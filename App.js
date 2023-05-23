@@ -19,7 +19,7 @@ export default function App() {
   const getLoadingSreen = async () => {
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     try {
-      await sleep(2000);
+      await sleep(1000);
     } finally {
       setIsLoading(false);
     }

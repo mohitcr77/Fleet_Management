@@ -57,10 +57,7 @@ const LogIn = ({ navigation }) => {
         resizeMode="cover"
         style={styles.image}
       >
-        <Image
-          style={styles.iconImage}
-          source={require("../assets/truck-icon.jpg")}
-        />
+        <View style={styles.layoutContainer}>
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -91,6 +88,7 @@ const LogIn = ({ navigation }) => {
           >
             <Text style={{ fontWeight: "bold", color: "#001aff" }}>SignUp</Text>
           </TouchableOpacity>
+        </View>
         </View>
       </ImageBackground>
     </View>
@@ -151,11 +149,7 @@ const styles = StyleSheet.create({
   text: {
     marginHorizontal: 20,
   },
-  iconImage: {
-    height: 200,
-    width: 300,
-    alignSelf: "center",
-    //marginTop: -120,
-    marginBottom: 90,
+  layoutContainer : {
+    marginTop: 200,
   },
 });

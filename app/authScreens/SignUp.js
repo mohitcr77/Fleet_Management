@@ -7,19 +7,64 @@ import {
   ImageBackground,
 } from "react-native";
 import { TextInput } from "react-native-paper";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "../screens/LoadingScreen";
 import dimensions from "../constatnts/dimensions";
 import { Layout, Text } from "@ui-kitten/components";
-
+import { ScrollView } from "react-native-gesture-handler";
+import LottieView from 'lottie-react-native';
+import { Animated, Easing } from 'react-native';
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const token = useContext(TokenContext);
   const [passwordVisible, setPasswordVisible] = useState(true);
+  const animation = useRef(null);
+  const animationProgress = useRef(new Animated.Value(0))
+
+  useEffect(() => {
+    Animated.timing(animationProgress.current, {
+      toValue: 1,
+      duration: 5000,
+      easing: Easing.linear,
+      useNativeDriver: false
+    }).start();
+  }, [])
+
+  //lottie animation 
+  const signupForm = [
+    {
+      placeholder: "Company Name",
+      hidden: false,
+    },
+    {
+      placeholder: "Company Domain",
+      hidden: false,
+    },
+    {
+      placeholder: "Office Email",
+      hidden: false,
+    },
+    {
+      placeholder: "Name",
+      hidden: false,
+    },
+    {
+      placeholder: "Email",
+      hidden: false,
+    },
+    {
+      placeholder: "Password",
+      hidden: true,
+    },
+    {
+      placeholder: "Retype Password",
+      hidden: true,
+    },
+  ];
 
   const getLoadingSreen = async () => {
     setIsLoading(true);
@@ -53,49 +98,56 @@ const SignUp = ({ navigation }) => {
 
   return (
     <View style={styles.appContainer}>
-      <ImageBackground
-        source={require("../assets/signup-design.png")}
-        resizeMode="cover"
-        style={styles.image}
-      >
-        <Image
-          style={styles.iconImage}
-          source={require("../assets/truck-icon.jpg")}
-        />
-        <View style={{flex:0.6}} >
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            onChangeText={setEmail}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={setPassword}
-            placeholder="Password"
-            secureTextEntry={passwordVisible}
-            right={
-              <TextInput.Icon
-                icon={passwordVisible ? "eye" : "eye-off"}
-                onPress={() => setPasswordVisible(!passwordVisible)}
+      
+        <LottieView
+        style={{
+          width: 250,
+          backgroundColor: "#ffffff00",
+          alignSelf:"center",
+        }}
+        progress={animationProgress.current}
+        source={require("../assets/signup-truck.json")}
+      />
+      <View style={{alignItems:"center"}} >
+      <Text style={{fontSize:20, fontWeight:"bold"}} >SignUp</Text>
+      </View>
+        <View style={styles.layoutContainer}>
+          <ScrollView>
+            {signupForm.map((item, index) => (
+              <TextInput
+                placeholder={item.placeholder}
+                secureTextEntry={item.hidden && passwordVisible}
+                style={styles.input}
+                right={
+                  item.hidden && (
+                    <TextInput.Icon
+                      icon={passwordVisible ? "eye" : "eye-off"}
+                      onPress={() => setPasswordVisible(!passwordVisible)}
+                    />
+                  )
+                }
               />
-            }
-          />
-          <View style={styles.btnStyle}>
-            <TouchableOpacity onPress={() => addNewid()} style={styles.button}>
-              <Text style={{ fontSize: 20, color: "white" }}>SignUp</Text>
-            </TouchableOpacity>
-            {/* <Button title="login" onPress={() => addNewid()} /> */}
-          </View>
-          <View style={{ flexDirection: "row", alignSelf: "center" }}>
-            <Text>Already have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-              <Text style={{ fontWeight: "bold", color: "#001aff" }}>
-                LogIn
-              </Text>
-            </TouchableOpacity>
-          </View>
+            ))}
+            <View style={styles.btnStyle}>
+              <TouchableOpacity
+                onPress={() => addNewid()}
+                style={styles.button}
+              >
+                <Text style={{ fontSize: 20, color: "white" }}>SignUp</Text>
+              </TouchableOpacity>
+              {/* <Button title="login" onPress={() => addNewid()} /> */}
+            </View>
+            <View style={{ flexDirection: "row", alignSelf: "center" }}>
+              <Text>Already have an account?</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={{ fontWeight: "bold", color: "#001aff" }}>
+                  LogIn
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
         </View>
-      </ImageBackground>
+      {/* </ImageBackground> */}
     </View>
   );
 };
@@ -114,6 +166,7 @@ const styles = StyleSheet.create({
   },
   appContainer: {
     flex: 1,
+    backgroundColor:"#ffffff"
   },
   image: {
     flex: 1,
@@ -140,6 +193,10 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 20,
   },
+  layoutContainer: {
+    flex:1,
+    marginBottom:20,
+  },
   button: {
     padding: 5,
     shadowOpacity: 5,
@@ -153,11 +210,5 @@ const styles = StyleSheet.create({
   },
   text: {
     marginHorizontal: 20,
-  },
-  iconImage: {
-    height: 200,
-    width: 300,
-    alignSelf: "center",
-    flex: 0.4,
   },
 });
