@@ -285,6 +285,7 @@ const UpdatejobColor = async (token, enteredItemText, id) => {
         headers: {
           Authorization: `Bearer ${token} `,
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
       }
     );

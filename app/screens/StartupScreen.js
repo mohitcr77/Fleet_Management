@@ -20,8 +20,8 @@ const StartupScreen = () => {
         autoPlay
         ref={animation}
         style={{
-          width: 100,
-          height: 100,
+          width: 150,
+          height: 150,
           backgroundColor: "#ffffff00",
         }}
         // Find more Lottie files at https://lottiefiles.com/featured

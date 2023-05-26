@@ -27,6 +27,8 @@ const Regos = () => {
     }
   };
 
+  //console.log(token.userToken.token);
+
   useEffect(() => {
     getLoadingSreen();
   }, []);
