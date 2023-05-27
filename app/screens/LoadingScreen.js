@@ -1,20 +1,22 @@
-import React from 'react'
-import { Text, View,ActivityIndicator,Image,StyleSheet } from 'react-native';
+import React from "react";
+import { Text, View, ActivityIndicator, Modal } from "react-native";
 
-const LoadingScreen = () => {
+const LoadingScreen = ({ loading }) => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Loading...</Text>
-    <ActivityIndicator size="large" />
-  </View>
-);
-}
+    <Modal visible={loading} transparent={true}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "rgba(255,255,255,.5)",
+        }}
+      >
+        <Text>Loading...</Text>
+        <ActivityIndicator size="large" />
+      </View>
+    </Modal>
+  );
+};
 
-export default LoadingScreen
-
-const styles = StyleSheet.create({
-  iconImage: {
-      height: 100,
-      width: 300,
-    },
-})
+export default LoadingScreen;
