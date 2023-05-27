@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
-const url = "https://fleet-management.kalpvaig.com/api/v1/login";
+const URL = "https://fleet-management.kalpvaig.com/api/v1";
 
 const getHeader = (token) => {
   return {
@@ -10,54 +10,48 @@ const getHeader = (token) => {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-  }
-}
+  };
+};
 
 const userDetails = "userdetails";
 //state, city & country service
+
+const get = async (endpoint) => {
+  try {
+    const res = await axios.get(URL + endpoint, getHeader(token));
+    return res.data;
+  } catch (error) {
+    console.warn("Error in getting city Api ", error);
+  }
+};
+
 const getcity = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/cities/101",
-      getHeader(token)
-    );
+    const res = await axios.get(`${URL}/cities/101`, getHeader(token));
     return res.data;
   } catch (error) {
     console.warn("Error in getting city Api ", error);
   }
 };
 
-const getlistData = async ( category ,token) => {
+const getlistData = async (category, token) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/${category}/101`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/${category}/101`, getHeader(token));
     return res.data;
   } catch (error) {
     console.warn("Error in getting city Api ", error);
   }
 };
-
 
 const getstate = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/states/101",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/states/101`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting state Api ", error);
@@ -66,16 +60,13 @@ const getstate = async (token) => {
 
 const getcountry = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/countries",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/countries`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting country Api ", error);
@@ -120,15 +111,12 @@ const deleteData = async () => {
 //Regos service
 const getRegoData = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/regos",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/regos`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting rego Api ", error);
@@ -137,15 +125,12 @@ const getRegoData = async (token) => {
 
 const getaRego = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/regos/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/regos/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a rego ", error);
@@ -154,15 +139,12 @@ const getaRego = async (token, id) => {
 
 const deleteRegoData = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/regos/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/regos/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     //console.log(res.data);
     //return res.data;
   } catch (error) {
@@ -173,16 +155,12 @@ const deleteRegoData = async (token, id) => {
 const postRegoData = async (token, enteredItemText) => {
   try {
     //console.log(enteredItemText);
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/regos",
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.post(`${URL}/regos`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in posting rego ", error);
   }
@@ -190,16 +168,12 @@ const postRegoData = async (token, enteredItemText) => {
 
 const UpdateRegoData = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/regos/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/regos/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating rego ", error);
   }
@@ -208,15 +182,12 @@ const UpdateRegoData = async (token, enteredItemText, id) => {
 //jobcolor service
 const getJobColor = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/color",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/color`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting jobColor Api ", error);
@@ -225,16 +196,12 @@ const getJobColor = async (token) => {
 
 const postJobColor = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/color",
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.post(`${URL}/color`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in posting job ", error);
@@ -243,15 +210,12 @@ const postJobColor = async (token, enteredItemText) => {
 
 const deletejobcolor = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/color/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/color/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     //console.log(res.data);
     //return res.data;
   } catch (error) {
@@ -261,15 +225,12 @@ const deletejobcolor = async (token, id) => {
 
 const getajobColor = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/color/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/color/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a color ", error);
@@ -278,17 +239,13 @@ const getajobColor = async (token, id) => {
 
 const UpdatejobColor = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/color/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/color/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating jobcolor ", error);
   }
@@ -296,15 +253,12 @@ const UpdatejobColor = async (token, enteredItemText, id) => {
 //client service
 const getclient = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/clients",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/clients`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting client Api ", error);
@@ -313,16 +267,12 @@ const getclient = async (token) => {
 
 const postclient = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/clients",
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.post(`${URL}/clients`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in posting client ", error);
@@ -331,15 +281,12 @@ const postclient = async (token, enteredItemText) => {
 
 const deleteclient = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/clients/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/clients/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     //console.log(res.data);
     //return res.data;
   } catch (error) {
@@ -349,15 +296,12 @@ const deleteclient = async (token, id) => {
 
 const getaclient = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/clients/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/clients/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a client ", error);
@@ -366,16 +310,12 @@ const getaclient = async (token, id) => {
 
 const Updateclient = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/clients/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/clients/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating client ", error);
   }
@@ -384,15 +324,12 @@ const Updateclient = async (token, enteredItemText, id) => {
 //currency service
 const getcurrency = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/currency",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/currency`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting currency Api ", error);
@@ -401,16 +338,12 @@ const getcurrency = async (token) => {
 
 const postcurrency = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/currency",
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.post(`${URL}/currency`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in posting currency ", error);
@@ -419,15 +352,12 @@ const postcurrency = async (token, enteredItemText) => {
 
 const deletecurrency = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/currency/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/currency/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting currency ", error);
   }
@@ -435,15 +365,12 @@ const deletecurrency = async (token, id) => {
 
 const getacurrency = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/currency/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/currency/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a currency ", error);
@@ -452,16 +379,12 @@ const getacurrency = async (token, id) => {
 
 const Updatecurrency = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/currency/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/currency/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating currency ", error);
   }
@@ -470,15 +393,12 @@ const Updatecurrency = async (token, enteredItemText, id) => {
 //Fuel Efficiency
 const getfuelEfficiency = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/fuel_efficiency",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/fuel_efficiency`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting fuelEfficiency Api ", error);
@@ -487,16 +407,12 @@ const getfuelEfficiency = async (token) => {
 
 const postfuelEfficiency = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/fuel_efficiency",
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.post(`${URL}/fuel_efficiency`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in posting fuelEfficiency ", error);
@@ -505,15 +421,12 @@ const postfuelEfficiency = async (token, enteredItemText) => {
 
 const deletefuelEfficiency = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/fuel_efficiency/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/fuel_efficiency/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting fuelEfficiency ", error);
   }
@@ -521,15 +434,12 @@ const deletefuelEfficiency = async (token, id) => {
 
 const getafuelEfficiency = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/fuel_efficiency/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/fuel_efficiency/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a fuelEfficiency ", error);
@@ -539,7 +449,7 @@ const getafuelEfficiency = async (token, id) => {
 const UpdatefuelEfficiency = async (token, enteredItemText, id) => {
   try {
     const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/fuel_efficiency/${id}`,
+      `${URL}/fuel_efficiency/${id}`,
       enteredItemText,
       {
         headers: {
@@ -556,18 +466,14 @@ const UpdatefuelEfficiency = async (token, enteredItemText, id) => {
 //driver service
 const postdriver = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/driver",
-       enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    return res.data
+    const res = await axios.post(`${URL}/driver`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     console.warn("Error in posting driver ", error);
   }
@@ -575,18 +481,15 @@ const postdriver = async (token, enteredItemText) => {
 
 const getdriver = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/driver",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/driver`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     // res.data.data.data[0].user.name
-    //console.log(res.data.data.data[0].user.user_details.mobile); 
+    //console.log(res.data.data.data[0].user.user_details.mobile);
     return res.data;
   } catch (error) {
     console.warn("Error in getting driver api ", error);
@@ -595,16 +498,13 @@ const getdriver = async (token) => {
 
 const deletedriver = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/driver/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/driver/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting driver ", error);
   }
@@ -612,16 +512,13 @@ const deletedriver = async (token, id) => {
 
 const getadriver = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/driver/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/driver/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a driver ", error);
@@ -630,17 +527,13 @@ const getadriver = async (token, id) => {
 
 const Updatedriver = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/driver/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/driver/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating driver ", error);
   }
@@ -649,18 +542,14 @@ const Updatedriver = async (token, enteredItemText, id) => {
 //company service
 const postcompany = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/company",
-       enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    return res.data
+    const res = await axios.post(`${URL}/company`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     console.warn("Error in posting company ", error);
   }
@@ -668,18 +557,15 @@ const postcompany = async (token, enteredItemText) => {
 
 const getcompany = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/company",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/company`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     // res.data.data.data[0].user.name
-    //console.log(res.data.data.data[0].user.user_details.mobile); 
+    //console.log(res.data.data.data[0].user.user_details.mobile);
     return res.data;
   } catch (error) {
     console.warn("Error in getting company api ", error);
@@ -688,16 +574,13 @@ const getcompany = async (token) => {
 
 const deletecompany = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/company/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/company/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting company ", error);
   }
@@ -705,16 +588,13 @@ const deletecompany = async (token, id) => {
 
 const getacompany = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/company/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/company/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a company ", error);
@@ -723,17 +603,13 @@ const getacompany = async (token, id) => {
 
 const Updatecompany = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/company/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/company/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating company ", error);
   }
@@ -742,18 +618,14 @@ const Updatecompany = async (token, enteredItemText, id) => {
 //fuelLog service
 const postfuellog = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/fuellog",
-       enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    return res.data
+    const res = await axios.post("${URL}/fuellog", enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     console.warn("Error in posting fuellog ", error);
   }
@@ -761,18 +633,15 @@ const postfuellog = async (token, enteredItemText) => {
 
 const getfuellog = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/fuellog",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/fuellog`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     // res.data.data.data[0].user.name
-    //console.log(res.data.data.data[0].user.user_details.mobile); 
+    //console.log(res.data.data.data[0].user.user_details.mobile);
     return res.data;
   } catch (error) {
     console.warn("Error in getting fuellog api ", error);
@@ -781,16 +650,13 @@ const getfuellog = async (token) => {
 
 const deletefuellog = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/fuellog/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/fuellog/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting fuellog ", error);
   }
@@ -798,16 +664,13 @@ const deletefuellog = async (token, id) => {
 
 const getafuellog = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/fuellog/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      } 
-    );
+    const res = await axios.get(`${URL}/fuellog/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a fuellog ", error);
@@ -816,17 +679,13 @@ const getafuellog = async (token, id) => {
 
 const Updatefuellog = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/fuellog/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/fuellog/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating fuellog ", error);
   }
@@ -835,18 +694,14 @@ const Updatefuellog = async (token, enteredItemText, id) => {
 //tax service
 const posttaxes = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/taxes",
-       enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    return res.data
+    const res = await axios.post(`${URL}/taxes`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     console.warn("Error in posting taxes ", error);
   }
@@ -854,18 +709,15 @@ const posttaxes = async (token, enteredItemText) => {
 
 const gettaxes = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/taxes",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/taxes`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     // res.data.data.data[0].user.name
-    //console.log(res.data.data.data[0].user.user_details.mobile); 
+    //console.log(res.data.data.data[0].user.user_details.mobile);
     return res.data;
   } catch (error) {
     console.warn("Error in getting taxes api ", error);
@@ -874,16 +726,13 @@ const gettaxes = async (token) => {
 
 const deletetaxes = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/taxes/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/taxes/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting taxes ", error);
   }
@@ -891,16 +740,13 @@ const deletetaxes = async (token, id) => {
 
 const getatax = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/taxes/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      } 
-    );
+    const res = await axios.get(`${URL}/taxes/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a taxes ", error);
@@ -909,17 +755,13 @@ const getatax = async (token, id) => {
 
 const Updatetaxes = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/taxes/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/taxes/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating taxes ", error);
   }
@@ -928,18 +770,14 @@ const Updatetaxes = async (token, enteredItemText, id) => {
 //issues service
 const postissues = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/issues",
-       enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    return res.data
+    const res = await axios.post(`${URL}/issues`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     console.warn("Error in posting issues ", error);
   }
@@ -947,18 +785,15 @@ const postissues = async (token, enteredItemText) => {
 
 const getissues = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/issues",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/issues`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     // res.data.data.data[0].user.name
-    //console.log(res.data.data.data[0].user.user_details.mobile); 
+    //console.log(res.data.data.data[0].user.user_details.mobile);
     return res.data;
   } catch (error) {
     console.warn("Error in getting issues api ", error);
@@ -967,16 +802,13 @@ const getissues = async (token) => {
 
 const deleteissues = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/issues/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/issues/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting issues ", error);
   }
@@ -984,16 +816,13 @@ const deleteissues = async (token, id) => {
 
 const getanIssue = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/issues/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      } 
-    );
+    const res = await axios.get(`${URL}/issues/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a issues ", error);
@@ -1002,17 +831,13 @@ const getanIssue = async (token, id) => {
 
 const Updateissues = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/issues/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/issues/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating issues ", error);
   }
@@ -1021,18 +846,14 @@ const Updateissues = async (token, enteredItemText, id) => {
 //staff service
 const poststaff = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/staff",
-       enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    return res.data
+    const res = await axios.post(`${URL}/staff`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     console.warn("Error in posting staff ", error);
   }
@@ -1040,18 +861,15 @@ const poststaff = async (token, enteredItemText) => {
 
 const getstaff = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/staff",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/staff`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     // res.data.data.data[0].user.name
-    //console.log(res.data.data.data[0].user.user_details.mobile); 
+    //console.log(res.data.data.data[0].user.user_details.mobile);
     return res.data;
   } catch (error) {
     console.warn("Error in getting staff api ", error);
@@ -1060,16 +878,13 @@ const getstaff = async (token) => {
 
 const deletestaff = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/staff/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/staff/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting staff ", error);
   }
@@ -1077,16 +892,13 @@ const deletestaff = async (token, id) => {
 
 const getastaff = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/staff/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      } 
-    );
+    const res = await axios.get(`${URL}/staff/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a staff ", error);
@@ -1095,17 +907,13 @@ const getastaff = async (token, id) => {
 
 const Updatestaff = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/staff/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/staff/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating staff ", error);
   }
@@ -1114,18 +922,14 @@ const Updatestaff = async (token, enteredItemText, id) => {
 //Mechanic service
 const postmechanic = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/mechanic",
-       enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    return res.data
+    const res = await axios.post(`${URL}/mechanic`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     console.warn("Error in posting mechanic ", error);
   }
@@ -1133,18 +937,15 @@ const postmechanic = async (token, enteredItemText) => {
 
 const getmechanic = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/mechanic",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/mechanic`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     // res.data.data.data[0].user.name
-    //console.log(res.data.data.data[0].user.user_details.mobile); 
+    //console.log(res.data.data.data[0].user.user_details.mobile);
     return res.data;
   } catch (error) {
     console.warn("Error in getting mechanic api ", error);
@@ -1153,16 +954,13 @@ const getmechanic = async (token) => {
 
 const deletemechanic = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/mechanic/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/mechanic/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting mechanic ", error);
   }
@@ -1170,16 +968,13 @@ const deletemechanic = async (token, id) => {
 
 const getamechanic = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/mechanic/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      } 
-    );
+    const res = await axios.get(`${URL}/mechanic/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a mechanic ", error);
@@ -1188,17 +983,13 @@ const getamechanic = async (token, id) => {
 
 const Updatemechanic = async (token, enteredItemText, id) => {
   try {
-    const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/mechanic/${id}`,
-      enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.put(`${URL}/mechanic/${id}`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in Updating mechanic ", error);
   }
@@ -1207,18 +998,14 @@ const Updatemechanic = async (token, enteredItemText, id) => {
 //Mechanic timesheet service
 const postmechanic_timesheet = async (token, enteredItemText) => {
   try {
-    const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/mechanic_timesheet",
-       enteredItemText,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    return res.data
+    const res = await axios.post(`${URL}/mechanic_timesheet`, enteredItemText, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    return res.data;
   } catch (error) {
     console.warn("Error in posting mechanic_timesheet ", error);
   }
@@ -1226,18 +1013,15 @@ const postmechanic_timesheet = async (token, enteredItemText) => {
 
 const getmechanic_timesheet = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/mechanic_timesheet",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/mechanic_timesheet`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     // res.data.data.data[0].user.name
-    //console.log(res.data.data.data[0].user.user_details.mobile); 
+    //console.log(res.data.data.data[0].user.user_details.mobile);
     return res.data;
   } catch (error) {
     console.warn("Error in getting mechanic_timesheet api ", error);
@@ -1246,16 +1030,13 @@ const getmechanic_timesheet = async (token) => {
 
 const deletemechanic_timesheet = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/mechanic_timesheet/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/mechanic_timesheet/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting mechanic_timesheet ", error);
   }
@@ -1263,16 +1044,13 @@ const deletemechanic_timesheet = async (token, id) => {
 
 const getamechanic_timesheet = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/mechanic_timesheet/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      } 
-    );
+    const res = await axios.get(`${URL}/mechanic_timesheet/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a mechanic_timesheet ", error);
@@ -1282,7 +1060,7 @@ const getamechanic_timesheet = async (token, id) => {
 const Updatemechanic_timesheet = async (token, enteredItemText, id) => {
   try {
     const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/mechanic_timesheet/${id}`,
+      `${URL}/mechanic_timesheet/${id}`,
       enteredItemText,
       {
         headers: {
@@ -1301,8 +1079,8 @@ const Updatemechanic_timesheet = async (token, enteredItemText, id) => {
 const postvehicle_maintenance = async (token, enteredItemText) => {
   try {
     const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/vehicle_maintenance",
-       enteredItemText,
+      `${URL}/vehicle_maintenance`,
+      enteredItemText,
       {
         headers: {
           Authorization: `Bearer ${token} `,
@@ -1311,7 +1089,7 @@ const postvehicle_maintenance = async (token, enteredItemText) => {
         },
       }
     );
-    return res.data
+    return res.data;
   } catch (error) {
     console.warn("Error in posting vehicle_maintenance ", error);
   }
@@ -1319,18 +1097,15 @@ const postvehicle_maintenance = async (token, enteredItemText) => {
 
 const getvehicle_maintenance = async (token) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/vehicle_maintenance",
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.get(`${URL}/vehicle_maintenance`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     // res.data.data.data[0].user.name
-    //console.log(res.data.data.data[0].user.user_details.mobile); 
+    //console.log(res.data.data.data[0].user.user_details.mobile);
     return res.data;
   } catch (error) {
     console.warn("Error in getting vehicle_maintenance api ", error);
@@ -1339,16 +1114,13 @@ const getvehicle_maintenance = async (token) => {
 
 const deletevehicle_maintenance = async (token, id) => {
   try {
-    const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/vehicle_maintenance/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(`${URL}/vehicle_maintenance/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   } catch (error) {
     console.warn("Error in deleting vehicle_maintenance ", error);
   }
@@ -1356,16 +1128,13 @@ const deletevehicle_maintenance = async (token, id) => {
 
 const getavehicle_maintenance = async (token, id) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/vehicle_maintenance/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      } 
-    );
+    const res = await axios.get(`${URL}/vehicle_maintenance/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     return res.data;
   } catch (error) {
     console.warn("Error in getting a vehicle_maintenance ", error);
@@ -1375,7 +1144,7 @@ const getavehicle_maintenance = async (token, id) => {
 const Updatevehicle_maintenance = async (token, enteredItemText, id) => {
   try {
     const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/vehicle_maintenance/${id}`,
+      `${URL}/vehicle_maintenance/${id}`,
       enteredItemText,
       {
         headers: {
@@ -1393,11 +1162,7 @@ const Updatevehicle_maintenance = async (token, enteredItemText, id) => {
 //dynamic service
 const getApi = async (token, url) => {
   try {
-    const res = await axios.get(
-      "https://fleet-management.kalpvaig.com/api/v1/"+
-      url,
-      getHeader(token)
-    );
+    const res = await axios.get(`${URL}/` + url, getHeader(token));
     return res.data;
   } catch (error) {
     console.warn("Error in getting Api ", error);
@@ -1407,11 +1172,11 @@ const getApi = async (token, url) => {
 const postApi = async (token, enteredItemText, url) => {
   try {
     const res = await axios.post(
-      "https://fleet-management.kalpvaig.com/api/v1/"+url,
-       enteredItemText,
-       getHeader(token)
+      `${URL}/` + url,
+      enteredItemText,
+      getHeader(token)
     );
-    return res.data
+    return res.data;
   } catch (error) {
     console.warn("Error in posting vehicle_maintenance ", error);
   }
@@ -1420,7 +1185,7 @@ const postApi = async (token, enteredItemText, url) => {
 const deleteApi = async (token, id, url) => {
   try {
     const res = await axios.delete(
-      `https://fleet-management.kalpvaig.com/api/v1/`+ url +`/${id}`,
+      `${URL}/` + url + `/${id}`,
       getHeader(token)
     );
   } catch (error) {
@@ -1430,10 +1195,7 @@ const deleteApi = async (token, id, url) => {
 
 const getaApi = async (token, id, url) => {
   try {
-    const res = await axios.get(
-      `https://fleet-management.kalpvaig.com/api/v1/`+ url +`/${id}`,
-      getHeader(token)
-    );
+    const res = await axios.get(`${URL}/` + url + `/${id}`, getHeader(token));
     return res.data;
   } catch (error) {
     console.warn("Error in getting a vehicle_maintenance ", error);
@@ -1443,7 +1205,7 @@ const getaApi = async (token, id, url) => {
 const UpdateApi = async (token, enteredItemText, id, url) => {
   try {
     const res = await axios.put(
-      `https://fleet-management.kalpvaig.com/api/v1/`+ url +`/${id}`,
+      `${URL}/` + url + `/${id}`,
       enteredItemText,
       getHeader(token)
     );
