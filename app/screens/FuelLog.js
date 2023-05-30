@@ -17,18 +17,6 @@ const FuelLog = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     date: "",
     time: "",
@@ -46,8 +34,8 @@ const FuelLog = () => {
 
   async function addItemHandler(enteredItemText) {
     console.log(enteredItemText);
-    index.postfuellog(token.userToken.token, enteredItemText);
-    const res = await index.getfuellog(token.userToken.token);
+    index.postApi(token.userToken.token, enteredItemText, "fuellog");
+    const res = await index.getApi(token.userToken.token, "fuellog");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
@@ -110,27 +98,29 @@ const FuelLog = () => {
     },
   ];
   const addNewid = async () => {
-    const res = await index.getfuellog(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "fuellog");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updatefuellog(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "fuellog");
     setisvisible(false);
     setviewData("");
     addNewid();
   }
 
   function deleteDataHandler(id) {
-    index.deletefuellog(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "fuellog");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getafuellog(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "fuellog");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -169,9 +159,7 @@ const FuelLog = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading}/>
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -268,7 +256,6 @@ const FuelLog = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

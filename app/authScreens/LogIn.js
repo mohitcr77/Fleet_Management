@@ -4,16 +4,17 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  TouchableWithoutFeedback,
 } from "react-native";
-import { TextInput } from "react-native-paper";
-import { useState, useEffect, useContext } from "react";
+//import { TextInput } from "react-native-paper";
+import { useState, useContext } from "react";
 import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "../screens/LoadingScreen";
-import dimensions from "../constants/dimensions";
-import { Layout, Text } from "@ui-kitten/components";
+import { Layout, Text, Input, Icon, IconElement } from "@ui-kitten/components";
 import { AuthLayoutContainer } from "./SelectUserType";
 import AppButton from "../components/AppButton";
+import { Entypo } from "@expo/vector-icons";
 
 const LogIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -22,37 +23,49 @@ const LogIn = ({ navigation }) => {
   const token = useContext(TokenContext);
   const [passwordVisible, setPasswordVisible] = useState(true);
 
-  // const getLoadingScreen = async () => {
-  //   setIsLoading(true);
-  //   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-  //   try {
-  //     await sleep(2000);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-  //verifying the entered email,password and saving it in expo store
   const addNewId = async () => {
     const data = {
       email: email,
       password: password,
     };
-    // setIsLoading(true);
+    setIsLoading(true);
     const res = await index.getApiData(data);
-    console.log(res);
     if (res.data) {
       token.setUserToken(res.data);
       index.saveData(JSON.stringify(res.data));
     } else {
       alert("Invalid userId or password");
     }
-    // setIsLoading(false);
+    setIsLoading(false);
   };
+
+  //for password toggle visibilty
+
+  const renderIcon = () => (
+    <TouchableWithoutFeedback
+      onPress={() => setPasswordVisible(!passwordVisible)}
+    >
+      {/* <CustomIcons.toggleEye show={passwordVisible}  /> */}
+      <Entypo
+        name={passwordVisible ? "eye" : "eye-with-line"}
+        size={24}
+        color="black"
+      />
+    </TouchableWithoutFeedback>
+  );
 
   return (
     <AuthLayoutContainer>
       <LoadingScreen loading={isLoading} />
-      <TextInput
+      <Input style={styles.input} placeholder="Email" onChangeText={setEmail} />
+      <Input
+        style={styles.input}
+        placeholder="Password"
+        accessoryRight={renderIcon}
+        secureTextEntry={passwordVisible}
+        onChangeText={setPassword}
+      />
+      {/* <TextInput
         style={styles.input}
         placeholder="Company"
         onChangeText={setEmail}
@@ -61,8 +74,8 @@ const LogIn = ({ navigation }) => {
         style={styles.input}
         placeholder="Email"
         onChangeText={setEmail}
-      />
-      <TextInput
+      /> */}
+      {/* <TextInput
         style={styles.input}
         onChangeText={setPassword}
         placeholder="Password"
@@ -73,10 +86,10 @@ const LogIn = ({ navigation }) => {
             onPress={() => setPasswordVisible(!passwordVisible)}
           />
         }
-      />
+      /> */}
       <AppButton
         title="Login"
-        onPress={addNewId}
+        onPress={() => addNewId()}
         // loading={isLoading}
       />
       <SignUpOption />
@@ -100,7 +113,8 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     marginVertical: 25,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
+    borderColor: "#ffffff",
     borderBottomWidth: 1,
     borderBottomColor: "black",
     fontSize: 18,
@@ -115,5 +129,9 @@ const styles = StyleSheet.create({
   },
   layoutContainer: {
     marginTop: 200,
+  },
+  icon: {
+    width: 32,
+    height: 32,
   },
 });

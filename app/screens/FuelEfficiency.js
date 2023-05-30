@@ -17,18 +17,6 @@ const FuelEfficiency = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  //console.log(listdata);
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
 
   useEffect(() => {
     addNewid();
@@ -112,34 +100,36 @@ const FuelEfficiency = () => {
   ];
 
   async function addItemHandler(enteredItemText) {
-    index.postfuelEfficiency(token.userToken.token, enteredItemText);
-    const res = await index.getfuelEfficiency(token.userToken.token);
+    index.postApi(token.userToken.token, enteredItemText, "fuel_efficiency");
+    const res = await index.getApi(token.userToken.token, "fuel_efficiency");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
   }
   const addNewid = async () => {
-    const res = await index.getfuelEfficiency(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "fuel_efficiency");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.UpdatefuelEfficiency(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "fuel_efficiency");
     setisvisible(false);
     addNewid();
     setviewData("");
   }
 
   function deleteDataHandler(id) {
-    index.deletefuelEfficiency(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "fuel_efficiency");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getafuelEfficiency(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "fuel_efficiency");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -179,9 +169,7 @@ const FuelEfficiency = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading} />
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -290,7 +278,6 @@ const FuelEfficiency = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

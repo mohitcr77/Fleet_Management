@@ -16,17 +16,7 @@ const Drivers = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getLoadingSreen();
     () => getcity();
   }, []);
 
@@ -123,36 +113,38 @@ const Drivers = () => {
   ];
   //console.log(listdata);
   async function addItemHandler(enteredItemText) {
-    console.log(enteredItemText);
-    index.postdriver(token.userToken.token, enteredItemText);
-    const res = await index.getdriver(token.userToken.token);
+    //console.log(enteredItemText);
+    index.postApi(token.userToken.token, enteredItemText, "driver");
+    const res = await index.getApi(token.userToken.token, "driver");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
   }
   const addNewid = async () => {
-    const res = await index.getdriver(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "driver");
     //console.log(res.data.data);
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updatedriver(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "driver");
     setisvisible(false);
     addNewid();
     setviewData("");
   }
 
   function deleteDataHandler(id) {
-    index.deletedriver(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "driver");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getadriver(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "driver");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -192,114 +184,111 @@ const Drivers = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Name",
-                  value: itemData.item?.user?.name,
-                },
-                {
-                  name: "Email",
-                  value: itemData.item?.user?.email,
-                },
-                {
-                  name: "Mobile",
-                  value: itemData.item?.user?.user_details?.mobile,
-                },
-                {
-                  name: "Address 1",
-                  value: JSON.stringify(
-                    itemData.item?.user?.user_details.current_address_1
-                  ),
-                },
-                {
-                  name: "Address 2",
-                  value: JSON.stringify(
-                    itemData?.item?.user?.user_details?.current_address_2
-                  ),
-                },
-                {
-                  name: "Rate",
-                  value: itemData?.item?.rate,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Name",
-                  key: "name",
-                  type: dataType.text,
-                  value: itemData.item?.user?.name,
-                },
-                {
-                  name: "Email",
-                  key: "email",
-                  type: dataType.text,
-                  value: itemData.item?.user?.email,
-                },
-                {
-                  name: "Mobile",
-                  key: "mobile",
-                  type: dataType.text,
-                  value: itemData.item?.user?.user_details?.mobile,
-                },
-                {
-                  name: "Address 1",
-                  key: "address1",
-                  type: dataType.text,
-                  value: JSON.stringify(
-                    itemData.item?.user?.user_details?.currrent_address_1
-                  ),
-                },
-                {
-                  name: "Address 2",
-                  key: "address2",
-                  type: dataType.text,
-                  value: JSON.stringify(
-                    itemData.item?.user?.user_details?.currrent_address_2
-                  ),
-                },
-                {
-                  name: "State",
-                  key: "state_id",
-                  type: dataType.state,
-                  value: itemData.item?.user?.user_details?.current_state_id,
-                },
-                {
-                  name: "City",
-                  key: "city_id",
-                  type: dataType.city,
-                  value: itemData.item?.user?.user_details?.current_city_id,
-                },
-                {
-                  name: "Country",
-                  key: "conutry_id",
-                  type: dataType.country,
-                  value: itemData.item?.user?.user_details?.current_conutry_id,
-                },
-                {
-                  name: "Rate",
-                  key: "rate",
-                  type: dataType.text,
-                  value: itemData.item?.rate,
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
-        )}
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Name",
+                value: itemData.item?.user?.name,
+              },
+              {
+                name: "Email",
+                value: itemData.item?.user?.email,
+              },
+              {
+                name: "Mobile",
+                value: itemData.item?.user?.user_details?.mobile,
+              },
+              {
+                name: "Address 1",
+                value: JSON.stringify(
+                  itemData.item?.user?.user_details.current_address_1
+                ),
+              },
+              {
+                name: "Address 2",
+                value: JSON.stringify(
+                  itemData?.item?.user?.user_details?.current_address_2
+                ),
+              },
+              {
+                name: "Rate",
+                value: itemData?.item?.rate,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Name",
+                key: "name",
+                type: dataType.text,
+                value: itemData.item?.user?.name,
+              },
+              {
+                name: "Email",
+                key: "email",
+                type: dataType.text,
+                value: itemData.item?.user?.email,
+              },
+              {
+                name: "Mobile",
+                key: "mobile",
+                type: dataType.text,
+                value: itemData.item?.user?.user_details?.mobile,
+              },
+              {
+                name: "Address 1",
+                key: "address1",
+                type: dataType.text,
+                value: JSON.stringify(
+                  itemData.item?.user?.user_details?.currrent_address_1
+                ),
+              },
+              {
+                name: "Address 2",
+                key: "address2",
+                type: dataType.text,
+                value: JSON.stringify(
+                  itemData.item?.user?.user_details?.currrent_address_2
+                ),
+              },
+              {
+                name: "State",
+                key: "state_id",
+                type: dataType.state,
+                value: itemData.item?.user?.user_details?.current_state_id,
+              },
+              {
+                name: "City",
+                key: "city_id",
+                type: dataType.city,
+                value: itemData.item?.user?.user_details?.current_city_id,
+              },
+              {
+                name: "Country",
+                key: "conutry_id",
+                type: dataType.country,
+                value: itemData.item?.user?.user_details?.current_conutry_id,
+              },
+              {
+                name: "Rate",
+                key: "rate",
+                type: dataType.text,
+                value: itemData.item?.rate,
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );

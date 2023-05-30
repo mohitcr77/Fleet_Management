@@ -17,18 +17,6 @@ const ReportIssue = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     date: "",
     shift: "",
@@ -42,8 +30,8 @@ const ReportIssue = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    index.postissues(token.userToken.token, enteredItemText);
-    const res = await index.getissues(token.userToken.token);
+    index.postApi(token.userToken.token, enteredItemText, "issues");
+    const res = await index.getApi(token.userToken.token, "issues");
     setlistdata(res.data.data);
     setisvisible(false);
   }
@@ -81,25 +69,27 @@ const ReportIssue = () => {
     },
   ];
   const addNewid = async () => {
-    const res = await index.getissues(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "issues");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updateissues(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "issues");
     setisvisible(false);
     setviewData("");
   }
 
   function deleteDataHandler(id) {
-    index.deleteissues(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "issues");
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getanIssue(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "issues");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -138,9 +128,7 @@ const ReportIssue = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading} />
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -209,7 +197,6 @@ const ReportIssue = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

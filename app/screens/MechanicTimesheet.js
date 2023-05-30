@@ -17,18 +17,6 @@ const MechanicTimesheet = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     mechanic_id: "",
     date: "",
@@ -44,8 +32,15 @@ const MechanicTimesheet = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    index.postmechanic_timesheet(token.userToken.token, enteredItemText);
-    const res = await index.getmechanic_timesheet(token.userToken.token);
+    index.postmechanic_timesheet(
+      token.userToken.token,
+      enteredItemText,
+      "mechanic_timesheet"
+    );
+    const res = await index.getmechanic_timesheet(
+      token.userToken.token,
+      "mechanic_timesheet"
+    );
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
@@ -96,27 +91,45 @@ const MechanicTimesheet = () => {
     },
   ];
   const addNewid = async () => {
-    const res = await index.getmechanic_timesheet(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getmechanic_timesheet(
+      token.userToken.token,
+      "mechanic_timesheet"
+    );
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updatemechanic_timesheet(token.userToken.token, newobj, dataID);
+    index.Updatemechanic_timesheet(
+      token.userToken.token,
+      newobj,
+      dataID,
+      "mechanic_timesheet"
+    );
     setisvisible(false);
     setviewData("");
     addNewid();
   }
 
   function deleteDataHandler(id) {
-    index.deletemechanic_timesheet(token.userToken.token, id);
+    index.deletemechanic_timesheet(
+      token.userToken.token,
+      id,
+      "mechanic_timesheet"
+    );
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getamechanic_timesheet(token.userToken.token, id);
+    const res = await index.getamechanic_timesheet(
+      token.userToken.token,
+      id,
+      "mechanic_timesheet"
+    );
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -155,94 +168,91 @@ const MechanicTimesheet = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Mechanic Id",
-                  value: itemData?.item?.mechanic_id,
-                },
-                {
-                  name: "Date",
-                  value: itemData?.item?.date,
-                },
-                {
-                  name: "Day",
-                  value: itemData?.item?.day,
-                },
-                {
-                  name: "Start time",
-                  value: itemData?.item?.start_time,
-                },
-                {
-                  name: "End_time",
-                  value: itemData?.item?.end_time,
-                },
-                {
-                  name: "notes",
-                  value: itemData?.item?.notes,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Mechanic Id",
-                  key: "mechanic_id",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.mechanic_id),
-                },
-                {
-                  name: "Date",
-                  key: "date",
-                  type: dataType.date,
-                  value: itemData?.item?.date,
-                },
-                {
-                  name: "Day",
-                  key: "day",
-                  type: dataType.text,
-                  value: itemData?.item?.day,
-                },
-                {
-                  name: "Start time",
-                  key: "start_time",
-                  type: dataType.time,
-                  value: itemData?.item?.start_time,
-                },
-                {
-                  name: "End_time",
-                  key: "end_time",
-                  type: dataType.time,
-                  value: itemData?.item?.end_time,
-                },
-                {
-                  name: "notes",
-                  key: "notes",
-                  type: dataType.text,
-                  value: itemData?.item?.notes,
-                },
-                {
-                  name: "Total time",
-                  key: "total_time",
-                  type: dataType.number,
-                  value: JSON.stringify(itemData?.item?.total_time),
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
-        )}
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Mechanic Id",
+                value: itemData?.item?.mechanic_id,
+              },
+              {
+                name: "Date",
+                value: itemData?.item?.date,
+              },
+              {
+                name: "Day",
+                value: itemData?.item?.day,
+              },
+              {
+                name: "Start time",
+                value: itemData?.item?.start_time,
+              },
+              {
+                name: "End_time",
+                value: itemData?.item?.end_time,
+              },
+              {
+                name: "notes",
+                value: itemData?.item?.notes,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Mechanic Id",
+                key: "mechanic_id",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.mechanic_id),
+              },
+              {
+                name: "Date",
+                key: "date",
+                type: dataType.date,
+                value: itemData?.item?.date,
+              },
+              {
+                name: "Day",
+                key: "day",
+                type: dataType.text,
+                value: itemData?.item?.day,
+              },
+              {
+                name: "Start time",
+                key: "start_time",
+                type: dataType.time,
+                value: itemData?.item?.start_time,
+              },
+              {
+                name: "End_time",
+                key: "end_time",
+                type: dataType.time,
+                value: itemData?.item?.end_time,
+              },
+              {
+                name: "notes",
+                key: "notes",
+                type: dataType.text,
+                value: itemData?.item?.notes,
+              },
+              {
+                name: "Total time",
+                key: "total_time",
+                type: dataType.number,
+                value: JSON.stringify(itemData?.item?.total_time),
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );

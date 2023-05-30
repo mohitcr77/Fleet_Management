@@ -17,18 +17,6 @@ const JobColor = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
 
   useEffect(() => {
     addNewid();
@@ -63,35 +51,37 @@ const JobColor = () => {
   ];
 
   async function addItemHandler(enteredItemText) {
-    index.postJobColor(token.userToken.token, enteredItemText);
-    const res = await index.getJobColor(token.userToken.token);
+    index.postApi(token.userToken.token, enteredItemText, "color");
+    const res = await index.getApi(token.userToken.token, "color");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
   }
   const addNewid = async () => {
-    const res = await index.getJobColor(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "color");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.UpdatejobColor(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "color");
     setisvisible(false);
     addNewid();
     setviewData("");
   }
 
   function deleteDataHandler(id) {
-    index.deletejobcolor(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "color");
     addNewid();
     //console.log(id);
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getajobColor(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "color");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -131,58 +121,55 @@ const JobColor = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Name",
-                  value: itemData.item.name,
-                },
-                {
-                  name: "Code",
-                  value: itemData.item.code,
-                },
-                {
-                  name: "Description",
-                  value: itemData.item.description,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Name",
-                  key: "name",
-                  type: dataType.text,
-                  value: itemData.item.name,
-                },
-                {
-                  name: "Code",
-                  key: "code",
-                  type: dataType.color,
-                  value: itemData.item.code,
-                },
-                {
-                  name: "Description",
-                  key: "description",
-                  type: dataType.text,
-                  value: itemData.item.description,
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
-        )}
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Name",
+                value: itemData.item.name,
+              },
+              {
+                name: "Code",
+                value: itemData.item.code,
+              },
+              {
+                name: "Description",
+                value: itemData.item.description,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Name",
+                key: "name",
+                type: dataType.text,
+                value: itemData.item.name,
+              },
+              {
+                name: "Code",
+                key: "code",
+                type: dataType.color,
+                value: itemData.item.code,
+              },
+              {
+                name: "Description",
+                key: "description",
+                type: dataType.text,
+                value: itemData.item.description,
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );

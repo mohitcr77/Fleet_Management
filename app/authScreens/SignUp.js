@@ -12,11 +12,8 @@ import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "../screens/LoadingScreen";
 import dimensions from "../constants/dimensions";
-import { Layout, Text } from "@ui-kitten/components";
-import { ScrollView } from "react-native-gesture-handler";
-import LottieView from "lottie-react-native";
 import { Animated, Easing } from "react-native";
-import Onboarding from "../screens/Onboarding";
+import OtpScreen from "./OtpScreen";
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -97,7 +94,7 @@ const SignUp = ({ navigation }) => {
   }
 
   return (
-    <Onboarding />
+    <OtpScreen />
     // <View style={styles.appContainer}>
     //   <LottieView
     //     style={{
