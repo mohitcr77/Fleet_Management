@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import dimensions from "../constatnts/dimensions";
+import dimensions from "../constants/dimensions";
 import { ActivityIndicator } from "react-native-paper";
 
 export default function AppButton({ onPress, title, loading }) {

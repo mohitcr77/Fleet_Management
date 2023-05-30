@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import InputModal from "../components/InputModal";
 import AppItem from "../components/AppItem";
-import dataType from "../constatnts/dataType";
+import dataType from "../constants/dataType";
 import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "./LoadingScreen";
@@ -66,8 +66,8 @@ const JobColor = () => {
     index.postJobColor(token.userToken.token, enteredItemText);
     const res = await index.getJobColor(token.userToken.token);
     setlistdata(res.data.data);
-    setisvisible(false)
-    addNewid()
+    setisvisible(false);
+    addNewid();
   }
   const addNewid = async () => {
     const res = await index.getJobColor(token.userToken.token);
@@ -84,8 +84,8 @@ const JobColor = () => {
   }
 
   function deleteDataHandler(id) {
-    index.deletejobcolor(token.userToken.token,id)
-    addNewid()
+    index.deletejobcolor(token.userToken.token, id);
+    addNewid();
     //console.log(id);
   }
 

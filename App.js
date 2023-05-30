@@ -11,7 +11,8 @@ import LoadingScreen from "./app/screens/LoadingScreen";
 import index from "./app/service/index";
 import StartupScreen from "./app/screens/StartupScreen";
 import * as eva from "@eva-design/eva";
-import { ApplicationProvider} from "@ui-kitten/components";
+import { ApplicationProvider } from "@ui-kitten/components";
+import DrawerNavigator from "./app/routes/AppRootDrawerNavigator";
 
 export default function App() {
   const [userToken, setUserToken] = useState(null);
@@ -46,6 +47,7 @@ export default function App() {
       <NavigationContainer>
         <Provider store={store}>
           <TokenContext.Provider value={{ userToken, setUserToken }}>
+            {/* <DrawerNavigator /> */}
             {userToken == null ? (
               // No token found, user isn't signed in
               <AuthNavigator />

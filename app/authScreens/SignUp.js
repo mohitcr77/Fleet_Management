@@ -11,7 +11,7 @@ import { useState, useEffect, useContext, useRef } from "react";
 import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "../screens/LoadingScreen";
-import dimensions from "../constatnts/dimensions";
+import dimensions from "../constants/dimensions";
 import { Layout, Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native-gesture-handler";
 import LottieView from "lottie-react-native";
@@ -97,7 +97,7 @@ const SignUp = ({ navigation }) => {
   }
 
   return (
-    <Onboarding/>
+    <Onboarding />
     // <View style={styles.appContainer}>
     //   <LottieView
     //     style={{

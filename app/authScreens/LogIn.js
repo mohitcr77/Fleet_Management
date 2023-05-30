@@ -10,7 +10,7 @@ import { useState, useEffect, useContext } from "react";
 import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "../screens/LoadingScreen";
-import dimensions from "../constatnts/dimensions";
+import dimensions from "../constants/dimensions";
 import { Layout, Text } from "@ui-kitten/components";
 import { AuthLayoutContainer } from "./SelectUserType";
 import AppButton from "../components/AppButton";
@@ -37,21 +37,26 @@ const LogIn = ({ navigation }) => {
       email: email,
       password: password,
     };
-    setIsLoading(true);
+    // setIsLoading(true);
     const res = await index.getApiData(data);
-    //console.log(res);
+    console.log(res);
     if (res.data) {
       token.setUserToken(res.data);
       index.saveData(JSON.stringify(res.data));
     } else {
       alert("Invalid userId or password");
     }
-    setIsLoading(false);
+    // setIsLoading(false);
   };
 
   return (
     <AuthLayoutContainer>
       <LoadingScreen loading={isLoading} />
+      <TextInput
+        style={styles.input}
+        placeholder="Company"
+        onChangeText={setEmail}
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -71,7 +76,7 @@ const LogIn = ({ navigation }) => {
       />
       <AppButton
         title="Login"
-        onPress={getLoadingScreen}
+        onPress={addNewId}
         // loading={isLoading}
       />
       <SignUpOption />

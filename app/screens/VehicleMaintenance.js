@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import InputModal from "../components/InputModal";
 import AppItem from "../components/AppItem";
-import dataType from "../constatnts/dataType";
+import dataType from "../constants/dataType";
 import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "./LoadingScreen";
@@ -136,7 +136,7 @@ const VehicleMaintenance = () => {
   const addNewid = async () => {
     const res = await index.getvehicle_maintenance(token.userToken.token);
     setlistdata(res.data.data);
-  }; 
+  };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")

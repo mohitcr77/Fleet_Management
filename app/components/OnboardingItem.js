@@ -12,7 +12,7 @@ import React from "react";
 import LottieView from "lottie-react-native";
 import { useState, useEffect, useContext, useRef } from "react";
 import { Text, Button } from "@ui-kitten/components";
-import dimensions from "../constatnts/dimensions";
+import dimensions from "../constants/dimensions";
 //import { TouchableOpacity } from "react-native-gesture-handler";
 const OnboardingItem = (props) => {
   const animation = useRef(null);
@@ -80,7 +80,7 @@ const OnboardingItem = (props) => {
           <Image
             tintColor={props?.index === props?.listLength ? "#cccccc" : null}
             source={require("../assets/arrow-right.png")}
-            style={{ height:30, width: 30 }}
+            style={{ height: 30, width: 30 }}
           />
         </TouchableOpacity>
       </View>

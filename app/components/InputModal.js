@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import AppInput from "./AppInput";
-import dataType from "../constatnts/dataType";
+import dataType from "../constants/dataType";
 import { open, close, selectVisible } from "../store/modalSlice";
 import index from "../service/index";
 import TokenContext from "../service/context";
@@ -17,7 +17,7 @@ const InputModal = (props) => {
   const [stateData, setstateData] = useState({});
   const [country, setcountry] = useState({});
   function onAddItemHandler() {
-    dispatch(close())
+    dispatch(close());
     props.onAddItem(state);
     setState(props.initialState);
   }
@@ -40,7 +40,7 @@ const InputModal = (props) => {
     //console.log(props.form);
   }
 
-  function onCancelHandler(){
+  function onCancelHandler() {
     props.onCancel();
     //setform(null)
     //console.log(form);
@@ -48,7 +48,9 @@ const InputModal = (props) => {
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.title}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{props.crudop === 'update' ? 'Update' : 'Create'} </Text>
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+          {props.crudop === "update" ? "Update" : "Create"}{" "}
+        </Text>
       </View>
       <ScrollView>
         <View style={styles.modal_style}>
@@ -70,26 +72,27 @@ const InputModal = (props) => {
       </ScrollView>
       <View style={styles.button}>
         {/* to show Update button on Update and show Submit button on adding  */}
-        {props.crudop === 'update' ? 
-        <Pressable
-        android_ripple={{ color: "#241056" }}
-        style={styles.btn1}
-        onPress={onUpdateItemHandler}
-      >
-        <View>
-          <Text style={styles.btnStyle}>Update</Text>
-        </View>
-      </Pressable> : 
-        <Pressable
-        android_ripple={{ color: "#241056" }}
-        style={styles.btn1}
-        onPress={onAddItemHandler}
-      >
-        <View>
-          <Text style={styles.btnStyle}>Submit</Text>
-        </View>
-      </Pressable>
-        }
+        {props.crudop === "update" ? (
+          <Pressable
+            android_ripple={{ color: "#241056" }}
+            style={styles.btn1}
+            onPress={onUpdateItemHandler}
+          >
+            <View>
+              <Text style={styles.btnStyle}>Update</Text>
+            </View>
+          </Pressable>
+        ) : (
+          <Pressable
+            android_ripple={{ color: "#241056" }}
+            style={styles.btn1}
+            onPress={onAddItemHandler}
+          >
+            <View>
+              <Text style={styles.btnStyle}>Submit</Text>
+            </View>
+          </Pressable>
+        )}
         <Pressable
           onPress={onCancelHandler}
           style={styles.btn2}

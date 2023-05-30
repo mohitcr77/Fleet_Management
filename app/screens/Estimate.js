@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import InputModal from "../components/InputModal";
 import AppItem from "../components/AppItem";
-import dataType from "../constatnts/dataType";
+import dataType from "../constants/dataType";
 import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "./LoadingScreen";
@@ -48,8 +48,8 @@ const Estimate = () => {
   //console.log(token.userToken.token);
   async function addItemHandler(enteredItemText) {
     console.log(enteredItemText);
-    index.postApi(token.userToken.token, enteredItemText,"estimate");
-    const res = await index.getApi(token.userToken.token,"estimate");
+    index.postApi(token.userToken.token, enteredItemText, "estimate");
+    const res = await index.getApi(token.userToken.token, "estimate");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();

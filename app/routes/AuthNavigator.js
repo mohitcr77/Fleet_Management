@@ -4,7 +4,7 @@ import SignUp from "../authScreens/SignUp";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useContext } from "react";
 import Onboarding from "../screens/Onboarding";
-import screenNames from "../constatnts/screenNames";
+import screenNames from "../constants/screenNames";
 import SelectUserType from "../authScreens/SelectUserType";
 
 const Stack = createNativeStackNavigator();

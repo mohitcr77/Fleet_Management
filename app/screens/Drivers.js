@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import InputModal from "../components/InputModal";
 import AppItem from "../components/AppItem";
-import dataType from "../constatnts/dataType";
+import dataType from "../constants/dataType";
 import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "./LoadingScreen";
@@ -27,7 +27,7 @@ const Drivers = () => {
 
   useEffect(() => {
     getLoadingSreen();
-    ()=>getcity();
+    () => getcity();
   }, []);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const Drivers = () => {
       name: "Address 2",
       key: "address2",
       type: dataType.text,
-      defaultValue:viewData?.user?.user_details?.currrent_address_2,
+      defaultValue: viewData?.user?.user_details?.currrent_address_2,
     },
     {
       name: "State",
@@ -213,11 +213,15 @@ const Drivers = () => {
                 },
                 {
                   name: "Address 1",
-                  value: JSON.stringify(itemData.item?.user?.user_details.current_address_1),
+                  value: JSON.stringify(
+                    itemData.item?.user?.user_details.current_address_1
+                  ),
                 },
                 {
                   name: "Address 2",
-                  value: JSON.stringify(itemData?.item?.user?.user_details?.current_address_2),
+                  value: JSON.stringify(
+                    itemData?.item?.user?.user_details?.current_address_2
+                  ),
                 },
                 {
                   name: "Rate",
@@ -247,13 +251,17 @@ const Drivers = () => {
                   name: "Address 1",
                   key: "address1",
                   type: dataType.text,
-                  value: JSON.stringify(itemData.item?.user?.user_details?.currrent_address_1),
+                  value: JSON.stringify(
+                    itemData.item?.user?.user_details?.currrent_address_1
+                  ),
                 },
                 {
                   name: "Address 2",
                   key: "address2",
                   type: dataType.text,
-                  value: JSON.stringify(itemData.item?.user?.user_details?.currrent_address_2),
+                  value: JSON.stringify(
+                    itemData.item?.user?.user_details?.currrent_address_2
+                  ),
                 },
                 {
                   name: "State",
@@ -297,7 +305,7 @@ const Drivers = () => {
   );
 };
 
-export default Drivers
+export default Drivers;
 
 const styles = StyleSheet.create({
   topContainer: {

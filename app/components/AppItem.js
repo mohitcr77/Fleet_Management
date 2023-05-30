@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Button, Modal, Pressable } from "react-native";
 import React, { useState, useContext, useEffect } from "react";
 import DataList from "./DataList";
-import dimensions from "../constatnts/dimensions";
+import dimensions from "../constants/dimensions";
 import AppInput from "./AppInput";
 import { ScrollView } from "react-native-gesture-handler";
 import TokenContext from "../service/context";
@@ -25,7 +25,7 @@ const AppItem = (props) => {
     const country = await index.getcountry(token.userToken.token);
     setcountry(country?.data?.data);
   };
-  //console.log(props.viewform); 
+  //console.log(props.viewform);
   return (
     <>
       <View style={styles.topContainer}>
@@ -40,7 +40,11 @@ const AppItem = (props) => {
             color={"#5e2dd8"}
             onPress={() => setvisible(true)}
           />
-          <Button title="Update" color={"#0774f8"} onPress={props.onupdateData.bind(this, props.id)}/>
+          <Button
+            title="Update"
+            color={"#0774f8"}
+            onPress={props.onupdateData.bind(this, props.id)}
+          />
           <Button
             title="Delete"
             color={"#bd112e"}
@@ -49,29 +53,29 @@ const AppItem = (props) => {
         </View>
       </View>
       <Modal visible={visible} transparent={false}>
-      <View style={styles.title}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>View </Text>
-      </View>
-      <ScrollView>
-      <View style={styles.modal_style}>
-          {props?.viewform.map((item,index) => (
-            <AppInput
-              editable={false}
-              text={item.name}
-              key={index}
-              type={item.type}
-              value={item.value}
-              disableDate={true}
-              disablecolor={true}
-              citydata={cityData}
-              countrydata={country}
-              statedata={stateData}
-            />
-          ))}
+        <View style={styles.title}>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>View </Text>
         </View>
+        <ScrollView>
+          <View style={styles.modal_style}>
+            {props?.viewform.map((item, index) => (
+              <AppInput
+                editable={false}
+                text={item.name}
+                key={index}
+                type={item.type}
+                value={item.value}
+                disableDate={true}
+                disablecolor={true}
+                citydata={cityData}
+                countrydata={country}
+                statedata={stateData}
+              />
+            ))}
+          </View>
         </ScrollView>
         <Pressable
-          onPress={() =>setvisible(false)}
+          onPress={() => setvisible(false)}
           style={styles.btn2}
           android_ripple={{ color: "#610909" }}
         >
@@ -101,7 +105,7 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: "white",
     borderRadius: 10,
-    borderWidth:1
+    borderWidth: 1,
   },
   btnContainer: {
     flexDirection: "row",
@@ -116,8 +120,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     marginHorizontal: 50,
-    alignItems: 'center',
-    marginVertical : 10
+    alignItems: "center",
+    marginVertical: 10,
   },
   modal_style: {
     margin: 20,
@@ -128,7 +132,7 @@ const styles = StyleSheet.create({
   },
   btnStyle: {
     fontSize: 15,
-    alignContent:"center",
+    alignContent: "center",
     color: "#ffffff",
   },
 });

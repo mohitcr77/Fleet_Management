@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import InputModal from "../components/InputModal";
 import AppItem from "../components/AppItem";
-import dataType from "../constatnts/dataType";
+import dataType from "../constants/dataType";
 import index from "../service/index";
 import TokenContext from "../service/context";
 import LoadingScreen from "./LoadingScreen";
@@ -33,7 +33,7 @@ const Mechanic = () => {
     name: "",
     email: "",
     password: "",
-    repassword:"",
+    repassword: "",
     current_address1: "",
     current_address2: "",
     current_state_id: "",
@@ -90,7 +90,7 @@ const Mechanic = () => {
       name: "Address 2",
       key: "current_address_2",
       type: dataType.text,
-      defaultValue:viewData?.user?.user_details?.current_address_2,
+      defaultValue: viewData?.user?.user_details?.current_address_2,
     },
     {
       name: "State",
@@ -264,7 +264,8 @@ const Mechanic = () => {
                   name: "Availabilty Status",
                   key: "availability_status",
                   type: dataType.city,
-                  value: itemData?.item?.user?.user_details?.availability_status,
+                  value:
+                    itemData?.item?.user?.user_details?.availability_status,
                 },
               ];
               return (
