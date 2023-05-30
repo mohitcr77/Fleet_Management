@@ -17,18 +17,6 @@ const Currencies = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     name: "",
     code: "",
@@ -40,8 +28,8 @@ const Currencies = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    index.postcurrency(token.userToken.token, enteredItemText);
-    const res = await index.getcurrency(token.userToken.token);
+    index.postApi(token.userToken.token, enteredItemText, "currency");
+    const res = await index.getApi(token.userToken.token, "currency");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
@@ -68,27 +56,29 @@ const Currencies = () => {
     },
   ];
   const addNewid = async () => {
-    const res = await index.getcurrency(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "currency");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updatecurrency(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "currency");
     setisvisible(false);
     setviewData("");
     addNewid();
   }
 
   function deleteDataHandler(id) {
-    index.deletecurrency(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "currency");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getacurrency(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "currency");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -127,9 +117,7 @@ const Currencies = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading} />
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -178,7 +166,6 @@ const Currencies = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

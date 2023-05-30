@@ -16,17 +16,7 @@ const Drivers = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getLoadingSreen();
     ()=>getcity();
   }, []);
 
@@ -123,36 +113,38 @@ const Drivers = () => {
   ];
   //console.log(listdata);
   async function addItemHandler(enteredItemText) {
-    console.log(enteredItemText);
-    index.postdriver(token.userToken.token, enteredItemText);
-    const res = await index.getdriver(token.userToken.token);
+    //console.log(enteredItemText);
+    index.postApi(token.userToken.token, enteredItemText, "driver");
+    const res = await index.getApi(token.userToken.token, "driver");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
   }
   const addNewid = async () => {
-    const res = await index.getdriver(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "driver");
     //console.log(res.data.data);
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updatedriver(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "driver");
     setisvisible(false);
     addNewid();
     setviewData("");
   }
 
   function deleteDataHandler(id) {
-    index.deletedriver(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "driver");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getadriver(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "driver");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -192,9 +184,7 @@ const Drivers = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading} />
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -291,7 +281,6 @@ const Drivers = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

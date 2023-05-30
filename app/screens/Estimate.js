@@ -17,18 +17,6 @@ const Estimate = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     client_id: "",
     estimate_no: "",
@@ -118,8 +106,10 @@ const Estimate = () => {
     },
   ];
   const addNewid = async () => {
+    setIsLoading(true);
     const res = await index.getApi(token.userToken.token, "estimate");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
@@ -177,9 +167,7 @@ const Estimate = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading} />
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -282,7 +270,6 @@ const Estimate = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

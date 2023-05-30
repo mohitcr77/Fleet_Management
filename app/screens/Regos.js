@@ -18,20 +18,6 @@ const Regos = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  //console.log(token.userToken.token);
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     name: "",
     rego_rate: "",
@@ -59,13 +45,11 @@ const Regos = () => {
 
   useEffect(() => {
     addNewid();
-    
   }, []);
   //console.log(token.userToken.token);
   async function addItemHandler(enteredItemText) {
-    console.log(enteredItemText);
-    index.postRegoData(token.userToken.token, enteredItemText);
-    const res = await index.getRegoData(token.userToken.token);
+    index.postApi(token.userToken.token, enteredItemText, "regos");
+    const res = await index.getApi(token.userToken.token, "regos");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
@@ -213,27 +197,29 @@ const Regos = () => {
     },
   ];
   const addNewid = async () => {
-    const res = await index.getRegoData(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "regos");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.UpdateRegoData(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "regos");
     setisvisible(false);
     setviewData("");
     addNewid();
   }
 
   function deleteDataHandler(id) {
-    index.deleteRegoData(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "regos");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getaRego(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "regos");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -272,9 +258,7 @@ const Regos = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading}/>
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -456,7 +440,6 @@ const Regos = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

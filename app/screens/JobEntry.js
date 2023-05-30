@@ -17,18 +17,6 @@ const JobEntry = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     date: "",
     day: "",
@@ -58,6 +46,7 @@ const JobEntry = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
+    console.log(enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "jobs");
     const res = await index.getApi(token.userToken.token, "jobs");
     setlistdata(res.data.data);
@@ -194,8 +183,10 @@ const JobEntry = () => {
     },
   ];
   const addNewid = async () => {
+    setIsLoading(true);
     const res = await index.getApi(token.userToken.token, "jobs");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
@@ -253,9 +244,7 @@ const JobEntry = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading} />
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -418,7 +407,6 @@ const JobEntry = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

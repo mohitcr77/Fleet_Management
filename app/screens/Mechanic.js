@@ -17,18 +17,6 @@ const Mechanic = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     name: "",
     email: "",
@@ -48,25 +36,26 @@ const Mechanic = () => {
 
   async function addItemHandler(enteredItemText) {
     //console.log(enteredItemText);
-    index.postmechanic(token.userToken.token, enteredItemText);
-    const res = await index.getmechanic(token.userToken.token);
+    index.postApi(token.userToken.token, enteredItemText, "mechanic");
+    const res = await index.getApi(token.userToken.token, "mechanic");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
   }
+  //console.log(viewData?.user);
 
   const form = [
     {
       name: "Name",
       key: "name",
       type: dataType.text,
-      defaultValue: viewData?.name,
+      defaultValue: viewData?.user?.name,
     },
     {
       name: "Email",
       key: "email",
       type: dataType.text,
-      defaultValue: viewData?.email,
+      defaultValue: viewData?.user?.email,
     },
     {
       name: "Password",
@@ -118,27 +107,30 @@ const Mechanic = () => {
     },
   ];
   const addNewid = async () => {
-    const res = await index.getmechanic(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "mechanic");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updatemechanic(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "mechanic");
     setisvisible(false);
     setviewData("");
     addNewid();
   }
 
   function deleteDataHandler(id) {
-    index.deletemechanic(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "mechanic");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getamechanic(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "mechanic");
+    //console.log(res?.data?.name);
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -177,9 +169,7 @@ const Mechanic = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading} />
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -210,13 +200,13 @@ const Mechanic = () => {
                   name: "Name",
                   key: "name",
                   type: dataType.text,
-                  value: itemData?.item?.name,
+                  value: itemData?.item?.user?.name,
                 },
                 {
                   name: "Email",
                   key: "email",
                   type: dataType.text,
-                  value: itemData?.item?.email,
+                  value: itemData?.item?.user?.email,
                 },
                 {
                   name: "Password",
@@ -278,7 +268,6 @@ const Mechanic = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

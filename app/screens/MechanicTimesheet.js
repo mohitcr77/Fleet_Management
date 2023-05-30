@@ -17,18 +17,6 @@ const MechanicTimesheet = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     mechanic_id: "",
     date: "",
@@ -44,8 +32,8 @@ const MechanicTimesheet = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    index.postmechanic_timesheet(token.userToken.token, enteredItemText);
-    const res = await index.getmechanic_timesheet(token.userToken.token);
+    index.postmechanic_timesheet(token.userToken.token, enteredItemText, "mechanic_timesheet");
+    const res = await index.getmechanic_timesheet(token.userToken.token, "mechanic_timesheet");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid()
@@ -96,27 +84,29 @@ const MechanicTimesheet = () => {
     },
   ]
   const addNewid = async () => {
-    const res = await index.getmechanic_timesheet(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getmechanic_timesheet(token.userToken.token, "mechanic_timesheet");
     setlistdata(res.data.data);
+    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updatemechanic_timesheet(token.userToken.token, newobj, dataID);
+    index.Updatemechanic_timesheet(token.userToken.token, newobj, dataID, "mechanic_timesheet");
     setisvisible(false);
     setviewData("");
     addNewid()
   }
 
   function deleteDataHandler(id) {
-    index.deletemechanic_timesheet(token.userToken.token, id);
+    index.deletemechanic_timesheet(token.userToken.token, id, "mechanic_timesheet");
     addNewid()
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getamechanic_timesheet(token.userToken.token, id);
+    const res = await index.getamechanic_timesheet(token.userToken.token, id, "mechanic_timesheet");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -155,9 +145,7 @@ const MechanicTimesheet = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading} />
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -242,7 +230,6 @@ const MechanicTimesheet = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );

@@ -17,18 +17,6 @@ const VehicleMaintenance = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
-  const getLoadingSreen = async () => {
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    try {
-      await sleep(2000);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getLoadingSreen();
-  }, []);
   const initialState = {
     mechanic_id: "",
     repair_date: "",
@@ -51,9 +39,9 @@ const VehicleMaintenance = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    console.log(enteredItemText);
-    index.postvehicle_maintenance(token.userToken.token, enteredItemText);
-    const res = await index.getvehicle_maintenance(token.userToken.token);
+    //console.log(enteredItemText);
+    index.postApi(token.userToken.token, enteredItemText, "vehicle_maintenance");
+    const res = await index.getApi(token.userToken.token, "vehicle_maintenance");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
@@ -64,7 +52,7 @@ const VehicleMaintenance = () => {
       name: "Mechanic Id",
       key: "mechanic_id",
       type: dataType.number,
-      defaultValue: viewData?.mechanic_id,
+      defaultValue: JSON.stringify(viewData?.mechanic_id),
     },
     {
       name: "Repair Date",
@@ -106,55 +94,57 @@ const VehicleMaintenance = () => {
       name: "Rego ID",
       key: "rego_id",
       type: dataType.text,
-      defaultValue: viewData?.rego_id,
+      defaultValue: JSON.stringify(viewData?.rego_id),
     },
     {
       name: "Odometer Start",
       key: "odo_start",
       type: dataType.number,
-      defaultValue: viewData?.odo_start,
+      defaultValue: JSON.stringify(viewData?.odo_start),
     },
     {
       name: "Odometer Start",
       key: "odo_finish",
       type: dataType.number,
-      defaultValue: viewData?.odo_finish,
+      defaultValue: JSON.stringify(viewData?.odo_finish),
     },
     {
       name: "Distance",
       key: "distance",
       type: dataType.number,
-      defaultValue: viewData?.distance,
+      defaultValue: JSON.stringify(viewData?.distance),
     },
     {
       name: "Mileage",
       key: "milage",
       type: dataType.number,
-      defaultValue: viewData?.milage,
+      defaultValue: JSON.stringify(viewData?.milage),
     },
   ];
   const addNewid = async () => {
-    const res = await index.getvehicle_maintenance(token.userToken.token);
+    setIsLoading(true);
+    const res = await index.getApi(token.userToken.token, "vehicle_maintenance");
     setlistdata(res.data.data);
+    setIsLoading(false);
   }; 
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updatevehicle_maintenance(token.userToken.token, newobj, dataID);
+    index.UpdateApi(token.userToken.token, newobj, dataID, "vehicle_maintenance");
     setisvisible(false);
     setviewData("");
     addNewid();
   }
 
   function deleteDataHandler(id) {
-    index.deletevehicle_maintenance(token.userToken.token, id);
+    index.deleteApi(token.userToken.token, id, "vehicle_maintenance");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getavehicle_maintenance(token.userToken.token, id);
+    const res = await index.getaApi(token.userToken.token, id, "vehicle_maintenance");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -193,9 +183,7 @@ const VehicleMaintenance = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen loading={isLoading}/>
           <FlatList
             data={listdata}
             renderItem={(itemData) => {
@@ -214,7 +202,7 @@ const VehicleMaintenance = () => {
                 },
                 {
                   name: "Day",
-                  value: itemData?.item?.Day,
+                  value: itemData?.item?.day,
                 },
                 {
                   name: "Comment",
@@ -310,7 +298,6 @@ const VehicleMaintenance = () => {
               );
             }}
           />
-        )}
       </View>
     </View>
   );
