@@ -1,9 +1,9 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
-const URL = "https://fleet-management.kalpvaig.com/api/v1";
+export const URL = "https://fleet-management.kalpvaig.com/api/v1";
 
-const getHeader = (token) => {
+export const getHeader = (token) => {
   return {
     headers: {
       Authorization: `Bearer ${token} `,

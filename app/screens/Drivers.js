@@ -36,7 +36,6 @@ const Drivers = () => {
     country_id: "",
     rate: "",
   };
-  //console.log(listdata[0].user.user_details.current_address_1);
   const form = [
     {
       name: "Name",
@@ -111,9 +110,7 @@ const Drivers = () => {
     //   defaultValue: viewData?.user?.user_details?.image,
     // },
   ];
-  //console.log(listdata);
   async function addItemHandler(enteredItemText) {
-    //console.log(enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "driver");
     const res = await index.getApi(token.userToken.token, "driver");
     setlistdata(res.data.data);
@@ -123,7 +120,6 @@ const Drivers = () => {
   const addNewid = async () => {
     setIsLoading(true);
     const res = await index.getApi(token.userToken.token, "driver");
-    //console.log(res.data.data);
     setlistdata(res.data.data);
     setIsLoading(false);
   };

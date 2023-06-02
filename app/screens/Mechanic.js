@@ -35,14 +35,12 @@ const Mechanic = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    //console.log(enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "mechanic");
     const res = await index.getApi(token.userToken.token, "mechanic");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
   }
-  //console.log(viewData?.user);
 
   const form = [
     {
@@ -130,7 +128,6 @@ const Mechanic = () => {
   async function updateHandler(id) {
     setdataID(id);
     const res = await index.getaApi(token.userToken.token, id, "mechanic");
-    //console.log(res?.data?.name);
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -169,106 +166,105 @@ const Mechanic = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-          <LoadingScreen loading={isLoading} />
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Name",
-                  value: itemData?.item?.user?.name,
-                },
-                {
-                  name: "Email",
-                  value: itemData?.item?.user?.email,
-                },
-                {
-                  name: "Address 1",
-                  value: itemData?.item?.user?.user_details?.current_address_1,
-                },
-                {
-                  name: "Address 2",
-                  value: itemData?.item?.user?.user_details?.current_address_2,
-                },
-                {
-                  name: "Availabilty Status",
-                  value: itemData?.item?.availibility_status,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Name",
-                  key: "name",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.name,
-                },
-                {
-                  name: "Email",
-                  key: "email",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.email,
-                },
-                {
-                  name: "Password",
-                  key: "password",
-                  type: dataType.password,
-                  value: itemData?.item?.password,
-                },
-                {
-                  name: "Re-enter Password",
-                  key: "repassword",
-                  type: dataType.password,
-                  value: itemData?.item?.repassword,
-                },
-                {
-                  name: "Address 1",
-                  key: "address1",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.user_details?.currrent_address_1,
-                },
-                {
-                  name: "Address 2",
-                  key: "address2",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.user_details?.currrent_address_2,
-                },
-                {
-                  name: "State",
-                  key: "state_id",
-                  type: dataType.state,
-                  value: itemData?.item?.user?.user_details?.current_state_id,
-                },
-                {
-                  name: "City",
-                  key: "city_id",
-                  type: dataType.city,
-                  value: itemData?.item?.user?.user_details?.current_city_id,
-                },
-                {
-                  name: "Country",
-                  key: "conutry_id",
-                  type: dataType.country,
-                  value: itemData?.item?.user?.user_details?.current_conutry_id,
-                },
-                {
-                  name: "Availabilty Status",
-                  key: "availability_status",
-                  type: dataType.city,
-                  value:
-                    itemData?.item?.user?.user_details?.availability_status,
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Name",
+                value: itemData?.item?.user?.name,
+              },
+              {
+                name: "Email",
+                value: itemData?.item?.user?.email,
+              },
+              {
+                name: "Address 1",
+                value: itemData?.item?.user?.user_details?.current_address_1,
+              },
+              {
+                name: "Address 2",
+                value: itemData?.item?.user?.user_details?.current_address_2,
+              },
+              {
+                name: "Availabilty Status",
+                value: itemData?.item?.availibility_status,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Name",
+                key: "name",
+                type: dataType.text,
+                value: itemData?.item?.user?.name,
+              },
+              {
+                name: "Email",
+                key: "email",
+                type: dataType.text,
+                value: itemData?.item?.user?.email,
+              },
+              {
+                name: "Password",
+                key: "password",
+                type: dataType.password,
+                value: itemData?.item?.password,
+              },
+              {
+                name: "Re-enter Password",
+                key: "repassword",
+                type: dataType.password,
+                value: itemData?.item?.repassword,
+              },
+              {
+                name: "Address 1",
+                key: "address1",
+                type: dataType.text,
+                value: itemData?.item?.user?.user_details?.currrent_address_1,
+              },
+              {
+                name: "Address 2",
+                key: "address2",
+                type: dataType.text,
+                value: itemData?.item?.user?.user_details?.currrent_address_2,
+              },
+              {
+                name: "State",
+                key: "state_id",
+                type: dataType.state,
+                value: itemData?.item?.user?.user_details?.current_state_id,
+              },
+              {
+                name: "City",
+                key: "city_id",
+                type: dataType.city,
+                value: itemData?.item?.user?.user_details?.current_city_id,
+              },
+              {
+                name: "Country",
+                key: "conutry_id",
+                type: dataType.country,
+                value: itemData?.item?.user?.user_details?.current_conutry_id,
+              },
+              {
+                name: "Availabilty Status",
+                key: "availability_status",
+                type: dataType.city,
+                value: itemData?.item?.user?.user_details?.availability_status,
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );

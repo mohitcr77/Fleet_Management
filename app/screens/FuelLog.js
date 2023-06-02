@@ -33,7 +33,6 @@ const FuelLog = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    console.log(enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "fuellog");
     const res = await index.getApi(token.userToken.token, "fuellog");
     setlistdata(res.data.data);
@@ -159,103 +158,103 @@ const FuelLog = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-          <LoadingScreen loading={isLoading}/>
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Date",
-                  value: itemData?.item?.date,
-                },
-                {
-                  name: "Time",
-                  value: itemData?.item?.time,
-                },
-                {
-                  name: "Dkt_no.",
-                  value: itemData?.item?.dkt_no,
-                },
-                {
-                  name: "Dip Start",
-                  value: JSON.stringify(itemData?.item?.dip_start),
-                },
-                {
-                  name: "Dip finish",
-                  value: itemData?.item?.dip_finish,
-                },
-                {
-                  name: "EST Delivered",
-                  value: itemData?.item?.est_delivered,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Date",
-                  key: "date",
-                  type: dataType.date,
-                  value: itemData?.item?.date,
-                },
-                {
-                  name: "Time",
-                  key: "time",
-                  type: dataType.time,
-                  value: itemData?.item?.time,
-                },
-                {
-                  name: "Dkt_no.",
-                  key: "dkt_no",
-                  type: dataType.text,
-                  value: itemData?.item?.dkt_no,
-                },
-                {
-                  name: "Dip Start",
-                  key: "dip_Start",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.dip_start),
-                },
-                {
-                  name: "Dip finish",
-                  key: "dip_finish",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.dip_finish),
-                },
-                {
-                  name: "EST Delivered",
-                  key: "est_delivered",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.est_delivered),
-                },
-                {
-                  name: "Actual Delivered",
-                  key: "actual_delivered",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.actual_delivered),
-                },
-                {
-                  name: "Fuel Rate",
-                  key: "fuel_rate",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.fuel_rate),
-                },
-                {
-                  name: "Invoice",
-                  key: "invoice_total",
-                  type: dataType.text,
-                  value: itemData?.item?.invoice_total,
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Date",
+                value: itemData?.item?.date,
+              },
+              {
+                name: "Time",
+                value: itemData?.item?.time,
+              },
+              {
+                name: "Dkt_no.",
+                value: itemData?.item?.dkt_no,
+              },
+              {
+                name: "Dip Start",
+                value: JSON.stringify(itemData?.item?.dip_start),
+              },
+              {
+                name: "Dip finish",
+                value: itemData?.item?.dip_finish,
+              },
+              {
+                name: "EST Delivered",
+                value: itemData?.item?.est_delivered,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Date",
+                key: "date",
+                type: dataType.date,
+                value: itemData?.item?.date,
+              },
+              {
+                name: "Time",
+                key: "time",
+                type: dataType.time,
+                value: itemData?.item?.time,
+              },
+              {
+                name: "Dkt_no.",
+                key: "dkt_no",
+                type: dataType.text,
+                value: itemData?.item?.dkt_no,
+              },
+              {
+                name: "Dip Start",
+                key: "dip_Start",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.dip_start),
+              },
+              {
+                name: "Dip finish",
+                key: "dip_finish",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.dip_finish),
+              },
+              {
+                name: "EST Delivered",
+                key: "est_delivered",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.est_delivered),
+              },
+              {
+                name: "Actual Delivered",
+                key: "actual_delivered",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.actual_delivered),
+              },
+              {
+                name: "Fuel Rate",
+                key: "fuel_rate",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.fuel_rate),
+              },
+              {
+                name: "Invoice",
+                key: "invoice_total",
+                type: dataType.text,
+                value: itemData?.item?.invoice_total,
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );

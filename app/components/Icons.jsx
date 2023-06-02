@@ -28,6 +28,21 @@ const Menu = ({ onPress, menuColor = "black" }) => (
   </TouchableOpacity>
 );
 
+const PlushCircle = ({ onPress }) => (
+  <TouchableOpacity style={{ marginVertical: 10 }} onPress={onPress}>
+    <Octicons name="plus-circle" size={40} color={colors.gray2} />
+  </TouchableOpacity>
+);
+
+const Close = ({ onPress }) => (
+  <TouchableOpacity
+    style={{ margin: 3, marginRight: 10, alignSelf: "flex-end" }}
+    onPress={onPress}
+  >
+    <AntDesign name="closecircle" size={24} color={colors.gray2} />
+  </TouchableOpacity>
+);
+
 const User = ({ image }) => {
   return (
     <>
@@ -58,10 +73,30 @@ const User = ({ image }) => {
   );
 };
 
+const Gallery = ({ size = 70, color = colors.blue2 }) => (
+  <MaterialIcons name="photo" size={size} color={color} />
+);
+
+const Camera = ({ size = 70, color = colors.blue2 }) => (
+  <AntDesign name="camera" size={size} color={color} />
+);
+
+const Send = ({ size = 16 }) => (
+  <FontAwesome name="send" size={size} color={colors.white} />
+);
+
+const Pencil = () => <MaterialIcons name="edit" size={24} color={"white"} />;
+
 export default {
+  Camera,
+  Gallery,
+  Close,
+  PlushCircle,
   EditPencil,
   Menu,
   User,
+  Send,
+  Pencil,
 };
 
 const styles = StyleSheet.create({

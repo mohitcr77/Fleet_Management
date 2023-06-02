@@ -19,7 +19,6 @@ const OnboardingItem = (props) => {
   useEffect(() => {
     animation.current?.play();
   }, []);
-  //console.log(props?.listLength);
   const { width } = useWindowDimensions();
   return (
     <View style={styles.container}>

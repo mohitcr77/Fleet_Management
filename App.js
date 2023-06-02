@@ -53,7 +53,8 @@ export default function App() {
               <AuthNavigator />
             ) : (
               // User is signed in
-              <AppNavigator />
+              <DrawerNavigator />
+              // <AppNavigator />
             )}
           </TokenContext.Provider>
         </Provider>

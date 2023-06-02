@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 
-import { DrawerActions, useNavigation } from "../hooks";
 import { scale, width } from "../helpers/scales";
 import colors from "../constants/colors";
 import Icons from "./Icons";

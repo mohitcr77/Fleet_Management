@@ -37,13 +37,11 @@ const InputModal = (props) => {
   function onUpdateItemHandler() {
     props.onUpdateItem(state);
     setState(props.initialState);
-    //console.log(props.form);
   }
 
   function onCancelHandler() {
     props.onCancel();
     //setform(null)
-    //console.log(form);
   }
   return (
     <Modal visible={props.visible} animationType="slide">

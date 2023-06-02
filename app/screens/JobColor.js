@@ -76,7 +76,6 @@ const JobColor = () => {
   function deleteDataHandler(id) {
     index.deleteApi(token.userToken.token, id, "color");
     addNewid();
-    //console.log(id);
   }
 
   async function updateHandler(id) {

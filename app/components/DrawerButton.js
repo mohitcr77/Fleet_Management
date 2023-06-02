@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 
-import { DrawerActions, useNavigation } from "../hooks";
 import colors from "../constants/colors";
+import { useNavigation } from "@react-navigation/native";
 
 export default function DrawerButton({
   title,

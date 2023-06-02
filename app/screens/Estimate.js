@@ -33,9 +33,7 @@ const Estimate = () => {
   useEffect(() => {
     addNewid();
   }, []);
-  //console.log(token.userToken.token);
   async function addItemHandler(enteredItemText) {
-    console.log(enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "estimate");
     const res = await index.getApi(token.userToken.token, "estimate");
     setlistdata(res.data.data);
@@ -167,109 +165,109 @@ const Estimate = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-          <LoadingScreen loading={isLoading} />
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Client ID",
-                  value: itemData?.item?.client_id,
-                },
-                {
-                  name: "Estimate number",
-                  value: itemData?.item?.estimate_no,
-                },
-                {
-                  name: "Reference Number",
-                  value: JSON.stringify(itemData?.item?.reference_no),
-                },
-                {
-                  name: "Estimate Date",
-                  value: itemData?.item?.estimate_date,
-                },
-                {
-                  name: "Expire Date",
-                  value: itemData?.item?.expire_date,
-                },
-                {
-                  name: "Subject",
-                  value: itemData?.item?.subject,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Client ID",
-                  key: "client_id",
-                  type: dataType.text,
-                  value: itemData?.item?.client_id,
-                },
-                {
-                  name: "Estimate number",
-                  key: "estimate_no",
-                  type: dataType.number,
-                  value: itemData?.item?.estimate_no,
-                },
-                {
-                  name: "Reference Number",
-                  key: "reference_no",
-                  type: dataType.number,
-                  value: JSON.stringify(itemData?.item?.reference_no),
-                },
-                {
-                  name: "Estimate Date",
-                  key: "estimate_date",
-                  type: dataType.date,
-                  value: itemData?.item?.estimate_date,
-                },
-                {
-                  name: "Expire Date",
-                  key: "expire_date",
-                  type: dataType.date,
-                  value: itemData?.item?.expire_date,
-                },
-                {
-                  name: "Subject",
-                  key: "subject",
-                  type: dataType.text,
-                  value: itemData?.item?.subject,
-                },
-                {
-                  name: "Customer Notes",
-                  key: "customer_notes",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.customer_notes),
-                },
-                {
-                  name: "Subtotal",
-                  key: "subtotal",
-                  type: dataType.number,
-                  value: itemData?.item?.subtotal,
-                },
-                {
-                  name: "Total",
-                  key: "total",
-                  type: dataType.number,
-                  value: itemData?.item?.total,
-                },
-                {
-                  name: "paid",
-                  key: "paid",
-                  type: dataType.number,
-                  value: itemData?.item?.paid,
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Client ID",
+                value: itemData?.item?.client_id,
+              },
+              {
+                name: "Estimate number",
+                value: itemData?.item?.estimate_no,
+              },
+              {
+                name: "Reference Number",
+                value: JSON.stringify(itemData?.item?.reference_no),
+              },
+              {
+                name: "Estimate Date",
+                value: itemData?.item?.estimate_date,
+              },
+              {
+                name: "Expire Date",
+                value: itemData?.item?.expire_date,
+              },
+              {
+                name: "Subject",
+                value: itemData?.item?.subject,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Client ID",
+                key: "client_id",
+                type: dataType.text,
+                value: itemData?.item?.client_id,
+              },
+              {
+                name: "Estimate number",
+                key: "estimate_no",
+                type: dataType.number,
+                value: itemData?.item?.estimate_no,
+              },
+              {
+                name: "Reference Number",
+                key: "reference_no",
+                type: dataType.number,
+                value: JSON.stringify(itemData?.item?.reference_no),
+              },
+              {
+                name: "Estimate Date",
+                key: "estimate_date",
+                type: dataType.date,
+                value: itemData?.item?.estimate_date,
+              },
+              {
+                name: "Expire Date",
+                key: "expire_date",
+                type: dataType.date,
+                value: itemData?.item?.expire_date,
+              },
+              {
+                name: "Subject",
+                key: "subject",
+                type: dataType.text,
+                value: itemData?.item?.subject,
+              },
+              {
+                name: "Customer Notes",
+                key: "customer_notes",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.customer_notes),
+              },
+              {
+                name: "Subtotal",
+                key: "subtotal",
+                type: dataType.number,
+                value: itemData?.item?.subtotal,
+              },
+              {
+                name: "Total",
+                key: "total",
+                type: dataType.number,
+                value: itemData?.item?.total,
+              },
+              {
+                name: "paid",
+                key: "paid",
+                type: dataType.number,
+                value: itemData?.item?.paid,
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );

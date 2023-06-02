@@ -46,7 +46,6 @@ const JobEntry = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    console.log(enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "jobs");
     const res = await index.getApi(token.userToken.token, "jobs");
     setlistdata(res.data.data);
@@ -244,169 +243,169 @@ const JobEntry = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-          <LoadingScreen loading={isLoading} />
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Date",
-                  value: itemData?.item?.date,
-                },
-                {
-                  name: "Day",
-                  value: itemData?.item?.day,
-                },
-                {
-                  name: "Client_id",
-                  value: itemData?.item?.client_id,
-                },
-                {
-                  name: "Job number",
-                  value: itemData?.item?.job_no,
-                },
-                {
-                  name: "Time",
-                  value: itemData?.item?.time,
-                },
-                {
-                  name: "Day Start",
-                  value: itemData?.item?.day_finish,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Date",
-                  key: "date",
-                  type: dataType.date,
-                  value: itemData?.item?.date,
-                },
-                {
-                  name: "Day",
-                  key: "day",
-                  type: dataType.text,
-                  value: itemData?.item?.day,
-                },
-                {
-                  name: "Client_id",
-                  key: "client_id",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.client_id),
-                },
-                {
-                  name: "Job number",
-                  key: "job_no",
-                  type: dataType.text,
-                  value: itemData?.item?.job_no,
-                },
-                {
-                  name: "Time",
-                  key: "time",
-                  type: dataType.time,
-                  value: itemData?.item?.time,
-                },
-                {
-                  name: "Day Start",
-                  key: "day_finish",
-                  type: dataType.date,
-                  value: itemData?.item?.day_finish,
-                },
-                {
-                  name: "Day Total",
-                  key: "day_total",
-                  type: dataType.text,
-                  value: itemData?.item?.day_total,
-                },
-                {
-                  name: "Docket number",
-                  key: "docket_no",
-                  type: dataType.country,
-                  value: itemData?.item?.docket_no,
-                },
-                {
-                  name: "Docket hours",
-                  key: "docket_hours",
-                  type: dataType.text,
-                  value: itemData?.item?.docket_hours,
-                },
-                {
-                  name: "Invoice no.",
-                  key: "invoice_no",
-                  type: dataType.text,
-                  value: itemData?.item?.invoice_no,
-                },
-                {
-                  name: "Driver ID",
-                  key: "driver_id",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.driver_id),
-                },
-                {
-                  name: "Rego ID",
-                  key: "rego_id",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.rego_id),
-                },
-                {
-                  name: "Rego planned ID",
-                  key: "rego_planned_id",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.rego_planned_id),
-                },
-                {
-                  name: "Color ID",
-                  key: "color_id",
-                  type: dataType.text,
-                  value: JSON.stringify(itemData?.item?.color_id),
-                },
-                {
-                  name: "Travel time",
-                  key: "travel_time",
-                  type: dataType.time,
-                  value: itemData?.item?.travel_time,
-                },
-                {
-                  name: "Admin dstart",
-                  key: "admin_dstart",
-                  type: dataType.text,
-                  value: itemData?.item?.admin_dstart,
-                },
-                {
-                  name: "Long URL",
-                  key: "long_url",
-                  type: dataType.text,
-                  value: itemData?.item?.long_url,
-                },
-                {
-                  name: "Short URL",
-                  key: "short_url",
-                  type: dataType.text,
-                  value: itemData?.item?.short_url,
-                },
-                {
-                  name: "Link_id",
-                  key: "link_id",
-                  type: dataType.text,
-                  value: itemData?.item?.link_id,
-                },
-                {
-                  name: "Comment",
-                  key: "comment",
-                  type: dataType.text,
-                  value: itemData?.item?.comment,
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Date",
+                value: itemData?.item?.date,
+              },
+              {
+                name: "Day",
+                value: itemData?.item?.day,
+              },
+              {
+                name: "Client_id",
+                value: itemData?.item?.client_id,
+              },
+              {
+                name: "Job number",
+                value: itemData?.item?.job_no,
+              },
+              {
+                name: "Time",
+                value: itemData?.item?.time,
+              },
+              {
+                name: "Day Start",
+                value: itemData?.item?.day_finish,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Date",
+                key: "date",
+                type: dataType.date,
+                value: itemData?.item?.date,
+              },
+              {
+                name: "Day",
+                key: "day",
+                type: dataType.text,
+                value: itemData?.item?.day,
+              },
+              {
+                name: "Client_id",
+                key: "client_id",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.client_id),
+              },
+              {
+                name: "Job number",
+                key: "job_no",
+                type: dataType.text,
+                value: itemData?.item?.job_no,
+              },
+              {
+                name: "Time",
+                key: "time",
+                type: dataType.time,
+                value: itemData?.item?.time,
+              },
+              {
+                name: "Day Start",
+                key: "day_finish",
+                type: dataType.date,
+                value: itemData?.item?.day_finish,
+              },
+              {
+                name: "Day Total",
+                key: "day_total",
+                type: dataType.text,
+                value: itemData?.item?.day_total,
+              },
+              {
+                name: "Docket number",
+                key: "docket_no",
+                type: dataType.country,
+                value: itemData?.item?.docket_no,
+              },
+              {
+                name: "Docket hours",
+                key: "docket_hours",
+                type: dataType.text,
+                value: itemData?.item?.docket_hours,
+              },
+              {
+                name: "Invoice no.",
+                key: "invoice_no",
+                type: dataType.text,
+                value: itemData?.item?.invoice_no,
+              },
+              {
+                name: "Driver ID",
+                key: "driver_id",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.driver_id),
+              },
+              {
+                name: "Rego ID",
+                key: "rego_id",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.rego_id),
+              },
+              {
+                name: "Rego planned ID",
+                key: "rego_planned_id",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.rego_planned_id),
+              },
+              {
+                name: "Color ID",
+                key: "color_id",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.color_id),
+              },
+              {
+                name: "Travel time",
+                key: "travel_time",
+                type: dataType.time,
+                value: itemData?.item?.travel_time,
+              },
+              {
+                name: "Admin dstart",
+                key: "admin_dstart",
+                type: dataType.text,
+                value: itemData?.item?.admin_dstart,
+              },
+              {
+                name: "Long URL",
+                key: "long_url",
+                type: dataType.text,
+                value: itemData?.item?.long_url,
+              },
+              {
+                name: "Short URL",
+                key: "short_url",
+                type: dataType.text,
+                value: itemData?.item?.short_url,
+              },
+              {
+                name: "Link_id",
+                key: "link_id",
+                type: dataType.text,
+                value: itemData?.item?.link_id,
+              },
+              {
+                name: "Comment",
+                key: "comment",
+                type: dataType.text,
+                value: itemData?.item?.comment,
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );

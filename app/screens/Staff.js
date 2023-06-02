@@ -42,7 +42,6 @@ const Staff = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    //console.log(enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "staff");
     const res = await index.getApi(token.userToken.token, "staff");
     setlistdata(res.data.data);
@@ -222,163 +221,163 @@ const Staff = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-          <LoadingScreen loading={isLoading} />
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Name",
-                  key: "name",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.name,
-                },
-                {
-                  name: "Email",
-                  key: "email",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.email,
-                },
-                {
-                  name: "address 1",
-                  key: "address1",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.user_details?.current_address_1,
-                },
-                {
-                  name: "Address 2",
-                  key: "address2",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.user_details?.current_address_2,
-                },
-                {
-                  name: "Hire Date",
-                  key: "hire_date",
-                  type: dataType.date,
-                  value: itemData?.item?.hire_date,
-                },
-                {
-                  name: "Date of birth",
-                  key: "date_of_birth",
-                  type: dataType.date,
-                  value: itemData?.item?.date_of_birth,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Name",
-                  key: "name",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.name,
-                },
-                {
-                  name: "Email",
-                  key: "email",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.email,
-                },
-                {
-                  name: "Password",
-                  key: "password",
-                  type: dataType.password,
-                  value: itemData?.item?.password,
-                },
-                {
-                  name: "address 1",
-                  key: "address1",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.user_details?.current_address_1,
-                },
-                {
-                  name: "Address 2",
-                  key: "address2",
-                  type: dataType.text,
-                  value: itemData?.item?.user?.user_details?.current_address_2,
-                },
-                {
-                  name: "Mobile",
-                  key: "mobile",
-                  type: dataType.city,
-                  value: itemData?.item?.user?.user_details?.mobile,
-                },
-                {
-                  name: "City",
-                  key: "city_id",
-                  type: dataType.city,
-                  value: itemData?.item?.city_id,
-                },
-                {
-                  name: "State",
-                  key: "state_id",
-                  type: dataType.state,
-                  value: itemData?.item?.state_id,
-                },
-                {
-                  name: "Country",
-                  key: "country_id",
-                  type: dataType.country,
-                  value: itemData?.item?.country_id,
-                },
-                {
-                  name: "Hire Date",
-                  key: "hire_date",
-                  type: dataType.date,
-                  value: itemData?.item?.hire_date,
-                },
-                {
-                  name: "Date of birth",
-                  key: "date_of_birth",
-                  type: dataType.date,
-                  value: itemData?.item?.date_of_birth,
-                },
-                {
-                  name: "Pincode",
-                  key: "pincode",
-                  type: dataType.text,
-                  value: itemData?.item?.pincode,
-                },
-                {
-                  name: "Select Staff Type",
-                  key: "select_staff_type",
-                  type: dataType.text,
-                  value: itemData?.item?.select_staff_type,
-                },
-                {
-                  name: "Certifiation",
-                  key: "certification",
-                  type: dataType.text,
-                  value: itemData?.item?.certification,
-                },
-                {
-                  name: "Licence Number",
-                  key: "liscence_number",
-                  type: dataType.text,
-                  value: itemData?.item?.liscence_number,
-                },
-                {
-                  name: "Licence Expiry",
-                  key: "licence_expiry",
-                  type: dataType.text,
-                  value: itemData?.item?.licence_expiry,
-                },
-                {
-                  name: "Other Staff",
-                  key: "other_staff",
-                  type: dataType.text,
-                  value: itemData?.item?.other_staff,
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Name",
+                key: "name",
+                type: dataType.text,
+                value: itemData?.item?.user?.name,
+              },
+              {
+                name: "Email",
+                key: "email",
+                type: dataType.text,
+                value: itemData?.item?.user?.email,
+              },
+              {
+                name: "address 1",
+                key: "address1",
+                type: dataType.text,
+                value: itemData?.item?.user?.user_details?.current_address_1,
+              },
+              {
+                name: "Address 2",
+                key: "address2",
+                type: dataType.text,
+                value: itemData?.item?.user?.user_details?.current_address_2,
+              },
+              {
+                name: "Hire Date",
+                key: "hire_date",
+                type: dataType.date,
+                value: itemData?.item?.hire_date,
+              },
+              {
+                name: "Date of birth",
+                key: "date_of_birth",
+                type: dataType.date,
+                value: itemData?.item?.date_of_birth,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Name",
+                key: "name",
+                type: dataType.text,
+                value: itemData?.item?.user?.name,
+              },
+              {
+                name: "Email",
+                key: "email",
+                type: dataType.text,
+                value: itemData?.item?.user?.email,
+              },
+              {
+                name: "Password",
+                key: "password",
+                type: dataType.password,
+                value: itemData?.item?.password,
+              },
+              {
+                name: "address 1",
+                key: "address1",
+                type: dataType.text,
+                value: itemData?.item?.user?.user_details?.current_address_1,
+              },
+              {
+                name: "Address 2",
+                key: "address2",
+                type: dataType.text,
+                value: itemData?.item?.user?.user_details?.current_address_2,
+              },
+              {
+                name: "Mobile",
+                key: "mobile",
+                type: dataType.city,
+                value: itemData?.item?.user?.user_details?.mobile,
+              },
+              {
+                name: "City",
+                key: "city_id",
+                type: dataType.city,
+                value: itemData?.item?.city_id,
+              },
+              {
+                name: "State",
+                key: "state_id",
+                type: dataType.state,
+                value: itemData?.item?.state_id,
+              },
+              {
+                name: "Country",
+                key: "country_id",
+                type: dataType.country,
+                value: itemData?.item?.country_id,
+              },
+              {
+                name: "Hire Date",
+                key: "hire_date",
+                type: dataType.date,
+                value: itemData?.item?.hire_date,
+              },
+              {
+                name: "Date of birth",
+                key: "date_of_birth",
+                type: dataType.date,
+                value: itemData?.item?.date_of_birth,
+              },
+              {
+                name: "Pincode",
+                key: "pincode",
+                type: dataType.text,
+                value: itemData?.item?.pincode,
+              },
+              {
+                name: "Select Staff Type",
+                key: "select_staff_type",
+                type: dataType.text,
+                value: itemData?.item?.select_staff_type,
+              },
+              {
+                name: "Certifiation",
+                key: "certification",
+                type: dataType.text,
+                value: itemData?.item?.certification,
+              },
+              {
+                name: "Licence Number",
+                key: "liscence_number",
+                type: dataType.text,
+                value: itemData?.item?.liscence_number,
+              },
+              {
+                name: "Licence Expiry",
+                key: "licence_expiry",
+                type: dataType.text,
+                value: itemData?.item?.licence_expiry,
+              },
+              {
+                name: "Other Staff",
+                key: "other_staff",
+                type: dataType.text,
+                value: itemData?.item?.other_staff,
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );

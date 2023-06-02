@@ -34,7 +34,6 @@ const Client = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    //console.log(enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "clients");
     const res = await index.getApi(token.userToken.token, "clients");
     setlistdata(res.data.data);

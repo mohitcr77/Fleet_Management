@@ -1,13 +1,31 @@
-const text = 'text'
-const date = 'date'
-const color = 'color'
-const number = 'number'
-const float = 'float'
-const time = 'time'
-const city ='city'
-const country ='country'
-const state = 'state'
-const image = 'image'
-const password = "password"
-const dropdown = "dropdown"
-export default {text ,date, color, number, float, time,state,city,country,image, password, dropdown}
+const city = "city";
+const color = "color";
+const country = "country";
+const date = "date";
+const dropdown = "dropdown";
+const float = "float";
+const form = "form";
+const image = "image";
+const number = "number";
+const password = "password";
+const state = "state";
+const text = "text";
+const time = "time";
+const signature = "signature";
+
+export default {
+  city,
+  color,
+  country,
+  date,
+  dropdown,
+  float,
+  form,
+  image,
+  number,
+  password,
+  signature,
+  state,
+  text,
+  time,
+};

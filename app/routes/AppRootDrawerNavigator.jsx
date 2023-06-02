@@ -1,15 +1,21 @@
 import React from "react";
-
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import DrawerContent from "../screens/DrawerContentScreen";
+
 import screenNames from "../constants/screenNames";
+
+import DrawerContent from "../screens/DrawerContentScreen";
 import FullDktList from "../screens/DriverScreens/FullDktList";
+import FullDktForm from "./../screens/DriverScreens/FullDktFormScreen";
+import useFetchList from "../hooks/useFetchList";
 
 const Drawer = createDrawerNavigator();
 
-export default DrawerNavigator = () => {
+export default function DrawerNavigator() {
+  useFetchList();
+
   const drawerScreens = [
     { name: screenNames.FULL_DKT_LIST_SCREEN, component: FullDktList },
+    { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
   ];
 
   return (
@@ -32,4 +38,4 @@ export default DrawerNavigator = () => {
       ))}
     </Drawer.Navigator>
   );
-};
+}

@@ -50,13 +50,13 @@ export default function useLocationTracking() {
     const hasStarted = await Location.hasStartedLocationUpdatesAsync(
       LOCATION_TRACKING
     );
-    console.log("tracking started?", hasStarted);
+    console.warn("tracking started?", hasStarted);
   };
   return { startLocationTracking, stopLocationUpdate };
 }
 TaskManager.defineTask(LOCATION_TRACKING, async ({ data, error }) => {
   if (error) {
-    console.log("LOCATION_TRACKING task ERROR:", error);
+    console.warn("LOCATION_TRACKING task ERROR:", error);
     return;
   }
   if (data) {

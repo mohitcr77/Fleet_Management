@@ -37,7 +37,6 @@ const CompanyInfo = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    console.log(enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "company");
     const res = await index.getApi(token.userToken.token, "company");
     setlistdata(res.data.data);
@@ -175,115 +174,115 @@ const CompanyInfo = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-          <LoadingScreen loading={isLoading} />
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Name",
-                  value: itemData?.item?.name,
-                },
-                {
-                  name: "Company Mobile",
-                  value: JSON.stringify(itemData?.item?.company_mobile),
-                },
-                {
-                  name: "Office Email",
-                  value: itemData?.item?.office_email,
-                },
-                {
-                  name: "Company address 1",
-                  value: itemData?.item?.company_address1,
-                },
-                {
-                  name: "Company Address 2",
-                  value: itemData?.item?.company_address2,
-                },
-                {
-                  name: "City",
-                  value: itemData?.item?.city_id,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Name",
-                  key: "name",
-                  type: dataType.text,
-                  value: itemData?.item.name,
-                },
-                {
-                  name: "Company Mobile",
-                  key: "company_mobile",
-                  type: dataType.text,
-                  value: itemData?.item.company_mobile,
-                },
-                {
-                  name: "Office Email",
-                  key: "office_email",
-                  type: dataType.text,
-                  value: itemData?.item.office_email,
-                },
-                {
-                  name: "Company address 1",
-                  key: "company_address1",
-                  type: dataType.text,
-                  value: itemData?.item.company_address1,
-                },
-                {
-                  name: "Company Address 2",
-                  key: "company_address2",
-                  type: dataType.text,
-                  value: itemData?.item.company_address2,
-                },
-                {
-                  name: "City",
-                  key: "city_id",
-                  type: dataType.city,
-                  value: itemData?.item.city_id,
-                },
-                {
-                  name: "State",
-                  key: "state_id",
-                  type: dataType.text,
-                  value: itemData?.item.state_id,
-                },
-                {
-                  name: "Country",
-                  key: "country_id",
-                  type: dataType.text,
-                  value: itemData?.item.country_id,
-                },
-                {
-                  name: "Company Gstin",
-                  key: "company_gstin",
-                  type: dataType.text,
-                  value: itemData?.item.company_gstin,
-                },
-                {
-                  name: "Company office",
-                  key: "company_office",
-                  type: dataType.text,
-                  value: itemData?.item.company_office,
-                },
-                {
-                  name: "Note",
-                  key: "payment_note",
-                  type: dataType.text,
-                  value: itemData?.item.payment_note,
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Name",
+                value: itemData?.item?.name,
+              },
+              {
+                name: "Company Mobile",
+                value: JSON.stringify(itemData?.item?.company_mobile),
+              },
+              {
+                name: "Office Email",
+                value: itemData?.item?.office_email,
+              },
+              {
+                name: "Company address 1",
+                value: itemData?.item?.company_address1,
+              },
+              {
+                name: "Company Address 2",
+                value: itemData?.item?.company_address2,
+              },
+              {
+                name: "City",
+                value: itemData?.item?.city_id,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Name",
+                key: "name",
+                type: dataType.text,
+                value: itemData?.item.name,
+              },
+              {
+                name: "Company Mobile",
+                key: "company_mobile",
+                type: dataType.text,
+                value: itemData?.item.company_mobile,
+              },
+              {
+                name: "Office Email",
+                key: "office_email",
+                type: dataType.text,
+                value: itemData?.item.office_email,
+              },
+              {
+                name: "Company address 1",
+                key: "company_address1",
+                type: dataType.text,
+                value: itemData?.item.company_address1,
+              },
+              {
+                name: "Company Address 2",
+                key: "company_address2",
+                type: dataType.text,
+                value: itemData?.item.company_address2,
+              },
+              {
+                name: "City",
+                key: "city_id",
+                type: dataType.city,
+                value: itemData?.item.city_id,
+              },
+              {
+                name: "State",
+                key: "state_id",
+                type: dataType.text,
+                value: itemData?.item.state_id,
+              },
+              {
+                name: "Country",
+                key: "country_id",
+                type: dataType.text,
+                value: itemData?.item.country_id,
+              },
+              {
+                name: "Company Gstin",
+                key: "company_gstin",
+                type: dataType.text,
+                value: itemData?.item.company_gstin,
+              },
+              {
+                name: "Company office",
+                key: "company_office",
+                type: dataType.text,
+                value: itemData?.item.company_office,
+              },
+              {
+                name: "Note",
+                key: "payment_note",
+                type: dataType.text,
+                value: itemData?.item.payment_note,
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );

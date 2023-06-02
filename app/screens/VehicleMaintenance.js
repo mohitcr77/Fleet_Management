@@ -39,7 +39,6 @@ const VehicleMaintenance = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    //console.log(enteredItemText);
     index.postApi(
       token.userToken.token,
       enteredItemText,

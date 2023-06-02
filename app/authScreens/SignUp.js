@@ -80,7 +80,6 @@ const SignUp = ({ navigation }) => {
     };
     const res = await index.getApiData(data);
     getLoadingSreen();
-    //console.log(res);
     if (res.data) {
       token.setUserToken(res.data);
       index.saveData(JSON.stringify(res.data));
