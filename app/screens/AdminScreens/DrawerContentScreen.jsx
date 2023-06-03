@@ -2,15 +2,29 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 
 // import AuthContext from "../../auth/context";
-import { width } from "../helpers/scales";
-import Icons from "../components/Icons";
-import colors from "../constants/colors";
-import DrawerButton from "../components/DrawerButton";
-import screenNames from "../constants/screenNames";
+import { width } from "../../helpers/scales";
+import Icons from "../../components/Icons";
+import colors from "../../constants/colors";
+import DrawerButton from "../../components/DrawerButton";
+import screenNames from "../../constants/screenNames";
 
 export default function DrawerContent({ navigation }) {
   // const { auth, setAuth } = useContext(AuthContext);
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState(0);
+
+  const btn = [
+    {
+      title: "Full DKT",
+      screen: screenNames.FULL_DKT_LIST_SCREEN,
+      icon: <Icons.EditPencil />,
+    },
+    {
+      title: "Scan DKT",
+      screen: screenNames.SCAN_DKT_LIST_SCREEN,
+      icon: <Icons.EditPencil />,
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -24,13 +38,16 @@ export default function DrawerContent({ navigation }) {
         <Text style={{ color: colors.white }}>email</Text>
       </TouchableOpacity>
 
-      <DrawerButton
-        title={"Full DKT"}
-        navigateToScreen={screenNames.FULL_DKT_LIST_SCREEN}
-        icon={<Icons.EditPencil />}
-        onSelect={() => setSelected(1)}
-        selected={selected == 1 ? true : false}
-      />
+      {btn.map((i, index) => (
+        <DrawerButton
+          key={index}
+          title={i.title}
+          navigateToScreen={i.screen}
+          icon={<Icons.EditPencil />}
+          onSelect={() => setSelected(index)}
+          selected={selected == index ? true : false}
+        />
+      ))}
 
       {/* <DrawerButton
         title={"Notification"}

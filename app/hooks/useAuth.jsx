@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import TokenContext from "../service/context";
 
 export default useAuth = () => {
-  const { userToken: auth, setUserToken: setAuth } = useContext(TokenContext);
+  const { userToken: auth, setAuth: setAuth } = useContext(TokenContext);
 
   return {
     auth,

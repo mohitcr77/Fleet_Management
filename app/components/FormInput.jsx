@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import React, { useState } from "react";
 import dataType from "../constants/dataType";
 import { Input } from "@ui-kitten/components";
@@ -30,7 +30,7 @@ export default function FormInput(props) {
               customStyles.inputBox,
               { paddingHorizontal: 14, height: 40 },
             ]}
-            placeholder={name}
+            placeholder={""}
             placeholderStyle={{ color: colors.gray2, fontSize: 15 }}
             data={data}
             search
@@ -70,18 +70,25 @@ export default function FormInput(props) {
         <CompWrapper>
           <Input
             style={{ backgroundColor: "white", borderRadius: 10 }}
-            placeholder={name}
+            placeholder={""}
             value={value}
             onChangeText={(nextValue) => setValue(nextValue)}
           />
         </CompWrapper>
       );
   }
+  function CompWrapper({ children }) {
+    return (
+      <View style={styles.compWrapperStyle}>
+        <Text style={{ marginBottom: 5, marginTop: 8, fontWeight: "bold" }}>
+          {name}
+        </Text>
+        {children}
+      </View>
+    );
+  }
 }
 
-function CompWrapper({ children }) {
-  return <View style={styles.compWrapperStyle}>{children}</View>;
-}
 const styles = StyleSheet.create({
   compWrapperStyle: {
     marginVertical: 5,

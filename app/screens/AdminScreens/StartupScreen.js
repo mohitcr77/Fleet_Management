@@ -14,7 +14,7 @@ const StartupScreen = () => {
       {/* <Text>Loading...</Text> */}
       <Image
         style={styles.iconImage}
-        source={require("../assets/atranz_logo.png")}
+        source={require("../../assets/atranz_logo.png")}
       />
       <LottieView
         autoPlay
@@ -25,7 +25,7 @@ const StartupScreen = () => {
           backgroundColor: "#ffffff00",
         }}
         // Find more Lottie files at https://lottiefiles.com/featured
-        source={require("../assets/loading.json")}
+        source={require("../../assets/loading.json")}
       />
       {/* <ActivityIndicator size="large" /> */}
     </View>

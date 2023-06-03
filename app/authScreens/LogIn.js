@@ -8,13 +8,13 @@ import {
 } from "react-native";
 //import { TextInput } from "react-native-paper";
 import { useState, useContext } from "react";
-import index from "../service/index";
 import TokenContext from "../service/context";
-import LoadingScreen from "../screens/LoadingScreen";
+import LoadingScreen from "../screens/AdminScreens/LoadingScreen";
 import { Layout, Text, Input, Icon, IconElement } from "@ui-kitten/components";
 import { AuthLayoutContainer } from "./SelectUserType";
 import AppButton from "../components/AppButton";
 import { Entypo } from "@expo/vector-icons";
+import service from "../service";
 
 const LogIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -31,8 +31,8 @@ const LogIn = ({ navigation }) => {
     setIsLoading(true);
     const res = await index.getApiData(data);
     if (res.data) {
-      token.setUserToken(res.data);
-      index.saveData(JSON.stringify(res.data));
+      token.setAuth(res.data);
+      service.saveData(JSON.stringify(res.data));
     } else {
       alert("Invalid userId or password");
     }

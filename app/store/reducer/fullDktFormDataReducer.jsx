@@ -40,7 +40,7 @@ export const fullDktFromData = createSlice({
       state.form.details[i][k] = e;
     },
     removeFormDktDetail: (state, action) => {
-      if (state.details.length === 1) {
+      if (state.form.details.length === 1) {
         state.form.details = initialState.details;
       } else {
         state.form.details.splice(action.payload, 1);

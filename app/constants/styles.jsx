@@ -26,17 +26,21 @@ const bottomSheetContainer = {
   paddingHorizontal: 20,
 };
 
-const inputBox = {
-  // height: 40,
+const inputBorder = {
   borderColor: "#cccccc",
   borderWidth: 1,
-  borderRadius: 10,
+  borderRadius: 4,
   backgroundColor: "white",
+};
+
+const inputBox = {
+  ...inputBorder,
+  height: 45,
   // paddingHorizontal: 12,
 };
 
 const smallBtn = {
-  borderRadius: 10,
+  borderRadius: 4,
   height: 30,
   width: dimensions.componentWidth / 2 - 10,
 };
@@ -52,6 +56,7 @@ const customStyles = StyleSheet.create({
   rightAligned,
   bottomSheetContainer,
   inputBox,
+  inputBorder,
 });
 
 export default customStyles;

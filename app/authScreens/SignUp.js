@@ -10,7 +10,7 @@ import { TextInput } from "react-native-paper";
 import { useState, useEffect, useContext, useRef } from "react";
 import index from "../service/index";
 import TokenContext from "../service/context";
-import LoadingScreen from "../screens/LoadingScreen";
+import LoadingScreen from "../screens/AdminScreens/LoadingScreen";
 import dimensions from "../constants/dimensions";
 import { Animated, Easing } from "react-native";
 import OtpScreen from "./OtpScreen";
@@ -81,7 +81,7 @@ const SignUp = ({ navigation }) => {
     const res = await index.getApiData(data);
     getLoadingSreen();
     if (res.data) {
-      token.setUserToken(res.data);
+      token.setAuth(res.data);
       index.saveData(JSON.stringify(res.data));
     } else {
       alert("Invalid userId or passowrd");

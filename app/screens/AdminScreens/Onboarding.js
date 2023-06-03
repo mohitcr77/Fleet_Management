@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, FlatList, Animated } from "react-native";
 import React from "react";
-import slides from "../constants/slides";
-import OnboardingItem from "../components/OnboardingItem";
+import slides from "../../constants/slides";
+import OnboardingItem from "../../components/OnboardingItem";
 import { useRef, useState, useCallback } from "react";
 
 const Onboarding = () => {

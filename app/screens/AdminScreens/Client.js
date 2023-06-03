@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import InputModal from "../components/InputModal";
-import AppItem from "../components/AppItem";
-import dataType from "../constants/dataType";
-import index from "../service/index";
-import TokenContext from "../service/context";
+import InputModal from "../../components/InputModal";
+import AppItem from "../../components/AppItem";
+import dataType from "../../constants/dataType";
+import index from "../../service/index";
+import TokenContext from "../../service/context";
 import LoadingScreen from "./LoadingScreen";
 
-const Mechanic = () => {
+const Client = () => {
   const token = useContext(TokenContext);
   const [isLoading, setIsLoading] = useState(true);
   const [isvisible, setisvisible] = useState(false);
@@ -22,12 +22,11 @@ const Mechanic = () => {
     email: "",
     password: "",
     repassword: "",
-    current_address1: "",
-    current_address2: "",
-    current_state_id: "",
-    current_city_id: "",
-    country_id: "",
-    availibility_status: "",
+    color_code: "",
+    weightage: "",
+    gstin: "",
+    bcc_email: "",
+    po: "",
   };
 
   useEffect(() => {
@@ -35,8 +34,8 @@ const Mechanic = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    index.postApi(token.userToken.token, enteredItemText, "mechanic");
-    const res = await index.getApi(token.userToken.token, "mechanic");
+    index.postApi(token.userToken.token, enteredItemText, "clients");
+    const res = await index.getApi(token.userToken.token, "clients");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
@@ -47,13 +46,13 @@ const Mechanic = () => {
       name: "Name",
       key: "name",
       type: dataType.text,
-      defaultValue: viewData?.user?.name,
+      defaultValue: viewData?.name,
     },
     {
       name: "Email",
       key: "email",
       type: dataType.text,
-      defaultValue: viewData?.user?.email,
+      defaultValue: viewData?.email,
     },
     {
       name: "Password",
@@ -68,45 +67,39 @@ const Mechanic = () => {
       defaultValue: viewData?.repassword,
     },
     {
-      name: "Address 1",
-      key: "current_address_1",
+      name: "Color Code",
+      key: "color_code",
+      type: dataType.color,
+      defaultValue: viewData?.color_code,
+    },
+    {
+      name: "Client Rate",
+      key: "weightage",
       type: dataType.text,
-      defaultValue: viewData?.user?.user_details?.current_address_1,
+      defaultValue: viewData?.weightage,
     },
     {
-      name: "Address 2",
-      key: "current_address_2",
+      name: "GSTIN",
+      key: "gstin",
       type: dataType.text,
-      defaultValue: viewData?.user?.user_details?.current_address_2,
+      defaultValue: viewData?.gstin,
     },
     {
-      name: "State",
-      key: "state_id",
-      type: dataType.state,
-      defaultValue: viewData?.user?.user_details?.current_state_id,
-    },
-    {
-      name: "City",
-      key: "city_id",
-      type: dataType.city,
-      defaultValue: viewData?.user?.user_details?.current_city_id,
-    },
-    {
-      name: "Country",
-      key: "conutry_id",
-      type: dataType.country,
-      defaultValue: viewData?.user?.user_details?.current_conutry_id,
-    },
-    {
-      name: "Availabilty Status",
-      key: "availibility_status",
+      name: "Bcc Email",
+      key: "bcc_email",
       type: dataType.text,
-      defaultValue: viewData?.availibility_status,
+      defaultValue: viewData?.bcc_email,
+    },
+    {
+      name: "Po",
+      key: "po",
+      type: dataType.text,
+      defaultValue: viewData?.po,
     },
   ];
   const addNewid = async () => {
     setIsLoading(true);
-    const res = await index.getApi(token.userToken.token, "mechanic");
+    const res = await index.getApi(token.userToken.token, "clients");
     setlistdata(res.data.data);
     setIsLoading(false);
   };
@@ -114,20 +107,20 @@ const Mechanic = () => {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.UpdateApi(token.userToken.token, newobj, dataID, "mechanic");
+    index.UpdateApi(token.userToken.token, newobj, dataID, "clients");
     setisvisible(false);
     setviewData("");
     addNewid();
   }
 
   function deleteDataHandler(id) {
-    index.deleteApi(token.userToken.token, id, "mechanic");
+    index.deleteApi(token.userToken.token, id, "clients");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getaApi(token.userToken.token, id, "mechanic");
+    const res = await index.getaApi(token.userToken.token, id, "clients");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -144,14 +137,14 @@ const Mechanic = () => {
   return (
     <View style={{ flex: 10 }}>
       <View style={styles.topContainer}>
-        <Text style={{ fontSize: 20 }}>Mechanic List</Text>
+        <Text style={{ fontSize: 20 }}>Client List</Text>
         <Pressable
           onPress={addHandler}
           style={styles.btnStyle}
           android_ripple={{ color: "#00580c" }}
         >
           <View>
-            <Text style={{ color: "#ffffff" }}>Add Mechanic</Text>
+            <Text style={{ color: "#ffffff" }}>Add Client</Text>
           </View>
         </Pressable>
       </View>
@@ -166,30 +159,31 @@ const Mechanic = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-        <LoadingScreen loading={isLoading} />
+        <LoadingScreen />
+
         <FlatList
           data={listdata}
           renderItem={(itemData) => {
             const cardviewform = [
               {
                 name: "Name",
-                value: itemData?.item?.user?.name,
+                value: itemData.item.name,
               },
               {
                 name: "Email",
-                value: itemData?.item?.user?.email,
+                value: itemData.item.email,
               },
               {
-                name: "Address 1",
-                value: itemData?.item?.user?.user_details?.current_address_1,
+                name: "Color code",
+                value: itemData.item.color_code,
               },
               {
-                name: "Address 2",
-                value: itemData?.item?.user?.user_details?.current_address_2,
+                name: "Vehicle Type",
+                value: itemData.item.gstin,
               },
               {
-                name: "Availabilty Status",
-                value: itemData?.item?.availibility_status,
+                name: "PO",
+                value: itemData.item.po,
               },
             ];
             const viewform = [
@@ -197,61 +191,43 @@ const Mechanic = () => {
                 name: "Name",
                 key: "name",
                 type: dataType.text,
-                value: itemData?.item?.user?.name,
+                value: itemData?.item?.name,
               },
               {
                 name: "Email",
                 key: "email",
                 type: dataType.text,
-                value: itemData?.item?.user?.email,
+                value: itemData?.item?.email,
               },
               {
-                name: "Password",
-                key: "password",
-                type: dataType.password,
-                value: itemData?.item?.password,
+                name: "Color Code",
+                key: "color_code",
+                type: dataType.color,
+                value: itemData?.item?.color_code,
               },
               {
-                name: "Re-enter Password",
-                key: "repassword",
-                type: dataType.password,
-                value: itemData?.item?.repassword,
-              },
-              {
-                name: "Address 1",
-                key: "address1",
+                name: "Client Rate",
+                key: "weightage",
                 type: dataType.text,
-                value: itemData?.item?.user?.user_details?.currrent_address_1,
+                value: itemData?.item?.weightage,
               },
               {
-                name: "Address 2",
-                key: "address2",
+                name: "GSTIN",
+                key: "gstin",
                 type: dataType.text,
-                value: itemData?.item?.user?.user_details?.currrent_address_2,
+                value: itemData?.item?.gstin,
               },
               {
-                name: "State",
-                key: "state_id",
-                type: dataType.state,
-                value: itemData?.item?.user?.user_details?.current_state_id,
+                name: "Bcc Email",
+                key: "bcc_email",
+                type: dataType.text,
+                value: itemData?.item?.bcc_email,
               },
               {
-                name: "City",
-                key: "city_id",
-                type: dataType.city,
-                value: itemData?.item?.user?.user_details?.current_city_id,
-              },
-              {
-                name: "Country",
-                key: "conutry_id",
-                type: dataType.country,
-                value: itemData?.item?.user?.user_details?.current_conutry_id,
-              },
-              {
-                name: "Availabilty Status",
-                key: "availability_status",
-                type: dataType.city,
-                value: itemData?.item?.user?.user_details?.availability_status,
+                name: "Po",
+                key: "po",
+                type: dataType.text,
+                value: itemData?.item?.po,
               },
             ];
             return (
@@ -270,7 +246,7 @@ const Mechanic = () => {
   );
 };
 
-export default Mechanic;
+export default Client;
 
 const styles = StyleSheet.create({
   topContainer: {

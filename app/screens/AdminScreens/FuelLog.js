@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import InputModal from "../components/InputModal";
-import AppItem from "../components/AppItem";
-import dataType from "../constants/dataType";
-import index from "../service/index";
-import TokenContext from "../service/context";
+import InputModal from "../../components/InputModal";
+import AppItem from "../../components/AppItem";
+import dataType from "../../constants/dataType";
+import index from "../../service/index";
+import TokenContext from "../../service/context";
 import LoadingScreen from "./LoadingScreen";
 
-const MechanicTimesheet = () => {
+const FuelLog = () => {
   const token = useContext(TokenContext);
   const [isLoading, setIsLoading] = useState(true);
   const [isvisible, setisvisible] = useState(false);
@@ -18,13 +18,14 @@ const MechanicTimesheet = () => {
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
   const initialState = {
-    mechanic_id: "",
     date: "",
-    day: "",
-    start_time: "",
-    end_time: "",
-    notes: "",
-    total_time: "",
+    time: "",
+    dkt_no: "",
+    dip_start: "",
+    dip_finish: "",
+    est_delivered: "",
+    fuel_rate: "",
+    invoice_total: "",
   };
 
   useEffect(() => {
@@ -32,15 +33,8 @@ const MechanicTimesheet = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    index.postmechanic_timesheet(
-      token.userToken.token,
-      enteredItemText,
-      "mechanic_timesheet"
-    );
-    const res = await index.getmechanic_timesheet(
-      token.userToken.token,
-      "mechanic_timesheet"
-    );
+    index.postApi(token.userToken.token, enteredItemText, "fuellog");
+    const res = await index.getApi(token.userToken.token, "fuellog");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
@@ -48,54 +42,63 @@ const MechanicTimesheet = () => {
 
   const form = [
     {
-      name: "Mechanic Id",
-      key: "mechanic_id",
-      type: dataType.number,
-      defaultValue: JSON.stringify(viewData?.mechanic_id),
-    },
-    {
       name: "Date",
       key: "date",
       type: dataType.date,
       defaultValue: viewData?.date,
     },
     {
-      name: "Day",
-      key: "day",
-      type: dataType.text,
-      defaultValue: viewData?.day,
-    },
-    {
-      name: "Start time",
-      key: "start_time",
+      name: "Time",
+      key: "time",
       type: dataType.time,
-      defaultValue: viewData?.start_time,
+      defaultValue: viewData?.time,
     },
     {
-      name: "End_time",
-      key: "end_time",
-      type: dataType.time,
-      defaultValue: viewData?.end_time,
-    },
-    {
-      name: "notes",
-      key: "notes",
+      name: "Dkt_no.",
+      key: "dkt_no",
       type: dataType.text,
-      defaultValue: viewData?.notes,
+      defaultValue: viewData?.dkt_no,
     },
     {
-      name: "Total time",
-      key: "total_time",
-      type: dataType.number,
-      defaultValue: JSON.stringify(viewData?.total_time),
+      name: "Dip Start",
+      key: "dip_Start",
+      type: dataType.text,
+      defaultValue: JSON.stringify(viewData?.dip_start),
+    },
+    {
+      name: "Dip finish",
+      key: "dip_finish",
+      type: dataType.text,
+      defaultValue: JSON.stringify(viewData?.dip_finish),
+    },
+    {
+      name: "EST Delivered",
+      key: "est_delivered",
+      type: dataType.text,
+      defaultValue: JSON.stringify(viewData?.est_delivered),
+    },
+    {
+      name: "Actual Delivered",
+      key: "actual_delivered",
+      type: dataType.text,
+      defaultValue: JSON.stringify(viewData?.actual_delivered),
+    },
+    {
+      name: "Fuel Rate",
+      key: "fuel_rate",
+      type: dataType.text,
+      defaultValue: JSON.stringify(viewData?.fuel_rate),
+    },
+    {
+      name: "Invoice",
+      key: "invoice_total",
+      type: dataType.text,
+      defaultValue: viewData?.invoice_total,
     },
   ];
   const addNewid = async () => {
     setIsLoading(true);
-    const res = await index.getmechanic_timesheet(
-      token.userToken.token,
-      "mechanic_timesheet"
-    );
+    const res = await index.getApi(token.userToken.token, "fuellog");
     setlistdata(res.data.data);
     setIsLoading(false);
   };
@@ -103,33 +106,20 @@ const MechanicTimesheet = () => {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.Updatemechanic_timesheet(
-      token.userToken.token,
-      newobj,
-      dataID,
-      "mechanic_timesheet"
-    );
+    index.UpdateApi(token.userToken.token, newobj, dataID, "fuellog");
     setisvisible(false);
     setviewData("");
     addNewid();
   }
 
   function deleteDataHandler(id) {
-    index.deletemechanic_timesheet(
-      token.userToken.token,
-      id,
-      "mechanic_timesheet"
-    );
+    index.deleteApi(token.userToken.token, id, "fuellog");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getamechanic_timesheet(
-      token.userToken.token,
-      id,
-      "mechanic_timesheet"
-    );
+    const res = await index.getaApi(token.userToken.token, id, "fuellog");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -146,14 +136,14 @@ const MechanicTimesheet = () => {
   return (
     <View style={{ flex: 10 }}>
       <View style={styles.topContainer}>
-        <Text style={{ fontSize: 14 }}>Mechanic timesheet List</Text>
+        <Text style={{ fontSize: 20 }}>FuelLog List</Text>
         <Pressable
           onPress={addHandler}
           style={styles.btnStyle}
           android_ripple={{ color: "#00580c" }}
         >
           <View>
-            <Text style={{ color: "#ffffff" }}>Add Mechanic timesheet</Text>
+            <Text style={{ color: "#ffffff" }}>Add FuelLog</Text>
           </View>
         </Pressable>
       </View>
@@ -174,37 +164,31 @@ const MechanicTimesheet = () => {
           renderItem={(itemData) => {
             const cardviewform = [
               {
-                name: "Mechanic Id",
-                value: itemData?.item?.mechanic_id,
-              },
-              {
                 name: "Date",
                 value: itemData?.item?.date,
               },
               {
-                name: "Day",
-                value: itemData?.item?.day,
+                name: "Time",
+                value: itemData?.item?.time,
               },
               {
-                name: "Start time",
-                value: itemData?.item?.start_time,
+                name: "Dkt_no.",
+                value: itemData?.item?.dkt_no,
               },
               {
-                name: "End_time",
-                value: itemData?.item?.end_time,
+                name: "Dip Start",
+                value: JSON.stringify(itemData?.item?.dip_start),
               },
               {
-                name: "notes",
-                value: itemData?.item?.notes,
+                name: "Dip finish",
+                value: itemData?.item?.dip_finish,
+              },
+              {
+                name: "EST Delivered",
+                value: itemData?.item?.est_delivered,
               },
             ];
             const viewform = [
-              {
-                name: "Mechanic Id",
-                key: "mechanic_id",
-                type: dataType.text,
-                value: JSON.stringify(itemData?.item?.mechanic_id),
-              },
               {
                 name: "Date",
                 key: "date",
@@ -212,34 +196,52 @@ const MechanicTimesheet = () => {
                 value: itemData?.item?.date,
               },
               {
-                name: "Day",
-                key: "day",
-                type: dataType.text,
-                value: itemData?.item?.day,
-              },
-              {
-                name: "Start time",
-                key: "start_time",
+                name: "Time",
+                key: "time",
                 type: dataType.time,
-                value: itemData?.item?.start_time,
+                value: itemData?.item?.time,
               },
               {
-                name: "End_time",
-                key: "end_time",
-                type: dataType.time,
-                value: itemData?.item?.end_time,
-              },
-              {
-                name: "notes",
-                key: "notes",
+                name: "Dkt_no.",
+                key: "dkt_no",
                 type: dataType.text,
-                value: itemData?.item?.notes,
+                value: itemData?.item?.dkt_no,
               },
               {
-                name: "Total time",
-                key: "total_time",
-                type: dataType.number,
-                value: JSON.stringify(itemData?.item?.total_time),
+                name: "Dip Start",
+                key: "dip_Start",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.dip_start),
+              },
+              {
+                name: "Dip finish",
+                key: "dip_finish",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.dip_finish),
+              },
+              {
+                name: "EST Delivered",
+                key: "est_delivered",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.est_delivered),
+              },
+              {
+                name: "Actual Delivered",
+                key: "actual_delivered",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.actual_delivered),
+              },
+              {
+                name: "Fuel Rate",
+                key: "fuel_rate",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.fuel_rate),
+              },
+              {
+                name: "Invoice",
+                key: "invoice_total",
+                type: dataType.text,
+                value: itemData?.item?.invoice_total,
               },
             ];
             return (
@@ -258,7 +260,7 @@ const MechanicTimesheet = () => {
   );
 };
 
-export default MechanicTimesheet;
+export default FuelLog;
 
 const styles = StyleSheet.create({
   topContainer: {
@@ -267,7 +269,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
     margin: 10,
     backgroundColor: "#ffffff",
     borderRadius: 10,

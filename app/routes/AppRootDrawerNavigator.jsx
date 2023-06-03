@@ -3,10 +3,12 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import screenNames from "../constants/screenNames";
 
-import DrawerContent from "../screens/DrawerContentScreen";
-import FullDktList from "../screens/DriverScreens/FullDktList";
+import DrawerContent from "../screens/AdminScreens/DrawerContentScreen";
 import FullDktForm from "./../screens/DriverScreens/FullDktFormScreen";
 import useFetchList from "../hooks/useFetchList";
+import FullDktList from "../screens/DriverScreens/ScanDktListScreen";
+import ScanDktForm from "../screens/DriverScreens/ScanDktFormScreen";
+import ScanDktList from "../screens/DriverScreens/ScanDktListScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -16,6 +18,8 @@ export default function DrawerNavigator() {
   const drawerScreens = [
     { name: screenNames.FULL_DKT_LIST_SCREEN, component: FullDktList },
     { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
+    { name: screenNames.SCAN_DKT_LIST_SCREEN, component: ScanDktList },
+    { name: screenNames.SCAN_DKT_FORM_SCREEN, component: ScanDktForm },
   ];
 
   return (

@@ -7,15 +7,14 @@ export const Emailcontext = createContext();
 import { store } from "./app/store/store";
 import { Provider } from "react-redux";
 import TokenContext from "./app/service/context";
-import LoadingScreen from "./app/screens/LoadingScreen";
 import index from "./app/service/index";
-import StartupScreen from "./app/screens/StartupScreen";
+import StartupScreen from "./app/screens/AdminScreens/StartupScreen";
 import * as eva from "@eva-design/eva";
 import { ApplicationProvider } from "@ui-kitten/components";
 import DrawerNavigator from "./app/routes/AppRootDrawerNavigator";
 
 export default function App() {
-  const [userToken, setUserToken] = useState(null);
+  const [userToken, setAuth] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const getLoadingSreen = async () => {
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -30,7 +29,7 @@ export default function App() {
     let result = await index.getData();
     if (result) {
       const resultjson = JSON.parse(result);
-      setUserToken(resultjson);
+      setAuth(resultjson);
     }
   };
   useEffect(() => {
@@ -46,7 +45,7 @@ export default function App() {
     <ApplicationProvider {...eva} theme={eva.light}>
       <NavigationContainer>
         <Provider store={store}>
-          <TokenContext.Provider value={{ userToken, setUserToken }}>
+          <TokenContext.Provider value={{ userToken, setAuth }}>
             {/* <DrawerNavigator /> */}
             {userToken == null ? (
               // No token found, user isn't signed in

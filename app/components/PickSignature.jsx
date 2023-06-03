@@ -16,18 +16,16 @@ export default function PickSignature() {
   const [showSignatureModal, setShowSignatureModal] = useState(false);
 
   return (
-    <View style={[styles.signatureContainer, customStyles.inputBox]}>
-      <Text style={{ color: colors.gray2 }}>Signature</Text>
+    <View style={[styles.signatureContainer, customStyles.inputBorder]}>
+      {/* <Text style={{ color: colors.gray2 }}>Signature</Text> */}
       <View style={customStyles.flex_row_between}>
         <AppButton
           title={"Manually"}
-          style={[styles.btn, customStyles.smallBtn]}
           type="small"
           onPress={() => setShowSignatureModal(true)}
         />
         <AppButton
           title={"Upload"}
-          style={styles.btn}
           type="small"
           onPress={() => setShowImagePicker(true)}
         />
@@ -102,9 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 5,
   },
-  btn: {
-    borderRadius: 10,
-  },
+
   sign: {
     height: 200,
     justifyContent: "center",

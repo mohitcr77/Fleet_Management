@@ -4,6 +4,8 @@ import ParentContainer from "../../components/ParentContainer";
 import FormInput from "../../components/FormInput";
 import dataType from "../../constants/dataType";
 import useFetchList from "../../hooks/useFetchList";
+import customStyles from "../../constants/styles";
+import AppButton from "../../components/AppButton";
 
 export default function FullDktForm() {
   const { clientList, machineTypeList } = useFetchList();
@@ -45,33 +47,25 @@ export default function FullDktForm() {
     { name: "Details", key: "details", type: dataType.form },
   ];
 
-  // const obj = {
-  //   // is_cc: !!supervisorNumber,
-  //   // job_no_status:"",
-  //   cc_phone: supervisorNumber,
-  //   client_id: params?.client_id || clientId,
-  //   date: params?.date || showDate,
-  //   details: detailsArray,
-  //   finish: showFinishTime,
-  //   job_no_id: params?.id || jobId,
-  //   job_no: params?.job_no || jobNumber,
-  //   location,
-  //   machine_id: params?.regos?.id || machineTypeId,
-  //   machine_type: params?.regos?.name || machineTypeName,
-  //   mail_sent,
-  //   operator,
-  //   send_supervisor: isCC ? 1 : 0,
-  //   start: showStartTime,
-  //   supervisor_id: supervisorId,
-  //   total: total || 0,
-  //   travel_time: travel || params?.travel_time,
-  // };
-
   return (
-    <ParentContainer>
+    <ParentContainer containerStyle={{ backgroundColor: "white" }}>
       {fullDktForm.map((i) => (
         <FormInput {...i} />
       ))}
+
+      <View
+        style={[
+          customStyles.flex_row_between,
+          { marginBottom: 150, marginTop: 40 },
+        ]}
+      >
+        <AppButton
+          title={"Save(Send Later)"}
+          type="small"
+          style={{ height: 40 }}
+        />
+        <AppButton title={"Submit"} type="small" style={{ height: 40 }} />
+      </View>
     </ParentContainer>
   );
 }

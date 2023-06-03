@@ -6,6 +6,8 @@ const screenNames = {
   // Driver Screens
   FULL_DKT_FORM_SCREEN: "Full Dkt Form Screen",
   FULL_DKT_LIST_SCREEN: "Full Dkt List Screen",
+  SCAN_DKT_FORM_SCREEN: "Scan Dkt Form Screen",
+  SCAN_DKT_LIST_SCREEN: "Scan Dkt List Screen",
 };
 
 export default screenNames;

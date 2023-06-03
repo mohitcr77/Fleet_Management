@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import InputModal from "../components/InputModal";
-import AppItem from "../components/AppItem";
-import dataType from "../constants/dataType";
-import index from "../service/index";
-import TokenContext from "../service/context";
+import InputModal from "../../components/InputModal";
+import AppItem from "../../components/AppItem";
+import dataType from "../../constants/dataType";
+import index from "../../service/index";
+import TokenContext from "../../service/context";
 import LoadingScreen from "./LoadingScreen";
 
-const JobColor = () => {
+const ReportIssue = () => {
   const token = useContext(TokenContext);
   const [isLoading, setIsLoading] = useState(true);
   const [isvisible, setisvisible] = useState(false);
@@ -17,49 +17,60 @@ const JobColor = () => {
   const [listdata, setlistdata] = useState("");
   const [viewData, setviewData] = useState("");
   const [dataID, setdataID] = useState("");
+  const initialState = {
+    date: "",
+    shift: "",
+    report_time: "",
+    reported_by: "",
+    report: "",
+  };
 
   useEffect(() => {
     addNewid();
   }, []);
-  function addHandler() {}
 
-  const initialState = {
-    name: "",
-    code: "",
-    description: "",
-  };
+  async function addItemHandler(enteredItemText) {
+    index.postApi(token.userToken.token, enteredItemText, "issues");
+    const res = await index.getApi(token.userToken.token, "issues");
+    setlistdata(res.data.data);
+    setisvisible(false);
+  }
 
   const form = [
     {
-      name: "Name",
-      key: "name",
-      type: dataType.text,
-      defaultValue: viewData?.name,
+      name: "Date",
+      key: "date",
+      type: dataType.date,
+      defaultValue: viewData?.date,
     },
     {
-      name: "code",
-      key: "code",
-      type: dataType.color,
-      defaultValue: viewData?.code,
+      name: "Shift",
+      key: "shift",
+      type: dataType.text,
+      defaultValue: JSON.stringify(viewData?.shift),
     },
     {
-      name: "Description",
-      key: "description",
+      name: "Report time",
+      key: "report_time",
+      type: dataType.time,
+      defaultValue: viewData?.report_time,
+    },
+    {
+      name: "Reported by",
+      key: "reported_by",
       type: dataType.text,
-      defaultValue: viewData?.description,
+      defaultValue: viewData?.reported_by,
+    },
+    {
+      name: "Report",
+      key: "report",
+      type: dataType.text,
+      defaultValue: viewData?.report,
     },
   ];
-
-  async function addItemHandler(enteredItemText) {
-    index.postApi(token.userToken.token, enteredItemText, "color");
-    const res = await index.getApi(token.userToken.token, "color");
-    setlistdata(res.data.data);
-    setisvisible(false);
-    addNewid();
-  }
   const addNewid = async () => {
     setIsLoading(true);
-    const res = await index.getApi(token.userToken.token, "color");
+    const res = await index.getApi(token.userToken.token, "issues");
     setlistdata(res.data.data);
     setIsLoading(false);
   };
@@ -67,20 +78,18 @@ const JobColor = () => {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.UpdateApi(token.userToken.token, newobj, dataID, "color");
+    index.UpdateApi(token.userToken.token, newobj, dataID, "issues");
     setisvisible(false);
-    addNewid();
     setviewData("");
   }
 
   function deleteDataHandler(id) {
-    index.deleteApi(token.userToken.token, id, "color");
-    addNewid();
+    index.deleteApi(token.userToken.token, id, "issues");
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getaApi(token.userToken.token, id, "color");
+    const res = await index.getaApi(token.userToken.token, id, "issues");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -94,26 +103,25 @@ const JobColor = () => {
     setisvisible(false);
     setviewData("");
   }
-
   return (
     <View style={{ flex: 10 }}>
       <View style={styles.topContainer}>
-        <Text style={{ fontSize: 18 }}>JobColor List</Text>
+        <Text style={{ fontSize: 20 }}>Report List</Text>
         <Pressable
           onPress={addHandler}
           style={styles.btnStyle}
           android_ripple={{ color: "#00580c" }}
         >
           <View>
-            <Text style={{ color: "#ffffff" }}>Add JobColor</Text>
+            <Text style={{ color: "#ffffff" }}>Report Issue</Text>
           </View>
         </Pressable>
       </View>
       <InputModal
         crudop={crud}
+        form={form}
         updateValue={updateData}
         initialState={initialState}
-        form={form}
         onAddItem={addItemHandler}
         onUpdateItem={updateItemHandler}
         visible={isvisible}
@@ -126,36 +134,56 @@ const JobColor = () => {
           renderItem={(itemData) => {
             const cardviewform = [
               {
-                name: "Name",
-                value: itemData.item.name,
+                name: "Date",
+                value: itemData?.item?.date,
               },
               {
-                name: "Code",
-                value: itemData.item.code,
+                name: "Shift",
+                value: itemData?.item?.shift,
               },
               {
-                name: "Description",
-                value: itemData.item.description,
+                name: "Report time",
+                value: itemData?.item?.report_time,
+              },
+              {
+                name: "Reported by",
+                value: itemData?.item?.reported_by,
+              },
+              {
+                name: "Report",
+                value: itemData?.item?.report,
               },
             ];
             const viewform = [
               {
-                name: "Name",
-                key: "name",
-                type: dataType.text,
-                value: itemData.item.name,
+                name: "Date",
+                key: "date",
+                type: dataType.date,
+                value: itemData?.item?.date,
               },
               {
-                name: "Code",
-                key: "code",
-                type: dataType.color,
-                value: itemData.item.code,
+                name: "Shift",
+                key: "shift",
+                type: dataType.text,
+                value: JSON.stringify(itemData?.item?.shift),
               },
               {
-                name: "Description",
-                key: "description",
+                name: "Report time",
+                key: "report_time",
+                type: dataType.time,
+                value: itemData?.item?.report_time,
+              },
+              {
+                name: "Reported by",
+                key: "reported_by",
                 type: dataType.text,
-                value: itemData.item.description,
+                value: itemData?.item?.reported_by,
+              },
+              {
+                name: "Report",
+                key: "report",
+                type: dataType.text,
+                value: itemData?.item?.report,
               },
             ];
             return (
@@ -174,7 +202,7 @@ const JobColor = () => {
   );
 };
 
-export default JobColor;
+export default ReportIssue;
 
 const styles = StyleSheet.create({
   topContainer: {

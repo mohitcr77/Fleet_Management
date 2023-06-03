@@ -13,6 +13,7 @@ export default function DrawerButton({
 }) {
   const navigation = useNavigation();
 
+  console.log(navigateToScreen);
   return (
     <TouchableOpacity
       onPress={() => {

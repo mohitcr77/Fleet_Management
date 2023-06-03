@@ -15,7 +15,7 @@ export default function AppButton({
 }) {
   let btn = {
     ...styles.button,
-    backgroundColor: loading ? "#91abed" : "#0f255eff",
+    backgroundColor: colors.themeColor,
   };
 
   let txtStyle = { fontSize: 20, color: "white", ...titleStyle };
@@ -34,15 +34,16 @@ export default function AppButton({
     </TouchableOpacity>
   );
 }
+
 const styles = StyleSheet.create({
   button: {
     padding: 5,
     shadowOpacity: 5,
     height: 45,
-    backgroundColor: colors.blue2,
+    backgroundColor: colors.themeColor,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 50,
+    borderRadius: 4,
     marginVertical: 8,
     width: dimensions.componentWidth - 20,
   },

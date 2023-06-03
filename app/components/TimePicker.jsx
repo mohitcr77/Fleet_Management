@@ -29,9 +29,7 @@ export const TimePicker = ({ name }) => {
       ]}
       onPress={() => setShow(true)}
     >
-      <Text style={{ color: time ? "black" : colors.gray2 }}>
-        {time || name}
-      </Text>
+      <Text style={{ color: "black" }}>{time}</Text>
       <DateTimePicker
         isVisible={show}
         onConfirm={onChange}

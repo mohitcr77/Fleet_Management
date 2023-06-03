@@ -14,8 +14,7 @@ import { ColorPicker } from "react-native-color-picker";
 import { Modal } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import TokenContext from "../service/context";
-import index from "../service/index";
-import LoadingScreen from "../screens/LoadingScreen";
+
 import * as ImagePicker from "expo-image-picker";
 const AppInput = (props) => {
   const token = useContext(TokenContext);

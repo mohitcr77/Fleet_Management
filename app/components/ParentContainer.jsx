@@ -9,8 +9,7 @@ import dimensions from "../constants/dimensions";
 
 export default function ParentContainer({
   children,
-  title,
-  color = colors.white,
+  containerStyle,
   useScroll = true,
 }) {
   const navigation = useNavigation();
@@ -18,9 +17,13 @@ export default function ParentContainer({
   const CompWrapper = () => {
     return (
       <View
-        style={{
-          width: dimensions.componentWidth,
-        }}
+        style={[
+          {
+            padding: dimensions.mainHorizontalPadding,
+            minHeight: height,
+          },
+          containerStyle,
+        ]}
       >
         {children}
       </View>

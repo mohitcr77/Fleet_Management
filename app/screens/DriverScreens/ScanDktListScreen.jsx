@@ -10,10 +10,10 @@ import ParentContainer from "../../components/ParentContainer";
 import ListHeader from "../../components/ListHeader";
 import screenNames from "../../constants/screenNames";
 import useFetchList from "../../hooks/useFetchList";
-import ListCard from "./../../components/ListCard";
+import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
 
-export default function FullDktList({ navigation }) {
+export default function ScanDktList({ navigation }) {
   const CardComponent = ({ obj }) => {
     const data = {
       cardData: [
@@ -64,9 +64,9 @@ export default function FullDktList({ navigation }) {
   return (
     <ParentContainer useScroll={false}>
       <ListHeader
-        listName={"Full Dkt List"}
+        listName={"Scan Dkt List"}
         btnName={"Create"}
-        onPress={() => navigation.navigate(screenNames.FULL_DKT_FORM_SCREEN)}
+        onPress={() => navigation.navigate(screenNames.SCAN_DKT_FORM_SCREEN)}
       />
       <View style={styles.container}>
         {false ? (

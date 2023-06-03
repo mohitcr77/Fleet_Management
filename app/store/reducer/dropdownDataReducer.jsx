@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   clientList: [],
   machineTypeList: [],
+  driverList: [],
+  supervisorList: [],
 };
 
 export const dropdownDataSlice = createSlice({

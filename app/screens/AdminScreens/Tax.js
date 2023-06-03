@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import InputModal from "../components/InputModal";
-import AppItem from "../components/AppItem";
-import dataType from "../constants/dataType";
-import index from "../service/index";
-import TokenContext from "../service/context";
+import InputModal from "../../components/InputModal";
+import AppItem from "../../components/AppItem";
+import dataType from "../../constants/dataType";
+import index from "../../service/index";
+import TokenContext from "../../service/context";
 import LoadingScreen from "./LoadingScreen";
 const Tax = () => {
   const token = useContext(TokenContext);
@@ -106,49 +106,49 @@ const Tax = () => {
         onCancel={onCancelHandler}
       />
       <View style={styles.listStyle}>
-          <LoadingScreen loading={isLoading} />
-          <FlatList
-            data={listdata}
-            renderItem={(itemData) => {
-              const cardviewform = [
-                {
-                  name: "Tax Name",
-                  key: "tax_name",
-                  type: dataType.text,
-                  value: itemData?.item?.tax_name,
-                },
-                {
-                  name: "Tax percentage",
-                  key: "tax_percentage",
-                  type: dataType.text,
-                  value: itemData?.item?.tax_percentage,
-                },
-              ];
-              const viewform = [
-                {
-                  name: "Tax Name",
-                  key: "tax_name",
-                  type: dataType.text,
-                  value: itemData?.item?.tax_name,
-                },
-                {
-                  name: "Tax percentage",
-                  key: "tax_percentage",
-                  type: dataType.text,
-                  value: itemData?.item?.tax_percentage,
-                },
-              ];
-              return (
-                <AppItem
-                  onDeleteItem={deleteDataHandler}
-                  onupdateData={updateHandler}
-                  id={itemData.item.id}
-                  cardviewform={cardviewform}
-                  viewform={viewform}
-                />
-              );
-            }}
-          />
+        <LoadingScreen loading={isLoading} />
+        <FlatList
+          data={listdata}
+          renderItem={(itemData) => {
+            const cardviewform = [
+              {
+                name: "Tax Name",
+                key: "tax_name",
+                type: dataType.text,
+                value: itemData?.item?.tax_name,
+              },
+              {
+                name: "Tax percentage",
+                key: "tax_percentage",
+                type: dataType.text,
+                value: itemData?.item?.tax_percentage,
+              },
+            ];
+            const viewform = [
+              {
+                name: "Tax Name",
+                key: "tax_name",
+                type: dataType.text,
+                value: itemData?.item?.tax_name,
+              },
+              {
+                name: "Tax percentage",
+                key: "tax_percentage",
+                type: dataType.text,
+                value: itemData?.item?.tax_percentage,
+              },
+            ];
+            return (
+              <AppItem
+                onDeleteItem={deleteDataHandler}
+                onupdateData={updateHandler}
+                id={itemData.item.id}
+                cardviewform={cardviewform}
+                viewform={viewform}
+              />
+            );
+          }}
+        />
       </View>
     </View>
   );
