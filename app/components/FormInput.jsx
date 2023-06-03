@@ -9,6 +9,7 @@ import colors from "../constants/colors";
 import { TimePicker } from "./TimePicker";
 import FromAdd from "./FromAdd";
 import PickSignature from "./PickSignature";
+import AddImage from "./AddImage";
 
 export default function FormInput(props) {
   const { name, type, list, data } = props;
@@ -62,6 +63,13 @@ export default function FormInput(props) {
       return (
         <CompWrapper>
           <FromAdd {...props} />
+        </CompWrapper>
+      );
+
+    case dataType.image:
+      return (
+        <CompWrapper>
+          <AddImage {...props} />
         </CompWrapper>
       );
 

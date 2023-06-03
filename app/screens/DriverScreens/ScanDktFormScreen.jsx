@@ -19,6 +19,7 @@ export default function ScanDktForm() {
     { label: "Item 8", value: "8" },
   ];
   const fullDktForm = [
+    { name: "Add Document", key: "document1", type: dataType.image },
     {
       name: "Client Name",
       key: "client",
@@ -40,7 +41,6 @@ export default function ScanDktForm() {
     },
     { name: "Docket No.", key: "docket_no", type: dataType.text },
     { name: "Job No.", key: "job_no", type: dataType.text },
-    { name: "Add", key: "document1", type: dataType.image },
   ];
 
   return (

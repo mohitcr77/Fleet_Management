@@ -9,7 +9,6 @@ import DrawerButton from "../../components/DrawerButton";
 import screenNames from "../../constants/screenNames";
 
 export default function DrawerContent({ navigation }) {
-  // const { auth, setAuth } = useContext(AuthContext);
   const [selected, setSelected] = useState(0);
 
   const btn = [
@@ -21,6 +20,21 @@ export default function DrawerContent({ navigation }) {
     {
       title: "Scan DKT",
       screen: screenNames.SCAN_DKT_LIST_SCREEN,
+      icon: <Icons.EditPencil />,
+    },
+    {
+      title: "Driver Pre-Inspection",
+      screen: screenNames.DRIVER_PRE_INSPECTION_SCREEN,
+      icon: <Icons.EditPencil />,
+    },
+    {
+      title: "Driver JObs",
+      screen: screenNames.DRIVER_JOBS_SCREEN,
+      icon: <Icons.EditPencil />,
+    },
+    {
+      title: "Chat",
+      screen: screenNames.CHAT_ROOM_SCREEN,
       icon: <Icons.EditPencil />,
     },
   ];

@@ -87,6 +87,18 @@ const Send = ({ size = 16 }) => (
 
 const Pencil = () => <MaterialIcons name="edit" size={24} color={"white"} />;
 
+const Attachment = (props) => (
+  <TouchableOpacity {...props}>
+    <Entypo name="attachment" size={20} color={props.color || colors.border2} />
+  </TouchableOpacity>
+);
+
+const ChatCamera = ({ onPress }) => (
+  <TouchableOpacity onPress={onPress} style={{ marginHorizontal: 8 }}>
+    <AntDesign name="camera" size={23} color={colors.border2} />
+  </TouchableOpacity>
+);
+
 export default {
   Camera,
   Gallery,
