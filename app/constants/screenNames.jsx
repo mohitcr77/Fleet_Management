@@ -4,10 +4,15 @@ const screenNames = {
   SELECT_USER_TYPE_SCREEN: "Select User Type Screen",
   SIGN_UP_SCREEN: "Sign Up Screen",
 
+  //Common Screens
+  ABOUT_APP_SCREEN: "About App Screen",
+
   // Driver Screens
   CHAT_ROOM_SCREEN: "Chat Room Screen",
+  DRIVER_DOCUMENTS_SCREEN: "Driver Documents Screen",
   DRIVER_JOBS_SCREEN: "Driver Jobs Screen",
   DRIVER_PRE_INSPECTION_SCREEN: "Driver Pre-Inspection Screen",
+  DRIVER_TIME_SHEET_SCREEN: "Driver Time Sheet Screen",
   FULL_DKT_FORM_SCREEN: "Full Dkt Form Screen",
   FULL_DKT_LIST_SCREEN: "Full Dkt List Screen",
   SCAN_DKT_FORM_SCREEN: "Scan Dkt Form Screen",

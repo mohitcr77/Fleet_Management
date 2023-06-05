@@ -99,16 +99,37 @@ const ChatCamera = ({ onPress }) => (
   </TouchableOpacity>
 );
 
+const File = () => (
+  <FontAwesome
+    name="file"
+    size={20}
+    color={colors.border2}
+    style={{ marginRight: 10 }}
+  />
+);
+
+const Information = () => (
+  <MaterialCommunityIcons
+    name="information-outline"
+    size={24}
+    color={colors.themeColor}
+  />
+);
+
 export default {
+  Information,
+  File,
+  Attachment,
   Camera,
-  Gallery,
+  ChatCamera,
   Close,
-  PlushCircle,
   EditPencil,
+  Gallery,
   Menu,
-  User,
-  Send,
   Pencil,
+  PlushCircle,
+  Send,
+  User,
 };
 
 const styles = StyleSheet.create({

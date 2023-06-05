@@ -16,17 +16,7 @@ export default function ParentContainer({
 
   const CompWrapper = () => {
     return (
-      <View
-        style={[
-          {
-            padding: dimensions.mainHorizontalPadding,
-            minHeight: height,
-          },
-          containerStyle,
-        ]}
-      >
-        {children}
-      </View>
+      <View style={[styles.compContainer, containerStyle]}>{children}</View>
     );
   };
   return (
@@ -76,5 +66,10 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     backgroundColor: "white",
     width: width,
+  },
+  compContainer: {
+    padding: dimensions.mainHorizontalPadding,
+    minHeight: height,
+    alignItems: "center",
   },
 });

@@ -2,11 +2,11 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 
 // import AuthContext from "../../auth/context";
-import { width } from "../../helpers/scales";
-import Icons from "../../components/Icons";
-import colors from "../../constants/colors";
-import DrawerButton from "../../components/DrawerButton";
-import screenNames from "../../constants/screenNames";
+import { width } from "../helpers/scales";
+import Icons from "../components/Icons";
+import colors from "../constants/colors";
+import DrawerButton from "../components/DrawerButton";
+import screenNames from "../constants/screenNames";
 
 export default function DrawerContent({ navigation }) {
   const [selected, setSelected] = useState(0);
@@ -30,6 +30,16 @@ export default function DrawerContent({ navigation }) {
     {
       title: "Driver JObs",
       screen: screenNames.DRIVER_JOBS_SCREEN,
+      icon: <Icons.EditPencil />,
+    },
+    {
+      title: "Documents",
+      screen: screenNames.DRIVER_DOCUMENTS_SCREEN,
+      icon: <Icons.EditPencil />,
+    },
+    {
+      title: "Time Sheet",
+      screen: screenNames.DRIVER_TIME_SHEET_SCREEN,
       icon: <Icons.EditPencil />,
     },
     {
@@ -63,22 +73,15 @@ export default function DrawerContent({ navigation }) {
         />
       ))}
 
-      {/* <DrawerButton
-        title={"Notification"}
-        navigateToScreen={screenNames.notificationScreen}
-        icon={<Icons.Notification />}
-        onSelect={() => setSelected(10)}
-        selected={selected == 10 ? true : false}
-      /> */}
-      {/* <View style={styles.aboutContainer}>
+      <View style={styles.aboutContainer}>
         <DrawerButton
           title={"About App"}
-          navigateToScreen={screenNames.aboutApp}
+          navigateToScreen={screenNames.ABOUT_APP_SCREEN}
           icon={<Icons.Information />}
           onSelect={() => setSelected(5)}
           selected={selected == 5 ? true : false}
         />
-      </View> */}
+      </View>
     </View>
   );
 }
