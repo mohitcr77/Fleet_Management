@@ -15,6 +15,14 @@ import DriverJobs from "../screens/DriverScreens/DriverJobsScreen";
 import ChatRoom from "../screens/DriverScreens/ChatRoomScreen";
 import Documents from "../screens/DriverScreens/DocumentsScreen";
 import TimeSheet from "../screens/DriverScreens/TimeSheetScreen";
+
+//mechanic screen
+import MechanicFormScreen from "../screens/MechnicScreens/MechanicFormScreen";
+import MechanicDataScreen from "../screens/MechnicScreens/MechanicDataScreen";
+import MechanicTimeSheetForm from "../screens/MechnicScreens/MechanicTimeSheetForm";
+import DocumentForm from "../screens/MechnicScreens/DocumentForm";
+
+//common screen
 import AboutApp from "../screens/AboutAppScreen";
 import PreInspectionForm from "./../screens/DriverScreens/PreInspectionFormScreen";
 
@@ -43,6 +51,16 @@ export default function DrawerNavigator() {
     },
   ];
 
+  const mechanicScreens = [
+    { name: screenNames.MECHANIC_FORM_SCREEN, component: MechanicFormScreen },
+    { name: screenNames.MECHANIC_DATA_SCREEN, component: MechanicDataScreen },
+    {
+      name: screenNames.MECHANIC_TIMESHEET_FORM,
+      component: MechanicTimeSheetForm,
+    },
+    //{ name: screenNames.ADD_DOCUMENT, component: DocumentForm },
+  ];
+
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -54,7 +72,7 @@ export default function DrawerNavigator() {
       drawerContent={(props) => <DrawerContent {...props} />}
       useLegacyImplementation={true}
     >
-      {drawerScreens.map((screen) => (
+      {mechanicScreens.map((screen) => (
         <Drawer.Screen
           key={screen.name}
           name={screen.name}

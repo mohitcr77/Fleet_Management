@@ -18,6 +18,12 @@ const screenNames = {
   SCAN_DKT_FORM_SCREEN: "Scan Dkt Form Screen",
   SCAN_DKT_LIST_SCREEN: "Scan Dkt List Screen",
   PRE_INSPECTION_FORM_SCREEN: "Pre-Inspection Form Screen",
+
+  //Mechanic Screens
+  MECHANIC_FORM_SCREEN: "Mechanic Form Screen",
+  MECHANIC_DATA_SCREEN: "Mechanic Data Screen",
+  MECHANIC_TIMESHEET_FORM: "Mechanic TimeSheet Form",
+  ADD_DOCUMENT: "Add Document",
 };
 
 export default screenNames;

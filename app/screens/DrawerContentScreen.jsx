@@ -49,6 +49,29 @@ export default function DrawerContent({ navigation }) {
     },
   ];
 
+  const mechanicBtn = [
+    {
+      title: "Mechanic Form",
+      screen: screenNames.MECHANIC_FORM_SCREEN,
+      icon: <Icons.EditPencil />,
+    },
+    {
+      title: "Mechanic Data",
+      screen: screenNames.MECHANIC_DATA_SCREEN,
+      icon: <Icons.Data/>
+    },
+    {
+      title: "Mechanic TimeSheet Form",
+      screen: screenNames.MECHANIC_TIMESHEET_FORM,
+      icon: <Icons.EditPencil />,
+    },
+    {
+      title: "Add Document",
+      screen: screenNames.ADD_DOCUMENT,
+      icon: <Icons.EditPencil />,
+    },
+  ]
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -61,13 +84,13 @@ export default function DrawerContent({ navigation }) {
         <Text style={{ color: colors.white, marginTop: 20 }}>name</Text>
         <Text style={{ color: colors.white }}>email</Text>
       </TouchableOpacity>
-
-      {btn.map((i, index) => (
+      
+      {mechanicBtn.map((i, index) => (
         <DrawerButton
           key={index}
           title={i.title}
           navigateToScreen={i.screen}
-          icon={<Icons.EditPencil />}
+          icon={i.icon}
           onSelect={() => setSelected(index)}
           selected={selected == index ? true : false}
         />

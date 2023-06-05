@@ -127,17 +127,21 @@ const CheckBox = ({ checked, onPress }) => {
     </TouchableOpacity>
   );
 };
+const Data = () => (
+  <Entypo name="database" size={24} color={colors.themeColor} />
+);
 
 export default {
-  CheckBox,
-  Information,
-  File,
   Attachment,
   Camera,
   ChatCamera,
+  CheckBox,
   Close,
+  Data,
   EditPencil,
+  File,
   Gallery,
+  Information,
   Menu,
   Pencil,
   PlushCircle,
