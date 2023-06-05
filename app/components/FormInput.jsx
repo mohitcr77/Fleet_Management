@@ -10,6 +10,7 @@ import { TimePicker } from "./TimePicker";
 import FromAdd from "./FromAdd";
 import PickSignature from "./PickSignature";
 import AddImage from "./AddImage";
+import dimensions from "../constants/dimensions";
 
 export default function FormInput(props) {
   const { name, type, list, data } = props;
@@ -100,5 +101,6 @@ export default function FormInput(props) {
 const styles = StyleSheet.create({
   compWrapperStyle: {
     marginVertical: 5,
+    width: dimensions.componentWidth
   },
 });

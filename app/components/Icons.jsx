@@ -116,6 +116,14 @@ const Information = () => (
   />
 );
 
+const Data = () => (
+  <Entypo
+  name="database"
+  size={24}
+  color={colors.themeColor}
+  />
+)
+
 export default {
   Information,
   File,
@@ -130,6 +138,7 @@ export default {
   PlushCircle,
   Send,
   User,
+  Data,
 };
 
 const styles = StyleSheet.create({
