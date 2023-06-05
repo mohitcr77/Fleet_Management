@@ -16,6 +16,7 @@ import ChatRoom from "../screens/DriverScreens/ChatRoomScreen";
 import Documents from "../screens/DriverScreens/DocumentsScreen";
 import TimeSheet from "../screens/DriverScreens/TimeSheetScreen";
 import AboutApp from "../screens/AboutAppScreen";
+import PreInspectionForm from "./../screens/DriverScreens/PreInspectionFormScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -23,6 +24,7 @@ export default function DrawerNavigator() {
   useFetchList();
 
   const drawerScreens = [
+    { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
     { name: screenNames.DRIVER_JOBS_SCREEN, component: DriverJobs },
     { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
     { name: screenNames.DRIVER_DOCUMENTS_SCREEN, component: Documents },
@@ -31,11 +33,14 @@ export default function DrawerNavigator() {
       component: DriverPreInspection,
     },
     { name: screenNames.DRIVER_TIME_SHEET_SCREEN, component: TimeSheet },
-    { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
     { name: screenNames.FULL_DKT_LIST_SCREEN, component: FullDktList },
     { name: screenNames.SCAN_DKT_FORM_SCREEN, component: ScanDktForm },
     { name: screenNames.SCAN_DKT_LIST_SCREEN, component: ScanDktList },
     { name: screenNames.ABOUT_APP_SCREEN, component: AboutApp },
+    {
+      name: screenNames.PRE_INSPECTION_FORM_SCREEN,
+      component: PreInspectionForm,
+    },
   ];
 
   return (

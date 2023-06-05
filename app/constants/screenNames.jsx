@@ -17,6 +17,7 @@ const screenNames = {
   FULL_DKT_LIST_SCREEN: "Full Dkt List Screen",
   SCAN_DKT_FORM_SCREEN: "Scan Dkt Form Screen",
   SCAN_DKT_LIST_SCREEN: "Scan Dkt List Screen",
+  PRE_INSPECTION_FORM_SCREEN: "Pre-Inspection Form Screen",
 };
 
 export default screenNames;

@@ -4,8 +4,9 @@ import ParentContainer from "../../components/ParentContainer";
 import AppButton from "./../../components/AppButton";
 import customStyles from "../../constants/styles";
 import dimensions from "../../constants/dimensions";
+import screenNames from "../../constants/screenNames";
 
-export default function DriverPreInspection() {
+export default function DriverPreInspection({ navigation }) {
   return (
     <ParentContainer>
       {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
@@ -13,39 +14,48 @@ export default function DriverPreInspection() {
       ))}
     </ParentContainer>
   );
-}
+  function InspectionCard() {
+    const btn = [
+      {
+        name: "Pre Inspection",
+        onPress: () =>
+          navigation.navigate(screenNames.PRE_INSPECTION_FORM_SCREEN),
+      },
+      { name: "History", onPress: () => console.log("first") },
+      { name: "Notes", onPress: () => console.log("first") },
+    ];
 
-function InspectionCard() {
-  const btn = [
-    { name: "Pre Inspection" },
-    { name: "History" },
-    { name: "Notes" },
-  ];
-  const detail = [
-    { name: "Id :", value: "object.id" },
-    { name: "Fleet Number :", value: "object.fleet_number" },
-  ];
-  return (
-    <View style={styles.card}>
-      {detail.map((i) => (
-        <View style={{ flexDirection: "row", marginVertical: 3 }} key={i.name}>
-          <Text style={{ fontWeight: "bold" }}>{i.name}</Text>
-          <Text> {i.value}</Text>
-        </View>
-      ))}
+    const detail = [
+      { name: "Id :", value: "object.id" },
+      { name: "Fleet Number :", value: "object.fleet_number" },
+    ];
 
-      <View style={customStyles.flex_row_between}>
-        {btn.map((i) => (
-          <AppButton
-            title={i.name}
+    return (
+      <View style={styles.card}>
+        {detail.map((i) => (
+          <View
+            style={{ flexDirection: "row", marginVertical: 3 }}
             key={i.name}
-            style={styles.cardBtn}
-            titleStyle={styles.btnText}
-          />
+          >
+            <Text style={{ fontWeight: "bold" }}>{i.name}</Text>
+            <Text> {i.value}</Text>
+          </View>
         ))}
+
+        <View style={customStyles.flex_row_between}>
+          {btn.map((i) => (
+            <AppButton
+              onPress={i.onPress}
+              title={i.name}
+              key={i.name}
+              style={styles.cardBtn}
+              titleStyle={styles.btnText}
+            />
+          ))}
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({

@@ -116,7 +116,20 @@ const Information = () => (
   />
 );
 
+const CheckBox = ({ checked, onPress }) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={{ width: 30 }}>
+      <Fontisto
+        name={checked ? "checkbox-active" : "checkbox-passive"}
+        size={24}
+        color="black"
+      />
+    </TouchableOpacity>
+  );
+};
+
 export default {
+  CheckBox,
   Information,
   File,
   Attachment,

@@ -22,7 +22,7 @@ export default function ParentContainer({
   return (
     <View
       style={{
-        minHeight: height,
+        minHeight: height + 30,
         alignItems: "center",
       }}
     >
@@ -71,5 +71,6 @@ const styles = StyleSheet.create({
     padding: dimensions.mainHorizontalPadding,
     minHeight: height,
     alignItems: "center",
+    paddingBottom: 50,
   },
 });
