@@ -28,7 +28,7 @@ export default function App() {
     setIsLoading(false);
   };
   useEffect(() => {
-    get();
+   // get();
   }, []);
 
   if (isLoading) {

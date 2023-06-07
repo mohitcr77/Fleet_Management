@@ -20,6 +20,11 @@ import TimeSheet from "../screens/DriverScreens/TimeSheetScreen";
 import MechanicFormScreen from "../screens/MechnicScreens/MechanicFormScreen";
 import MechanicDataScreen from "../screens/MechnicScreens/MechanicDataScreen";
 import MechanicTimeSheetForm from "../screens/MechnicScreens/MechanicTimeSheetForm";
+import MechanicTimeSheetData from "../screens/MechnicScreens/MechanicTimeSheetData";
+import FleetInspection from "../screens/MechnicScreens/FleetInspection";
+import InspectionHistory from "../screens/MechnicScreens/InspectionHistory"
+import DocumentForm from "../screens/MechnicScreens/DocumentForm"
+import DocumentList from "../screens/MechnicScreens/DocumentList"
 
 //common screen
 import AboutApp from "../screens/AboutAppScreen";
@@ -31,7 +36,7 @@ const Drawer = createDrawerNavigator();
 export default function DrawerNavigator() {
   useFetchList();
 
-  let user = "driver";
+  let user = "mechanic";
 
   const driverScreens = [
     { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
@@ -61,6 +66,11 @@ export default function DrawerNavigator() {
       name: screenNames.MECHANIC_TIMESHEET_FORM,
       component: MechanicTimeSheetForm,
     },
+    { name: screenNames.MECHANIC_TIMESHEET_DATA, component: MechanicTimeSheetData },
+    { name: screenNames.FLEET_INSPECTION, component: FleetInspection },
+    { name: screenNames.INSPECTION_HISTORY, component: InspectionHistory },
+    { name: screenNames.ADD_DOCUMENT, component: DocumentForm },
+    { name: screenNames.VIEW_DOCUMENTS, component: DocumentList },
     //{ name: screenNames.ADD_DOCUMENT, component: DocumentForm },
   ];
 

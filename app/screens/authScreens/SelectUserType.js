@@ -1,11 +1,11 @@
 import { View, StyleSheet, ImageBackground } from "react-native";
-import AppButton from "../components/AppButton";
+import AppButton from "../../components/AppButton";
 
 export function AuthLayoutContainer({ children }) {
   return (
     <View style={styles.appContainer}>
       <ImageBackground
-        source={require("../assets/login-design.png")}
+        source={require("../../assets/login-design.png")}
         resizeMode="cover"
         style={styles.image}
       >

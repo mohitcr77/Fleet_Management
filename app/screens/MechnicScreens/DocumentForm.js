@@ -21,8 +21,8 @@ const DocumentForm = () => {
             type: dataType.text,
           },
           {
-            name: "End Time",
-            key: "end_time",
+            name: "Attach file",
+            key: "Attach_file",
             type: dataType.image,
           },
     ]

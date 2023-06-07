@@ -12,13 +12,14 @@ import { Card, Text, Input } from "@ui-kitten/components";
 
 import { AuthLayoutContainer } from "./SelectUserType";
 import { Entypo } from "@expo/vector-icons";
-import AppButton from "../components/AppButton";
-import dimensions from "../constants/dimensions";
-import LoadingScreen from "../screens/AdminScreens/LoadingScreen";
-import service from "../service";
-import TokenContext from "../service/context";
-import customStyles from "../constants/styles";
-import colors from "../constants/colors";
+import AppButton from "../../components/AppButton";
+import dimensions from "../../constants/dimensions";
+import LoadingScreen from "../AdminScreens/LoadingScreen";
+import service from "../../service";
+import TokenContext from "../../service/context";
+import customStyles from "../../constants/styles";
+import colors from "../../constants/colors";
+import screenNames from "../../constants/screenNames";
 
 const LogIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -34,7 +35,7 @@ const LogIn = ({ navigation }) => {
       password: password,
     };
     setIsLoading(true);
-    const res = await index.getApiData(data);
+    const res = await service.getApiData(data);
     if (res.data) {
       token.setAuth(res.data);
       service.saveData(JSON.stringify(res.data));
@@ -115,7 +116,7 @@ const LogIn = ({ navigation }) => {
     return (
       <View style={{ flexDirection: "row", alignSelf: "center" }}>
         <Text>Don't have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+        <TouchableOpacity onPress={() => navigation.navigate(screenNames.SIGN_UP_SCREEN)}>
           <Text style={{ fontWeight: "bold", color: "#001aff" }}>SignUp</Text>
         </TouchableOpacity>
       </View>

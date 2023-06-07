@@ -139,6 +139,10 @@ const Chevron = ({ closed }) => (
   />
 );
 
+const ToggleEye = (props) =>
+<Entypo name={ props.show? "eye": "eye-with-line"} size={24} color="black" />
+
+
 export default {
   Chevron,
   Attachment,
@@ -156,6 +160,7 @@ export default {
   PlushCircle,
   Send,
   User,
+  ToggleEye
 };
 
 const styles = StyleSheet.create({

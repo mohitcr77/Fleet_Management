@@ -13,7 +13,7 @@ import ScanDktList from "./DriverScreens/ScanDktListScreen";
 export default function DrawerContent({ navigation }) {
   const [selected, setSelected] = useState(0);
 
-  let user = "driver";
+  let user = "mechanic";
 
   const drawerBtn = {
     driver: [
@@ -68,6 +68,46 @@ export default function DrawerContent({ navigation }) {
         children: null,
       },
     ],
+    mechanic: [
+      {
+        name : "Mechanic Data",
+        screen: null,
+        children: [
+          {
+            name: "Mechanic Form",
+            screen: screenNames.MECHANIC_FORM_SCREEN
+          },
+          {
+            name : "View Mechanic Data",
+            screen: screenNames.MECHANIC_DATA_SCREEN
+          },
+        ]
+      },
+      {
+        name: "TimeSheet",
+        screen: null,
+        children: [
+          { name: "TimeSheet Form", screen: screenNames.MECHANIC_TIMESHEET_FORM },
+          { name: "TimeSheet Data", screen: screenNames.MECHANIC_TIMESHEET_DATA },
+        ],
+      },
+      {
+        name: "Inspection",
+        screen: null,
+        children: [
+          { name: "Fleet Inspection", screen: screenNames.FLEET_INSPECTION },
+          { name: "Inspection History", screen: screenNames.INSPECTION_HISTORY },
+        ],
+      },
+      {
+        name: "Documents",
+        screen: null,
+        children: [
+          { name: "Add Document", screen: screenNames.ADD_DOCUMENT },
+          { name: "View Documents", screen: screenNames.VIEW_DOCUMENTS },
+        ],
+      },
+    ]
   };
 
   const driverBtn = [
