@@ -6,6 +6,7 @@ const screenNames = {
 
   //Common Screens
   ABOUT_APP_SCREEN: "About App Screen",
+  PROFILE_SCREEN: "Profile Screen",
 
   // Driver Screens
   CHAT_ROOM_SCREEN: "Chat Room Screen",

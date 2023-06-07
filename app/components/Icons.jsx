@@ -131,7 +131,16 @@ const Data = () => (
   <Entypo name="database" size={24} color={colors.themeColor} />
 );
 
+const Chevron = ({ closed }) => (
+  <MaterialIcons
+    name={closed ? "keyboard-arrow-down" : "keyboard-arrow-up"}
+    size={24}
+    color="black"
+  />
+);
+
 export default {
+  Chevron,
   Attachment,
   Camera,
   ChatCamera,

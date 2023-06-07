@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 4,
     marginVertical: 8,
-    width: dimensions.componentWidth - 20,
+    width: dimensions.componentWidth,
   },
 });
