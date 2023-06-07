@@ -7,11 +7,70 @@ import Icons from "../components/Icons";
 import colors from "../constants/colors";
 import DrawerButton from "../components/DrawerButton";
 import screenNames from "../constants/screenNames";
+import DrawerButtonAccordion from "../components/DrawerButtonAccordion";
+import ScanDktList from "./DriverScreens/ScanDktListScreen";
 
 export default function DrawerContent({ navigation }) {
   const [selected, setSelected] = useState(0);
 
-  const btn = [
+  let user = "driver";
+
+  const drawerBtn = {
+    driver: [
+      {
+        name: "Full Dkt",
+        screen: null,
+        children: [
+          { name: "Full Dkt Form", screen: screenNames.FULL_DKT_FORM_SCREEN },
+          { name: "Full Dkt List", screen: screenNames.FULL_DKT_LIST_SCREEN },
+        ],
+      },
+      {
+        name: "Scan Dkt",
+        screen: null,
+        children: [
+          { name: "Scan Dkt Form", screen: screenNames.SCAN_DKT_FORM_SCREEN },
+          { name: "Scan Dkt List", screen: screenNames.SCAN_DKT_LIST_SCREEN },
+        ],
+      },
+      {
+        name: "Pre-Inspection",
+        screen: null,
+        children: [
+          {
+            name: "Pre-Inspection Form",
+            screen: screenNames.PRE_INSPECTION_FORM_SCREEN,
+          },
+          {
+            name: "Pre-Inspection List",
+            screen: screenNames.DRIVER_PRE_INSPECTION_SCREEN,
+          },
+        ],
+      },
+      {
+        name: "Driver Jobs",
+        screen: screenNames.DRIVER_JOBS_SCREEN,
+        children: null,
+      },
+      {
+        name: "Documents",
+        screen: screenNames.DRIVER_DOCUMENTS_SCREEN,
+        children: null,
+      },
+      {
+        name: "Time Sheet",
+        screen: screenNames.DRIVER_TIME_SHEET_SCREEN,
+        children: null,
+      },
+      {
+        name: "Chat",
+        screen: screenNames.CHAT_ROOM_SCREEN,
+        children: null,
+      },
+    ],
+  };
+
+  const driverBtn = [
     {
       title: "Full DKT",
       screen: screenNames.FULL_DKT_LIST_SCREEN,
@@ -58,7 +117,7 @@ export default function DrawerContent({ navigation }) {
     {
       title: "Mechanic Data",
       screen: screenNames.MECHANIC_DATA_SCREEN,
-      icon: <Icons.Data/>
+      icon: <Icons.Data />,
     },
     {
       title: "Mechanic TimeSheet Form",
@@ -70,22 +129,17 @@ export default function DrawerContent({ navigation }) {
       screen: screenNames.ADD_DOCUMENT,
       icon: <Icons.EditPencil />,
     },
-  ]
+  ];
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.profileContainer}
-        // onPress={() => navigation.navigate(screenNames.profile)}
-      >
-        <Icons.User
-        // image={auth.profile_pic}
-        />
-        <Text style={{ color: colors.white, marginTop: 20 }}>name</Text>
-        <Text style={{ color: colors.white }}>email</Text>
-      </TouchableOpacity>
-      
-      {mechanicBtn.map((i, index) => (
+      <Profile />
+
+      {drawerBtn[user].map((data) => (
+        <DrawerButtonAccordion key={data.name} data={data} />
+      ))}
+
+      {/* {(user === "driver" ? driverBtn : mechanicBtn).map((i, index) => (
         <DrawerButton
           key={index}
           title={i.title}
@@ -104,9 +158,23 @@ export default function DrawerContent({ navigation }) {
           onSelect={() => setSelected(5)}
           selected={selected == 5 ? true : false}
         />
-      </View>
+      </View> */}
     </View>
   );
+  function Profile() {
+    return (
+      <TouchableOpacity
+        style={styles.profileContainer}
+        // onPress={() => navigation.navigate(screenNames.profile)}
+      >
+        <Icons.User
+        // image={auth.profile_pic}
+        />
+        <Text style={{ color: colors.white, marginTop: 20 }}>name</Text>
+        <Text style={{ color: colors.white }}>email</Text>
+      </TouchableOpacity>
+    );
+  }
 }
 const styles = StyleSheet.create({
   btn: {

@@ -116,29 +116,46 @@ const Information = () => (
   />
 );
 
+const CheckBox = ({ checked, onPress }) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={{ width: 30 }}>
+      <Fontisto
+        name={checked ? "checkbox-active" : "checkbox-passive"}
+        size={24}
+        color="black"
+      />
+    </TouchableOpacity>
+  );
+};
 const Data = () => (
-  <Entypo
-  name="database"
-  size={24}
-  color={colors.themeColor}
+  <Entypo name="database" size={24} color={colors.themeColor} />
+);
+
+const Chevron = ({ closed }) => (
+  <MaterialIcons
+    name={closed ? "keyboard-arrow-down" : "keyboard-arrow-up"}
+    size={24}
+    color="black"
   />
-)
+);
 
 export default {
-  Information,
-  File,
+  Chevron,
   Attachment,
   Camera,
   ChatCamera,
+  CheckBox,
   Close,
+  Data,
   EditPencil,
+  File,
   Gallery,
+  Information,
   Menu,
   Pencil,
   PlushCircle,
   Send,
   User,
-  Data,
 };
 
 const styles = StyleSheet.create({

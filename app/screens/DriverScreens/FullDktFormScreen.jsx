@@ -1,4 +1,4 @@
-import { View, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
 import ParentContainer from "../../components/ParentContainer";
 import FormInput from "../../components/FormInput";
@@ -6,6 +6,7 @@ import dataType from "../../constants/dataType";
 import useFetchList from "../../hooks/useFetchList";
 import customStyles from "../../constants/styles";
 import AppButton from "../../components/AppButton";
+import dimensions from "../../constants/dimensions";
 
 export default function FullDktForm() {
   const { clientList, machineTypeList } = useFetchList();
@@ -53,12 +54,7 @@ export default function FullDktForm() {
         <FormInput {...i} />
       ))}
 
-      <View
-        style={[
-          customStyles.flex_row_between,
-          { marginBottom: 150, marginTop: 40 },
-        ]}
-      >
+      <View style={styles.btnContainer}>
         <AppButton
           title={"Save(Send Later)"}
           type="small"
@@ -69,3 +65,11 @@ export default function FullDktForm() {
     </ParentContainer>
   );
 }
+const styles = StyleSheet.create({
+  btnContainer: {
+    ...customStyles.flex_row_between,
+    marginBottom: 150,
+    marginTop: 40,
+    width: dimensions.componentWidth,
+  },
+});

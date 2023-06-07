@@ -8,18 +8,23 @@ import {
 } from "react-native";
 //import { TextInput } from "react-native-paper";
 import { useState, useContext } from "react";
-import TokenContext from "../service/context";
-import LoadingScreen from "../screens/AdminScreens/LoadingScreen";
-import { Layout, Text, Input, Icon, IconElement } from "@ui-kitten/components";
+import { Card, Text, Input } from "@ui-kitten/components";
+
 import { AuthLayoutContainer } from "./SelectUserType";
-import AppButton from "../components/AppButton";
 import { Entypo } from "@expo/vector-icons";
+import AppButton from "../components/AppButton";
+import dimensions from "../constants/dimensions";
+import LoadingScreen from "../screens/AdminScreens/LoadingScreen";
 import service from "../service";
+import TokenContext from "../service/context";
+import customStyles from "../constants/styles";
+import colors from "../constants/colors";
 
 const LogIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [role, setRole] = useState(0);
   const token = useContext(TokenContext);
   const [passwordVisible, setPasswordVisible] = useState(true);
 
@@ -57,6 +62,7 @@ const LogIn = ({ navigation }) => {
   return (
     <AuthLayoutContainer>
       <LoadingScreen loading={isLoading} />
+      {/* <Roles /> */}
       <Input style={styles.input} placeholder="Email" onChangeText={setEmail} />
       <Input
         style={styles.input}
@@ -65,28 +71,7 @@ const LogIn = ({ navigation }) => {
         secureTextEntry={passwordVisible}
         onChangeText={setPassword}
       />
-      {/* <TextInput
-        style={styles.input}
-        placeholder="Company"
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={setEmail}
-      /> */}
-      {/* <TextInput
-        style={styles.input}
-        onChangeText={setPassword}
-        placeholder="Password"
-        secureTextEntry={passwordVisible}
-        right={
-          <TextInput.Icon
-            icon={passwordVisible ? "eye" : "eye-off"}
-            onPress={() => setPasswordVisible(!passwordVisible)}
-          />
-        }
-      /> */}
+
       <AppButton
         title="Login"
         onPress={() => addNewId()}
@@ -95,6 +80,37 @@ const LogIn = ({ navigation }) => {
       <SignUpOption />
     </AuthLayoutContainer>
   );
+
+  function Roles(params) {
+    const btn = [
+      { role: "Admin", cardType: "danger" },
+      { role: "Driver", cardType: "success" },
+      { role: "Mechanic", cardType: "warning" },
+    ];
+    return (
+      <View style={styles.roleContainer}>
+        {btn.map((i, index) => (
+          <Card
+            key={i.role}
+            onPress={() => setRole(index)}
+            style={{
+              backgroundColor: role === index ? colors.green1 : null,
+            }}
+            status={i.cardType}
+          >
+            <Text
+              style={{
+                color: role === index ? "white" : null,
+              }}
+            >
+              {i.role}
+            </Text>
+          </Card>
+        ))}
+      </View>
+    );
+  }
+
   function SignUpOption() {
     return (
       <View style={{ flexDirection: "row", alignSelf: "center" }}>
@@ -110,6 +126,11 @@ const LogIn = ({ navigation }) => {
 export default LogIn;
 
 const styles = StyleSheet.create({
+  roleContainer: {
+    width: dimensions.componentWidth,
+    height: 60,
+    ...customStyles.flex_row_between,
+  },
   input: {
     height: 40,
     marginVertical: 25,

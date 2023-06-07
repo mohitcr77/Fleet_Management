@@ -4,14 +4,16 @@ import React, { useState } from "react";
 import customStyles from "../constants/styles";
 import colors from "../constants/colors";
 import AppImagePicker from "./AppImagePicker";
+import dimensions from "../constants/dimensions";
 
-export default function AddImage() {
+export default function AddImage({ title = "Add" }) {
   const [image, setImage] = useState(null);
   const [visible, setVisible] = useState(false);
+
   return (
-    <View>
+    <View style={{ width: dimensions.componentWidth }}>
       <Pressable style={styles.btn} onPress={() => setVisible(true)}>
-        <Text>Add</Text>
+        <Text>{title}</Text>
       </Pressable>
       <View
         style={[
@@ -39,7 +41,9 @@ export default function AddImage() {
 const styles = StyleSheet.create({
   btn: {
     ...customStyles.inputBorder,
-    width: 70,
+    // width: 70,
+    alignSelf: "flex-start",
+    paddingHorizontal: 10,
     height: 30,
     backgroundColor: colors.gray4,
     marginBottom: 10,

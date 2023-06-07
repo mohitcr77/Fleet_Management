@@ -11,6 +11,7 @@ import FromAdd from "./FromAdd";
 import PickSignature from "./PickSignature";
 import AddImage from "./AddImage";
 import dimensions from "../constants/dimensions";
+import AppCheckBox from "./AppCheckBox";
 
 export default function FormInput(props) {
   const { name, type, list, data } = props;
@@ -74,6 +75,13 @@ export default function FormInput(props) {
         </CompWrapper>
       );
 
+    case dataType.checkBox:
+      return (
+        <CompWrapper>
+          <AppCheckBox {...props} />
+        </CompWrapper>
+      );
+
     default:
       return (
         <CompWrapper>
@@ -101,6 +109,6 @@ export default function FormInput(props) {
 const styles = StyleSheet.create({
   compWrapperStyle: {
     marginVertical: 5,
-    width: dimensions.componentWidth
+    width: dimensions.componentWidth,
   },
 });

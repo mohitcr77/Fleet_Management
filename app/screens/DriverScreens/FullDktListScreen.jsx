@@ -1,17 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  FlatList,
-  Text,
-} from "react-native";
+import React from "react";
+import { StyleSheet, View, FlatList, Text } from "react-native";
+import { height } from "../../helpers/scales";
+
 import ParentContainer from "../../components/ParentContainer";
 import ListHeader from "../../components/ListHeader";
 import screenNames from "../../constants/screenNames";
-import useFetchList from "../../hooks/useFetchList";
 import ListCard from "../../components/ListCard";
-import { height } from "../../helpers/scales";
 
 export default function FullDktList({ navigation }) {
   const CardComponent = ({ obj }) => {
