@@ -6,14 +6,14 @@ import screenNames from "../constants/screenNames";
 import useFetchList from "../hooks/useFetchList";
 
 //screens
-import FullDktForm from "./../screens/DriverScreens/FullDktFormScreen";
-import ScanDktForm from "../screens/DriverScreens/ScanDktFormScreen";
-import ScanDktList from "../screens/DriverScreens/ScanDktListScreen";
-import FullDktList from "../screens/DriverScreens/FullDktListScreen";
-import DriverPreInspection from "../screens/DriverScreens/DriverPreInspectionScreen";
-import DriverJobs from "../screens/DriverScreens/DriverJobsScreen";
 import ChatRoom from "../screens/DriverScreens/ChatRoomScreen";
 import Documents from "../screens/DriverScreens/DocumentsScreen";
+import DriverJobs from "../screens/DriverScreens/DriverJobsScreen";
+import FullDktForm from "./../screens/DriverScreens/FullDktFormScreen";
+import FullDktList from "../screens/DriverScreens/FullDktListScreen";
+import PreInspectionList from "../screens/DriverScreens/PreInspectionListScreen";
+import ScanDktForm from "../screens/DriverScreens/ScanDktFormScreen";
+import ScanDktList from "../screens/DriverScreens/ScanDktListScreen";
 import TimeSheet from "../screens/DriverScreens/TimeSheetScreen";
 
 //mechanic screen
@@ -25,6 +25,10 @@ import MechanicTimeSheetForm from "../screens/MechnicScreens/MechanicTimeSheetFo
 import AboutApp from "../screens/AboutAppScreen";
 import PreInspectionForm from "./../screens/DriverScreens/PreInspectionFormScreen";
 import Profile from "../screens/ProfileScreen";
+import DocumentAdd from "../screens/DriverScreens/DocumentAddScreen";
+import PreInspectionHistory from "../screens/DriverScreens/PreInspectionHistoryScreen";
+import PreInspectionNote from "../screens/DriverScreens/PreInspectionNoteScreen";
+import DriverJobsList from "../screens/DriverScreens/DriverJobsListScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -43,15 +47,25 @@ export default function DrawerNavigator() {
       component: PreInspectionForm,
     },
     {
-      name: screenNames.DRIVER_PRE_INSPECTION_SCREEN,
-      component: DriverPreInspection,
+      name: screenNames.PRE_INSPECTION_LIST_SCREEN,
+      component: PreInspectionList,
     },
     { name: screenNames.DRIVER_JOBS_SCREEN, component: DriverJobs },
+    { name: screenNames.DRIVER_JOBS_LIST_SCREEN, component: DriverJobsList },
 
     { name: screenNames.DRIVER_DOCUMENTS_SCREEN, component: Documents },
     { name: screenNames.DRIVER_TIME_SHEET_SCREEN, component: TimeSheet },
 
     { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
+    { name: screenNames.DOCUMENT_ADD_SCREEN, component: DocumentAdd },
+    {
+      name: screenNames.PRE_INSPECTION_HISTORY_SCREEN,
+      component: PreInspectionHistory,
+    },
+    {
+      name: screenNames.PRE_INSPECTION_NOTES_SCREEN,
+      component: PreInspectionNote,
+    },
   ];
 
   const mechanicScreens = [

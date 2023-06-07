@@ -7,6 +7,7 @@ import useFetchList from "../../hooks/useFetchList";
 import customStyles from "../../constants/styles";
 import AppButton from "../../components/AppButton";
 import dimensions from "../../constants/dimensions";
+import AppFooterButton from "../../components/AppFooterButton";
 
 export default function FullDktForm() {
   const { clientList, machineTypeList } = useFetchList();
@@ -54,14 +55,7 @@ export default function FullDktForm() {
         <FormInput {...i} />
       ))}
 
-      <View style={styles.btnContainer}>
-        <AppButton
-          title={"Save(Send Later)"}
-          type="small"
-          style={{ height: 40 }}
-        />
-        <AppButton title={"Submit"} type="small" style={{ height: 40 }} />
-      </View>
+      <AppFooterButton leftBtnTitle="Save(Send Later)" rightBtnTitle="Submit" />
     </ParentContainer>
   );
 }

@@ -4,10 +4,19 @@ import ParentContainer from "../../components/ParentContainer";
 import { width } from "../../helpers/scales";
 import colors from "../../constants/colors";
 import TouchableText from "../../components/TouchableText";
+import Icons from "../../components/Icons";
+import screenNames from "../../constants/screenNames";
 
-export default function Documents() {
+export default function Documents({ navigation }) {
   return (
-    <ParentContainer>
+    <ParentContainer
+      onAddDocumentScreen={screenNames.DOCUMENT_ADD_SCREEN}
+      // headerBtn={() => (
+      //   <Icons.AddDocument
+      //     onPress={() => navigation.navigate(screenNames.DOCUMENT_ADD_SCREEN)}
+      //   />
+      // )}
+    >
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
         <CardComponent key={i} item={i} />
       ))}

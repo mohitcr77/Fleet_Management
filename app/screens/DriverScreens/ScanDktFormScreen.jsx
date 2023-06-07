@@ -4,6 +4,7 @@ import ParentContainer from "../../components/ParentContainer";
 import FormInput from "../../components/FormInput";
 import dataType from "../../constants/dataType";
 import useFetchList from "../../hooks/useFetchList";
+import AppFooterButton from "../../components/AppFooterButton";
 
 export default function ScanDktForm() {
   const { clientList, machineTypeList } = useFetchList();
@@ -48,6 +49,8 @@ export default function ScanDktForm() {
       {fullDktForm.map((i) => (
         <FormInput {...i} />
       ))}
+
+      <AppFooterButton />
     </ParentContainer>
   );
 }

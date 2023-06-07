@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import ParentContainer from "../../components/ParentContainer";
-import AppButton from "./../../components/AppButton";
+import AppButton from "../../components/AppButton";
 import customStyles from "../../constants/styles";
 import dimensions from "../../constants/dimensions";
 import screenNames from "../../constants/screenNames";
 
-export default function DriverPreInspection({ navigation }) {
+export default function PreInspectionList({ navigation }) {
   return (
     <ParentContainer>
       {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
@@ -21,8 +21,16 @@ export default function DriverPreInspection({ navigation }) {
         onPress: () =>
           navigation.navigate(screenNames.PRE_INSPECTION_FORM_SCREEN),
       },
-      { name: "History", onPress: () => console.log("first") },
-      { name: "Notes", onPress: () => console.log("first") },
+      {
+        name: "History",
+        onPress: () =>
+          navigation.navigate(screenNames.PRE_INSPECTION_HISTORY_SCREEN),
+      },
+      {
+        name: "Notes",
+        onPress: () =>
+          navigation.navigate(screenNames.PRE_INSPECTION_NOTES_SCREEN),
+      },
     ];
 
     const detail = [
