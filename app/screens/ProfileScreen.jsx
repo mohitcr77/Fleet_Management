@@ -1,94 +1,97 @@
-import React from "react";
-import { StyleSheet, Text } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 
 import ParentContainer from "../components/ParentContainer";
 import { width } from "../helpers/scales";
 import colors from "../constants/colors";
+import useAuth from "../hooks/useAuth";
+import Icons from "../components/Icons";
+import { DrawerActions } from "@react-navigation/native";
 
-export default function Profile({ route }) {
-  return (
-    <ParentContainer>
-      <Text> hii</Text>
-    </ParentContainer>
-  );
-
-  // const { auth, setAuth } = useContext(AuthContext);
-  // const [image, setImage] = useState(genImageUrl(auth.profile_pic));
-
-  // const pickFromGallery = async () => {
-  //   try {
-  //     let result = await ImagePicker.launchImageLibraryAsync({
-  //       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-  //       allowsEditing: isAndroid(),
-  //       quality: 0.1,
-  //       base64: true,
-  //     });
-
-  //     if (!result.cancelled) {
-  //       setImage(`data:image/jpeg;base64,${result.base64}`);
-  //       try {
-  //         const resp = await services.updateProfilePic(
-  //           auth.user.toLowerCase(),
-  //           { profile_pic: `data:image/jpeg;base64,${result.base64}` },
-  //           auth.token
-  //         );
-  //         if (resp.ok) {
-  //           const data = {
-  //             ...auth,
-  //             profile_pic: resp.data[auth.user.toLowerCase()].profile_pic,
-  //           };
-  //           setAuth(data);
-  //           storage.storeDetails(JSON.stringify(data));
-  //         } else {
-  //           alert("Something Went Wrong!!");
-  //         }
-  //       } catch (error) {
-  //         console.warn(error);
-  //       }
-  //     }
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
+export default function Profile({ navigation }) {
   // return (
-  //   <ParentContainer
-  //     title="Profile"
-  //     color={colors.lightThemeColor}
-  //     textColor={colors.white}
-  //   >
-  //     <View style={styles.profileImageBackground}></View>
-  //     <TouchableOpacity style={styles.imageContainer} onPress={pickFromGallery}>
-  //       <Image
-  //         source={
-  //           auth.profile_pic
-  //             ? { uri: image }
-  //             : require("../../assets/images/profile.png")
-  //         }
-  //         style={styles.image}
-  //       />
-  //     </TouchableOpacity>
-
-  //     <AppText style={styles.nameContainer}>{auth.name}</AppText>
-  //     <View style={styles.textContainer}>
-  //       <AppText>{auth.name}</AppText>
-  //     </View>
-  //     <View style={styles.textContainer}>
-  //       <AppText>{auth.email}</AppText>
-  //     </View>
-  //     <View style={styles.textContainer}>
-  //       <AppText> {auth.phone}</AppText>
-  //     </View>
-  //     <TouchableOpacity
-  //       onPress={async () => {
-  //         storage.deleteDetails();
-  //         setAuth(null);
-  //       }}
-  //       style={styles.signOutButton}
-  //     >
-  //       <AppText style={styles.signOut}>Sign Out</AppText>
-  //     </TouchableOpacity>
+  //   <ParentContainer>
+  //     <Text> hii</Text>
   //   </ParentContainer>
   // );
+
+  const { auth, setAuth } = useAuth();
+  console.log(auth);
+  const [image, setImage] = useState(null);
+
+  const pickFromGallery = async () => {
+    // try {
+    //   let result = await ImagePicker.launchImageLibraryAsync({
+    //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    //     allowsEditing: isAndroid(),
+    //     quality: 0.1,
+    //     base64: true,
+    //   });
+    //   if (!result.cancelled) {
+    //     setImage(`data:image/jpeg;base64,${result.base64}`);
+    //     try {
+    //       const resp = await services.updateProfilePic(
+    //         auth.user.toLowerCase(),
+    //         { profile_pic: `data:image/jpeg;base64,${result.base64}` },
+    //         auth.token
+    //       );
+    //       if (resp.ok) {
+    //         const data = {
+    //           ...auth,
+    //           profile_pic: resp.data[auth.user.toLowerCase()].profile_pic,
+    //         };
+    //         setAuth(data);
+    //         storage.storeDetails(JSON.stringify(data));
+    //       } else {
+    //         alert("Something Went Wrong!!");
+    //       }
+    //     } catch (error) {
+    //       console.warn(error);
+    //     }
+    //   }
+    // } catch (e) {
+    //   console.error(e);
+    // }
+  };
+  return (
+    <View>
+      <View style={styles.profileImageBackground}>
+        <Icons.Menu
+          menuColor="white"
+          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+        />
+      </View>
+      <TouchableOpacity style={styles.imageContainer} onPress={pickFromGallery}>
+        <Image
+          source={
+            auth.profile_pic
+              ? { uri: image }
+              : require("../assets/images/profile.png")
+          }
+          style={styles.image}
+        />
+      </TouchableOpacity>
+
+      <Text style={styles.nameContainer}>{auth.user.name}</Text>
+      <View style={styles.textContainer}>
+        <Text>{auth.user.name}</Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text>{auth.user.email}</Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text> {auth.phone}</Text>
+      </View>
+      <TouchableOpacity
+        onPress={async () => {
+          setAuth(null);
+        }}
+        style={styles.signOutButton}
+      >
+        <Text style={styles.signOut}>Sign Out</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -116,8 +119,10 @@ const styles = StyleSheet.create({
   },
   profileImageBackground: {
     width,
-    height: 100,
+    height: 180,
     backgroundColor: colors.lightThemeColor,
+    paddingTop: 60,
+    paddingLeft: 20,
   },
   image: { height: 114, width: 114, borderRadius: 57 },
   imageContainer: {

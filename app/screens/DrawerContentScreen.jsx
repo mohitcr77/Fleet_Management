@@ -33,23 +33,24 @@ export default function DrawerContent({ navigation }) {
           { name: "Scan Dkt List", screen: screenNames.SCAN_DKT_LIST_SCREEN },
         ],
       },
+
       {
-        name: "Pre-Inspection",
+        name: "Jobs",
         screen: null,
         children: [
           {
-            name: "Pre-Inspection Form",
-            screen: screenNames.PRE_INSPECTION_FORM_SCREEN,
+            name: "Today Jobs",
+            screen: screenNames.DRIVER_JOBS_SCREEN,
           },
           {
-            name: "Pre-Inspection List",
-            screen: screenNames.DRIVER_PRE_INSPECTION_SCREEN,
+            name: "Older Jobs",
+            screen: screenNames.DRIVER_JOBS_LIST_SCREEN,
           },
         ],
       },
       {
-        name: "Driver Jobs",
-        screen: screenNames.DRIVER_JOBS_SCREEN,
+        name: "Pre-Inspection",
+        screen: screenNames.PRE_INSPECTION_LIST_SCREEN,
         children: null,
       },
       {
@@ -87,8 +88,8 @@ export default function DrawerContent({ navigation }) {
         name: "TimeSheet",
         screen: null,
         children: [
-          { name: "TimeSheet Form", screen: screenNames.MECHANIC_TIMESHEET_FORM },
-          { name: "TimeSheet Data", screen: screenNames.MECHANIC_TIMESHEET_DATA },
+          { name: "TimeSheet Form", screen: screenNames.MECHANIC_TIME_SHEET_FORM },
+          { name: "TimeSheet Data", screen: screenNames.MECHANIC_TIME_SHEET_DATA },
         ],
       },
       {
@@ -103,7 +104,7 @@ export default function DrawerContent({ navigation }) {
         name: "Documents",
         screen: null,
         children: [
-          { name: "Add Document", screen: screenNames.ADD_DOCUMENT },
+          { name: "Add Document", screen: screenNames.ADD_DOCUMENT_SCREEN },
           { name: "View Documents", screen: screenNames.VIEW_DOCUMENTS },
         ],
       },
@@ -205,7 +206,7 @@ export default function DrawerContent({ navigation }) {
     return (
       <TouchableOpacity
         style={styles.profileContainer}
-        // onPress={() => navigation.navigate(screenNames.profile)}
+        onPress={() => navigation.navigate(screenNames.PROFILE_SCREEN)}
       >
         <Icons.User
         // image={auth.profile_pic}

@@ -8,14 +8,21 @@ import { largeScreen, scale, width, height } from "../helpers/scales";
 import screenNames from "../constants/screenNames";
 import { TouchableOpacity } from "react-native";
 import dimensions from "../constants/dimensions";
+import { Button } from "@ui-kitten/components";
+import AppButton from "./AppButton";
 
 export default function ListCard({
   obj,
   data,
+  inspectionData,
   editScreen,
   showMore = true,
   onSendClick,
   listScreen,
+  resolveBtn,
+  previewBtn,
+  editBtn,
+  viewBtn
 }) {
   const navigation = useNavigation();
   const handleEdit = () => {
@@ -73,7 +80,7 @@ export default function ListCard({
           <Text style={{ color: colors.saveBlue }}>Show More</Text>
         </TouchableOpacity>
       )}
-      {data.cardData.map((item, index) => {
+      {data?.cardData.map((item, index) => {
         return (
           <View View key={index} style={styles.textContainer}>
             <Text
@@ -83,6 +90,27 @@ export default function ListCard({
               }}
             >
               {item.key}
+            </Text>
+            <Text
+              style={{
+                width: item.type === "date" ? 80 : width / 2 - 10,
+              }}
+            >
+              {item.value}
+            </Text>
+          </View>
+        );
+      })}
+      {inspectionData?.cardData.map((item, index) => {
+        return (
+          <View View key={index} style={styles.inspectionTextContainer}>
+            <Text
+              style={{
+                color: colors.border2,
+                fontSize: 12,
+              }}
+            >
+              {item.key}{" "}
             </Text>
             <Text
               style={{
@@ -105,9 +133,22 @@ export default function ListCard({
           <Icons.Send size={24} />
         </TouchableOpacity>
       )}
-      <TouchableOpacity style={styles.editBtn} onPress={handleEdit}>
-        <Icons.Pencil />
-      </TouchableOpacity>
+      {resolveBtn ? (
+        <AppButton style={styles.previewBtn} title={"RESOLVE"} />
+      ) : previewBtn ? (
+        <AppButton style={styles.previewBtn} title={"PREVIEW"} />
+      ):
+      editBtn ?
+      <AppButton style={styles.editBtn2} title={"EDIT"} />
+       : (
+        <TouchableOpacity style={styles.editBtn} onPress={handleEdit}>
+          <Icons.Pencil />
+        </TouchableOpacity>
+      )}
+      {
+        viewBtn &&
+        <Button style={styles.viewBtn} status="basic" >{"    "}VIEW{"    "}</Button>
+      }
     </View>
   );
 }
@@ -121,6 +162,27 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 8,
     borderRadius: 2,
+  },
+  editBtn2: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+  },
+  previewBtn:{
+    position: "absolute",
+    top: 50,
+    right: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+  },
+  viewBtn:{
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
   },
   showMore: {
     position: "absolute",
@@ -142,6 +204,11 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     width: dimensions.componentWidth / 2 - 10,
     paddingVertical: 3,
+    // backgroundColor: "red",
+  },
+  inspectionTextContainer: {
+    paddingVertical: 3,
+    flexDirection:"row"
     // backgroundColor: "red",
   },
 });

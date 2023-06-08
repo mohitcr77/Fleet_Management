@@ -86,14 +86,20 @@ export default function FormInput(props) {
       return (
         <CompWrapper>
           <Input
-            style={{ backgroundColor: "white", borderRadius: 10 }}
+            style={{
+              backgroundColor: "white",
+              borderRadius: 10,
+              ...props.style,
+            }}
             placeholder={""}
             value={value}
             onChangeText={(nextValue) => setValue(nextValue)}
+            {...props}
           />
         </CompWrapper>
       );
   }
+
   function CompWrapper({ children }) {
     return (
       <View style={styles.compWrapperStyle}>

@@ -23,7 +23,7 @@ const EditPencil = (props) => (
   </TouchableOpacity>
 );
 const Menu = ({ onPress, menuColor = "black" }) => (
-  <TouchableOpacity onPress={onPress} style={{ marginRight: 15 }}>
+  <TouchableOpacity onPress={onPress}>
     <Entypo name="menu" size={30} color={menuColor} />
   </TouchableOpacity>
 );
@@ -142,8 +142,19 @@ const Chevron = ({ closed }) => (
 const ToggleEye = (props) =>
 <Entypo name={ props.show? "eye": "eye-with-line"} size={24} color="black" />
 
+const AddDocument = ({ onPress }) => (
+  <TouchableOpacity onPress={onPress} style={{ alignItems: "center" }}>
+    <Ionicons
+      name="md-add-circle-outline"
+      size={26}
+      color={colors.themeColor}
+    />
+    <Text style={{ fontSize: 10, color: colors.border2 }}>Add Document</Text>
+  </TouchableOpacity>
+);
 
 export default {
+  AddDocument,
   Chevron,
   Attachment,
   Camera,
