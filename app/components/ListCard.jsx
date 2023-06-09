@@ -134,12 +134,12 @@ export default function ListCard({
         </TouchableOpacity>
       )}
       {resolveBtn ? (
-        <AppButton style={styles.previewBtn} title={"RESOLVE"} />
+        <AppButton  style={styles.resolveBtn} title={"Resolve"} />
       ) : previewBtn ? (
-        <AppButton style={styles.previewBtn} title={"PREVIEW"} />
+        <AppButton  style={styles.previewBtn} title={"Preview"} />
       ):
       editBtn ?
-      <AppButton style={styles.editBtn2} title={"EDIT"} />
+      <AppButton  style={styles.editBtn2} title={"EDIT"} />
        : (
         <TouchableOpacity style={styles.editBtn} onPress={handleEdit}>
           <Icons.Pencil />
@@ -147,7 +147,7 @@ export default function ListCard({
       )}
       {
         viewBtn &&
-        <Button style={styles.viewBtn} status="basic" >{"    "}VIEW{"    "}</Button>
+        <AppButton style={styles.viewBtn}  title={"View"} />
       }
     </View>
   );
@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
     right: 10,
     paddingVertical: 5,
     paddingHorizontal: 8,
+    width: dimensions.componentWidth/2 - 80
   },
   previewBtn:{
     position: "absolute",
@@ -176,13 +177,23 @@ const styles = StyleSheet.create({
     right: 10,
     paddingVertical: 5,
     paddingHorizontal: 8,
+    width: dimensions.componentWidth/2 - 60,
   },
-  viewBtn:{
+  resolveBtn:{
     position: "absolute",
-    bottom: 10,
+    top: 20,
     right: 10,
     paddingVertical: 5,
     paddingHorizontal: 8,
+    width: dimensions.componentWidth/2 - 60
+  },
+  viewBtn:{
+    position: "absolute",
+    bottom: 20,
+    right: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    width: dimensions.componentWidth/2 - 60
   },
   showMore: {
     position: "absolute",

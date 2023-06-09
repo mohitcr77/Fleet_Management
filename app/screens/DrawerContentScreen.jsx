@@ -108,6 +108,80 @@ export default function DrawerContent({ navigation }) {
           { name: "View Documents", screen: screenNames.VIEW_DOCUMENTS },
         ],
       },
+    ],
+    admin: [
+      {
+        name: "Dashboard",
+        screen: screenNames.DASHBOARD,
+        children: null
+      },
+      {
+        name: "Vehicle",
+        screen: null,
+        children: [
+          { name:"Regos", screen: screenNames.REGOS },
+          { name: "Vehicle Maintainance", screen: screenNames.VEHICLE_MAINTENANCE }
+        ]
+      },
+      {
+        name: "Staffs",
+        screen: null,
+        children: [
+          { name:"Staff", screen: screenNames.STAFF },
+          { name: "Driver", screen: screenNames.DRIVER },
+          { name: "Mechanic", screen: screenNames.MECHANIC }
+        ]
+      },
+      {
+        name: "Fuel",
+        screen: null,
+        children: [
+          { name:"Fuel Log", screen: screenNames.FUEL_LOG },
+          { name: "Fuel Efficiency", screen: screenNames.FUEL_EFFICIENCY }
+        ]
+      },
+      {
+        name: "Communication",
+        screen: null,
+        children: [
+          { name:"SMS", screen: screenNames.SMS },
+          { name: "Chat", screen: screenNames.CHAT }
+        ]
+      },
+      {
+        name: "Job Entry",
+        screen: screenNames.JOB_ENTRY,
+        children: null
+      },
+      {
+        name: "Report Issue",
+        screen: screenNames.REPORT_ISSUE,
+        children: null,
+      },
+      {
+        name: "Mechanic Time Sheet",
+        screen: screenNames.MECHANIC_TIME_SHEET,
+        children: null
+      },
+      {
+        name: "Sales",
+        screen: null,
+        children: [
+          { name:"Estimate", screen: screenNames.ESTIMATE },
+          { name: "Client", screen: screenNames.CLIENT }
+        ]
+      },
+      {
+        name: "Setting",
+        screen: null,
+        children: [
+          { name:"Tax", screen: screenNames.TAX },
+          { name: "Company Info", screen: screenNames.COMPANY_INFO },
+          { name: "Job Color", screen: screenNames.JOB_COLOR },
+          { name: "Currency", screen: screenNames.CURRENCY }
+        ]
+      },
+
     ]
   };
 

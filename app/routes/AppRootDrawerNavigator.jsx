@@ -57,7 +57,7 @@ import JobColor from "../screens/AdminScreens/JobColor";
 import Currencies from "../screens/AdminScreens/Currencies";
 import Timezones from "../screens/AdminScreens/Timezones";
 
-
+//todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator() {
