@@ -3,7 +3,7 @@ const screenNames = {
   LOGIN_SCREEN: "Login Screen",
   SELECT_USER_TYPE_SCREEN: "Select User Type Screen",
   SIGN_UP_SCREEN: "Sign Up Screen",
-
+  OTP_SCREEN: "Otp Screen",
   //Common Screens
   ABOUT_APP_SCREEN: "About App Screen",
   PROFILE_SCREEN: "Profile Screen",
@@ -28,7 +28,11 @@ const screenNames = {
   MECHANIC_FORM_SCREEN: "Mechanic Form Screen",
   MECHANIC_DATA_SCREEN: "Mechanic Data Screen",
   MECHANIC_TIME_SHEET_FORM: "Mechanic TimeSheet Form",
-  ADD_DOCUMENT_SCREEN: "Add Document",
+  MECHANIC_TIME_SHEET_DATA: "Mechanic TimeSheet Data",
+  ADD_DOCUMENT: "Add Document",
+  VIEW_DOCUMENTS: "View Documents",
+  FLEET_INSPECTION: "Fleet Inspection",
+  INSPECTION_HISTORY: "Inspection History",
 };
 
 export default screenNames;

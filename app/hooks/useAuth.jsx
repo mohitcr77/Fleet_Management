@@ -7,5 +7,7 @@ export default useAuth = () => {
   return {
     auth,
     setAuth,
+    role: auth.role.name,
+    token: auth.token,
   };
 };

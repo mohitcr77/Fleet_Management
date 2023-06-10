@@ -149,6 +149,9 @@ const AddDocument = ({ onPress }) => (
     <Text style={{ fontSize: 10, color: colors.border2 }}>Add Document</Text>
   </TouchableOpacity>
 );
+const ToggleEye = (props) => (
+  <Entypo name={props.show ? "eye" : "eye-with-line"} size={24} color="black" />
+);
 
 export default {
   AddDocument,
@@ -168,6 +171,7 @@ export default {
   PlushCircle,
   Send,
   User,
+  ToggleEye,
 };
 
 const styles = StyleSheet.create({

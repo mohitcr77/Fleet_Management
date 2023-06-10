@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { StyleSheet, Text, View } from "react-native";
 import { useState, createContext, useEffect } from "react";
 import * as eva from "@eva-design/eva";
+import Toast from "react-native-toast-message";
 
 import AuthNavigator from "./app/routes/AuthNavigator";
 import { store } from "./app/store/store";
@@ -11,8 +12,7 @@ import DrawerNavigator from "./app/routes/AppRootDrawerNavigator";
 import index from "./app/service/index";
 import StartupScreen from "./app/screens/AdminScreens/StartupScreen";
 import TokenContext from "./app/service/context";
-
-export const Emailcontext = createContext();
+import { toastConfig } from "./app/config/toastConfig";
 
 export default function App() {
   const [userToken, setAuth] = useState(null);
@@ -36,20 +36,23 @@ export default function App() {
   }
 
   return (
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <NavigationContainer>
-        <Provider store={store}>
-          <TokenContext.Provider value={{ userToken, setAuth }}>
-            {userToken == null ? (
-              <AuthNavigator />
-            ) : (
-              <DrawerNavigator />
-              // <AppNavigator />
-            )}
-          </TokenContext.Provider>
-        </Provider>
-      </NavigationContainer>
-    </ApplicationProvider>
+    <>
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <NavigationContainer>
+          <Provider store={store}>
+            <TokenContext.Provider value={{ userToken, setAuth }}>
+              {userToken == null ? (
+                <AuthNavigator />
+              ) : (
+                <DrawerNavigator />
+                // <AppNavigator />
+              )}
+            </TokenContext.Provider>
+          </Provider>
+        </NavigationContainer>
+      </ApplicationProvider>
+      <Toast config={toastConfig} />
+    </>
   );
 }
 

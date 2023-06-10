@@ -22,4 +22,5 @@ export default {
   textBlack: "#252525",
   themeColor: "#000000",
   white: "#FFFFFF",
+  translucent: "rgba(255,255,255,.5)",
 };

@@ -108,6 +108,35 @@ const deleteData = async () => {
   }
 };
 
+//signUp
+const signUpApi = async (data) => {
+  try {
+    const res = await axios.post(`${URL}/signup`, data);
+    return res;
+  } catch (error) {
+    console.warn("Error in signup Api ", error);
+  }
+};
+
+//OTP
+const verifyOTP = async (data) => {
+  try {
+    const res = await axios.post(`${URL}/verify-otp`, data);
+    return res;
+  } catch (error) {
+    console.warn("Error in posting verify-otp Api ", error);
+  }
+};
+
+const resendOTP = async (data) => {
+  try {
+    const res = await axios.post(`${URL}/resend`, data);
+    return res;
+  } catch (error) {
+    console.warn("Error in posting resend Api ", error);
+  }
+};
+
 //dynamic service
 const getApi = async (token, url) => {
   try {
@@ -177,5 +206,8 @@ export default {
   UpdateApi,
   getaApi,
   postApi,
+  signUpApi,
+  verifyOTP,
+  resendOTP,
   userDetails,
 };

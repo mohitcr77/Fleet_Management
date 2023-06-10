@@ -1,7 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import dimensions from "../constants/dimensions";
-import { ActivityIndicator } from "react-native-paper";
 
 export default function AppSmallButton({ onPress, title, loading }) {
   return (

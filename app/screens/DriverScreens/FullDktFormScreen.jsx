@@ -1,13 +1,14 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import React from "react";
-import ParentContainer from "../../components/ParentContainer";
-import FormInput from "../../components/FormInput";
-import dataType from "../../constants/dataType";
-import useFetchList from "../../hooks/useFetchList";
-import customStyles from "../../constants/styles";
-import AppButton from "../../components/AppButton";
+import Toast from "react-native-toast-message";
+
 import dimensions from "../../constants/dimensions";
 import AppFooterButton from "../../components/AppFooterButton";
+import customStyles from "../../constants/styles";
+import dataType from "../../constants/dataType";
+import FormInput from "../../components/FormInput";
+import ParentContainer from "../../components/ParentContainer";
+import useFetchList from "../../hooks/useFetchList";
 
 export default function FullDktForm() {
   const { clientList, machineTypeList } = useFetchList();
@@ -51,6 +52,16 @@ export default function FullDktForm() {
 
   return (
     <ParentContainer containerStyle={{ backgroundColor: "white" }}>
+      {/* <Button
+        title="click"
+        onPress={() =>
+          Toast.show({
+            type: "success",
+            text1: "Hello",
+            text2: "This is some something 👋",
+          })
+        }
+      /> */}
       {fullDktForm.map((i) => (
         <FormInput {...i} />
       ))}

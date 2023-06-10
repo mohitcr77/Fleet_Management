@@ -20,6 +20,11 @@ import TimeSheet from "../screens/DriverScreens/TimeSheetScreen";
 import MechanicFormScreen from "../screens/MechnicScreens/MechanicFormScreen";
 import MechanicDataScreen from "../screens/MechnicScreens/MechanicDataScreen";
 import MechanicTimeSheetForm from "../screens/MechnicScreens/MechanicTimeSheetForm";
+import MechanicTimeSheetData from "../screens/MechnicScreens/MechanicTimeSheetData";
+import FleetInspection from "../screens/MechnicScreens/FleetInspection";
+import InspectionHistory from "../screens/MechnicScreens/InspectionHistory";
+import DocumentForm from "../screens/MechnicScreens/DocumentForm";
+import DocumentList from "../screens/MechnicScreens/DocumentList";
 
 //common screen
 import AboutApp from "../screens/AboutAppScreen";
@@ -29,64 +34,74 @@ import DocumentAdd from "../screens/DriverScreens/DocumentAddScreen";
 import PreInspectionHistory from "../screens/DriverScreens/PreInspectionHistoryScreen";
 import PreInspectionNote from "../screens/DriverScreens/PreInspectionNoteScreen";
 import DriverJobsList from "../screens/DriverScreens/DriverJobsListScreen";
+import useAuth from "../hooks/useAuth";
+import { Role } from "../constants/entity";
 
 const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator() {
+  const { role } = useAuth();
   useFetchList();
 
-  let user = "driver";
+  const navigationScreens = {
+    [Role.MECHANIC]: [
+      { name: screenNames.MECHANIC_FORM_SCREEN, component: MechanicFormScreen },
+      { name: screenNames.MECHANIC_DATA_SCREEN, component: MechanicDataScreen },
+      {
+        name: screenNames.MECHANIC_TIME_SHEET_FORM,
+        component: MechanicTimeSheetForm,
+      },
+      {
+        name: screenNames.MECHANIC_TIME_SHEET_DATA,
+        component: MechanicTimeSheetData,
+      },
+      { name: screenNames.FLEET_INSPECTION, component: FleetInspection },
+      { name: screenNames.INSPECTION_HISTORY, component: InspectionHistory },
+      { name: screenNames.ADD_DOCUMENT, component: DocumentForm },
+      { name: screenNames.VIEW_DOCUMENTS, component: DocumentList },
+      //{ name: screenNames.ADD_DOCUMENT, component: DocumentForm },
+    ],
 
-  const driverScreens = [
-    { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
-    { name: screenNames.FULL_DKT_LIST_SCREEN, component: FullDktList },
-    { name: screenNames.SCAN_DKT_FORM_SCREEN, component: ScanDktForm },
-    { name: screenNames.SCAN_DKT_LIST_SCREEN, component: ScanDktList },
-    {
-      name: screenNames.PRE_INSPECTION_FORM_SCREEN,
-      component: PreInspectionForm,
-    },
-    {
-      name: screenNames.PRE_INSPECTION_LIST_SCREEN,
-      component: PreInspectionList,
-    },
-    { name: screenNames.DRIVER_JOBS_SCREEN, component: DriverJobs },
-    { name: screenNames.DRIVER_JOBS_LIST_SCREEN, component: DriverJobsList },
+    [Role.DRIVER]: [
+      { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
+      { name: screenNames.FULL_DKT_LIST_SCREEN, component: FullDktList },
+      { name: screenNames.SCAN_DKT_FORM_SCREEN, component: ScanDktForm },
+      { name: screenNames.SCAN_DKT_LIST_SCREEN, component: ScanDktList },
+      {
+        name: screenNames.PRE_INSPECTION_FORM_SCREEN,
+        component: PreInspectionForm,
+      },
+      {
+        name: screenNames.PRE_INSPECTION_LIST_SCREEN,
+        component: PreInspectionList,
+      },
+      { name: screenNames.DRIVER_JOBS_SCREEN, component: DriverJobs },
+      { name: screenNames.DRIVER_JOBS_LIST_SCREEN, component: DriverJobsList },
 
-    { name: screenNames.DRIVER_DOCUMENTS_SCREEN, component: Documents },
-    { name: screenNames.DRIVER_TIME_SHEET_SCREEN, component: TimeSheet },
+      { name: screenNames.DRIVER_DOCUMENTS_SCREEN, component: Documents },
+      { name: screenNames.DRIVER_TIME_SHEET_SCREEN, component: TimeSheet },
 
-    { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
-    { name: screenNames.DOCUMENT_ADD_SCREEN, component: DocumentAdd },
-    {
-      name: screenNames.PRE_INSPECTION_HISTORY_SCREEN,
-      component: PreInspectionHistory,
-    },
-    {
-      name: screenNames.PRE_INSPECTION_NOTES_SCREEN,
-      component: PreInspectionNote,
-    },
-  ];
+      { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
+      { name: screenNames.DOCUMENT_ADD_SCREEN, component: DocumentAdd },
+      {
+        name: screenNames.PRE_INSPECTION_HISTORY_SCREEN,
+        component: PreInspectionHistory,
+      },
+      {
+        name: screenNames.PRE_INSPECTION_NOTES_SCREEN,
+        component: PreInspectionNote,
+      },
+    ],
 
-  const mechanicScreens = [
-    { name: screenNames.MECHANIC_FORM_SCREEN, component: MechanicFormScreen },
-    { name: screenNames.MECHANIC_DATA_SCREEN, component: MechanicDataScreen },
-    {
-      name: screenNames.MECHANIC_TIMESHEET_FORM,
-      component: MechanicTimeSheetForm,
-    },
-    //{ name: screenNames.ADD_DOCUMENT, component: DocumentForm },
-  ];
+    [Role.ADMIN]: [],
+  };
 
   const commonScreens = [
     { name: screenNames.ABOUT_APP_SCREEN, component: AboutApp },
     { name: screenNames.PROFILE_SCREEN, component: Profile },
   ];
 
-  const drawerScreens = [
-    ...(user === "driver" ? driverScreens : mechanicScreens),
-    ...commonScreens,
-  ];
+  const drawerScreens = [...navigationScreens[role], ...commonScreens];
 
   return (
     <Drawer.Navigator

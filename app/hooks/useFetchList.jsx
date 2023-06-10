@@ -1,6 +1,8 @@
 import { View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Toast from "react-native-toast-message";
+
 import useAuth from "./useAuth";
 import isEmptyArray from "../helpers/isEmptyArray";
 import driverServices, {
@@ -22,14 +24,16 @@ export default useFetchList = (update) => {
   );
 
   useEffect(() => {
-    setLoading(true);
+    Toast.show({
+      type: "loading",
+      autoHide: false,
+    });
     if (isEmptyArray(clientList)) {
       handleGetClientDetails();
     }
     if (isEmptyArray(machineTypeList)) {
       handleGetRegoDetails();
     }
-    setLoading(false);
   }, [update]);
 
   const handleGetClientDetails = async () => {
@@ -55,6 +59,7 @@ export default useFetchList = (update) => {
 
       dispatch(addMachineTypeList(d));
     }
+    Toast.hide();
   };
 
   const response = {

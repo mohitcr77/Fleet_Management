@@ -16,7 +16,6 @@ export default function Profile({ navigation }) {
   // );
 
   const { auth, setAuth } = useAuth();
-  console.log(auth);
   const [image, setImage] = useState(null);
 
   const pickFromGallery = async () => {

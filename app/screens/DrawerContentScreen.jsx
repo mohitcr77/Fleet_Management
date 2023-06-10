@@ -1,22 +1,19 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 
-// import AuthContext from "../../auth/context";
+import { Role } from "../constants/entity";
 import { width } from "../helpers/scales";
-import Icons from "../components/Icons";
-import colors from "../constants/colors";
-import DrawerButton from "../components/DrawerButton";
 import screenNames from "../constants/screenNames";
+import colors from "../constants/colors";
 import DrawerButtonAccordion from "../components/DrawerButtonAccordion";
-import ScanDktList from "./DriverScreens/ScanDktListScreen";
+import Icons from "../components/Icons";
+import useAuth from "../hooks/useAuth";
 
 export default function DrawerContent({ navigation }) {
-  const [selected, setSelected] = useState(0);
-
-  let user = "driver";
+  const { role } = useAuth();
 
   const drawerBtn = {
-    driver: [
+    [Role.DRIVER]: [
       {
         name: "Full Dkt",
         screen: null,
@@ -69,74 +66,63 @@ export default function DrawerContent({ navigation }) {
         children: null,
       },
     ],
+    [Role.MECHANIC]: [
+      {
+        name: "Mechanic Data",
+        screen: null,
+        children: [
+          {
+            name: "Mechanic Form",
+            screen: screenNames.MECHANIC_FORM_SCREEN,
+          },
+          {
+            name: "View Mechanic Data",
+            screen: screenNames.MECHANIC_DATA_SCREEN,
+          },
+        ],
+      },
+      {
+        name: "TimeSheet",
+        screen: null,
+        children: [
+          {
+            name: "TimeSheet Form",
+            screen: screenNames.MECHANIC_TIME_SHEET_FORM,
+          },
+          {
+            name: "TimeSheet Data",
+            screen: screenNames.MECHANIC_TIME_SHEET_DATA,
+          },
+        ],
+      },
+      {
+        name: "Inspection",
+        screen: null,
+        children: [
+          { name: "Fleet Inspection", screen: screenNames.FLEET_INSPECTION },
+          {
+            name: "Inspection History",
+            screen: screenNames.INSPECTION_HISTORY,
+          },
+        ],
+      },
+      {
+        name: "Documents",
+        screen: null,
+        children: [
+          { name: "Add Document", screen: screenNames.ADD_DOCUMENT },
+          { name: "View Documents", screen: screenNames.VIEW_DOCUMENTS },
+        ],
+      },
+    ],
+    [Role.ADMIN]: [],
   };
-
-  const driverBtn = [
-    {
-      title: "Full DKT",
-      screen: screenNames.FULL_DKT_LIST_SCREEN,
-      icon: <Icons.EditPencil />,
-    },
-    {
-      title: "Scan DKT",
-      screen: screenNames.SCAN_DKT_LIST_SCREEN,
-      icon: <Icons.EditPencil />,
-    },
-    {
-      title: "Driver Pre-Inspection",
-      screen: screenNames.DRIVER_PRE_INSPECTION_SCREEN,
-      icon: <Icons.EditPencil />,
-    },
-    {
-      title: "Driver JObs",
-      screen: screenNames.DRIVER_JOBS_SCREEN,
-      icon: <Icons.EditPencil />,
-    },
-    {
-      title: "Documents",
-      screen: screenNames.DRIVER_DOCUMENTS_SCREEN,
-      icon: <Icons.EditPencil />,
-    },
-    {
-      title: "Time Sheet",
-      screen: screenNames.DRIVER_TIME_SHEET_SCREEN,
-      icon: <Icons.EditPencil />,
-    },
-    {
-      title: "Chat",
-      screen: screenNames.CHAT_ROOM_SCREEN,
-      icon: <Icons.EditPencil />,
-    },
-  ];
-
-  const mechanicBtn = [
-    {
-      title: "Mechanic Form",
-      screen: screenNames.MECHANIC_FORM_SCREEN,
-      icon: <Icons.EditPencil />,
-    },
-    {
-      title: "Mechanic Data",
-      screen: screenNames.MECHANIC_DATA_SCREEN,
-      icon: <Icons.Data />,
-    },
-    {
-      title: "Mechanic TimeSheet Form",
-      screen: screenNames.MECHANIC_TIMESHEET_FORM,
-      icon: <Icons.EditPencil />,
-    },
-    {
-      title: "Add Document",
-      screen: screenNames.ADD_DOCUMENT,
-      icon: <Icons.EditPencil />,
-    },
-  ];
 
   return (
     <View style={styles.container}>
       <Profile />
 
-      {drawerBtn[user].map((data) => (
+      {drawerBtn[role].map((data) => (
         <DrawerButtonAccordion key={data.name} data={data} />
       ))}
 
