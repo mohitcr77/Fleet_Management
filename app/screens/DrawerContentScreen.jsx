@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 
 import { Role } from "../constants/entity";
@@ -10,7 +16,8 @@ import Icons from "../components/Icons";
 import useAuth from "../hooks/useAuth";
 
 export default function DrawerContent({ navigation }) {
-  const { role } = useAuth();
+  const { auth, role } = useAuth();
+  const [activeDrawer, setActiveDrawer] = useState(0);
 
   const drawerBtn = {
     [Role.DRIVER]: [
@@ -110,58 +117,122 @@ export default function DrawerContent({ navigation }) {
         name: "Documents",
         screen: null,
         children: [
-          { name: "Add Document", screen: screenNames.ADD_DOCUMENT },
+          { name: "Add Document", screen: screenNames.ADD_DOCUMENT_SCREEN },
           { name: "View Documents", screen: screenNames.VIEW_DOCUMENTS },
         ],
       },
     ],
-    [Role.ADMIN]: [],
+    [Role.ADMIN]: [
+      {
+        name: "Dashboard",
+        screen: screenNames.DASHBOARD,
+        children: null,
+      },
+      {
+        name: "Vehicle",
+        screen: null,
+        children: [
+          { name: "Regos", screen: screenNames.REGOS },
+          {
+            name: "Vehicle Maintenance",
+            screen: screenNames.VEHICLE_MAINTENANCE,
+          },
+        ],
+      },
+      {
+        name: "Staffs",
+        screen: null,
+        children: [
+          { name: "Staff", screen: screenNames.STAFF },
+          { name: "Driver", screen: screenNames.DRIVER },
+          { name: "Mechanic", screen: screenNames.MECHANIC },
+        ],
+      },
+      {
+        name: "Fuel",
+        screen: null,
+        children: [
+          { name: "Fuel Log", screen: screenNames.FUEL_LOG },
+          { name: "Fuel Efficiency", screen: screenNames.FUEL_EFFICIENCY },
+        ],
+      },
+      {
+        name: "Communication",
+        screen: null,
+        children: [
+          { name: "SMS", screen: screenNames.SMS },
+          { name: "Chat", screen: screenNames.CHAT },
+        ],
+      },
+      {
+        name: "Job Entry",
+        screen: screenNames.JOB_ENTRY,
+        children: null,
+      },
+      {
+        name: "Report Issue",
+        screen: screenNames.REPORT_ISSUE,
+        children: null,
+      },
+      {
+        name: "Mechanic Time Sheet",
+        screen: screenNames.MECHANIC_TIME_SHEET,
+        children: null,
+      },
+      {
+        name: "Sales",
+        screen: null,
+        children: [
+          { name: "Estimate", screen: screenNames.ESTIMATE },
+          { name: "Client", screen: screenNames.CLIENT },
+        ],
+      },
+      {
+        name: "Setting",
+        screen: null,
+        children: [
+          { name: "Tax", screen: screenNames.TAX },
+          { name: "Company Info", screen: screenNames.COMPANY_INFO },
+          { name: "Job Color", screen: screenNames.JOB_COLOR },
+          { name: "Currency", screen: screenNames.CURRENCY },
+        ],
+      },
+    ],
   };
 
   return (
     <View style={styles.container}>
-      <Profile />
-
-      {drawerBtn[role].map((data) => (
-        <DrawerButtonAccordion key={data.name} data={data} />
-      ))}
-
-      {/* {(user === "driver" ? driverBtn : mechanicBtn).map((i, index) => (
-        <DrawerButton
-          key={index}
-          title={i.title}
-          navigateToScreen={i.screen}
-          icon={i.icon}
-          onSelect={() => setSelected(index)}
-          selected={selected == index ? true : false}
-        />
-      ))}
-
-      <View style={styles.aboutContainer}>
-        <DrawerButton
-          title={"About App"}
-          navigateToScreen={screenNames.ABOUT_APP_SCREEN}
-          icon={<Icons.Information />}
-          onSelect={() => setSelected(5)}
-          selected={selected == 5 ? true : false}
-        />
-      </View> */}
+      <Profile auth={auth} />
+      <FlatList
+        data={drawerBtn[role]}
+        renderItem={({ item, index }) => (
+          <DrawerButtonAccordion
+            data={item}
+            onClick={() => setActiveDrawer(index)}
+            active={activeDrawer === index}
+          />
+        )}
+        keyExtractor={(item, index) => index}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
-  function Profile() {
-    return (
-      <TouchableOpacity
-        style={styles.profileContainer}
-        onPress={() => navigation.navigate(screenNames.PROFILE_SCREEN)}
-      >
-        <Icons.User
-        // image={auth.profile_pic}
-        />
-        <Text style={{ color: colors.white, marginTop: 20 }}>name</Text>
-        <Text style={{ color: colors.white }}>email</Text>
-      </TouchableOpacity>
-    );
-  }
+}
+function Profile({ auth }) {
+  return (
+    <TouchableOpacity
+      style={styles.profileContainer}
+      onPress={() => navigation.navigate(screenNames.PROFILE_SCREEN)}
+    >
+      <Icons.User
+      // image={auth.profile_pic}
+      />
+      <Text style={{ color: colors.white, marginTop: 20 }}>
+        {auth.user.name}
+      </Text>
+      <Text style={{ color: colors.white }}>{auth.user.email}</Text>
+    </TouchableOpacity>
+  );
 }
 const styles = StyleSheet.create({
   btn: {
@@ -182,6 +253,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    paddingBottom: 20,
   },
   signOutBtn: {
     backgroundColor: colors.red,

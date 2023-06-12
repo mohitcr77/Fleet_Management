@@ -104,7 +104,7 @@ const ReportIssue = () => {
     setviewData("");
   }
   return (
-    <View style={{ flex: 10 }}>
+    <ParentContainer>
       <View style={styles.topContainer}>
         <Text style={{ fontSize: 20 }}>Report List</Text>
         <Pressable
@@ -198,7 +198,7 @@ const ReportIssue = () => {
           }}
         />
       </View>
-    </View>
+    </ParentContainer>
   );
 };
 

@@ -15,11 +15,12 @@ import dimensions from "../constants/dimensions";
 import customStyles from "../constants/styles";
 
 export default function ParentContainer({
+  title = null,
   children,
   containerStyle,
   useScroll = true,
   onBackButtonPressScreen,
-  onAddDocumentScreen,
+  addScreen,
 }) {
   const navigation = useNavigation();
 
@@ -42,14 +43,17 @@ export default function ParentContainer({
           />
           <Image
             source={require("../assets/images/logo-truck.png")}
-            style={{ width: 60, height: 50, marginLeft: 15 }}
+            style={{ width: 60, height: 50, marginLeft: 5 }}
             resizeMode="contain"
           />
-          <Image
+          {/* <Image
             source={require("../assets/images/logo-name.png")}
             style={{ width: 100, height: 50 }}
             resizeMode="contain"
-          />
+          /> */}
+        </View>
+        <View style={styles.headerTitle}>
+          <Text style={{ fontSize: 18 }}>{title}</Text>
         </View>
         <View style={styles.iconContainer}>
           <HeaderIcon />
@@ -76,11 +80,9 @@ export default function ParentContainer({
       );
     }
 
-    if (onAddDocumentScreen) {
+    if (addScreen) {
       return (
-        <Icons.AddDocument
-          onPress={() => navigation.navigate(onAddDocumentScreen)}
-        />
+        <Icons.AddDocument onPress={() => navigation.navigate(addScreen)} />
       );
     }
 
@@ -103,6 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: width,
     justifyContent: "space-between",
+    position: "relative",
   },
   compContainer: {
     padding: dimensions.mainHorizontalPadding,
@@ -116,5 +119,16 @@ const styles = StyleSheet.create({
     width: 80,
     justifyContent: "center",
     alignItems: "center",
+  },
+  headerTitle: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 16,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: -1,
+    // backgroundColor: "red",
   },
 });

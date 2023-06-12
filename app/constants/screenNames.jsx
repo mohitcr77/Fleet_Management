@@ -27,12 +27,34 @@ const screenNames = {
   //Mechanic Screens
   MECHANIC_FORM_SCREEN: "Mechanic Form Screen",
   MECHANIC_DATA_SCREEN: "Mechanic Data Screen",
-  MECHANIC_TIME_SHEET_FORM: "Mechanic TimeSheet Form",
   MECHANIC_TIME_SHEET_DATA: "Mechanic TimeSheet Data",
-  ADD_DOCUMENT: "Add Document",
   VIEW_DOCUMENTS: "View Documents",
   FLEET_INSPECTION: "Fleet Inspection",
   INSPECTION_HISTORY: "Inspection History",
+  MECHANIC_TIME_SHEET_FORM: "Mechanic TimeSheet Form",
+  ADD_DOCUMENT_SCREEN: "Add Document",
+
+  //Admin Screens
+  DASHBOARD: "Dashboard",
+  REGOS: "Regos",
+  VEHICLE_MAINTENANCE: "Vehicle Maintenance",
+  STAFF: "STAFF",
+  MECHANIC: "Mechanic",
+  DRIVER: "Drivers",
+  CLIENT: "Client",
+  FUEL_LOG: "Fuel Log",
+  FUEL_EFFICIENCY: "Fuel Efficiency",
+  CHAT: "Chat",
+  SMS: "SMS",
+  JOB_ENTRY: "Job Entry",
+  REPORT_ISSUE: "Report Issue",
+  MECHANIC_TIME_SHEET: "Mechanic Time sheet",
+  ESTIMATE: "Estimate",
+  TAX: "Tax",
+  COMPANY_INFO: "Company Info",
+  JOB_COLOR: "Job Color",
+  CURRENCY: "Currency",
+  TIMEZONE: "Timezone",
 };
 
 export default screenNames;

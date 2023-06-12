@@ -1,11 +1,73 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import ParentContainer from '../../components/ParentContainer'
+import React, { useState, useEffect, useContext } from "react";
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  FlatList,
+  Text,
+} from "react-native";
+import ParentContainer from "../../components/ParentContainer";
+import ListHeader from "../../components/ListHeader";
+import screenNames from "../../constants/screenNames";
+import useFetchList from "../../hooks/useFetchList";
+import ListCard from "../../components/ListCard";
+import { height } from "../../helpers/scales";
 
 const InspectionHistory = () => {
+  const CardComponent = ({ obj }) => {
+    const data = {
+      cardData: [
+        {
+          key: "Id",
+          value:
+            'obj.id',
+        },
+        { key: "Created at", value: "obj.date", type: "date" },
+        { key: "Created by", value: "obj.created_by", type: "text" },
+        {
+          key: "Fleet number",
+          value: "obj.fleet_number",
+          type: "text",
+        },
+        {
+          key: "Description",
+          value: "obj.description",
+          type: "text",
+        },
+      ],
+    };
+
+    return (
+      <ListCard
+        inspectionData={data}
+        obj={obj}
+        editScreen={screenNames.MECHANIC_TIME_SHEET_FORM}
+        listScreen={screenNames.MECHANIC_TIME_SHEET_DATA}
+        showMore={false}
+        previewBtn={true}
+      />
+    );
+  };
   return (
-    <ParentContainer>
-      <Text>InspectionHistory</Text>
+    <ParentContainer
+      useScroll={false}
+      // containerStyle={{ alignItems: "center" }}
+    >
+      <View style={styles.container}>
+        {false ? (
+          <Text style={{ marginTop: 100, alignSelf: "center", height }}>
+            No Data
+          </Text>
+        ) : (
+          <FlatList
+            data={[1, 2, 3]}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              return <CardComponent obj={item} />;
+            }}
+          />
+        )}
+      </View>
     </ParentContainer>
   )
 }

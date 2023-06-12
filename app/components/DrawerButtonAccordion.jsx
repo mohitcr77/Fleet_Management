@@ -18,33 +18,36 @@ if (Platform.OS === "android") {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-export default function DrawerButtonAccordion({ data, show }) {
+export default function DrawerButtonAccordion({
+  data,
+  active = false,
+  onClick,
+}) {
   const navigation = useNavigation();
-  const [selected, setSelected] = useState(false);
 
   return (
     <View>
       <Button
         onPress={() => {
+          onClick();
           if (data.screen) {
             navigation.navigate(data.screen);
             return;
           }
           LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-          setSelected(!selected);
         }}
         appearance="ghost"
-        status="info"
+        status={active ? "info" : "basic"}
         style={[styles.container]}
         accessoryRight={
-          data.children ? () => <Icons.Chevron closed={!selected} /> : null
+          data.children ? () => <Icons.Chevron closed={!active} /> : null
         }
       >
         {data.name}
       </Button>
       <Divider />
 
-      {selected && data.children && (
+      {active && data.children && (
         <List
           style={{ maxHeight: data.children.length * 45 }}
           data={data.children}
@@ -53,6 +56,7 @@ export default function DrawerButtonAccordion({ data, show }) {
             <ListItem
               onPress={() => navigation.navigate(item.screen)}
               title={`${item.name}`}
+              style={{ paddingLeft: 30 }}
               // description={`${item.description} ${index + 1}`}
             />
           )}

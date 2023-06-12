@@ -1,8 +1,9 @@
 import axios from "axios";
 import { URL, getHeader } from ".";
 
-export const getClients = "/clients";
-export const getRegos = "/regos";
+const clients = "/clients";
+const rego = "/regos";
+const getId = (id) => `/id${id}`;
 
 const fetchData = async (endpoint, token) => {
   let res;
@@ -17,4 +18,7 @@ const fetchData = async (endpoint, token) => {
 
 export default {
   fetchData,
+  clients,
+  rego,
+  getId,
 };

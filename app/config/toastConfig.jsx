@@ -24,6 +24,7 @@ export const toastConfig = {
 
   loading: () => (
     <View style={styles.loader}>
+      <Text>Loading...</Text>
       <ActivityIndicator size={"large"} />
     </View>
   ),

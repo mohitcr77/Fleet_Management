@@ -31,7 +31,6 @@ const MechanicFormScreen = () => {
       name: "Mileage",
       key: "mileage",
       type: dataType.number,
-      data: clientList,
     },
     {
       name: "Comment",
@@ -57,11 +56,6 @@ const MechanicFormScreen = () => {
           { marginBottom: 150, marginTop: 40 },
         ]}
       >
-        <AppButton
-          title={"Save(Send Later)"}
-          type="small"
-          style={{ height: 40 }}
-        />
         <AppButton title={"Submit"} type="small" style={{ height: 40 }} />
       </View>
     </ParentContainer>

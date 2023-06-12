@@ -5,10 +5,7 @@ import Toast from "react-native-toast-message";
 
 import useAuth from "./useAuth";
 import isEmptyArray from "../helpers/isEmptyArray";
-import driverServices, {
-  getClients,
-  getRegos,
-} from "../service/driverServices";
+import driverServices, { clients, rego } from "../service/endpoint";
 import {
   addClientList,
   addMachineTypeList,
@@ -24,10 +21,6 @@ export default useFetchList = (update) => {
   );
 
   useEffect(() => {
-    Toast.show({
-      type: "loading",
-      autoHide: false,
-    });
     if (isEmptyArray(clientList)) {
       handleGetClientDetails();
     }
@@ -37,7 +30,7 @@ export default useFetchList = (update) => {
   }, [update]);
 
   const handleGetClientDetails = async () => {
-    const resp = await driverServices.fetchData(getClients, auth.token);
+    const resp = await driverServices.fetchData(clients, auth.token);
     if (resp.status === 200) {
       const d = resp.data.data.data;
       d.forEach((e) => {
@@ -49,7 +42,7 @@ export default useFetchList = (update) => {
   };
 
   const handleGetRegoDetails = async () => {
-    const resp = await driverServices.fetchData(getRegos, auth.token);
+    const resp = await driverServices.fetchData(rego, auth.token);
     if (resp.status === 200) {
       const d = resp.data.data.data;
       d.forEach((e) => {

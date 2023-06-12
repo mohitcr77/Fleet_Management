@@ -2104,7 +2104,7 @@ anymatch@^3.0.3:
 
 apisauce@^3.0.0:
   version "3.0.0"
-  resolved "https://registry.npmjs.org/apisauce/-/apisauce-3.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/apisauce/-/apisauce-3.0.0.tgz#0e015ba4c908c7ff616abb12970dfcc731a7f9a3"
   integrity sha512-xENxzTziTfcyEXocVUi8vlOGhfYCDaRxYkuj6H960L2qJaFUrUTnn248Ol4S+tHMwCnE0jKGwfqaqtZR+QIz+Q==
   dependencies:
     axios "^0.27.2"

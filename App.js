@@ -6,13 +6,13 @@ import { useState, createContext, useEffect } from "react";
 import * as eva from "@eva-design/eva";
 import Toast from "react-native-toast-message";
 
-import AuthNavigator from "./app/routes/AuthNavigator";
 import { store } from "./app/store/store";
-import DrawerNavigator from "./app/routes/AppRootDrawerNavigator";
+import { toastConfig } from "./app/config/toastConfig";
+import AppNavigator from "./app/routes/AppNavigator";
+import AuthNavigator from "./app/routes/AuthNavigator";
 import index from "./app/service/index";
 import StartupScreen from "./app/screens/AdminScreens/StartupScreen";
 import TokenContext from "./app/service/context";
-import { toastConfig } from "./app/config/toastConfig";
 
 export default function App() {
   const [userToken, setAuth] = useState(null);
@@ -41,12 +41,7 @@ export default function App() {
         <NavigationContainer>
           <Provider store={store}>
             <TokenContext.Provider value={{ userToken, setAuth }}>
-              {userToken == null ? (
-                <AuthNavigator />
-              ) : (
-                <DrawerNavigator />
-                // <AppNavigator />
-              )}
+              {userToken == null ? <AuthNavigator /> : <AppNavigator />}
             </TokenContext.Provider>
           </Provider>
         </NavigationContainer>

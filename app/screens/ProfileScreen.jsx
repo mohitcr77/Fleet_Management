@@ -7,6 +7,7 @@ import colors from "../constants/colors";
 import useAuth from "../hooks/useAuth";
 import Icons from "../components/Icons";
 import { DrawerActions } from "@react-navigation/native";
+import { deleteData } from "../store/dataSlice";
 
 export default function Profile({ navigation }) {
   // return (
@@ -84,6 +85,7 @@ export default function Profile({ navigation }) {
       <TouchableOpacity
         onPress={async () => {
           setAuth(null);
+          deleteData();
         }}
         style={styles.signOutButton}
       >

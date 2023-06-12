@@ -34,7 +34,6 @@ const LogIn = ({ navigation }) => {
     setIsLoading(true);
     try {
       const res = await service.getApiData(data);
-      // console.log(res.data, "res");
       if (res.data) {
         token.setAuth(res.data);
         service.saveData(JSON.stringify(res.data));

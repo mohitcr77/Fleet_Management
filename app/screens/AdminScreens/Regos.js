@@ -7,11 +7,19 @@ import dataType from "../../constants/dataType";
 import index from "../../service/index";
 import TokenContext from "../../service/context";
 import LoadingScreen from "./LoadingScreen";
+import ParentContainer from "../../components/ParentContainer";
+import usePost from "../../hooks/usePost";
+import endpoint from "../../service/endpoint";
+import screenNames from "../../constants/screenNames";
 //redux toolkit
 //include base 64 , quality 0.7 in image
 const Regos = () => {
   const token = useContext(TokenContext);
-  const [isLoading, setIsLoading] = useState(true);
+  const { request: postRego } = usePost(
+    handlePostRegoSuccess,
+    handlePostRegoFail
+  );
+
   const [isvisible, setisvisible] = useState(false);
   const [updateData, setupdateData] = useState("");
   const [crud, setcrud] = useState("");
@@ -46,7 +54,20 @@ const Regos = () => {
   useEffect(() => {
     addNewid();
   }, []);
+
+  function handlePostRegoSuccess() {
+    console.log("success");
+  }
+
+  function handlePostRegoFail() {
+    console.log("fail");
+  }
+
   async function addItemHandler(enteredItemText) {
+    console.log(enteredItemText, "4444444444444");
+    // return;
+    await postRego(endpoint.rego, enteredItemText);
+
     index.postApi(token.userToken.token, enteredItemText, "regos");
     const res = await index.getApi(token.userToken.token, "regos");
     setlistdata(res.data.data);
@@ -195,11 +216,10 @@ const Regos = () => {
       defaultValue: viewData?.first_aid_kit_due_dates,
     },
   ];
+
   const addNewid = async () => {
-    setIsLoading(true);
     const res = await index.getApi(token.userToken.token, "regos");
     setlistdata(res.data.data);
-    setIsLoading(false);
   };
   function updateItemHandler(enteredItemText) {
     const newobj = Object.fromEntries(
@@ -233,7 +253,11 @@ const Regos = () => {
     setviewData("");
   }
   return (
-    <View style={{ flex: 10 }}>
+    <ParentContainer
+      useScroll={false}
+      screen="Regos"
+      // addScreen={screenNames.DASHBOARD}
+    >
       <View style={styles.topContainer}>
         <Text style={{ fontSize: 20 }}>Regos List</Text>
         <Pressable
@@ -249,15 +273,14 @@ const Regos = () => {
       <InputModal
         crudop={crud}
         form={form}
-        updateValue={updateData}
         initialState={initialState}
         onAddItem={addItemHandler}
-        onUpdateItem={updateItemHandler}
-        visible={isvisible}
         onCancel={onCancelHandler}
+        onUpdateItem={updateItemHandler}
+        updateValue={updateData}
+        visible={isvisible}
       />
       <View style={styles.listStyle}>
-        <LoadingScreen loading={isLoading} />
         <FlatList
           data={listdata}
           renderItem={(itemData) => {
@@ -440,7 +463,7 @@ const Regos = () => {
           }}
         />
       </View>
-    </View>
+    </ParentContainer>
   );
 };
 

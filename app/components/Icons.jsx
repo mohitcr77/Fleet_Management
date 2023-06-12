@@ -139,6 +139,10 @@ const Chevron = ({ closed }) => (
   />
 );
 
+const ToggleEye = (props) => (
+  <Entypo name={props.show ? "eye" : "eye-with-line"} size={24} color="black" />
+);
+
 const AddDocument = ({ onPress }) => (
   <TouchableOpacity onPress={onPress} style={{ alignItems: "center" }}>
     <Ionicons
@@ -146,11 +150,8 @@ const AddDocument = ({ onPress }) => (
       size={26}
       color={colors.themeColor}
     />
-    <Text style={{ fontSize: 10, color: colors.border2 }}>Add Document</Text>
+    {/* <Text style={{ fontSize: 10, color: colors.border2 }}>Add Document</Text> */}
   </TouchableOpacity>
-);
-const ToggleEye = (props) => (
-  <Entypo name={props.show ? "eye" : "eye-with-line"} size={24} color="black" />
 );
 
 export default {
