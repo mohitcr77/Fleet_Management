@@ -1,15 +1,24 @@
 import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import InputModal from "../../components/InputModal";
+import InputModal from "../../components/InputFormSCreen";
 import AppItem from "../../components/AppItem";
 import dataType from "../../constants/dataType";
 import index from "../../service/index";
 import TokenContext from "../../service/context";
 import LoadingScreen from "./LoadingScreen";
+import ParentContainer from "../../components/ParentContainer";
+import InputFormScreen from "../../components/InputFormSCreen";
+import endpoint from "../../service/endpoint";
 
 const Client = () => {
   const token = useContext(TokenContext);
+
+  const { request: postClient } = usePost(
+    handlePostRegoSuccess,
+    handlePostRegoFail
+  );
+
   const [isLoading, setIsLoading] = useState(true);
   const [isvisible, setisvisible] = useState(false);
   const [updateData, setupdateData] = useState("");
@@ -33,7 +42,17 @@ const Client = () => {
     addNewid();
   }, []);
 
+  function handlePostRegoSuccess() {
+    console.log("success");
+  }
+
+  function handlePostRegoFail() {
+    console.log("fail");
+  }
+
   async function addItemHandler(enteredItemText) {
+
+    await postClient(endpoint.clients, enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "clients");
     const res = await index.getApi(token.userToken.token, "clients");
     setlistdata(res.data.data);
@@ -135,114 +154,115 @@ const Client = () => {
     setviewData("");
   }
   return (
-    <View style={{ flex: 10 }}>
-      <View style={styles.topContainer}>
-        <Text style={{ fontSize: 20 }}>Client List</Text>
-        <Pressable
-          onPress={addHandler}
-          style={styles.btnStyle}
-          android_ripple={{ color: "#00580c" }}
-        >
-          <View>
-            <Text style={{ color: "#ffffff" }}>Add Client</Text>
-          </View>
-        </Pressable>
+    <ParentContainer>
+      <View style={{ flex: 10 }}>
+        <View style={styles.topContainer}>
+          <Text style={{ fontSize: 20 }}>Client List</Text>
+          <Pressable
+            onPress={addHandler}
+            style={styles.btnStyle}
+            android_ripple={{ color: "#00580c" }}
+          >
+            <View>
+              <Text style={{ color: "#ffffff" }}>Add Client</Text>
+            </View>
+          </Pressable>
+        </View>
+        {/* <InputFormScreen
+          crudop={crud}
+          form={form}
+          updateValue={updateData}
+          initialState={initialState}
+          onAddItem={addItemHandler}
+          onUpdateItem={updateItemHandler}
+          visible={isvisible}
+          onCancel={onCancelHandler}
+        /> */}
+        <View style={styles.listStyle}>
+          {/* <LoadingScreen /> */}
+          {/* <FlatList
+            data={listdata}
+            renderItem={(itemData) => {
+              const cardviewform = [
+                {
+                  name: "Name",
+                  value: itemData.item.name,
+                },
+                {
+                  name: "Email",
+                  value: itemData.item.email,
+                },
+                {
+                  name: "Color code",
+                  value: itemData.item.color_code,
+                },
+                {
+                  name: "Vehicle Type",
+                  value: itemData.item.gstin,
+                },
+                {
+                  name: "PO",
+                  value: itemData.item.po,
+                },
+              ];
+              const viewform = [
+                {
+                  name: "Name",
+                  key: "name",
+                  type: dataType.text,
+                  value: itemData?.item?.name,
+                },
+                {
+                  name: "Email",
+                  key: "email",
+                  type: dataType.text,
+                  value: itemData?.item?.email,
+                },
+                {
+                  name: "Color Code",
+                  key: "color_code",
+                  type: dataType.color,
+                  value: itemData?.item?.color_code,
+                },
+                {
+                  name: "Client Rate",
+                  key: "weightage",
+                  type: dataType.text,
+                  value: itemData?.item?.weightage,
+                },
+                {
+                  name: "GSTIN",
+                  key: "gstin",
+                  type: dataType.text,
+                  value: itemData?.item?.gstin,
+                },
+                {
+                  name: "Bcc Email",
+                  key: "bcc_email",
+                  type: dataType.text,
+                  value: itemData?.item?.bcc_email,
+                },
+                {
+                  name: "Po",
+                  key: "po",
+                  type: dataType.text,
+                  value: itemData?.item?.po,
+                },
+              ];
+              return (
+                <AppItem
+                  onDeleteItem={deleteDataHandler}
+                  onupdateData={updateHandler}
+                  id={itemData.item.id}
+                  cardviewform={cardviewform}
+                  viewform={viewform}
+                />
+              );
+            }}
+          /> */}
+        </View>
       </View>
-      <InputModal
-        crudop={crud}
-        form={form}
-        updateValue={updateData}
-        initialState={initialState}
-        onAddItem={addItemHandler}
-        onUpdateItem={updateItemHandler}
-        visible={isvisible}
-        onCancel={onCancelHandler}
-      />
-      <View style={styles.listStyle}>
-        <LoadingScreen />
-
-        <FlatList
-          data={listdata}
-          renderItem={(itemData) => {
-            const cardviewform = [
-              {
-                name: "Name",
-                value: itemData.item.name,
-              },
-              {
-                name: "Email",
-                value: itemData.item.email,
-              },
-              {
-                name: "Color code",
-                value: itemData.item.color_code,
-              },
-              {
-                name: "Vehicle Type",
-                value: itemData.item.gstin,
-              },
-              {
-                name: "PO",
-                value: itemData.item.po,
-              },
-            ];
-            const viewform = [
-              {
-                name: "Name",
-                key: "name",
-                type: dataType.text,
-                value: itemData?.item?.name,
-              },
-              {
-                name: "Email",
-                key: "email",
-                type: dataType.text,
-                value: itemData?.item?.email,
-              },
-              {
-                name: "Color Code",
-                key: "color_code",
-                type: dataType.color,
-                value: itemData?.item?.color_code,
-              },
-              {
-                name: "Client Rate",
-                key: "weightage",
-                type: dataType.text,
-                value: itemData?.item?.weightage,
-              },
-              {
-                name: "GSTIN",
-                key: "gstin",
-                type: dataType.text,
-                value: itemData?.item?.gstin,
-              },
-              {
-                name: "Bcc Email",
-                key: "bcc_email",
-                type: dataType.text,
-                value: itemData?.item?.bcc_email,
-              },
-              {
-                name: "Po",
-                key: "po",
-                type: dataType.text,
-                value: itemData?.item?.po,
-              },
-            ];
-            return (
-              <AppItem
-                onDeleteItem={deleteDataHandler}
-                onupdateData={updateHandler}
-                id={itemData.item.id}
-                cardviewform={cardviewform}
-                viewform={viewform}
-              />
-            );
-          }}
-        />
-      </View>
-    </View>
+    </ParentContainer>
   );
 };
 

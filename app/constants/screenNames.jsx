@@ -55,6 +55,9 @@ const screenNames = {
   JOB_COLOR: "Job Color",
   CURRENCY: "Currency",
   TIMEZONE: "Timezone",
+  
+  //Admin Component 
+  INPUT_FORM_SCREEN: "Input Form Screen"
+  
 };
-
 export default screenNames;
