@@ -55,6 +55,8 @@ const screenNames = {
   JOB_COLOR: "Job Color",
   CURRENCY: "Currency",
   TIMEZONE: "Timezone",
+
+  REGO_FORM_SCREEN: "Rego Form Screen",
 };
 
 export default screenNames;

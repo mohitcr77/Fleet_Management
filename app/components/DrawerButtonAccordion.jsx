@@ -1,15 +1,12 @@
 import {
   View,
-  Text,
-  TouchableOpacity,
   StyleSheet,
   LayoutAnimation,
   UIManager,
   Platform,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 
-import colors from "../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 import Icons from "./Icons";
 import { Button, Divider, List, ListItem } from "@ui-kitten/components";

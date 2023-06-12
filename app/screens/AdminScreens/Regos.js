@@ -64,7 +64,6 @@ const Regos = () => {
   }
 
   async function addItemHandler(enteredItemText) {
-    console.log(enteredItemText, "4444444444444");
     // return;
     await postRego(endpoint.rego, enteredItemText);
 
@@ -255,21 +254,9 @@ const Regos = () => {
   return (
     <ParentContainer
       useScroll={false}
-      screen="Regos"
-      // addScreen={screenNames.DASHBOARD}
+      title="Regos"
+      addScreen={screenNames.REGO_FORM_SCREEN}
     >
-      <View style={styles.topContainer}>
-        <Text style={{ fontSize: 20 }}>Regos List</Text>
-        <Pressable
-          onPress={addHandler}
-          style={styles.btnStyle}
-          android_ripple={{ color: "#00580c" }}
-        >
-          <View>
-            <Text style={{ color: "#ffffff" }}>Add Regos</Text>
-          </View>
-        </Pressable>
-      </View>
       <InputModal
         crudop={crud}
         form={form}

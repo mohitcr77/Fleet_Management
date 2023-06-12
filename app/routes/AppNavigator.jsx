@@ -58,6 +58,7 @@ import CompanyInfo from "../screens/AdminScreens/CompanyInfo";
 import JobColor from "../screens/AdminScreens/JobColor";
 import Currencies from "../screens/AdminScreens/Currencies";
 import Timezones from "../screens/AdminScreens/Timezones";
+import RegosForm from "../screens/AdminScreens/RegosFormScreen";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -187,6 +188,7 @@ export default function AppNavigator() {
         name: screenNames.TIMEZONE,
         component: Timezones,
       },
+      { name: screenNames.REGO_FORM_SCREEN, component: RegosForm },
     ],
   };
 

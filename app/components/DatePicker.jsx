@@ -4,7 +4,8 @@ import { Datepicker, Layout, Text } from "@ui-kitten/components";
 import dimensions from "../constants/dimensions";
 import customStyles from "../constants/styles";
 
-export const DatePicker = () => {
+export const DatePicker = (props) => {
+  // const d = props.value !== "" ? new Date(props.value) : new Date();
   const [date, setDate] = React.useState(new Date());
 
   return (
@@ -12,7 +13,10 @@ export const DatePicker = () => {
       <Layout style={styles.container} level="1">
         <Datepicker
           date={date}
-          onSelect={(nextDate) => setDate(nextDate)}
+          onSelect={(nextDate) => {
+            setDate(nextDate);
+            props.onDateSelect(nextDate);
+          }}
           controlStyle={{ backgroundColor: "white" }}
         />
       </Layout>
@@ -23,6 +27,5 @@ export const DatePicker = () => {
 const styles = StyleSheet.create({
   container: {
     width: dimensions.componentWidth,
-    backgroundColor: "red",
   },
 });
