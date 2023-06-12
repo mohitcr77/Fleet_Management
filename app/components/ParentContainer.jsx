@@ -81,8 +81,9 @@ export default function ParentContainer({
     }
 
     if (addScreen) {
+      // console.log(first)
       return (
-        <Icons.AddDocument onPress={() => navigation.navigate(addScreen)} />
+        <Icons.AddDocument onPress={() => navigation.navigate(...addScreen)} />
       );
     }
 

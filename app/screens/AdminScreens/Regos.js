@@ -11,14 +11,12 @@ import ParentContainer from "../../components/ParentContainer";
 import usePost from "../../hooks/usePost";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
+import AdminListRendered from "../../components/AdminListRendered";
+import useGet from "./../../hooks/useGet";
 //redux toolkit
 //include base 64 , quality 0.7 in image
 const Regos = () => {
   const token = useContext(TokenContext);
-  const { request: postRego } = usePost(
-    handlePostRegoSuccess,
-    handlePostRegoFail
-  );
 
   const [isvisible, setisvisible] = useState(false);
   const [updateData, setupdateData] = useState("");
@@ -51,188 +49,192 @@ const Regos = () => {
     first_aid_kit_due_dates: "",
   };
 
-  useEffect(() => {
-    addNewid();
-  }, []);
+  const [listData, setListData] = useState([]);
 
-  function handlePostRegoSuccess() {
-    console.log("success");
+  const { data } = useGet(endpoint.rego, handleGetRegoSuccess);
+
+  function handleGetRegoSuccess(d) {
+    setlistdata(d);
+    let arr = [];
+    console.log(d, "success");
+    d.forEach((item) => {
+      const cardData = [
+        {
+          name: "Name",
+          value: itemData.item.name,
+        },
+        {
+          name: "Regos Rate",
+          value: itemData.item.rego_rate,
+        },
+        {
+          name: "Milage Threshold",
+          value: JSON.stringify(itemData.item.milage_threshold),
+        },
+        {
+          name: "Vehicle Type",
+          value: itemData.item.vehicle_type,
+        },
+        {
+          name: "CheckSheet Type",
+          value: itemData.item.checksheet_type,
+        },
+        {
+          name: "Plate No",
+          value: itemData.item.plate_no,
+        },
+      ];
+      const viewData = [
+        {
+          name: "Name",
+          key: "name",
+          type: dataType.text,
+          value: itemData.item.name,
+        },
+        {
+          name: "Regos Rate",
+          key: "rego_rate",
+          type: dataType.text,
+          value: itemData.item.rego_rate,
+        },
+        {
+          name: "Milage Threshold",
+          key: "milage_threshold",
+          type: dataType.text,
+          value: JSON.stringify(itemData.item.milage_threshold),
+        },
+        {
+          name: "Vehicle Type",
+          key: "vehicle_type",
+          type: dataType.text,
+          value: itemData.item.vehicle_type,
+        },
+        {
+          name: "CheckSheet Type",
+          key: "checksheet_type",
+          type: dataType.text,
+          value: itemData.item.checksheet_type,
+        },
+        {
+          name: "Plate No",
+          key: "plate_no",
+          type: dataType.text,
+          value: itemData.item.plate_no,
+        },
+        {
+          name: "Year",
+          key: "year",
+          type: dataType.text,
+          value: JSON.stringify(itemData.item.year),
+        },
+        {
+          name: "Make",
+          key: "make",
+          type: dataType.text,
+          value: itemData.item.make,
+        },
+        {
+          name: "Model",
+          key: "model",
+          type: dataType.text,
+          value: itemData.item.model,
+        },
+        {
+          name: "Vin No",
+          key: "vin_no",
+          type: dataType.text,
+          value: itemData.item.vin_no,
+        },
+        {
+          name: "Engine No",
+          key: "engine_no",
+          type: dataType.text,
+          value: itemData.item.engine_no,
+        },
+        {
+          name: "Model No",
+          key: "model_no",
+          type: dataType.text,
+          value: itemData.item.model_no,
+        },
+        {
+          name: "Serial No",
+          key: "serial_no",
+          type: dataType.text,
+          value: itemData.item.serial_no,
+        },
+        {
+          name: "Fuel Type",
+          key: "fuel_type",
+          type: dataType.text,
+          value: itemData.item.fuel_type,
+        },
+        {
+          name: "Transmission Type",
+          key: "transmission_type",
+          type: dataType.text,
+          value: itemData.item.transmission_type,
+        },
+        {
+          name: "CC Rating",
+          key: "cc_rating",
+          type: dataType.text,
+          value: itemData.item.cc_rating,
+        },
+        {
+          name: "Current KMS",
+          key: "current_kms",
+          type: dataType.text,
+          value: JSON.stringify(itemData.item.current_kms),
+        },
+
+        {
+          name: "Service Due KMS",
+          key: "service_due_kms",
+          type: dataType.text,
+          value: JSON.stringify(itemData.item.service_due_kms),
+        },
+        {
+          name: "Service Due Date",
+          key: "service_due_date",
+          type: dataType.date,
+          value: itemData.item.service_due_date,
+        },
+        {
+          name: "WOF COF Due Date",
+          key: "wof_cof_due_date",
+          type: dataType.date,
+          value: itemData.item.wof_cof_due_date,
+        },
+        {
+          name: "Registration Due Date",
+          key: "registration_due_date",
+          type: dataType.date,
+          value: itemData.item.registration_due_date,
+        },
+        {
+          name: "Fire Extinguisher Due Date",
+          key: "fire_extinguisher_due_date",
+          type: dataType.date,
+          value: itemData.item.fire_extinguisher_due_date,
+        },
+        {
+          name: "First Aid Kit Due Dates",
+          key: "first_aid_kit_due_dates",
+          type: dataType.date,
+          value: itemData.item.first_aid_kit_due_dates,
+        },
+      ];
+    });
+    setListData(d);
   }
 
   function handlePostRegoFail() {
     console.log("fail");
   }
 
-  async function addItemHandler(enteredItemText) {
-    // return;
-    await postRego(endpoint.rego, enteredItemText);
-
-    index.postApi(token.userToken.token, enteredItemText, "regos");
-    const res = await index.getApi(token.userToken.token, "regos");
-    setlistdata(res.data.data);
-    setisvisible(false);
-    addNewid();
-  }
-
-  const form = [
-    {
-      name: "Name",
-      key: "name",
-      type: dataType.text,
-      defaultValue: viewData?.name,
-    },
-    {
-      name: "Regos Rate",
-      key: "rego_rate",
-      type: dataType.text,
-      defaultValue: viewData?.rego_rate,
-    },
-    {
-      name: "Milage Threshold",
-      key: "milage_threshold",
-      type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.milage_threshold),
-    },
-    {
-      name: "Vehicle Type",
-      key: "vehicle_type",
-      type: dataType.text,
-      defaultValue: viewData?.vehicle_type,
-    },
-    {
-      name: "CheckSheet Type",
-      key: "checksheet_type",
-      type: dataType.text,
-      defaultValue: viewData?.checksheet_type,
-    },
-    {
-      name: "Plate No",
-      key: "plate_no",
-      type: dataType.text,
-      defaultValue: viewData?.plate_no,
-    },
-    {
-      name: "Year",
-      key: "year",
-      type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.year),
-    },
-    {
-      name: "Make",
-      key: "make",
-      type: dataType.text,
-      defaultValue: viewData?.make,
-    },
-    {
-      name: "Model",
-      key: "model",
-      type: dataType.text,
-      defaultValue: viewData?.model,
-    },
-    {
-      name: "Vin No",
-      key: "vin_no",
-      type: dataType.text,
-      defaultValue: viewData?.vin_no,
-    },
-    {
-      name: "Engine No",
-      key: "engine_no",
-      type: dataType.text,
-      defaultValue: viewData?.engine_no,
-    },
-    {
-      name: "Model No",
-      key: "model_no",
-      type: dataType.text,
-      defaultValue: viewData?.model_no,
-    },
-    {
-      name: "Serial No",
-      key: "serial_no",
-      type: dataType.text,
-      defaultValue: viewData?.serial_no,
-    },
-    {
-      name: "Fuel Type",
-      key: "fuel_type",
-      type: dataType.text,
-      defaultValue: viewData?.fuel_type,
-    },
-    {
-      name: "Transmission Type",
-      key: "transmission_type",
-      type: dataType.text,
-      defaultValue: viewData?.transmission_type,
-    },
-    {
-      name: "CC Rating",
-      key: "cc_rating",
-      type: dataType.text,
-      defaultValue: viewData?.cc_rating,
-    },
-    {
-      name: "Current KMS",
-      key: "current_kms",
-      type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.current_kms),
-    },
-
-    {
-      name: "Service Due KMS",
-      key: "service_due_kms",
-      type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.service_due_kms),
-    },
-    {
-      name: "Service Due Date",
-      key: "service_due_date",
-      type: dataType.date,
-      defaultValue: viewData?.service_due_date,
-    },
-    {
-      name: "WOF COF Due Date",
-      key: "wof_cof_due_date",
-      type: dataType.date,
-      defaultValue: viewData?.wof_cof_due_date,
-    },
-    {
-      name: "Registration Due Date",
-      key: "registration_due_date",
-      type: dataType.date,
-      defaultValue: viewData?.registration_due_date,
-    },
-    {
-      name: "Fire Extinguisher Due Date",
-      key: "fire_extinguisher_due_date",
-      type: dataType.date,
-      defaultValue: viewData?.fire_extinguisher_due_date,
-    },
-    {
-      name: "First Aid Kit Due Dates",
-      key: "first_aid_kit_due_dates",
-      type: dataType.date,
-      defaultValue: viewData?.first_aid_kit_due_dates,
-    },
-  ];
-
-  const addNewid = async () => {
-    const res = await index.getApi(token.userToken.token, "regos");
-    setlistdata(res.data.data);
-  };
-  function updateItemHandler(enteredItemText) {
-    const newobj = Object.fromEntries(
-      Object.entries(enteredItemText).filter(([_, val]) => val !== "")
-    );
-    index.UpdateApi(token.userToken.token, newobj, dataID, "regos");
-    setisvisible(false);
-    setviewData("");
-    addNewid();
-  }
-
   function deleteDataHandler(id) {
     index.deleteApi(token.userToken.token, id, "regos");
-    addNewid();
   }
 
   async function updateHandler(id) {
@@ -242,31 +244,137 @@ const Regos = () => {
     setcrud("update");
     setisvisible(true);
   }
-  function addHandler() {
-    setisvisible(true);
-    setupdateData("");
-    setcrud("");
-  }
-  function onCancelHandler() {
-    setisvisible(false);
-    setviewData("");
-  }
+  const form = [
+    {
+      name: "Name",
+      key: "name",
+      type: dataType.text,
+    },
+    {
+      name: "Regos Rate",
+      key: "rego_rate",
+      type: dataType.number,
+    },
+    {
+      name: "Milage Threshold",
+      key: "milage_threshold",
+      type: dataType.number,
+    },
+    {
+      name: "Vehicle Type",
+      key: "vehicle_type",
+      type: dataType.text,
+    },
+    {
+      name: "CheckSheet Type",
+      key: "checksheet_type",
+      type: dataType.text,
+    },
+    {
+      name: "Plate No",
+      key: "plate_no",
+      type: dataType.number,
+    },
+    {
+      name: "Year",
+      key: "year",
+      type: dataType.text,
+    },
+    {
+      name: "Make",
+      key: "make",
+      type: dataType.text,
+    },
+    {
+      name: "Model",
+      key: "model",
+      type: dataType.text,
+    },
+    {
+      name: "Vin No",
+      key: "vin_no",
+      type: dataType.number,
+    },
+    {
+      name: "Engine No",
+      key: "engine_no",
+      type: dataType.number,
+    },
+    {
+      name: "Model No",
+      key: "model_no",
+      type: dataType.number,
+    },
+    {
+      name: "Serial No",
+      key: "serial_no",
+      type: dataType.number,
+    },
+    {
+      name: "Fuel Type",
+      key: "fuel_type",
+      type: dataType.text,
+    },
+    {
+      name: "Transmission Type",
+      key: "transmission_type",
+      type: dataType.text,
+    },
+    {
+      name: "CC Rating",
+      key: "cc_rating",
+      type: dataType.text,
+    },
+    {
+      name: "Current KMS",
+      key: "current_kms",
+      type: dataType.number,
+    },
+    {
+      name: "Service Due KMS",
+      key: "service_due_kms",
+      type: dataType.number,
+    },
+    {
+      name: "Service Due Date",
+      key: "service_due_date",
+      type: dataType.date,
+    },
+    {
+      name: "WOF COF Due Date",
+      key: "wof_cof_due_date",
+      type: dataType.date,
+    },
+    {
+      name: "Registration Due Date",
+      key: "registration_due_date",
+      type: dataType.date,
+    },
+    {
+      name: "Fire Extinguisher Due Date",
+      key: "fire_extinguisher_due_date",
+      type: dataType.date,
+    },
+    {
+      name: "First Aid Kit Due Dates",
+      key: "first_aid_kit_due_dates",
+      type: dataType.date,
+    },
+  ];
+  const formProps = {
+    backScreen: screenNames.REGOS,
+    endpoint: endpoint.rego,
+    form,
+    title: "Add Regos",
+  };
   return (
     <ParentContainer
       useScroll={false}
       title="Regos"
-      addScreen={screenNames.REGO_FORM_SCREEN}
+      addScreen={[screenNames.FORM_SCREEN, formProps]}
     >
-      <InputModal
-        crudop={crud}
-        form={form}
-        initialState={initialState}
-        onAddItem={addItemHandler}
-        onCancel={onCancelHandler}
-        onUpdateItem={updateItemHandler}
-        updateValue={updateData}
-        visible={isvisible}
-      />
+      <AdminListRendered data={[1, 2, 3, 4, 5, 6]} />
+
       <View style={styles.listStyle}>
         <FlatList
           data={listdata}

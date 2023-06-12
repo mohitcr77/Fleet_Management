@@ -7,6 +7,7 @@ const screenNames = {
   //Common Screens
   ABOUT_APP_SCREEN: "About App Screen",
   PROFILE_SCREEN: "Profile Screen",
+  FORM_SCREEN: "Form Screen",
 
   // Driver Screens
   CHAT_ROOM_SCREEN: "Chat Room Screen",
@@ -55,8 +56,6 @@ const screenNames = {
   JOB_COLOR: "Job Color",
   CURRENCY: "Currency",
   TIMEZONE: "Timezone",
-
-  REGO_FORM_SCREEN: "Rego Form Screen",
 };
 
 export default screenNames;
