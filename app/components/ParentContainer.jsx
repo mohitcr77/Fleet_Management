@@ -1,4 +1,8 @@
-import { useNavigation, DrawerActions } from "@react-navigation/native";
+import {
+  useNavigation,
+  DrawerActions,
+  CommonActions,
+} from "@react-navigation/native";
 import React from "react";
 import {
   View,
@@ -82,7 +86,15 @@ export default function ParentContainer({
 
     if (addScreen) {
       return (
-        <Icons.AddDocument onPress={() => navigation.navigate(...addScreen)} />
+        <Icons.AddDocument
+          onPress={() =>
+            navigation.dispatch(
+              CommonActions.reset({
+                routes: [addScreen],
+              })
+            )
+          }
+        />
       );
     }
 

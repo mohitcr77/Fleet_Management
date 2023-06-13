@@ -204,7 +204,7 @@ const Regos = () => {
     <ParentContainer
       useScroll={false}
       title="Regos"
-      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}

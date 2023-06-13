@@ -91,6 +91,7 @@ export default function AdminListRendered({
                     backScreen,
                     listTitle,
                     title: editTitle,
+                    endpoint,
                   },
                 },
               ],
