@@ -52,7 +52,6 @@ const Client = () => {
   }
 
   async function addItemHandler(enteredItemText) {
-
     await postClient(endpoint.clients, enteredItemText);
     index.postApi(token.userToken.token, enteredItemText, "clients");
     const res = await index.getApi(token.userToken.token, "clients");
@@ -156,7 +155,7 @@ const Client = () => {
   }
   return (
     <ParentContainer
-    useScroll={false}
+      useScroll={false}
       title="Regos"
       addScreen={screenNames.CLIENT_FORM_SCREEN}
     >
@@ -172,8 +171,8 @@ const Client = () => {
           onCancel={onCancelHandler}
         /> */}
         <View style={styles.listStyle}>
-          <LoadingScreen loading={isLoading} /> 
-         <FlatList
+          <LoadingScreen loading={isLoading} />
+          <FlatList
             data={listdata}
             renderItem={(itemData) => {
               const cardviewform = [
@@ -252,7 +251,7 @@ const Client = () => {
                 />
               );
             }}
-          /> 
+          />
         </View>
       </View>
     </ParentContainer>

@@ -7,7 +7,7 @@ import service from "../../service";
 import screenNames from "../../constants/screenNames";
 import LoadingScreen from "../AdminScreens/LoadingScreen";
 
-const OtpScreen = ({ route, navigation }) => {
+export default function FillOtp({ route, navigation }) {
   const { email } = route.params;
   const [isLoading, setIsLoading] = useState(false);
   const [timerCount, setTimer] = useState(30);
@@ -95,9 +95,7 @@ const OtpScreen = ({ route, navigation }) => {
       </Button>
     </View>
   );
-};
-
-export default OtpScreen;
+}
 
 const styles = StyleSheet.create({
   heading: {

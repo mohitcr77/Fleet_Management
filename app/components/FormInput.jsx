@@ -12,11 +12,10 @@ import PickSignature from "./PickSignature";
 import AddImage from "./AddImage";
 import dimensions from "../constants/dimensions";
 import AppCheckBox from "./AppCheckBox";
-import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
 
 export default function FormInput(props) {
   const { name, type, list, data } = props;
-  const [value, setValue] = useState("");
+
   switch (type) {
     case dataType.date:
       return (
@@ -95,7 +94,7 @@ export default function FormInput(props) {
             keyboardType={
               props.type === dataType.number ? "number-pad" : "default"
             }
-            value={props.value}
+            // value={getValue()}
             onChangeText={props.onChangeText}
             {...props}
           />

@@ -54,14 +54,11 @@ import ReportIssue from "../screens/AdminScreens/ReportIssue";
 import MechanicTimesheet from "../screens/AdminScreens/MechanicTimesheet";
 import Estimate from "../screens/AdminScreens/Estimate";
 import Tax from "../screens/AdminScreens/Tax";
-import CompanyInfo from "../screens/AdminScreens/CompanyInfo";
 import JobColor from "../screens/AdminScreens/JobColor";
 import Currencies from "../screens/AdminScreens/Currencies";
 import Timezones from "../screens/AdminScreens/Timezones";
 import Form from "../screens/FormScreen";
-import InputFormScreen from "../components/InputFormSCreen";
-import RegosForm from "../screens/AdminScreens/RegosFormScreen";
-import ClientsFormScreen from "../screens/AdminScreens/ClientsFormScreen";
+import DetailsView from "../screens/DetailsViewScreen";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -191,11 +188,6 @@ export default function AppNavigator() {
         name: screenNames.TIMEZONE,
         component: Timezones,
       },
-      {
-        name: screenNames.CLIENT_FORM_SCREEN,
-        component: ClientsFormScreen,
-      },
-      { name: screenNames.REGO_FORM_SCREEN, component: RegosForm },
     ],
   };
 
@@ -203,6 +195,7 @@ export default function AppNavigator() {
     { name: screenNames.ABOUT_APP_SCREEN, component: AboutApp },
     { name: screenNames.PROFILE_SCREEN, component: Profile },
     { name: screenNames.FORM_SCREEN, component: Form },
+    { name: screenNames.DETAILS_VIEW_SCREEN, component: DetailsView },
   ];
 
   const navigationScreens = [...drawerScreens[role], ...commonScreens];

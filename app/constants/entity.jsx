@@ -13,3 +13,9 @@ export const ToastType = {
   },
   ERROR: { type: "error", text1: "Failed", text2: "Failed to upload data" },
 };
+
+export const HTTPS_METHODS = {
+  GET: "get",
+  POST: "post",
+  DELETE: "delete",
+};

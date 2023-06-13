@@ -4,10 +4,12 @@ const screenNames = {
   SELECT_USER_TYPE_SCREEN: "Select User Type Screen",
   SIGN_UP_SCREEN: "Sign Up Screen",
   OTP_SCREEN: "Otp Screen",
+
   //Common Screens
   ABOUT_APP_SCREEN: "About App Screen",
   PROFILE_SCREEN: "Profile Screen",
   FORM_SCREEN: "Form Screen",
+  DETAILS_VIEW_SCREEN: "Details View Screen",
 
   // Driver Screens
   CHAT_ROOM_SCREEN: "Chat Room Screen",
