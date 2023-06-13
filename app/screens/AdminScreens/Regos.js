@@ -51,182 +51,180 @@ const Regos = () => {
 
   const [listData, setListData] = useState([]);
 
-  const { data } = useGet(endpoint.rego, handleGetRegoSuccess);
+  const { refresh, loading } = useGet(endpoint.rego, handleGetRegoSuccess);
 
   function handleGetRegoSuccess(d) {
-    setlistdata(d);
     let arr = [];
-    console.log(d, "success");
     d.forEach((item) => {
-      const cardData = [
+      const a = [
         {
           name: "Name",
-          value: itemData.item.name,
+          value: item.name,
+          card: true,
         },
         {
           name: "Regos Rate",
-          value: itemData.item.rego_rate,
+          value: item.rego_rate,
+          card: true,
         },
         {
           name: "Milage Threshold",
-          value: JSON.stringify(itemData.item.milage_threshold),
+          value: JSON.stringify(item.milage_threshold),
+          card: true,
         },
         {
           name: "Vehicle Type",
-          value: itemData.item.vehicle_type,
+          value: item.vehicle_type,
         },
         {
           name: "CheckSheet Type",
-          value: itemData.item.checksheet_type,
+          value: item.checksheet_type,
+          card: true,
         },
         {
           name: "Plate No",
-          value: itemData.item.plate_no,
+          value: item.plate_no,
+          card: true,
         },
-      ];
-      const viewData = [
-        {
-          name: "Name",
-          key: "name",
-          type: dataType.text,
-          value: itemData.item.name,
-        },
+
         {
           name: "Regos Rate",
           key: "rego_rate",
           type: dataType.text,
-          value: itemData.item.rego_rate,
+          value: item.rego_rate,
+          card: true,
         },
         {
           name: "Milage Threshold",
           key: "milage_threshold",
           type: dataType.text,
-          value: JSON.stringify(itemData.item.milage_threshold),
+          value: JSON.stringify(item.milage_threshold),
         },
         {
           name: "Vehicle Type",
           key: "vehicle_type",
           type: dataType.text,
-          value: itemData.item.vehicle_type,
+          value: item.vehicle_type,
         },
         {
           name: "CheckSheet Type",
           key: "checksheet_type",
           type: dataType.text,
-          value: itemData.item.checksheet_type,
+          value: item.checksheet_type,
         },
         {
           name: "Plate No",
           key: "plate_no",
           type: dataType.text,
-          value: itemData.item.plate_no,
+          value: item.plate_no,
         },
         {
           name: "Year",
           key: "year",
           type: dataType.text,
-          value: JSON.stringify(itemData.item.year),
+          value: JSON.stringify(item.year),
         },
         {
           name: "Make",
           key: "make",
           type: dataType.text,
-          value: itemData.item.make,
+          value: item.make,
         },
         {
           name: "Model",
           key: "model",
           type: dataType.text,
-          value: itemData.item.model,
+          value: item.model,
         },
         {
           name: "Vin No",
           key: "vin_no",
           type: dataType.text,
-          value: itemData.item.vin_no,
+          value: item.vin_no,
         },
         {
           name: "Engine No",
           key: "engine_no",
           type: dataType.text,
-          value: itemData.item.engine_no,
+          value: item.engine_no,
         },
         {
           name: "Model No",
           key: "model_no",
           type: dataType.text,
-          value: itemData.item.model_no,
+          value: item.model_no,
         },
         {
           name: "Serial No",
           key: "serial_no",
           type: dataType.text,
-          value: itemData.item.serial_no,
+          value: item.serial_no,
         },
         {
           name: "Fuel Type",
           key: "fuel_type",
           type: dataType.text,
-          value: itemData.item.fuel_type,
+          value: item.fuel_type,
         },
         {
           name: "Transmission Type",
           key: "transmission_type",
           type: dataType.text,
-          value: itemData.item.transmission_type,
+          value: item.transmission_type,
         },
         {
           name: "CC Rating",
           key: "cc_rating",
           type: dataType.text,
-          value: itemData.item.cc_rating,
+          value: item.cc_rating,
         },
         {
           name: "Current KMS",
           key: "current_kms",
           type: dataType.text,
-          value: JSON.stringify(itemData.item.current_kms),
+          value: JSON.stringify(item.current_kms),
         },
 
         {
           name: "Service Due KMS",
           key: "service_due_kms",
           type: dataType.text,
-          value: JSON.stringify(itemData.item.service_due_kms),
+          value: JSON.stringify(item.service_due_kms),
         },
         {
           name: "Service Due Date",
           key: "service_due_date",
           type: dataType.date,
-          value: itemData.item.service_due_date,
+          value: item.service_due_date,
         },
         {
           name: "WOF COF Due Date",
           key: "wof_cof_due_date",
           type: dataType.date,
-          value: itemData.item.wof_cof_due_date,
+          value: item.wof_cof_due_date,
         },
         {
           name: "Registration Due Date",
           key: "registration_due_date",
           type: dataType.date,
-          value: itemData.item.registration_due_date,
+          value: item.registration_due_date,
         },
         {
           name: "Fire Extinguisher Due Date",
           key: "fire_extinguisher_due_date",
           type: dataType.date,
-          value: itemData.item.fire_extinguisher_due_date,
+          value: item.fire_extinguisher_due_date,
         },
         {
           name: "First Aid Kit Due Dates",
           key: "first_aid_kit_due_dates",
           type: dataType.date,
-          value: itemData.item.first_aid_kit_due_dates,
+          value: item.first_aid_kit_due_dates,
         },
       ];
+      arr.push(a);
     });
-    setListData(d);
+    setListData(arr);
   }
 
   function handlePostRegoFail() {
@@ -373,191 +371,11 @@ const Regos = () => {
       title="Regos"
       addScreen={[screenNames.FORM_SCREEN, formProps]}
     >
-      <AdminListRendered data={[1, 2, 3, 4, 5, 6]} />
-
-      <View style={styles.listStyle}>
-        <FlatList
-          data={listdata}
-          renderItem={(itemData) => {
-            const cardviewform = [
-              {
-                name: "Name",
-                value: itemData.item.name,
-              },
-              {
-                name: "Regos Rate",
-                value: itemData.item.rego_rate,
-              },
-              {
-                name: "Milage Threshold",
-                value: JSON.stringify(itemData.item.milage_threshold),
-              },
-              {
-                name: "Vehicle Type",
-                value: itemData.item.vehicle_type,
-              },
-              {
-                name: "CheckSheet Type",
-                value: itemData.item.checksheet_type,
-              },
-              {
-                name: "Plate No",
-                value: itemData.item.plate_no,
-              },
-            ];
-            const viewform = [
-              {
-                name: "Name",
-                key: "name",
-                type: dataType.text,
-                value: itemData.item.name,
-              },
-              {
-                name: "Regos Rate",
-                key: "rego_rate",
-                type: dataType.text,
-                value: itemData.item.rego_rate,
-              },
-              {
-                name: "Milage Threshold",
-                key: "milage_threshold",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.milage_threshold),
-              },
-              {
-                name: "Vehicle Type",
-                key: "vehicle_type",
-                type: dataType.text,
-                value: itemData.item.vehicle_type,
-              },
-              {
-                name: "CheckSheet Type",
-                key: "checksheet_type",
-                type: dataType.text,
-                value: itemData.item.checksheet_type,
-              },
-              {
-                name: "Plate No",
-                key: "plate_no",
-                type: dataType.text,
-                value: itemData.item.plate_no,
-              },
-              {
-                name: "Year",
-                key: "year",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.year),
-              },
-              {
-                name: "Make",
-                key: "make",
-                type: dataType.text,
-                value: itemData.item.make,
-              },
-              {
-                name: "Model",
-                key: "model",
-                type: dataType.text,
-                value: itemData.item.model,
-              },
-              {
-                name: "Vin No",
-                key: "vin_no",
-                type: dataType.text,
-                value: itemData.item.vin_no,
-              },
-              {
-                name: "Engine No",
-                key: "engine_no",
-                type: dataType.text,
-                value: itemData.item.engine_no,
-              },
-              {
-                name: "Model No",
-                key: "model_no",
-                type: dataType.text,
-                value: itemData.item.model_no,
-              },
-              {
-                name: "Serial No",
-                key: "serial_no",
-                type: dataType.text,
-                value: itemData.item.serial_no,
-              },
-              {
-                name: "Fuel Type",
-                key: "fuel_type",
-                type: dataType.text,
-                value: itemData.item.fuel_type,
-              },
-              {
-                name: "Transmission Type",
-                key: "transmission_type",
-                type: dataType.text,
-                value: itemData.item.transmission_type,
-              },
-              {
-                name: "CC Rating",
-                key: "cc_rating",
-                type: dataType.text,
-                value: itemData.item.cc_rating,
-              },
-              {
-                name: "Current KMS",
-                key: "current_kms",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.current_kms),
-              },
-
-              {
-                name: "Service Due KMS",
-                key: "service_due_kms",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.service_due_kms),
-              },
-              {
-                name: "Service Due Date",
-                key: "service_due_date",
-                type: dataType.date,
-                value: itemData.item.service_due_date,
-              },
-              {
-                name: "WOF COF Due Date",
-                key: "wof_cof_due_date",
-                type: dataType.date,
-                value: itemData.item.wof_cof_due_date,
-              },
-              {
-                name: "Registration Due Date",
-                key: "registration_due_date",
-                type: dataType.date,
-                value: itemData.item.registration_due_date,
-              },
-              {
-                name: "Fire Extinguisher Due Date",
-                key: "fire_extinguisher_due_date",
-                type: dataType.date,
-                value: itemData.item.fire_extinguisher_due_date,
-              },
-              {
-                name: "First Aid Kit Due Dates",
-                key: "first_aid_kit_due_dates",
-                type: dataType.date,
-                value: itemData.item.first_aid_kit_due_dates,
-              },
-            ];
-            return (
-              <AppItem
-                onDeleteItem={deleteDataHandler}
-                onupdateData={updateHandler}
-                id={itemData.item.id}
-                cardviewform={cardviewform}
-                viewform={viewform}
-              />
-            );
-          }}
-        />
-      </View>
+      <AdminListRendered
+        data={listData}
+        onRefresh={refresh}
+        loading={loading}
+      />
     </ParentContainer>
   );
 };

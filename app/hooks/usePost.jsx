@@ -19,7 +19,6 @@ export default usePost = (onSuccess = () => {}, onFail = () => {}) => {
       onSuccess();
       return data;
     } catch (error) {
-      console.log(error);
       Toast.show(ToastType.ERROR);
       onFail();
     }

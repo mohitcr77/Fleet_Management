@@ -22,8 +22,8 @@ const AppItem = (props) => {
     setcityData(data?.data?.data);
     const state = await index.getstate(token.userToken.token);
     setstateData(state?.data?.data);
-    const country = await index.getcountry(token.userToken.token);
-    setcountry(country?.data?.data);
+    // const country = await index.getcountry(token.userToken.token);
+    // setcountry(country?.data?.data);
   };
   return (
     <>

@@ -8,25 +8,22 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { ToastType } from "../constants/entity";
 import api from "../service/api";
 
-export default useGet = (
-  endpoint,
-  onSuccess = () => {},
-  onFail = () => {},
-  update = false
-) => {
+export default useGet = (endpoint, onSuccess = () => {}, onFail = () => {}) => {
   const [data, setData] = useState(null);
+  const [update, setUpdate] = useState(true);
+  const [loading, setLoading] = useState(true);
   const { token } = useAuth();
 
   useEffect(() => {
     request();
   }, [update]);
 
+  const refresh = () => setUpdate(!update);
+
   const request = async () => {
     try {
-      Toast.show(ToastType.LOADING);
-
       const data = await api.get(endpoint, {}, getHeader(token));
-      Toast.hide();
+      setLoading(false);
       if (data.ok) {
         setData(data.data.data.data);
         onSuccess(data.data.data.data);
@@ -35,5 +32,5 @@ export default useGet = (
       onFail();
     }
   };
-  return { request, data };
+  return { request, data, refresh, loading };
 };

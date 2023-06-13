@@ -205,6 +205,7 @@ export default function DrawerContent({ navigation }) {
       <Profile auth={auth} />
       <FlatList
         data={drawerBtn[role]}
+        refreshing={true}
         renderItem={({ item, index }) => (
           <DrawerButtonAccordion
             data={item}

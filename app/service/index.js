@@ -141,7 +141,6 @@ const resendOTP = async (data) => {
 const getApi = async (token, url) => {
   try {
     const res = await axios.get(`${URL}/` + url, getHeader(token));
-    // console.log(res, "0000000000000");
     return res.data;
   } catch (error) {
     console.warn("Error in getting Api ", error);

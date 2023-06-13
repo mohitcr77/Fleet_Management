@@ -16,8 +16,7 @@ export default function Form({ route, navigation }) {
   const { request } = usePost(handlePostSuccess);
 
   async function handlePostData() {
-    const d = await request(endpoint, formData.current);
-    console.log(d, formData.current);
+    await request(endpoint, formData.current);
   }
 
   function handlePostSuccess() {
