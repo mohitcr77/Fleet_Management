@@ -9,7 +9,7 @@ import { open, close, selectVisible } from "../store/modalSlice";
 import index from "../service/index";
 import TokenContext from "../service/context";
 
-const InputModal = (props) => {
+const InputFormScreen = (props) => {
   const token = useContext(TokenContext);
   const [state, setState] = useState(props.initialState);
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const InputModal = (props) => {
     //setform(null)
   }
   return (
-    <Modal visible={props.visible} animationType="slide">
+    <View>
       <View style={styles.title}>
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>
           {props.crudop === "update" ? "Update" : "Create"}{" "}
@@ -101,11 +101,11 @@ const InputModal = (props) => {
           </View>
         </Pressable>
       </View>
-    </Modal>
+      </View>
   );
 };
 
-export default InputModal;
+export default InputFormScreen;
 
 const styles = StyleSheet.create({
   button: {

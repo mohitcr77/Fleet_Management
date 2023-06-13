@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import InputModal from "../../components/InputModal";
+import InputModal from "../../components/InputFormSCreen";
 import AppItem from "../../components/AppItem";
 import dataType from "../../constants/dataType";
 import index from "../../service/index";
 import TokenContext from "../../service/context";
 import LoadingScreen from "./LoadingScreen";
+import ParentContainer from "../../components/ParentContainer";
 
 const Currencies = () => {
   const token = useContext(TokenContext);
@@ -93,19 +94,8 @@ const Currencies = () => {
     setviewData("");
   }
   return (
+    <ParentContainer>
     <View style={{ flex: 10 }}>
-      <View style={styles.topContainer}>
-        <Text style={{ fontSize: 20 }}>Currency List</Text>
-        <Pressable
-          onPress={addHandler}
-          style={styles.btnStyle}
-          android_ripple={{ color: "#00580c" }}
-        >
-          <View>
-            <Text style={{ color: "#ffffff" }}>Add Currency</Text>
-          </View>
-        </Pressable>
-      </View>
       <InputModal
         crudop={crud}
         form={form}
@@ -168,6 +158,7 @@ const Currencies = () => {
         />
       </View>
     </View>
+    </ParentContainer>
   );
 };
 
