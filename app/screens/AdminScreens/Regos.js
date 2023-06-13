@@ -1,14 +1,9 @@
 import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import InputModal from "../../components/InputFormSCreen";
-import AppItem from "../../components/AppItem";
 import dataType from "../../constants/dataType";
-import index from "../../service/index";
 import TokenContext from "../../service/context";
-import LoadingScreen from "./LoadingScreen";
 import ParentContainer from "../../components/ParentContainer";
-import usePost from "../../hooks/usePost";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
@@ -16,39 +11,6 @@ import useGet from "./../../hooks/useGet";
 //redux toolkit
 //include base 64 , quality 0.7 in image
 const Regos = () => {
-  const token = useContext(TokenContext);
-
-  const [isvisible, setisvisible] = useState(false);
-  const [updateData, setupdateData] = useState("");
-  const [crud, setcrud] = useState("");
-  const [listdata, setlistdata] = useState("");
-  const [viewData, setviewData] = useState("");
-  const [dataID, setdataID] = useState("");
-  const initialState = {
-    name: "",
-    rego_rate: "",
-    milage_threshold: "",
-    vehicle_type: "",
-    checksheet_type: "",
-    plate_no: "",
-    year: "",
-    make: "",
-    model: "",
-    vin_no: "",
-    engine_no: "",
-    model_no: "",
-    serial_no: "",
-    fuel_type: "",
-    transmission_type: "",
-    cc_rating: "",
-    current_kms: "",
-    service_due_kms: "",
-    wof_cof_due_date: "",
-    registration_due_date: "",
-    fire_extinguisher_due_date: "",
-    first_aid_kit_due_dates: "",
-  };
-
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useGet(endpoint.rego, handleGetRegoSuccess);
@@ -225,22 +187,6 @@ const Regos = () => {
       arr.push(a);
     });
     setListData(arr);
-  }
-
-  function handlePostRegoFail() {
-    console.log("fail");
-  }
-
-  function deleteDataHandler(id) {
-    index.deleteApi(token.userToken.token, id, "regos");
-  }
-
-  async function updateHandler(id) {
-    setdataID(id);
-    const res = await index.getaApi(token.userToken.token, id, "regos");
-    setviewData(res?.data);
-    setcrud("update");
-    setisvisible(true);
   }
   const form = [
     {

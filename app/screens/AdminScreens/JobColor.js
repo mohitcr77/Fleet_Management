@@ -1,202 +1,78 @@
-import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
-import { useState, useEffect, useContext } from "react";
-import InputModal from "../../components/InputFormSCreen";
-import AppItem from "../../components/AppItem";
+import { useState} from "react";
 import dataType from "../../constants/dataType";
-import index from "../../service/index";
-import TokenContext from "../../service/context";
-import LoadingScreen from "./LoadingScreen";
 import ParentContainer from "../../components/ParentContainer";
+import endpoint from "../../service/endpoint";
+import screenNames from "../../constants/screenNames";
+import AdminListRendered from "../../components/AdminListRendered";
+import useGet from "./../../hooks/useGet";
 
 const JobColor = () => {
-  const token = useContext(TokenContext);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isvisible, setisvisible] = useState(false);
-  const [updateData, setupdateData] = useState("");
-  const [crud, setcrud] = useState("");
-  const [listdata, setlistdata] = useState("");
-  const [viewData, setviewData] = useState("");
-  const [dataID, setdataID] = useState("");
+  const [listData, setListData] = useState([]);
 
-  useEffect(() => {
-    addNewid();
-  }, []);
-  function addHandler() {}
+  const { refresh, loading } = useGet(endpoint.job_color, handleJobColorSuccess);
 
-  const initialState = {
-    name: "",
-    code: "",
-    description: "",
-  };
-
+  function handleJobColorSuccess(d) {
+    let arr = [];
+    d.forEach((item) => {
+      const a = [
+        {
+          name: "Name",
+          value: item.name,
+          card: true
+        },
+        {
+          name: "Code",
+          value: item.code,
+          card: true
+        },
+        {
+          name: "Description",
+          value: item.description,
+          card: true
+        },
+      ];
+      arr.push(a);
+    });
+    setListData(arr);
+  }
   const form = [
     {
       name: "Name",
       key: "name",
       type: dataType.text,
-      defaultValue: viewData?.name,
     },
     {
       name: "code",
       key: "code",
-      type: dataType.color,
-      defaultValue: viewData?.code,
+      type: dataType.text,
     },
     {
       name: "Description",
       key: "description",
       type: dataType.text,
-      defaultValue: viewData?.description,
     },
   ];
-
-  async function addItemHandler(enteredItemText) {
-    index.postApi(token.userToken.token, enteredItemText, "color");
-    const res = await index.getApi(token.userToken.token, "color");
-    setlistdata(res.data.data);
-    setisvisible(false);
-    addNewid();
-  }
-  const addNewid = async () => {
-    setIsLoading(true);
-    const res = await index.getApi(token.userToken.token, "color");
-    setlistdata(res.data.data);
-    setIsLoading(false);
+  const formProps = {
+    backScreen: screenNames.JOB_COLOR,
+    endpoint: endpoint.job_color,
+    form,
+    title: "Add Job Color",
   };
-  function updateItemHandler(enteredItemText) {
-    const newobj = Object.fromEntries(
-      Object.entries(enteredItemText).filter(([_, val]) => val !== "")
-    );
-    index.UpdateApi(token.userToken.token, newobj, dataID, "color");
-    setisvisible(false);
-    addNewid();
-    setviewData("");
-  }
-
-  function deleteDataHandler(id) {
-    index.deleteApi(token.userToken.token, id, "color");
-    addNewid();
-  }
-
-  async function updateHandler(id) {
-    setdataID(id);
-    const res = await index.getaApi(token.userToken.token, id, "color");
-    setviewData(res?.data);
-    setcrud("update");
-    setisvisible(true);
-  }
-  function addHandler() {
-    setisvisible(true);
-    setupdateData("");
-    setcrud("");
-  }
-  function onCancelHandler() {
-    setisvisible(false);
-    setviewData("");
-  }
 
   return (
-    <ParentContainer>
-    <View style={{ flex: 10 }}>
-      <View style={styles.topContainer}>
-        <Text style={{ fontSize: 18 }}>JobColor List</Text>
-        <Pressable
-          onPress={addHandler}
-          style={styles.btnStyle}
-          android_ripple={{ color: "#00580c" }}
-        >
-          <View>
-            <Text style={{ color: "#ffffff" }}>Add JobColor</Text>
-          </View>
-        </Pressable>
-      </View>
-      <InputModal
-        crudop={crud}
-        updateValue={updateData}
-        initialState={initialState}
-        form={form}
-        onAddItem={addItemHandler}
-        onUpdateItem={updateItemHandler}
-        visible={isvisible}
-        onCancel={onCancelHandler}
+    <ParentContainer
+      useScroll={false}
+      title="Job Color"
+      addScreen={[screenNames.FORM_SCREEN, formProps]}
+    >
+      <AdminListRendered
+        data={listData}
+        onRefresh={refresh}
+        loading={loading}
       />
-      <View style={styles.listStyle}>
-        <LoadingScreen loading={isLoading} />
-        <FlatList
-          data={listdata}
-          renderItem={(itemData) => {
-            const cardviewform = [
-              {
-                name: "Name",
-                value: itemData.item.name,
-              },
-              {
-                name: "Code",
-                value: itemData.item.code,
-              },
-              {
-                name: "Description",
-                value: itemData.item.description,
-              },
-            ];
-            const viewform = [
-              {
-                name: "Name",
-                key: "name",
-                type: dataType.text,
-                value: itemData.item.name,
-              },
-              {
-                name: "Code",
-                key: "code",
-                type: dataType.color,
-                value: itemData.item.code,
-              },
-              {
-                name: "Description",
-                key: "description",
-                type: dataType.text,
-                value: itemData.item.description,
-              },
-            ];
-            return (
-              <AppItem
-                onDeleteItem={deleteDataHandler}
-                onupdateData={updateHandler}
-                id={itemData.item.id}
-                cardviewform={cardviewform}
-                viewform={viewform}
-              />
-            );
-          }}
-        />
-      </View>
-    </View>
     </ParentContainer>
   );
 };
 
 export default JobColor;
-
-const styles = StyleSheet.create({
-  topContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-    margin: 10,
-    backgroundColor: "#ffffff",
-    borderRadius: 10,
-  },
-  btnStyle: {
-    backgroundColor: "#13bfa6",
-    borderRadius: 6,
-    padding: 8,
-  },
-  listStyle: {
-    flex: 9,
-  },
-});
