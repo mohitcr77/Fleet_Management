@@ -96,18 +96,6 @@ const Currencies = () => {
   return (
     <ParentContainer>
     <View style={{ flex: 10 }}>
-      <View style={styles.topContainer}>
-        <Text style={{ fontSize: 20 }}>Currency List</Text>
-        <Pressable
-          onPress={addHandler}
-          style={styles.btnStyle}
-          android_ripple={{ color: "#00580c" }}
-        >
-          <View>
-            <Text style={{ color: "#ffffff" }}>Add Currency</Text>
-          </View>
-        </Pressable>
-      </View>
       <InputModal
         crudop={crud}
         form={form}

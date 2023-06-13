@@ -10,6 +10,7 @@ import LoadingScreen from "./LoadingScreen";
 import ParentContainer from "../../components/ParentContainer";
 import InputFormScreen from "../../components/InputFormSCreen";
 import endpoint from "../../service/endpoint";
+import screenNames from "../../constants/screenNames";
 
 const Client = () => {
   const token = useContext(TokenContext);
@@ -154,20 +155,12 @@ const Client = () => {
     setviewData("");
   }
   return (
-    <ParentContainer>
+    <ParentContainer
+    useScroll={false}
+      title="Regos"
+      addScreen={screenNames.CLIENT_FORM_SCREEN}
+    >
       <View style={{ flex: 10 }}>
-        <View style={styles.topContainer}>
-          <Text style={{ fontSize: 20 }}>Client List</Text>
-          <Pressable
-            onPress={addHandler}
-            style={styles.btnStyle}
-            android_ripple={{ color: "#00580c" }}
-          >
-            <View>
-              <Text style={{ color: "#ffffff" }}>Add Client</Text>
-            </View>
-          </Pressable>
-        </View>
         {/* <InputFormScreen
           crudop={crud}
           form={form}
@@ -179,8 +172,8 @@ const Client = () => {
           onCancel={onCancelHandler}
         /> */}
         <View style={styles.listStyle}>
-          {/* <LoadingScreen /> */}
-          {/* <FlatList
+          <LoadingScreen loading={isLoading} /> 
+         <FlatList
             data={listdata}
             renderItem={(itemData) => {
               const cardviewform = [
@@ -259,7 +252,7 @@ const Client = () => {
                 />
               );
             }}
-          /> */}
+          /> 
         </View>
       </View>
     </ParentContainer>

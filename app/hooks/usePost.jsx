@@ -4,6 +4,7 @@ import { ToastType } from "../constants/entity";
 import axios from "axios";
 import { getHeader } from "../service";
 import useAuth from "./useAuth";
+import api from "../service/api";
 
 export default usePost = (onSuccess = () => {}, onFail = () => {}) => {
   const { token } = useAuth();
@@ -11,7 +12,7 @@ export default usePost = (onSuccess = () => {}, onFail = () => {}) => {
   const request = async (endpoint, body) => {
     try {
       Toast.show(ToastType.LOADING);
-      const data = await axios.post(endpoint, body, getHeader(token));
+      const data = await api.post(endpoint, body, getHeader(token));
       Toast.hide();
 
       Toast.show(ToastType.SUCCESS);

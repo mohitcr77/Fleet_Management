@@ -57,7 +57,7 @@ const screenNames = {
   TIMEZONE: "Timezone",
   
   //Admin Component 
-  INPUT_FORM_SCREEN: "Input Form Screen"
-  
+  CLIENT_FORM_SCREEN: "CLIENT Form Screen",
+  REGO_FORM_SCREEN: "Rego Form Screen",
 };
 export default screenNames;

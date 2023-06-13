@@ -12,16 +12,16 @@ import PickSignature from "./PickSignature";
 import AddImage from "./AddImage";
 import dimensions from "../constants/dimensions";
 import AppCheckBox from "./AppCheckBox";
+import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
 
 export default function FormInput(props) {
   const { name, type, list, data } = props;
   const [value, setValue] = useState("");
-
   switch (type) {
     case dataType.date:
       return (
         <CompWrapper>
-          <DatePicker />
+          <DatePicker {...props} />
         </CompWrapper>
       );
 
@@ -39,7 +39,7 @@ export default function FormInput(props) {
             search
             searchPlaceholder="Search..."
             onChange={(item) => {
-              setValue(item.value);
+              // setValue(item.value);
             }}
             labelField="label"
             valueField="value"
@@ -92,8 +92,11 @@ export default function FormInput(props) {
               ...props.style,
             }}
             placeholder={""}
-            value={value}
-            onChangeText={(nextValue) => setValue(nextValue)}
+            keyboardType={
+              props.type === dataType.number ? "number-pad" : "default"
+            }
+            value={props.value}
+            onChangeText={props.onChangeText}
             {...props}
           />
         </CompWrapper>

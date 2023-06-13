@@ -10,19 +10,20 @@ import FormInput from "../../components/FormInput";
 import ParentContainer from "../../components/ParentContainer";
 import useFetchList from "../../hooks/useFetchList";
 
+export const dummyDropdownData = [
+  { label: "Item 1", value: "1" },
+  { label: "Item 2", value: "2" },
+  { label: "Item 3", value: "3" },
+  { label: "Item 4", value: "4" },
+  { label: "Item 5", value: "5" },
+  { label: "Item 6", value: "6" },
+  { label: "Item 7", value: "7" },
+  { label: "Item 8", value: "8" },
+];
+
 export default function FullDktForm() {
   const { clientList, machineTypeList } = useFetchList();
 
-  const data = [
-    { label: "Item 1", value: "1" },
-    { label: "Item 2", value: "2" },
-    { label: "Item 3", value: "3" },
-    { label: "Item 4", value: "4" },
-    { label: "Item 5", value: "5" },
-    { label: "Item 6", value: "6" },
-    { label: "Item 7", value: "7" },
-    { label: "Item 8", value: "8" },
-  ];
   const fullDktForm = [
     {
       name: "Client Name",
@@ -36,8 +37,18 @@ export default function FullDktForm() {
       type: dataType.dropdown,
       data: machineTypeList,
     },
-    { name: "Travel Time", key: "travel_time", type: dataType.dropdown, data },
-    { name: "Supervisor", key: "supervisor", type: dataType.dropdown, data },
+    {
+      name: "Travel Time",
+      key: "travel_time",
+      type: dataType.dropdown,
+      data: dummyDropdownData,
+    },
+    {
+      name: "Supervisor",
+      key: "supervisor",
+      type: dataType.dropdown,
+      data: dummyDropdownData,
+    },
     { name: "Date", key: "date", type: dataType.date },
     { name: "Start Time", key: "start", type: dataType.time },
     { name: "Finish Time", key: "finish", type: dataType.time },

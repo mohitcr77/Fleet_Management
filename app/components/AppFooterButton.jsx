@@ -31,7 +31,7 @@ export default function AppFooterButton({
 const styles = StyleSheet.create({
   btnContainer: {
     ...customStyles.flex_row_between,
-    marginBottom: 150,
+    marginBottom: 100,
     marginTop: 40,
     width: dimensions.componentWidth,
   },
