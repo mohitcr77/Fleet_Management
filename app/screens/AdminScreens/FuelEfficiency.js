@@ -1,293 +1,147 @@
 import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import InputModal from "../../components/InputFormSCreen";
-import AppItem from "../../components/AppItem";
 import dataType from "../../constants/dataType";
-import index from "../../service/index";
-import TokenContext from "../../service/context";
-import LoadingScreen from "./LoadingScreen";
 import ParentContainer from "../../components/ParentContainer";
+import endpoint from "../../service/endpoint";
+import screenNames from "../../constants/screenNames";
+import AdminListRendered from "../../components/AdminListRendered";
+import useGet from "./../../hooks/useGet";
 
 const FuelEfficiency = () => {
-  const token = useContext(TokenContext);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isvisible, setisvisible] = useState(false);
-  const [updateData, setupdateData] = useState("");
-  const [crud, setcrud] = useState("");
-  const [listdata, setlistdata] = useState("");
-  const [viewData, setviewData] = useState("");
-  const [dataID, setdataID] = useState("");
+  const [listData, setListData] = useState([]);
 
-  useEffect(() => {
-    addNewid();
-  }, []);
-  function addHandler() {}
+  const { refresh, loading } = useGet(endpoint.fuel_efficiency, handleFuelEfficiencySuccess);
 
-  const initialState = {
-    driver_id: "",
-    current_miles: "",
-    total_fuel_ltrs: "",
-    milage: "",
-    fuel_cost: "",
-    fuel_card_no: "",
-    fuel_rate: "",
-    fuel_per_km: "",
-    date: "",
-    comments: "",
-  };
-
+  function handleFuelEfficiencySuccess(d) {
+    let arr = [];
+    d.forEach((item) => {
+      const a = [
+        {
+          name: "Driver id",
+          value: JSON.stringify(item.driver_id),
+          card: true
+        },
+        {
+          name: "Current miles",
+          value: JSON.stringify(item.current_miles),
+          card: true
+        },
+        {
+          name: "Total fuel (ltrs)",
+          value: JSON.stringify(item.total_fuel_ltrs),
+          card: true
+        },
+        {
+          name: "Milage",
+          value: JSON.stringify(item.milage),
+          card: true
+        },
+        {
+          name: "Total fuel (ltrs)",
+          value: JSON.stringify(item.total_fuel_ltrs),
+        },
+        {
+          name: "Fuel Cost",
+          value: JSON.stringify(item.fuel_cost),
+        },
+        {
+          name: "Fuel card no",
+          value: item.fuel_card_no,
+        },
+        {
+          name: "Fuel rate",
+          value: JSON.stringify(item.fuel_rate),
+        },
+        {
+          name: "Fuel per km",
+          value: item.fuel_per_km,
+        },
+        {
+          name: "Date",
+          value: item.date,
+        },
+        {
+          name: "Comments",
+          value: item.comments,
+        },
+      ];
+      arr.push(a);
+    });
+    setListData(arr);
+  }
   const form = [
     {
       name: "User id",
       key: "driver_id",
       type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.driver_id),
     },
     {
       name: "Current miles",
       key: "current_miles",
       type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.current_miles),
     },
     {
       name: "Total fuel (ltrs)",
       key: "total_fuel_ltrs",
       type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.total_fuel_ltrs),
     },
     {
       name: "Milage",
       key: "milage",
       type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.milage),
     },
     {
       name: "Fuel Cost",
       key: "fuel_cost",
       type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.fuel_cost),
     },
     {
       name: "Fuel card no",
       key: "fuel_card_no",
       type: dataType.text,
-      defaultValue: viewData?.fuel_card_no,
     },
     {
       name: "Fuel rate",
       key: "fuel_rate",
       type: dataType.text,
-      defaultValue: JSON.stringify(viewData?.fuel_rate),
     },
     {
       name: "Fuel per km",
       key: "fuel_per_km",
       type: dataType.text,
-      defaultValue: viewData?.fuel_per_km,
     },
     {
       name: "Date",
       key: "date",
       type: dataType.date,
-      defaultValue: viewData?.date,
     },
     {
       name: "Comments",
       key: "comments",
       type: dataType.text,
-      defaultValue: viewData?.comments,
     },
   ];
-
-  async function addItemHandler(enteredItemText) {
-    index.postApi(token.userToken.token, enteredItemText, "fuel_efficiency");
-    const res = await index.getApi(token.userToken.token, "fuel_efficiency");
-    setlistdata(res.data.data);
-    setisvisible(false);
-    addNewid();
-  }
-  const addNewid = async () => {
-    setIsLoading(true);
-    const res = await index.getApi(token.userToken.token, "fuel_efficiency");
-    setlistdata(res.data.data);
-    setIsLoading(false);
-  };
-  function updateItemHandler(enteredItemText) {
-    const newobj = Object.fromEntries(
-      Object.entries(enteredItemText).filter(([_, val]) => val !== "")
-    );
-    index.UpdateApi(token.userToken.token, newobj, dataID, "fuel_efficiency");
-    setisvisible(false);
-    addNewid();
-    setviewData("");
-  }
-
-  function deleteDataHandler(id) {
-    index.deleteApi(token.userToken.token, id, "fuel_efficiency");
-    addNewid();
-  }
-
-  async function updateHandler(id) {
-    setdataID(id);
-    const res = await index.getaApi(
-      token.userToken.token,
-      id,
-      "fuel_efficiency"
-    );
-    setviewData(res?.data);
-    setcrud("update");
-    setisvisible(true);
-  }
-  function addHandler() {
-    setisvisible(true);
-    setupdateData("");
-    setcrud("");
-  }
-  function onCancelHandler() {
-    setisvisible(false);
-    setviewData("");
+  const formProps = {
+    backScreen: screenNames.FUEL_EFFICIENCY,
+    endpoint: endpoint.fuel_efficiency,
+    form,
+    title: "Add Fuel Efficiency",
   }
 
   return (
-    <ParentContainer>
-    <View style={{ flex: 10 }}>
-      <View style={styles.topContainer}>
-        <Text style={{ fontSize: 15 }}>Fuel Efficiency List</Text>
-        <Pressable
-          onPress={addHandler}
-          style={styles.btnStyle}
-          android_ripple={{ color: "#00580c" }}
-        >
-          <View>
-            <Text style={{ color: "#ffffff" }}>Add Fuel Efficiency</Text>
-          </View>
-        </Pressable>
-      </View>
-      <InputModal
-        crudop={crud}
-        updateValue={updateData}
-        initialState={initialState}
-        form={form}
-        onAddItem={addItemHandler}
-        onUpdateItem={updateItemHandler}
-        visible={isvisible}
-        onCancel={onCancelHandler}
+    <ParentContainer
+      useScroll={false}
+      title="Fuel Efficiency"
+      addScreen={[screenNames.FORM_SCREEN, formProps]}
+    >
+      <AdminListRendered
+        data={listData}
+        onRefresh={refresh}
+        loading={loading}
       />
-      <View style={styles.listStyle}>
-        <LoadingScreen loading={isLoading} />
-        <FlatList
-          data={listdata}
-          renderItem={(itemData) => {
-            const cardviewform = [
-              {
-                name: "User id",
-                value: JSON.stringify(itemData.item.driver_id),
-              },
-              {
-                name: "Current miles",
-                value: itemData.item.current_miles,
-              },
-              {
-                name: "Total fuel (ltrs)",
-                value: itemData.item.total_fuel_ltrs,
-              },
-              {
-                name: "Milage",
-                value: itemData.item.milage,
-              },
-              {
-                name: "Fuel Cost",
-                value: itemData.item.fuel_cost,
-              },
-              {
-                name: "Fuel card no",
-                Value: itemData.item.fuel_card_no,
-              },
-            ];
-            const viewform = [
-              {
-                name: "Driver id",
-                key: "driver_id",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.driver_id),
-              },
-              {
-                name: "Current miles",
-                key: "current_miles",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.current_miles),
-              },
-              {
-                name: "Total fuel (ltrs)",
-                key: "total_fuel_ltrs",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.total_fuel_ltrs),
-              },
-              {
-                name: "Milage",
-                key: "milage",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.milage),
-              },
-              {
-                name: "Total fuel (ltrs)",
-                key: "total_fuel_ltrs",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.total_fuel_ltrs),
-              },
-              {
-                name: "Fuel Cost",
-                key: "fuel_cost",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.fuel_cost),
-              },
-              {
-                name: "Fuel card no",
-                key: "fuel_card_no",
-                type: dataType.text,
-                value: itemData.item.fuel_card_no,
-              },
-              {
-                name: "Fuel rate",
-                key: "fuel_rate",
-                type: dataType.text,
-                value: JSON.stringify(itemData.item.fuel_rate),
-              },
-              {
-                name: "Fuel per km",
-                key: "fuel_per_km",
-                type: dataType.text,
-                value: itemData.item.fuel_per_km,
-              },
-              {
-                name: "Date",
-                key: "date",
-                type: dataType.date,
-                value: itemData.item.date,
-              },
-              {
-                name: "Comments",
-                key: "comments",
-                type: dataType.text,
-                value: itemData.item.comments,
-              },
-            ];
-            return (
-              <AppItem
-                onDeleteItem={deleteDataHandler}
-                onupdateData={updateHandler}
-                id={itemData.item.id}
-                cardviewform={cardviewform}
-                viewform={viewform}
-              />
-            );
-          }}
-        />
-      </View>
-    </View>
     </ParentContainer>
-  );
+  )
 };
 
 export default FuelEfficiency;

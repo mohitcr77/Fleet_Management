@@ -9,8 +9,9 @@ import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 
-const Currencies = () => {
-  const [listData, setListData] = useState([]);
+const CreditNote = () => {
+
+    const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useGet(endpoint.currency, handleCurrencySuccess);
 
@@ -63,8 +64,9 @@ const Currencies = () => {
     form,
     title: "Add Currency",
   };
+
   return (
-    <ParentContainer
+   <ParentContainer
       useScroll={false}
       title="Currency"
       addScreen={[screenNames.FORM_SCREEN, formProps]}
@@ -78,26 +80,6 @@ const Currencies = () => {
   );
 };
 
-export default Currencies;
+export default CreditNote
 
-const styles = StyleSheet.create({
-  topContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-    margin: 10,
-    backgroundColor: "#ffffff",
-    borderRadius: 10,
-  },
-  btnStyle: {
-    backgroundColor: "#13bfa6",
-    borderRadius: 6,
-    padding: 8,
-  },
-  listStyle: {
-    flex: 9,
-  },
-});
+const styles = StyleSheet.create({})
