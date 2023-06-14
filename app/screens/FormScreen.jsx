@@ -19,30 +19,13 @@ export default function Form({ route, navigation }) {
 
   async function handlePostData() {
     const id = formData.current.id;
-    // for (let x in form) {
-    //   console.log(x);
-    // }
-    // return;
-    // [...form].forEach((i) => {
-    //   if (
-    //     i.type == dataType.number &&
-    //     typeof formData.current[i.key] !== dataType.number
-    //   ) {
-    //     formData.current[i.key] = JSON.parseInt(formData.current[i.key]);
-    //   }
-    // });
-
-    // for (let x in formData.current) {
-    //   console.log(typeof formData.current[x]);
-    // }
 
     const requestConfig = {
       method: id ? HTTPS_METHODS.PUT : HTTPS_METHODS.POST,
       endpoint: id ? endpoint + "/" + id : endpoint,
       body: formData.current,
     };
-    // console.log(requestConfig, "pppp");
-    // return;
+
     const d = await request(requestConfig);
     console.log(d);
   }
@@ -50,7 +33,6 @@ export default function Form({ route, navigation }) {
   function handlePostSuccess() {
     formData.current = initialState;
     setUpdate(!update);
-    // navigation.navigate(backScreen);
   }
 
   return (
@@ -65,10 +47,7 @@ export default function Form({ route, navigation }) {
             <FormInput
               {...i}
               value={formData.current[i.key]}
-              onChangeText={(e) => {
-                formData.current[i.key] = e;
-                setUpdate(!update);
-              }}
+              onChangeText={(e) => (formData.current[i.key] = e)}
               onDateSelect={(e) =>
                 (formData.current[i.key] = formatDate(e).y_m_d)
               }

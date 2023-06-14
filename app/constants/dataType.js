@@ -13,8 +13,10 @@ const signature = "signature";
 const state = "state";
 const text = "text";
 const time = "time";
+const string = "string";
 
 export default {
+  string,
   checkBox,
   city,
   color,
