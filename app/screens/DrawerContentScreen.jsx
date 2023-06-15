@@ -23,19 +23,13 @@ export default function DrawerContent({ navigation }) {
     [Role.DRIVER]: [
       {
         name: "Full Dkt",
-        screen: null,
-        children: [
-          { name: "Full Dkt Form", screen: screenNames.FULL_DKT_FORM_SCREEN },
-          { name: "Full Dkt List", screen: screenNames.FULL_DKT_LIST_SCREEN },
-        ],
+        screen: screenNames.FULL_DKT_LIST_SCREEN,
+        children: null,
       },
       {
         name: "Scan Dkt",
-        screen: null,
-        children: [
-          { name: "Scan Dkt Form", screen: screenNames.SCAN_DKT_FORM_SCREEN },
-          { name: "Scan Dkt List", screen: screenNames.SCAN_DKT_LIST_SCREEN },
-        ],
+        screen: screenNames.SCAN_DKT_LIST_SCREEN,
+        children: null,
       },
 
       {
@@ -218,22 +212,22 @@ export default function DrawerContent({ navigation }) {
       />
     </View>
   );
-}
-function Profile({ auth }) {
-  return (
-    <TouchableOpacity
-      style={styles.profileContainer}
-      onPress={() => navigation.navigate(screenNames.PROFILE_SCREEN)}
-    >
-      <Icons.User
-      // image={auth.profile_pic}
-      />
-      <Text style={{ color: colors.white, marginTop: 20 }}>
-        {auth.user.name}
-      </Text>
-      <Text style={{ color: colors.white }}>{auth.user.email}</Text>
-    </TouchableOpacity>
-  );
+  function Profile({ auth }) {
+    return (
+      <TouchableOpacity
+        style={styles.profileContainer}
+        onPress={() => navigation.navigate(screenNames.PROFILE_SCREEN)}
+      >
+        <Icons.User
+        // image={auth.profile_pic}
+        />
+        <Text style={{ color: colors.white, marginTop: 20 }}>
+          {auth.user.name}
+        </Text>
+        <Text style={{ color: colors.white }}>{auth.user.email}</Text>
+      </TouchableOpacity>
+    );
+  }
 }
 const styles = StyleSheet.create({
   btn: {

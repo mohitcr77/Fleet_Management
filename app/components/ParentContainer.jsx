@@ -17,6 +17,7 @@ import { height, width } from "../helpers/scales";
 import Icons from "./Icons";
 import dimensions from "../constants/dimensions";
 import customStyles from "../constants/styles";
+import colors from "../constants/colors";
 
 export default function ParentContainer({
   title = null,
@@ -50,14 +51,9 @@ export default function ParentContainer({
             style={{ width: 60, height: 50, marginLeft: 5 }}
             resizeMode="contain"
           />
-          {/* <Image
-            source={require("../assets/images/logo-name.png")}
-            style={{ width: 100, height: 50 }}
-            resizeMode="contain"
-          /> */}
         </View>
         <View style={styles.headerTitle}>
-          <Text style={{ fontSize: 18 }}>{title}</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>{title}</Text>
         </View>
         <View style={styles.iconContainer}>
           <HeaderIcon />
@@ -68,7 +64,9 @@ export default function ParentContainer({
           <CompWrapper />
         </ScrollView>
       ) : (
-        <CompWrapper />
+        <View style={{ height: height - 40 }}>
+          <CompWrapper />
+        </View>
       )}
     </View>
   );
@@ -79,7 +77,9 @@ export default function ParentContainer({
         <TouchableOpacity
           onPress={() => navigation.navigate(onBackButtonPressScreen)}
         >
-          <Text>Back</Text>
+          <Text style={{ fontSize: 12, color: colors.lightThemeColor }}>
+            Back
+          </Text>
         </TouchableOpacity>
       );
     }
@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
   },
   compContainer: {
     padding: dimensions.mainHorizontalPadding,
-    minHeight: height,
     alignItems: "center",
     paddingBottom: 50,
   },

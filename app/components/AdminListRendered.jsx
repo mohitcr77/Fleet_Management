@@ -31,36 +31,34 @@ export default function AdminListRendered({
   };
 
   return (
-    <View style={{ height: height - 100 }}>
-      <FlatList
-        data={data}
-        onRefresh={onRefresh}
-        refreshing={loading}
-        renderItem={({ item }) => {
-          return (
-            <Layout style={{ marginBottom: 8 }} level="1">
-              <Card status="primary">
-                <View style={styles.card}>
-                  {item.map((i, index) =>
-                    i.card ? (
-                      <View key={index} style={styles.dataContainer}>
-                        <Text style={{ fontSize: 13, fontWeight: "bold" }}>
-                          {i.name} :
-                        </Text>
-                        <Text style={{ fontSize: 12, color: colors.gray2 }}>
-                          {i.value || "null"}
-                        </Text>
-                      </View>
-                    ) : null
-                  )}
-                </View>
-                <BtnGroup data={item} />
-              </Card>
-            </Layout>
-          );
-        }}
-      />
-    </View>
+    <FlatList
+      data={data}
+      onRefresh={onRefresh}
+      refreshing={loading}
+      renderItem={({ item }) => {
+        return (
+          <Layout style={{ marginBottom: 8 }} level="1">
+            <Card status="primary">
+              <View style={styles.card}>
+                {item.map((i, index) =>
+                  i.card ? (
+                    <View key={index} style={styles.dataContainer}>
+                      <Text style={{ fontSize: 13, fontWeight: "bold" }}>
+                        {i.name} :
+                      </Text>
+                      <Text style={{ fontSize: 12, color: colors.gray2 }}>
+                        {i.value || "null"}
+                      </Text>
+                    </View>
+                  ) : null
+                )}
+              </View>
+              <BtnGroup data={item} />
+            </Card>
+          </Layout>
+        );
+      }}
+    />
   );
   function BtnGroup({ data }) {
     const navigation = useNavigation();

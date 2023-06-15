@@ -15,7 +15,6 @@ import AppCheckBox from "./AppCheckBox";
 
 export default function FormInput(props) {
   const { name, type, list, data } = props;
-
   switch (type) {
     case dataType.date:
       return (
@@ -94,8 +93,6 @@ export default function FormInput(props) {
             keyboardType={
               props.type === dataType.number ? "number-pad" : "default"
             }
-            // value={getValue()}
-            onChangeText={props.onChangeText}
             {...props}
           />
         </CompWrapper>

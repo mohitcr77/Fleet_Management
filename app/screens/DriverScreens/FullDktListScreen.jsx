@@ -58,14 +58,10 @@ export default function FullDktList({ navigation }) {
   return (
     <ParentContainer
       useScroll={false}
-      // containerStyle={{ alignItems: "center" }}
+      title="Full Dkt"
+      addScreen={{ name: screenNames.FULL_DKT_FORM_SCREEN }}
     >
-      <ListHeader
-        listName={"Full Dkt List"}
-        btnName={"Create"}
-        onPress={() => navigation.navigate(screenNames.FULL_DKT_FORM_SCREEN)}
-      />
-      <View style={styles.container}>
+      <>
         {false ? (
           <Text style={{ marginTop: 100, alignSelf: "center", height }}>
             No Data
@@ -93,11 +89,11 @@ export default function FullDktList({ navigation }) {
             }}
           />
         )}
-      </View>
+      </>
     </ParentContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { height: height - 200 },
+  // container: { height: height - 200 },
 });

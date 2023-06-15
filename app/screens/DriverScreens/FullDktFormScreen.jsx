@@ -9,6 +9,7 @@ import dataType from "../../constants/dataType";
 import FormInput from "../../components/FormInput";
 import ParentContainer from "../../components/ParentContainer";
 import useFetchList from "../../hooks/useFetchList";
+import screenNames from "../../constants/screenNames";
 
 export const dummyDropdownData = [
   { label: "Item 1", value: "1" },
@@ -62,17 +63,11 @@ export default function FullDktForm() {
   ];
 
   return (
-    <ParentContainer containerStyle={{ backgroundColor: "white" }}>
-      {/* <Button
-        title="click"
-        onPress={() =>
-          Toast.show({
-            type: "success",
-            text1: "Hello",
-            text2: "This is some something 👋",
-          })
-        }
-      /> */}
+    <ParentContainer
+      containerStyle={{ backgroundColor: "white" }}
+      title={"Form"}
+      onBackButtonPressScreen={screenNames.FULL_DKT_LIST_SCREEN}
+    >
       {fullDktForm.map((i) => (
         <FormInput {...i} />
       ))}

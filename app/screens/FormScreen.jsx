@@ -7,7 +7,6 @@ import generateKeyValueFromFormData from "../helpers/generateKeyValueFromForm";
 import useApi from "../hooks/useApi";
 import formatDate from "../helpers/formatDate";
 import { HTTPS_METHODS } from "../constants/entity";
-import dataType from "../constants/dataType";
 
 export default function Form({ route, navigation }) {
   const { title, backScreen, form, endpoint } = route.params;
@@ -45,9 +44,12 @@ export default function Form({ route, navigation }) {
         (i) =>
           i.name !== "Id#" && (
             <FormInput
-              {...i}
+              name={i.name}
+              key={i.key}
+              type={i.type}
               value={formData.current[i.key]}
               onChangeText={(e) => (formData.current[i.key] = e)}
+              // onChangeText={(e) => (formData.current[i.key] = e)}
               onDateSelect={(e) =>
                 (formData.current[i.key] = formatDate(e).y_m_d)
               }

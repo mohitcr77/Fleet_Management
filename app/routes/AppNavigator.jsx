@@ -58,10 +58,7 @@ import JobColor from "../screens/AdminScreens/JobColor";
 import Currencies from "../screens/AdminScreens/Currencies";
 import Timezones from "../screens/AdminScreens/Timezones";
 import Form from "../screens/FormScreen";
-<<<<<<< HEAD
 import DetailsView from "../screens/DetailsViewScreen";
-=======
->>>>>>> 9ef9d4bec9cacc2e147f88c4ad4969aa65ca6845
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -191,13 +188,10 @@ export default function AppNavigator() {
         name: screenNames.TIMEZONE,
         component: Timezones,
       },
-<<<<<<< HEAD
-=======
       {
         name: screenNames.ESTIMATE,
         component: Estimate,
       },
->>>>>>> 9ef9d4bec9cacc2e147f88c4ad4969aa65ca6845
     ],
   };
 
