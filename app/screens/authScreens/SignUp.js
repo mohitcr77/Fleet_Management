@@ -46,6 +46,7 @@ const placements = [
 ];
 const SignUp = ({ navigation }) => {
   const { data: currencyList } = useGet(endpoint.currency);
+  const { data: timezoneList } = useGet(endpoint.timezones);
 
   const signupForm = [
     {
@@ -90,7 +91,7 @@ const SignUp = ({ navigation }) => {
       hidden: false,
       key: "timezone_id",
       type: dataType.dropdown,
-      data: currencyList,
+      data: timezoneList,
     },
     {
       placeholder: "Role",
@@ -136,10 +137,11 @@ const SignUp = ({ navigation }) => {
     setPlacementIndex(index);
   };
   const signUp = async () => {
-    const requestConfig = {
-      endpoint: endpoint.sign_up,
-      body: state,
-    };
+     const requestConfig = {
+       endpoint: endpoint.sign_up,
+       body: state,
+     };
+    //console.log(state);
     await signUpUser(requestConfig);
   };
 
@@ -156,12 +158,15 @@ const SignUp = ({ navigation }) => {
       <Icons.ToggleEye show={passwordVisible} />
     </Pressable>
   );
-  const renderPlacementItem = (item) => <SelectItem title={item.name} />;
+  const renderPlacementItem = (item) => (
+    <SelectItem title={item.timezone ? item.timezone : item.name} />
+  );
 
   const onDropDownSelect = (e, i) => {
-    setState({ ...state, [i.key]: e });
-
-    console.log(e, i);
+    setState({ ...state, [i.key]: i.data[e.row].id });
+    //console.log(e.row);
+    //console.log(i);
+    //console.log(timezoneList[0].timezone);
   };
   if (isEmptyArray(currencyList)) {
     return <LoadingScreen loading={true} />;
@@ -180,13 +185,13 @@ const SignUp = ({ navigation }) => {
         <View style={styles.layoutContainer}>
           <ScrollView>
             {signupForm.map((item, index) =>
-              item.type == dataType.dropdown ? (
+              item?.type == dataType.dropdown ? (
                 <Select
                   placeholder={item.name}
                   value={placement}
                   selectedIndex={placementIndex}
                   onSelect={(e) => onDropDownSelect(e, item)}
-                  style={styles.input}
+                  style={styles.dropDown}
                 >
                   {item.data.map(renderPlacementItem)}
                 </Select>
@@ -285,5 +290,10 @@ const styles = StyleSheet.create({
   },
   text: {
     marginHorizontal: 20,
+  },
+  dropDown: {
+    marginVertical: 15,
+    marginHorizontal: 20,
+    tintColor: "white",
   },
 });

@@ -8,6 +8,7 @@ import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import getNestedData from "../../helpers/getNestedData";
 const Drivers = () => {
   const form = [
     {
@@ -16,77 +17,76 @@ const Drivers = () => {
       type: dataType.number,
       value: null,
       card: true,
+      mapKey: "id",
     },
     {
       name: "Name",
       key: "name",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
+      mapKey: ["user", "name"],
     },
     {
       name: "Email",
       key: "email",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
+      mapKey: ["user", "email"],
     },
-    {
-      name: "Password",
-      key: "password",
-      type: dataType.password,
-      value: null,
-    },
-    {
-      name: "Re-enter Password",
-      key: "repassword",
-      type: dataType.password,
-      value: null,
-    },
+
     {
       name: "Mobile",
       key: "mobile",
       type: dataType.text,
       value: null,
       card: true,
+      mapKey: ["mobile"],
     },
     {
       name: "Address 1",
       key: "address1",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
+      mapKey: ["user", "user_details", "current_address_1"],
     },
     {
       name: "Address 2",
       key: "address2",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
+      mapKey: ["address2"],
     },
     {
       name: "State",
       key: "state_id",
       type: dataType.text,
       value: null,
+      mapKey: ["state_id"],
     },
     {
       name: "City",
       key: "city_id",
       type: dataType.text,
       value: null,
+      mapKey: ["city_id"],
     },
     {
       name: "Country",
       key: "conutry_id",
       type: dataType.text,
       value: null,
+      mapKey: ["conutry_id"],
     },
     {
       name: "Rate",
       key: "rate",
       type: dataType.text,
       value: null,
+      mapKey: ["rate"],
     },
   ];
 
@@ -96,14 +96,17 @@ const Drivers = () => {
 
   function handleGetDriverSuccess(d) {
     let arr = [];
-    d.forEach((item) => {
+    d.data.data.forEach((item) => {
       let a = [];
-      form.forEach((i) => a.push({ ...i, value: item[i.key] }));
+      form.forEach((i) => {
+        const value = getNestedData(item, i.mapKey);
+        a.push({ ...i, value });
+      });
       arr.push(a);
     });
     setListData(arr);
   }
-  
+
   const formProps = {
     backScreen: screenNames.DRIVER,
     endpoint: endpoint.driver,
@@ -120,7 +123,7 @@ const Drivers = () => {
       <AdminListRendered
         data={listData}
         onRefresh={refresh}
-        loading={loading}  
+        loading={loading}
         backScreen={screenNames.DRIVER}
         listTitle={"Driver Details"}
         editTitle={"Edit Driver"}

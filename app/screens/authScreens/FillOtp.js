@@ -39,7 +39,7 @@ export default function FillOtp({ route, navigation }) {
     };
     setIsLoading(true);
     const res = await service.resendOTP(data);
-    if (res) {
+    if (res.data.success) {
       alert("re-sending OTP successful");
     } else {
       alert("error in re-sending OTP");
@@ -54,7 +54,7 @@ export default function FillOtp({ route, navigation }) {
     };
     setIsLoading(true);
     const res = await service.verifyOTP(data);
-    if (res.data) {
+    if (res.data.success) {
       navigation.navigate(screenNames.LOGIN_SCREEN);
       alert("OTP verified");
     } else {
