@@ -58,6 +58,7 @@ import CompanyInfo from "../screens/AdminScreens/CompanyInfo";
 import JobColor from "../screens/AdminScreens/JobColor";
 import Currencies from "../screens/AdminScreens/Currencies";
 import Timezones from "../screens/AdminScreens/Timezones";
+import CreditNote from "../screens/AdminScreens/CreditNote";
 import Form from "../screens/FormScreen";
 
 //todo - scroll in side drawer

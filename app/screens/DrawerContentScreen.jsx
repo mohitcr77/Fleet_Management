@@ -185,6 +185,7 @@ export default function DrawerContent({ navigation }) {
         children: [
           { name: "Estimate", screen: screenNames.ESTIMATE },
           { name: "Client", screen: screenNames.CLIENT },
+          {name : "Credit Note", screen: screenNames.CREDIT_NOTE}
         ],
       },
       {
