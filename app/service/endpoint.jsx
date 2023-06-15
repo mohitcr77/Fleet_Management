@@ -13,6 +13,7 @@ const mechanic_timeSheet= "/mechanic_timesheet";
 const tax= "/taxes";
 const vehicle_Maintenance = "/vehicle_maintenance";
 const estimate= "/estimate"
+const staff= "/staff"
 const getId = (id) => `/id${id}`;
 
 const fetchData = async (endpoint, token) => {
@@ -40,5 +41,6 @@ export default {
   tax,
   vehicle_Maintenance,
   estimate,
+  staff,
   getId,
 };
