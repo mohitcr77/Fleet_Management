@@ -160,8 +160,6 @@ const SignUp = ({ navigation }) => {
 
   const onDropDownSelect = (e, i) => {
     setState({ ...state, [i.key]: e });
-
-    console.log(e, i);
   };
   if (isEmptyArray(currencyList)) {
     return <LoadingScreen loading={true} />;

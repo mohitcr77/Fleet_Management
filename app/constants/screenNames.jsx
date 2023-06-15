@@ -58,6 +58,7 @@ const screenNames = {
   JOB_COLOR: "Job Color",
   CURRENCY: "Currency",
   TIMEZONE: "Timezone",
+  CREDIT_NOTE: "Credit Note",
 
   //Admin Component
   CLIENT_FORM_SCREEN: "CLIENT Form Screen",

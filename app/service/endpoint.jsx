@@ -6,13 +6,15 @@ const currency = "/currencies";
 const driver = "/driver";
 const estimate = "/estimate";
 const fuel_efficiency = "/fuel_efficiency";
-const fuel_log = "/fuel_log";
+const fuel_log = "/fuellog";
 const getId = (id) => `/id${id}`;
 const job_color = "/color";
-const mechanic_timeSheet = "/mechanic_timesheet";
 const mechanic = "/mechanic";
+const mechanic_timeSheet = "/mechanic_timesheet";
+
 const rego = "/regos";
 const sign_up = "/signup";
+const staff = "/staff";
 const tax = "/taxes";
 const vehicle_Maintenance = "/vehicle_maintenance";
 
@@ -41,6 +43,7 @@ export default {
   mechanic,
   rego,
   sign_up,
+  staff,
   tax,
   vehicle_Maintenance,
 };

@@ -10,107 +10,59 @@ import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 
 const VehicleMaintenance = () => {
-  const [listData, setListData] = useState([]);
-
-  const { refresh, loading } = useGet(endpoint.vehicle_Maintenance, handleVehicleMaintenanceSuccess);
-
-  function handleVehicleMaintenanceSuccess(d) {
-    let arr = [];
-    d.forEach((item) => {
-      const a = [
-        {
-          name: "Mechanic Id",
-          value: JSON.stringify(item?.mechanic_id),
-          card: true
-
-        },
-        {
-          name: "Repair Date",
-          value: item?.repair_date,
-          card: true
-        },
-        {
-          name: "Repair Time",
-          value: item?.repair_time,
-          card: true
-        },
-        {
-          name: "Day",
-          value: item?.day,
-          card: true
-        },
-        {
-          name: "Comment",
-          value: item?.comment,
-        },
-        {
-          name: "Total amount",
-          value: item?.total_amount,
-        },
-        {
-          name: "Type",
-          value: item?.type,
-        },
-        {
-          name: "Rego ID",
-          value: JSON.stringify(item?.rego_id),
-        },
-        {
-          name: "Odometer Start",
-          value: JSON.stringify(item?.odo_start),
-        },
-        {
-          name: "Odometer Start",
-          value: JSON.stringify(item?.odo_finish),
-        },
-        {
-          name: "Distance",
-          value: JSON.stringify(item?.distance),
-        },
-        {
-          name: "Mileage",
-          value: JSON.stringify(item?.milage),
-        },
-      ];
-      arr.push(a);
-    });
-    setListData(arr);
-  }
   const form = [
+    {
+      name: "Id#",
+      key: "id",
+      type: dataType.number,
+      value: null,
+      card: true,
+    },
     {
       name: "Mechanic Id",
       key: "mechanic_id",
       type: dataType.number,
+      value: null,
+      card: true
     },
     {
       name: "Repair Date",
       key: "repair_date",
       type: dataType.date,
+      value: null,
+      card: true
     },
     {
       name: "Repair Time",
       key: "repair_time",
       type: dataType.time,
+      value: null,
+      card: true
     },
     {
       name: "Day",
       key: "day",
       type: dataType.text,
+      value: null,
+      card: true
     },
     {
       name: "Comment",
       key: "comment",
       type: dataType.text,
+      value: null,
     },
     {
       name: "Total amount",
       key: "total_amount",
       type: dataType.number,
+      value: null,
     },
     {
       name: "Type",
       key: "type",
       type: dataType.text,
+      value: null,
     },
     {
       name: "Rego ID",
@@ -121,42 +73,66 @@ const VehicleMaintenance = () => {
       name: "Odometer Start",
       key: "odo_start",
       type: dataType.number,
+      value: null,
     },
     {
       name: "Odometer Finish",
       key: "odo_finish",
       type: dataType.number,
+      value: null,
     },
     {
       name: "Distance",
       key: "distance",
       type: dataType.number,
+      value: null,
     },
     {
       name: "Mileage",
-      key: "milage",
+      key: "milage", 
       type: dataType.number,
+      value: null,
     },
   ];
+  const [listData, setListData] = useState([]);
+ 
+  const { refresh, loading } = useGet( 
+    endpoint.vehicle_Maintenance,
+    handleGetVehicleMaintenanceSuccess
+  );
+   
+  function handleGetVehicleMaintenanceSuccess(d) {
+    let arr = [];
+    d.forEach((item) => {
+      let a = [];
+      form.forEach((i) => a.push({ ...i, value: item[i.key] }));
+      arr.push(a);
+    });
+    setListData(arr);
+  }
   const formProps = {
     backScreen: screenNames.VEHICLE_MAINTENANCE,
     endpoint: endpoint.vehicle_Maintenance,
     form,
-    title: "Add Vehicle Maintenance",
+    title: "Add Vehicle",
   };
 
   return (
     <ParentContainer
-    useScroll={false}
-    title="Vehicle Maintenance"
-    addScreen={[screenNames.FORM_SCREEN, formProps]}
-  >
-    <AdminListRendered
-      data={listData}
-      onRefresh={refresh}
-      loading={loading}
-    />
-  </ParentContainer>
+      useScroll={false}
+      title="Vehicle"
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
+    >
+      <AdminListRendered
+        data={listData}
+        onRefresh={refresh}
+        loading={loading}
+        backScreen={screenNames.VEHICLE_MAINTENANCE}
+        listTitle={"Vehicle Details"}
+        editTitle={"Edit Vehicle"}
+        endpoint={endpoint.vehicle_Maintenance}
+      />
+    </ParentContainer>
   );
 };
 
