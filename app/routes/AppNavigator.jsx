@@ -54,12 +54,12 @@ import ReportIssue from "../screens/AdminScreens/ReportIssue";
 import MechanicTimesheet from "../screens/AdminScreens/MechanicTimesheet";
 import Estimate from "../screens/AdminScreens/Estimate";
 import Tax from "../screens/AdminScreens/Tax";
-import CompanyInfo from "../screens/AdminScreens/CompanyInfo";
 import JobColor from "../screens/AdminScreens/JobColor";
 import Currencies from "../screens/AdminScreens/Currencies";
 import Timezones from "../screens/AdminScreens/Timezones";
 import CreditNote from "../screens/AdminScreens/CreditNote";
 import Form from "../screens/FormScreen";
+import DetailsView from "../screens/DetailsViewScreen";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -200,6 +200,7 @@ export default function AppNavigator() {
     { name: screenNames.ABOUT_APP_SCREEN, component: AboutApp },
     { name: screenNames.PROFILE_SCREEN, component: Profile },
     { name: screenNames.FORM_SCREEN, component: Form },
+    { name: screenNames.DETAILS_VIEW_SCREEN, component: DetailsView },
   ];
 
   const navigationScreens = [...drawerScreens[role], ...commonScreens];

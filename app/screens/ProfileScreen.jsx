@@ -10,49 +10,10 @@ import { DrawerActions } from "@react-navigation/native";
 import { deleteData } from "../store/dataSlice";
 
 export default function Profile({ navigation }) {
-  // return (
-  //   <ParentContainer>
-  //     <Text> hii</Text>
-  //   </ParentContainer>
-  // );
-
   const { auth, setAuth } = useAuth();
   const [image, setImage] = useState(null);
 
-  const pickFromGallery = async () => {
-    // try {
-    //   let result = await ImagePicker.launchImageLibraryAsync({
-    //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    //     allowsEditing: isAndroid(),
-    //     quality: 0.1,
-    //     base64: true,
-    //   });
-    //   if (!result.cancelled) {
-    //     setImage(`data:image/jpeg;base64,${result.base64}`);
-    //     try {
-    //       const resp = await services.updateProfilePic(
-    //         auth.user.toLowerCase(),
-    //         { profile_pic: `data:image/jpeg;base64,${result.base64}` },
-    //         auth.token
-    //       );
-    //       if (resp.ok) {
-    //         const data = {
-    //           ...auth,
-    //           profile_pic: resp.data[auth.user.toLowerCase()].profile_pic,
-    //         };
-    //         setAuth(data);
-    //         storage.storeDetails(JSON.stringify(data));
-    //       } else {
-    //         alert("Something Went Wrong!!");
-    //       }
-    //     } catch (error) {
-    //       console.warn(error);
-    //     }
-    //   }
-    // } catch (e) {
-    //   console.error(e);
-    // }
-  };
+  const pickFromGallery = async () => {};
   return (
     <View>
       <View style={styles.profileImageBackground}>

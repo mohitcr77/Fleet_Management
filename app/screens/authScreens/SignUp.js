@@ -16,7 +16,7 @@ import dimensions from "../../constants/dimensions";
 import { Animated, Easing } from "react-native";
 import { Text, Input } from "@ui-kitten/components/ui";
 import Icons from "../../components/Icons";
-import OtpScreen from "./OtpScreen";
+import OtpScreen from "./FillOtp";
 import screenNames from "../../constants/screenNames";
 
 const SignUp = ({ navigation }) => {

@@ -21,27 +21,27 @@ const Client = () => {
         {
           name: "Name",
           value: item.name,
-          card: true
+          card: true,
         },
         {
           name: "Email",
           value: item.email,
-          card: true
+          card: true,
         },
         {
           name: "Color code",
           value: item.color_code,
-          card: true
+          card: true,
         },
         {
           name: "Vehicle Type",
           value: item.gstin,
-          card: true
+          card: true,
         },
         {
           name: "PO",
           value: item.po,
-          card: true
+          card: true,
         },
       ];
       arr.push(a);

@@ -3,10 +3,9 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import screenNames from "../constants/screenNames";
-
-import LogIn from "../screens/authScreens/LogIn";
-import SignUp from "../screens/authScreens/SignUp";
-import OtpScreen from "../screens/authScreens/OtpScreen";
+import LogIn from "../screens/AuthScreens/LogIn";
+import SignUp from "../screens/AuthScreens/SignUp";
+import FillOtp from "../screens/AuthScreens/FillOtp";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +14,7 @@ const authNavigator = () => {
     // { name: screenNames.SELECT_USER_TYPE_SCREEN, component: SelectUserType },
     { name: screenNames.LOGIN_SCREEN, component: LogIn },
     { name: screenNames.SIGN_UP_SCREEN, component: SignUp },
-    { name: screenNames.OTP_SCREEN, component: OtpScreen },
+    { name: screenNames.OTP_SCREEN, component: FillOtp },
   ];
 
   return (
