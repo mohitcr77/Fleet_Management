@@ -7,22 +7,117 @@ import {
   ScrollView,
   TouchableOpacity,
   ImageBackground,
+  Animated,
+  Easing,
 } from "react-native";
-import { useState, useEffect, useContext, useRef } from "react";
-import service from "../../service";
-import TokenContext from "../../service/context";
-import LoadingScreen from "../AdminScreens/LoadingScreen";
-import dimensions from "../../constants/dimensions";
-import { Animated, Easing } from "react-native";
-import { Text, Input } from "@ui-kitten/components/ui";
-import Icons from "../../components/Icons";
-import OtpScreen from "./FillOtp";
-import screenNames from "../../constants/screenNames";
+import { useState, useEffect, useRef } from "react";
+import {
+  Text,
+  Input,
+  Select,
+  SelectItem,
+  IndexPath,
+} from "@ui-kitten/components/ui";
 
+import dimensions from "../../constants/dimensions";
+import Icons from "../../components/Icons";
+import screenNames from "../../constants/screenNames";
+import useApi from "../../hooks/useApi";
+import endpoint from "../../service/endpoint";
+import generateKeyValueFromFormData from "../../helpers/generateKeyValueFromForm";
+import useGet from "./../../hooks/useGet";
+import dataType from "../../constants/dataType";
+import isEmptyArray from "../../helpers/isEmptyArray";
+import LoadingScreen from "./../AdminScreens/LoadingScreen";
+
+const placements = [
+  "top",
+  "top start",
+  "top end",
+  "bottom",
+  "bottom start",
+  "bottom end",
+  "left",
+  "left start",
+  "left end",
+  "right",
+  "right start",
+  "right end",
+];
 const SignUp = ({ navigation }) => {
+  const { data: currencyList } = useGet(endpoint.currency);
+
+  const signupForm = [
+    {
+      placeholder: "Company Name",
+      hidden: false,
+      key: "company_name",
+      type: dataType.text,
+    },
+    {
+      placeholder: "Company Domain",
+      hidden: false,
+      key: "company_domain",
+      type: dataType.text,
+    },
+    {
+      placeholder: "Office Email",
+      hidden: false,
+      key: "office_email",
+      type: dataType.text,
+    },
+    {
+      placeholder: "Name",
+      hidden: false,
+      key: "name",
+      type: dataType.text,
+    },
+    {
+      placeholder: "Email",
+      hidden: false,
+      key: "email",
+      type: dataType.text,
+    },
+    {
+      placeholder: "Currency",
+      hidden: false,
+      key: "currency_id",
+      type: dataType.dropdown,
+      data: currencyList,
+    },
+    {
+      placeholder: "Timezone",
+      hidden: false,
+      key: "timezone_id",
+      type: dataType.dropdown,
+      data: currencyList,
+    },
+    {
+      placeholder: "Role",
+      hidden: false,
+      key: "role",
+      type: dataType.text,
+    },
+    {
+      placeholder: "Password",
+      hidden: true,
+      key: "password",
+      type: dataType.text,
+    },
+    {
+      placeholder: "Retype Password",
+      hidden: true,
+      key: "re_password",
+      type: dataType.text,
+    },
+  ];
+
+  const initialState = generateKeyValueFromFormData(signupForm);
   const [state, setState] = useState(initialState);
-  const [isLoading, setIsLoading] = useState(false);
-  const token = useContext(TokenContext);
+  const [placementIndex, setPlacementIndex] = useState();
+  const placement = null;
+
+  const { request: signUpUser } = useApi(handleSignUpSuccess);
   const [passwordVisible, setPasswordVisible] = useState(true);
   const animationProgress = useRef(new Animated.Value(0));
 
@@ -36,82 +131,21 @@ const SignUp = ({ navigation }) => {
     }).start();
   }, []);
 
-  const initialState = {
-    company_domain: "",
-    company_name: "",
-    email: "",
-    name: "",
-    office_email: "",
-    currency_id: "",
-    timezone_id: "",
-    role: "",
-    password: "",
-    re_password: "",
+  //verifying the entered email,password and saving it in expo store
+  const onPlacementSelect = (index) => {
+    setPlacementIndex(index);
+  };
+  const signUp = async () => {
+    const requestConfig = {
+      endpoint: endpoint.sign_up,
+      body: state,
+    };
+    await signUpUser(requestConfig);
   };
 
-  const signupForm = [
-    {
-      placeholder: "Company Name",
-      hidden: false,
-      key: "company_name",
-    },
-    {
-      placeholder: "Company Domain",
-      hidden: false,
-      key: "company_domain",
-    },
-    {
-      placeholder: "Office Email",
-      hidden: false,
-      key: "office_email",
-    },
-    {
-      placeholder: "Name",
-      hidden: false,
-      key: "name",
-    },
-    {
-      placeholder: "Email",
-      hidden: false,
-      key: "email",
-    },
-    {
-      placeholder: "Currency",
-      hidden: false,
-      key: "currency_id",
-    },
-    {
-      placeholder: "Timezone",
-      hidden: false,
-      key: "timezone_id",
-    },
-    {
-      placeholder: "Role",
-      hidden: false,
-      key: "role",
-    },
-    {
-      placeholder: "Password",
-      hidden: true,
-      key: "password",
-    },
-    {
-      placeholder: "Retype Password",
-      hidden: true,
-      key: "re_password",
-    },
-  ];
-  //verifying the entered email,password and saving it in expo store
-  const addNewid = async () => {
-    setIsLoading(true);
-    const res = await service.signUpApi(state);
-    if (res) {
-      navigation.navigate(screenNames.OTP_SCREEN, { email: state?.email });
-    } else {
-      alert("Invalid userId or passowrd");
-    }
-    setIsLoading(false);
-  };
+  function handleSignUpSuccess() {
+    navigation.navigate(screenNames.OTP_SCREEN, { email: state?.email });
+  }
 
   const renderIcon = () => (
     <Pressable
@@ -122,19 +156,19 @@ const SignUp = ({ navigation }) => {
       <Icons.ToggleEye show={passwordVisible} />
     </Pressable>
   );
+  const renderPlacementItem = (item) => <SelectItem title={item.name} />;
+
+  const onDropDownSelect = (e, i) => {
+    setState({ ...state, [i.key]: e });
+
+    console.log(e, i);
+  };
+  if (isEmptyArray(currencyList)) {
+    return <LoadingScreen loading={true} />;
+  }
 
   return (
     <View style={styles.appContainer}>
-      {/* <LottieView
-        style={{
-          width: 250,
-          backgroundColor: "#ffffff00",
-          alignSelf: "center",
-        }}
-        progress={animationProgress.current}
-        source={require("../assets/signup-truck.json")}
-      /> */}
-      <LoadingScreen loading={isLoading} />
       <ImageBackground
         style={{ flex: 1 }}
         source={require("../../assets/signup-design.png")}
@@ -145,26 +179,34 @@ const SignUp = ({ navigation }) => {
         </View>
         <View style={styles.layoutContainer}>
           <ScrollView>
-            {signupForm.map((item, index) => (
-              <Input
-                key={index}
-                placeholder={item?.placeholder}
-                secureTextEntry={item?.hidden && passwordVisible}
-                style={styles.input}
-                accessoryRight={item?.hidden && renderIcon}
-                onChangeText={(e) => {
-                  setState({ ...state, [item.key]: e });
-                }}
-              />
-            ))}
+            {signupForm.map((item, index) =>
+              item.type == dataType.dropdown ? (
+                <Select
+                  placeholder={item.name}
+                  value={placement}
+                  selectedIndex={placementIndex}
+                  onSelect={(e) => onDropDownSelect(e, item)}
+                  style={styles.input}
+                >
+                  {item.data.map(renderPlacementItem)}
+                </Select>
+              ) : (
+                <Input
+                  key={index}
+                  placeholder={item?.placeholder}
+                  secureTextEntry={item?.hidden && passwordVisible}
+                  style={styles.input}
+                  accessoryRight={item?.hidden && renderIcon}
+                  onChangeText={(e) => {
+                    setState({ ...state, [item.key]: e });
+                  }}
+                />
+              )
+            )}
             <View style={styles.btnStyle}>
-              <TouchableOpacity
-                onPress={() => addNewid()}
-                style={styles.button}
-              >
+              <TouchableOpacity onPress={() => signUp()} style={styles.button}>
                 <Text style={{ fontSize: 20, color: "white" }}>SignUp</Text>
               </TouchableOpacity>
-              {/* <Button title="login" onPress={() => addNewid()} /> */}
             </View>
             <View style={{ flexDirection: "row", alignSelf: "center" }}>
               <Text>Already have an account?</Text>
@@ -205,13 +247,14 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    marginVertical: 25,
+    marginVertical: 15,
     marginHorizontal: 20,
     borderColor: "#ffffff",
     borderBottomWidth: 1,
     borderBottomColor: "black",
     fontSize: 18,
     backgroundColor: "#ffffff",
+    color: "white",
   },
   textStyle: {
     fontSize: 20,

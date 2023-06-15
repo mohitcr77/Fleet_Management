@@ -2,19 +2,19 @@ import axios from "axios";
 import { URL, getHeader } from ".";
 
 const clients = "/clients";
-const rego = "/regos";
-const currency= "/currency";
-const driver= "/driver";
-const fuel_efficiency= "/fuel_efficiency";
-const fuel_log= "/fuellog";
-const job_color= "/color";
-const mechanic= "/mechanic";
-const mechanic_timeSheet= "/mechanic_timesheet";
-const tax= "/taxes";
-const vehicle_Maintenance = "/vehicle_maintenance";
-const estimate= "/estimate"
-const staff= "/staff"
+const currency = "/currencies";
+const driver = "/driver";
+const estimate = "/estimate";
+const fuel_efficiency = "/fuel_efficiency";
+const fuel_log = "/fuel_log";
 const getId = (id) => `/id${id}`;
+const job_color = "/color";
+const mechanic_timeSheet = "/mechanic_timesheet";
+const mechanic = "/mechanic";
+const rego = "/regos";
+const sign_up = "/signup";
+const tax = "/taxes";
+const vehicle_Maintenance = "/vehicle_maintenance";
 
 const fetchData = async (endpoint, token) => {
   let res;
@@ -28,19 +28,20 @@ const fetchData = async (endpoint, token) => {
 };
 
 export default {
-  fetchData,
   clients,
-  rego,
   currency,
   driver,
+  estimate,
+  fetchData,
   fuel_efficiency,
   fuel_log,
+  getId,
   job_color,
-  mechanic,
   mechanic_timeSheet,
+  mechanic,
+  rego,
+  sign_up,
+  staff,
   tax,
   vehicle_Maintenance,
-  estimate,
-  staff,
-  getId,
 };

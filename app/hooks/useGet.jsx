@@ -25,9 +25,10 @@ export default useGet = (endpoint, onSuccess = () => {}, onFail = () => {}) => {
       const data = await api.get(endpoint, {}, getHeader(token));
       setLoading(false);
       if (data.ok) {
-        setData(data.data.data.data);
-        onSuccess(data.data.data.data);
-      } else Toast.show(ToastType.ERROR);
+        setData(data.data);
+        onSuccess(data.data);
+      }
+      // else Toast.show(ToastType.ERROR);
     } catch (error) {
       onFail();
     }

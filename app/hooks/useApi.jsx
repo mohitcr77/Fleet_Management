@@ -15,9 +15,14 @@ export default useApi = (onSuccess = () => {}, onFail = () => {}) => {
       Toast.show(ToastType.LOADING);
       const data = await api[method](endpoint, body, getHeader(token));
       Toast.hide();
+      if (data.ok) {
+        Toast.show(ToastType.SUCCESS);
+        onSuccess();
+      } else {
+        Toast.show(ToastType.ERROR);
+        onFail();
+      }
 
-      Toast.show(ToastType.SUCCESS);
-      onSuccess();
       return data;
     } catch (error) {
       Toast.show(ToastType.ERROR);
