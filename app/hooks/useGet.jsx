@@ -23,7 +23,6 @@ export default useGet = (endpoint, onSuccess = () => {}, onFail = () => {}) => {
   const request = async () => {
     try {
       const data = await api.get(endpoint, {}, getHeader(token));
-      setLoading(false);
       if (data.ok) {
         setData(data?.data);
         onSuccess(data?.data);
@@ -32,6 +31,7 @@ export default useGet = (endpoint, onSuccess = () => {}, onFail = () => {}) => {
     } catch (error) {
       onFail();
     }
+    setLoading(false);
   };
   return { request, data, refresh, loading };
 };

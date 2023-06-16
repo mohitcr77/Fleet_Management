@@ -11,12 +11,12 @@ const getId = (id) => `/id${id}`;
 const job_color = "/color";
 const mechanic = "/mechanic";
 const mechanic_timeSheet = "/mechanic_timesheet";
-
 const rego = "/regos";
 const sign_up = "/signup";
 const staff = "/staff";
 const tax = "/taxes";
 const vehicle_Maintenance = "/vehicle_maintenance";
+const timezones = "/timezones"
 
 const fetchData = async (endpoint, token) => {
   let res;
@@ -46,4 +46,5 @@ export default {
   staff,
   tax,
   vehicle_Maintenance,
+  timezones
 };

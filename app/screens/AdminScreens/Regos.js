@@ -17,6 +17,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: true,
+      mapKey: "id"
     },
     {
       name: "Name",
@@ -24,6 +25,7 @@ const Regos = () => {
       type: dataType.text,
       value: null,
       card: true,
+      mapKey: ["name"]
     },
     {
       name: "Regos Rate",
@@ -31,6 +33,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: true,
+      mapKey: ["rego_rate"]
     },
     {
       name: "Milage Threshold",
@@ -38,6 +41,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: false,
+      mapKey: ["milage_threshold"]
     },
     {
       name: "Vehicle Type",
@@ -45,6 +49,7 @@ const Regos = () => {
       type: dataType.text,
       value: null,
       card: false,
+      mapKey: ["vehicle_type"]
     },
     {
       name: "CheckSheet Type",
@@ -52,6 +57,7 @@ const Regos = () => {
       type: dataType.text,
       value: null,
       card: false,
+      mapKey: ["checksheet_type"]
     },
     {
       name: "Plate No",
@@ -59,6 +65,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: false,
+      mapKey: ["plate_no"]
     },
     {
       name: "Year",
@@ -66,6 +73,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: true,
+      mapKey: ["year"]
     },
     {
       name: "Make",
@@ -73,6 +81,7 @@ const Regos = () => {
       type: dataType.text,
       value: null,
       card: true,
+      mapKey: ["make"]
     },
     {
       name: "Model",
@@ -80,6 +89,7 @@ const Regos = () => {
       type: dataType.text,
       value: null,
       card: false,
+      mapKey: ["model"]
     },
     {
       name: "Vin No",
@@ -87,6 +97,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: false,
+      mapKey: ["vin_no"]
     },
     {
       name: "Engine No",
@@ -94,6 +105,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: false,
+      mapKey: ["engine_number"]
     },
     {
       name: "Model No",
@@ -101,6 +113,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: true,
+      mapKey: ["model_no"]
     },
     {
       name: "Serial No",
@@ -108,6 +121,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: false,
+      mapKey: ["serial_no"]
     },
     {
       name: "Fuel Type",
@@ -115,6 +129,7 @@ const Regos = () => {
       type: dataType.text,
       value: null,
       card: false,
+      mapKey: ["fuel_type"]
     },
     {
       name: "Transmission Type",
@@ -122,6 +137,7 @@ const Regos = () => {
       type: dataType.text,
       value: null,
       card: false,
+      mapKey: ["transmission_type"]
     },
     {
       name: "CC Rating",
@@ -129,6 +145,7 @@ const Regos = () => {
       type: dataType.text,
       value: null,
       card: false,
+      mapKey: ["cc_rating"]
     },
     {
       name: "Current KMS",
@@ -136,6 +153,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: false,
+      mapKey: ["current_kms"]
     },
     {
       name: "Service Due KMS",
@@ -143,6 +161,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: false,
+      mapKey: ["service_due_kms"]
     },
     {
       name: "Service Due Date",
@@ -150,6 +169,7 @@ const Regos = () => {
       type: dataType.date,
       value: null,
       card: false,
+      mapKey: ["service_due_date"]
     },
     {
       name: "WOF COF Due Date",
@@ -157,6 +177,7 @@ const Regos = () => {
       type: dataType.date,
       value: null,
       card: false,
+      mapKey: ["wof_cof_due_date"]
     },
     {
       name: "Registration Due Date",
@@ -164,6 +185,7 @@ const Regos = () => {
       type: dataType.date,
       value: null,
       card: false,
+      mapKey: ["registration_due_date"]
     },
     {
       name: "Fire Extinguisher Due Date",
@@ -171,6 +193,7 @@ const Regos = () => {
       type: dataType.date,
       value: null,
       card: false,
+      mapKey: ["fire_extinguisher_due_date"]
     },
     {
       name: "First Aid Kit Due Dates",
@@ -178,6 +201,7 @@ const Regos = () => {
       type: dataType.date,
       value: null,
       card: false,
+      mapKey: ["first_aid_kit_due_dates"]
     },
   ];
   const [listData, setListData] = useState([]);
@@ -188,7 +212,10 @@ const Regos = () => {
     let arr = [];
     d.data.data.forEach((item) => {
       let a = [];
-      form.forEach((i) => a.push({ ...i, value: item[i.key] }));
+      form.forEach((i) => {
+        const value = getNestedData(item, i.mapKey);
+        a.push({ ...i, value });
+      });
       arr.push(a);
     });
     setListData(arr);
