@@ -6,6 +6,7 @@ import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import getNestedData from "../../helpers/getNestedData";
 
 const JobColor = () => {
   const [listData, setListData] = useState([]);
@@ -34,7 +35,7 @@ const JobColor = () => {
       type: dataType.number,
       value: null,
       card: true,
-      mapKey: "id",
+      mapKey: ["id"],
     },
     {
       name: "Name",
@@ -75,6 +76,10 @@ const JobColor = () => {
         data={listData}
         onRefresh={refresh}
         loading={loading}
+        backScreen={screenNames.JOB_COLOR}
+        listTitle={"JobColor Details"}
+        editTitle={"Edit JobColoe"}
+        endpoint={endpoint.job_color}
       />
     </ParentContainer>
   );

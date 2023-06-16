@@ -8,6 +8,7 @@ import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import getNestedData from "../../helpers/getNestedData";
 
 const Regos = () => {
   const form = [
@@ -17,7 +18,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: true,
-      mapKey: "id"
+      mapKey: ["id"]
     },
     {
       name: "Name",
@@ -209,6 +210,7 @@ const Regos = () => {
   const { refresh, loading } = useGet(endpoint.rego, handleGetRegoSuccess);
 
   function handleGetRegoSuccess(d) {
+    console.log(d.data.data);
     let arr = [];
     d.data.data.forEach((item) => {
       let a = [];
