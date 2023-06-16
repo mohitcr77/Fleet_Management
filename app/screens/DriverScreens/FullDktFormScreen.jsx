@@ -8,8 +8,8 @@ import customStyles from "../../constants/styles";
 import dataType from "../../constants/dataType";
 import FormInput from "../../components/FormInput";
 import ParentContainer from "../../components/ParentContainer";
-import useFetchList from "../../hooks/useFetchList";
 import screenNames from "../../constants/screenNames";
+import { useSelector } from "react-redux";
 
 export const dummyDropdownData = [
   { label: "Item 1", value: "1" },
@@ -23,8 +23,9 @@ export const dummyDropdownData = [
 ];
 
 export default function FullDktForm() {
-  const { clientList, machineTypeList } = useFetchList();
-
+  const { clientList, machineTypeList } = useSelector(
+    (state) => state.dropDownData
+  );
   const fullDktForm = [
     {
       name: "Client Name",

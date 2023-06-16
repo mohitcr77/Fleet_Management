@@ -70,8 +70,8 @@ export default function AppNavigator() {
 
   const drawerScreens = {
     [Role.MECHANIC]: [
-      { name: screenNames.MECHANIC_FORM_SCREEN, component: MechanicFormScreen },
       { name: screenNames.MECHANIC_DATA_SCREEN, component: MechanicDataScreen },
+      { name: screenNames.MECHANIC_FORM_SCREEN, component: MechanicFormScreen },
       {
         name: screenNames.MECHANIC_TIME_SHEET_FORM,
         component: MechanicTimeSheetForm,
@@ -82,15 +82,14 @@ export default function AppNavigator() {
       },
       { name: screenNames.FLEET_INSPECTION, component: FleetInspection },
       { name: screenNames.INSPECTION_HISTORY, component: InspectionHistory },
-      { name: screenNames.ADD_DOCUMENT, component: DocumentForm },
+      { name: screenNames.ADD_DOCUMENT_SCREEN, component: DocumentForm },
       { name: screenNames.VIEW_DOCUMENTS, component: DocumentList },
-      //{ name: screenNames.ADD_DOCUMENT, component: DocumentForm },
     ],
     [Role.DRIVER]: [
-      { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
       { name: screenNames.FULL_DKT_LIST_SCREEN, component: FullDktList },
-      { name: screenNames.SCAN_DKT_FORM_SCREEN, component: ScanDktForm },
       { name: screenNames.SCAN_DKT_LIST_SCREEN, component: ScanDktList },
+      { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
+      { name: screenNames.SCAN_DKT_FORM_SCREEN, component: ScanDktForm },
       {
         name: screenNames.PRE_INSPECTION_FORM_SCREEN,
         component: PreInspectionForm,

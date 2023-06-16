@@ -1,16 +1,21 @@
-import { View, ScrollView } from "react-native";
-import React from "react";
-import ParentContainer from "../../components/ParentContainer";
-import FormInput from "../../components/FormInput";
+import React, { useRef } from "react";
+import { useSelector } from "react-redux";
+
+import screenNames from "../../constants/screenNames";
+import AppFooterButton from "../../components/AppFooterButton";
 import dataType from "../../constants/dataType";
-import useFetchList from "../../hooks/useFetchList";
-import customStyles from "../../constants/styles";
-import AppButton from "../../components/AppButton";
+import endpoint from "../../service/endpoint";
+import formatDate from "./../../helpers/formatDate";
+import FormInput from "../../components/FormInput";
+import generateKeyValueFromFormData from "../../helpers/generateKeyValueFromForm";
+import ParentContainer from "../../components/ParentContainer";
+import useApi from "../../hooks/useApi";
 
 const MechanicFormScreen = () => {
-  const { clientList, machineTypeList } = useFetchList();
+  const { machineTypeList } = useSelector((state) => state.dropDownData);
+  const { request: postMechanicData } = useApi();
 
-  const mechanicForm=[
+  const mechanicForm = [
     {
       name: "Rego",
       key: "rego",
@@ -42,24 +47,38 @@ const MechanicFormScreen = () => {
       key: "attachment",
       type: dataType.image,
     },
-  ]
-  
+  ];
+
+  const initialState = generateKeyValueFromFormData(mechanicForm);
+  const form = useRef(initialState);
+
+  const handleSubmit = async () => {
+    const requestConfig = {
+      endpoint: endpoint,
+      body: form.current,
+    };
+    console.log(form.current);
+  };
   return (
-    <ParentContainer containerStyle={{ backgroundColor: "white" }}>
+    <ParentContainer
+      containerStyle={{ backgroundColor: "white" }}
+      title={"Form"}
+      onBackButtonPressScreen={screenNames.MECHANIC_DATA_SCREEN}
+    >
       {mechanicForm.map((i) => (
-        <FormInput {...i} />
+        <FormInput
+          {...i}
+          defaultValue={form.current[i.key]}
+          onChangeText={(e) => (form.current[i.key] = e)}
+          onDateSelect={(e) => (form.current[i.key] = formatDate(e).y_m_d)}
+          onImageSelect={(e) => (form.current[i.key] = e)}
+          onDropdownItemSelect={(e) => (form.current[i.key] = e.id)}
+        />
       ))}
 
-      <View
-        style={[
-          customStyles.flex_row_between,
-          { marginBottom: 150, marginTop: 40 },
-        ]}
-      >
-        <AppButton title={"Submit"} type="small" style={{ height: 40 }} />
-      </View>
+      <AppFooterButton onPressRight={handleSubmit} />
     </ParentContainer>
-  )
-}
+  );
+};
 
-export default MechanicFormScreen
+export default MechanicFormScreen;

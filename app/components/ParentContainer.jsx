@@ -18,6 +18,8 @@ import Icons from "./Icons";
 import dimensions from "../constants/dimensions";
 import customStyles from "../constants/styles";
 import colors from "../constants/colors";
+import { useDispatch } from "react-redux";
+import { addInputForm } from "../store/reducer/inputFormReducer";
 
 export default function ParentContainer({
   title = null,
@@ -28,6 +30,7 @@ export default function ParentContainer({
   addScreen,
 }) {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const CompWrapper = () => {
     return (
@@ -87,13 +90,18 @@ export default function ParentContainer({
     if (addScreen) {
       return (
         <Icons.AddDocument
-          onPress={() =>
-            navigation.dispatch(
-              CommonActions.reset({
-                routes: [addScreen],
-              })
-            )
-          }
+          onPress={() => {
+            dispatch(addInputForm(addScreen[1].form));
+
+            navigation.navigate(...addScreen);
+          }}
+          // onPress={() =>
+          //   navigation.dispatch(
+          //     CommonActions.reset({
+          //       routes: [addScreen],
+          //     })
+          //   )
+          // }
         />
       );
     }

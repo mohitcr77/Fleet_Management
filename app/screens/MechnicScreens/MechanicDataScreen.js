@@ -7,13 +7,56 @@ import {
   Text,
 } from "react-native";
 import ParentContainer from "../../components/ParentContainer";
-import ListHeader from "../../components/ListHeader";
 import screenNames from "../../constants/screenNames";
-import useFetchList from "../../hooks/useFetchList";
 import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
+import { useSelector } from "react-redux";
+import dataType from "../../constants/dataType";
+import endpoint from "../../service/endpoint";
 
 const MechanicDataScreen = ({ navigation }) => {
+  const { machineTypeList } = useSelector((state) => state.dropDownData);
+  const form = [
+    {
+      name: "Id#",
+      key: "id",
+      type: dataType.number,
+      value: null,
+      card: true,
+    },
+    {
+      name: "Rego",
+      key: "rego",
+      type: dataType.dropdown,
+      data: machineTypeList,
+    },
+    {
+      name: "Date",
+      key: "date",
+      type: dataType.date,
+    },
+    {
+      name: "Total Amount",
+      key: "total_amount",
+      type: dataType.number,
+    },
+    {
+      name: "Mileage",
+      key: "mileage",
+      type: dataType.number,
+    },
+    {
+      name: "Comment",
+      key: "comment",
+      type: dataType.text,
+    },
+    {
+      name: "Attachment",
+      key: "attachment",
+      type: dataType.image,
+    },
+  ];
+
   const CardComponent = ({ obj }) => {
     const data = {
       cardData: [
@@ -43,10 +86,18 @@ const MechanicDataScreen = ({ navigation }) => {
       />
     );
   };
+  const formProps = {
+    backScreen: screenNames.MECHANIC_DATA_SCREEN,
+    endpoint: endpoint.rego,
+    form,
+    title: "Mechanic Form",
+  };
   return (
     <ParentContainer
       useScroll={false}
       // containerStyle={{ alignItems: "center" }}
+      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      title={"Data"}
     >
       <View style={styles.container}>
         {false ? (
@@ -70,5 +121,5 @@ const MechanicDataScreen = ({ navigation }) => {
 export default MechanicDataScreen;
 
 const styles = StyleSheet.create({
-  container: { height: height - 40},
+  container: { height: height - 40 },
 });

@@ -3,12 +3,13 @@ import React from "react";
 import ParentContainer from "../../components/ParentContainer";
 import FormInput from "../../components/FormInput";
 import dataType from "../../constants/dataType";
-import useFetchList from "../../hooks/useFetchList";
 import AppFooterButton from "../../components/AppFooterButton";
+import { useSelector } from "react-redux";
 
 export default function ScanDktForm() {
-  const { clientList, machineTypeList } = useFetchList();
-
+  const { clientList, machineTypeList } = useSelector(
+    (state) => state.dropDownData
+  );
   const data = [
     { label: "Item 1", value: "1" },
     { label: "Item 2", value: "2" },

@@ -9,7 +9,6 @@ import {
 import ParentContainer from "../../components/ParentContainer";
 import ListHeader from "../../components/ListHeader";
 import screenNames from "../../constants/screenNames";
-import useFetchList from "../../hooks/useFetchList";
 import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
 

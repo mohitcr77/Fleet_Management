@@ -4,6 +4,7 @@ import modalReducer from "./modalSlice.js";
 import dataReducer from "./dataSlice.js";
 import dropdownDataReducer from "./reducer/dropdownDataReducer.jsx";
 import fullDktFormDataReducer from "./reducer/fullDktFormDataReducer.jsx";
+import inputFormReducer from "./reducer/inputFormReducer.jsx";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     dataShow: dataReducer,
     dropDownData: dropdownDataReducer,
     fullDktFromData: fullDktFormDataReducer,
+    inputForm: inputFormReducer,
   },
 });
