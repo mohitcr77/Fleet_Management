@@ -36,9 +36,7 @@ export default function FormInput(props) {
             data={data}
             search
             searchPlaceholder="Search..."
-            onChange={(item) => {
-              // setValue(item.value);
-            }}
+            onChange={props.onDropdownItemSelect}
             labelField="label"
             valueField="value"
           />
@@ -93,6 +91,8 @@ export default function FormInput(props) {
             keyboardType={
               props.type === dataType.number ? "number-pad" : "default"
             }
+            // value={props.value}
+            // onChangeText={props.onChangeText}
             {...props}
           />
         </CompWrapper>

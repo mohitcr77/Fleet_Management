@@ -8,7 +8,6 @@ import {
 import ParentContainer from "../../components/ParentContainer";
 import ListHeader from "../../components/ListHeader";
 import screenNames from "../../constants/screenNames";
-import useFetchList from "../../hooks/useFetchList";
 import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
 
@@ -18,8 +17,7 @@ const FleetInspection = () => {
       cardData: [
         {
           key: "Id",
-          value:
-            'obj.id',
+          value: "obj.id",
         },
         { key: "Created at", value: "obj.date", type: "date" },
         { key: "Created by", value: "obj.created_by", type: "text" },
@@ -71,8 +69,8 @@ const FleetInspection = () => {
       </View>
     </ParentContainer>
   );
-}
+};
 
-export default FleetInspection
+export default FleetInspection;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

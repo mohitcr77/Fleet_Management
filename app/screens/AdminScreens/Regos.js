@@ -186,7 +186,7 @@ const Regos = () => {
 
   function handleGetRegoSuccess(d) {
     let arr = [];
-    d.forEach((item) => {
+    d.data.data.forEach((item) => {
       let a = [];
       form.forEach((i) => a.push({ ...i, value: item[i.key] }));
       arr.push(a);

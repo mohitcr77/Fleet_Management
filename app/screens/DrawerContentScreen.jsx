@@ -70,17 +70,8 @@ export default function DrawerContent({ navigation }) {
     [Role.MECHANIC]: [
       {
         name: "Mechanic Data",
-        screen: null,
-        children: [
-          {
-            name: "Mechanic Form",
-            screen: screenNames.MECHANIC_FORM_SCREEN,
-          },
-          {
-            name: "View Mechanic Data",
-            screen: screenNames.MECHANIC_DATA_SCREEN,
-          },
-        ],
+        screen: screenNames.MECHANIC_DATA_SCREEN,
+        children: null,
       },
       {
         name: "TimeSheet",
@@ -179,7 +170,7 @@ export default function DrawerContent({ navigation }) {
         children: [
           { name: "Estimate", screen: screenNames.ESTIMATE },
           { name: "Client", screen: screenNames.CLIENT },
-          {name : "Credit Note", screen: screenNames.CREDIT_NOTE}
+          { name: "Credit Note", screen: screenNames.CREDIT_NOTE },
         ],
       },
       {

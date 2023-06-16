@@ -1,16 +1,22 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { useSelector } from "react-redux";
 import React, { useRef, useState } from "react";
-import ParentContainer from "../components/ParentContainer";
-import FormInput from "../components/FormInput";
-import AppFooterButton from "./../components/AppFooterButton";
-import generateKeyValueFromFormData from "../helpers/generateKeyValueFromForm";
-import useApi from "../hooks/useApi";
-import formatDate from "../helpers/formatDate";
+
 import { HTTPS_METHODS } from "../constants/entity";
+import AppFooterButton from "./../components/AppFooterButton";
+import formatDate from "../helpers/formatDate";
+import FormInput from "../components/FormInput";
+import generateKeyValueFromFormData from "../helpers/generateKeyValueFromForm";
+import ParentContainer from "../components/ParentContainer";
+import useApi from "../hooks/useApi";
 
 export default function Form({ route, navigation }) {
-  const { title, backScreen, form, endpoint } = route.params;
+  const { title, backScreen, endpoint } = route.params;
+  const { form } = useSelector((state) => state.inputForm);
   const initialState = generateKeyValueFromFormData(form);
+  console.log(initialState);
+
+  // return <View />;
   const [update, setUpdate] = useState(false);
   const formData = useRef(initialState);
 
@@ -25,15 +31,13 @@ export default function Form({ route, navigation }) {
       body: formData.current,
     };
 
-    const d = await request(requestConfig);
-    console.log(d);
+    await request(requestConfig);
   }
 
   function handlePostSuccess() {
     formData.current = initialState;
     setUpdate(!update);
   }
-
   return (
     <ParentContainer
       title={title}
@@ -44,15 +48,16 @@ export default function Form({ route, navigation }) {
         (i) =>
           i.name !== "Id#" && (
             <FormInput
-              name={i.name}
               key={i.key}
+              name={i.name}
               type={i.type}
-              value={formData.current[i.key]}
+              defaultValue={formData.current[i.key]}
               onChangeText={(e) => (formData.current[i.key] = e)}
-              // onChangeText={(e) => (formData.current[i.key] = e)}
               onDateSelect={(e) =>
                 (formData.current[i.key] = formatDate(e).y_m_d)
               }
+              onImageSelect={(e) => (formData.current[i.key] = e)}
+              onDropdownItemSelect={(e) => (formData.current[i.key] = e.id)}
             />
           )
       )}

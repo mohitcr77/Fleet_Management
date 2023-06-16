@@ -6,7 +6,7 @@ import colors from "../constants/colors";
 import AppImagePicker from "./AppImagePicker";
 import dimensions from "../constants/dimensions";
 
-export default function AddImage({ title = "Add" }) {
+export default function AddImage({ title = "Add", onImageSelect }) {
   const [image, setImage] = useState(null);
   const [visible, setVisible] = useState(false);
 
@@ -33,6 +33,7 @@ export default function AddImage({ title = "Add" }) {
           if (!e) return;
 
           setImage(`data:image/jpeg;base64,${e.assets[0].base64}`);
+          onImageSelect(`data:image/jpeg;base64,${e.assets[0].base64}`);
         }}
       />
     </View>

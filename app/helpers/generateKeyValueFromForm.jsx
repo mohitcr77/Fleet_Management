@@ -1,4 +1,5 @@
 import dataType from "../constants/dataType";
+import isNotNullOrUndefined from "./isNotNullOrUndefined";
 
 function generateKeyValueFromFormData(arr) {
   let obj = {};
@@ -8,7 +9,7 @@ function generateKeyValueFromFormData(arr) {
       e.type === dataType.number &&
       typeof e.value !== dataType.string
         ? JSON.stringify(e.value)
-        : e.value;
+        : e.value || "";
   });
   return obj;
 }
