@@ -11,8 +11,8 @@ import ParentContainer from "../components/ParentContainer";
 import useApi from "../hooks/useApi";
 
 export default function Form({ route, navigation }) {
-  const { title, backScreen, endpoint } = route.params;
-  const { form } = useSelector((state) => state.inputForm);
+  const { title, backScreen, endpoint, form } = route.params;
+  //const { form } = useSelector((state) => state.inputForm);
   const initialState = generateKeyValueFromFormData(form);
   console.log(initialState);
 

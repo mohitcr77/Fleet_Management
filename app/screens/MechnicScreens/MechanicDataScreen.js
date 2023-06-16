@@ -96,7 +96,7 @@ const MechanicDataScreen = ({ navigation }) => {
     <ParentContainer
       useScroll={false}
       // containerStyle={{ alignItems: "center" }}
-      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      addScreen={{name:screenNames.FORM_SCREEN, params: formProps}}
       title={"Data"}
     >
       <View style={styles.container}>

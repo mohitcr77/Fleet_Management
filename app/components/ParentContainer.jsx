@@ -90,18 +90,18 @@ export default function ParentContainer({
     if (addScreen) {
       return (
         <Icons.AddDocument
-          onPress={() => {
-            dispatch(addInputForm(addScreen[1].form));
+          // onPress={() => {
+          //   dispatch(addInputForm(addScreen[1].form));
 
-            navigation.navigate(...addScreen);
-          }}
-          // onPress={() =>
-          //   navigation.dispatch(
-          //     CommonActions.reset({
-          //       routes: [addScreen],
-          //     })
-          //   )
-          // }
+          //   navigation.navigate(...addScreen);
+          // }}
+           onPress={() =>
+             navigation.dispatch(
+               CommonActions.reset({
+                 routes: [addScreen],
+               })
+             )
+           }
         />
       );
     }
