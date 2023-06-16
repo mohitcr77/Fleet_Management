@@ -7,16 +7,11 @@ import {
   ScrollView,
   TouchableOpacity,
   ImageBackground,
-  Animated,
-  Easing,
 } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import {
   Text,
   Input,
-  Select,
-  SelectItem,
-  IndexPath,
 } from "@ui-kitten/components/ui";
 
 import dimensions from "../../constants/dimensions";
@@ -29,6 +24,7 @@ import useGet from "./../../hooks/useGet";
 import dataType from "../../constants/dataType";
 import isEmptyArray from "../../helpers/isEmptyArray";
 import LoadingScreen from "./../AdminScreens/LoadingScreen";
+import SignUpDropDown from "../../components/SignUpDropDown";
 
 const placements = [
   "top",
@@ -120,34 +116,24 @@ const SignUp = ({ navigation }) => {
 
   const { request: signUpUser } = useApi(handleSignUpSuccess);
   const [passwordVisible, setPasswordVisible] = useState(true);
-  const animationProgress = useRef(new Animated.Value(0));
 
-  //lottie animation
-  useEffect(() => {
-    Animated.timing(animationProgress.current, {
-      toValue: 1,
-      duration: 5000,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-  }, []);
-
-  //verifying the entered email,password and saving it in expo store
-  const onPlacementSelect = (index) => {
-    setPlacementIndex(index);
-  };
   const signUp = async () => {
-     const requestConfig = {
-       endpoint: endpoint.sign_up,
-       body: state,
-     };
-    //console.log(state);
+    const requestConfig = {
+      endpoint: endpoint.sign_up,
+      body: state,
+    };
+    console.log(state);
     await signUpUser(requestConfig);
   };
 
   function handleSignUpSuccess() {
     navigation.navigate(screenNames.OTP_SCREEN, { email: state?.email });
   }
+
+  //setting value for dropdown 
+  const setDropDownState = (key, item) => {
+    setState({ ...state, [key]: item });
+  };
 
   const renderIcon = () => (
     <Pressable
@@ -158,16 +144,6 @@ const SignUp = ({ navigation }) => {
       <Icons.ToggleEye show={passwordVisible} />
     </Pressable>
   );
-  const renderPlacementItem = (item) => (
-    <SelectItem title={item.timezone ? item.timezone : item.name} />
-  );
-
-  const onDropDownSelect = (e, i) => {
-    setState({ ...state, [i.key]: i.data[e.row].id });
-    //console.log(e.row);
-    //console.log(i);
-    //console.log(timezoneList[0].timezone);
-  };
   if (isEmptyArray(currencyList)) {
     return <LoadingScreen loading={true} />;
   }
@@ -184,17 +160,13 @@ const SignUp = ({ navigation }) => {
         </View>
         <View style={styles.layoutContainer}>
           <ScrollView>
-            {signupForm.map((item, index) =>
-              item?.type == dataType.dropdown ? (
-                <Select
-                  placeholder={item.name}
-                  value={placement}
-                  selectedIndex={placementIndex}
-                  onSelect={(e) => onDropDownSelect(e, item)}
-                  style={styles.dropDown}
-                >
-                  {item.data.map(renderPlacementItem)}
-                </Select>
+            {signupForm?.map((item, index) =>
+              item?.type == dataType?.dropdown ? (
+                <SignUpDropDown
+                  setValue={setDropDownState}
+                  item={item}
+                  keyValue={item?.key}
+                />
               ) : (
                 <Input
                   key={index}
@@ -291,9 +263,14 @@ const styles = StyleSheet.create({
   text: {
     marginHorizontal: 20,
   },
-  dropDown: {
-    marginVertical: 15,
+  dropdown: {
+    height: 40,
+    borderColor: "white",
+    borderBottomColor: "black",
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
     marginHorizontal: 20,
-    tintColor: "white",
+    marginVertical: 15,
   },
 });

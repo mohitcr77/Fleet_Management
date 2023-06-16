@@ -1,5 +1,5 @@
 import React from "react";
-import { useState} from "react";
+import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
@@ -10,47 +10,52 @@ import useGet from "./../../hooks/useGet";
 const JobColor = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.job_color, handleJobColorSuccess);
+  const { refresh, loading } = useGet(
+    endpoint.job_color,
+    handleJobColorSuccess
+  );
 
   function handleJobColorSuccess(d) {
     let arr = [];
-    d.forEach((item) => {
-      const a = [
-        {
-          name: "Name",
-          value: item.name,
-          card: true
-        },
-        {
-          name: "Code",
-          value: item.code,
-          card: true
-        },
-        {
-          name: "Description",
-          value: item.description,
-          card: true
-        },
-      ];
+    d.data.data.forEach((item) => {
+      let a = [];
+      form.forEach((i) => {
+        const value = getNestedData(item, i.mapKey);
+        a.push({ ...i, value });
+      });
       arr.push(a);
     });
     setListData(arr);
   }
   const form = [
     {
+      name: "Id#",
+      key: "id",
+      type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: "id",
+    },
+    {
       name: "Name",
       key: "name",
       type: dataType.text,
+      card: true,
+      mapKey: ["name"],
     },
     {
       name: "code",
       key: "code",
       type: dataType.text,
+      card: true,
+      mapKey: "code",
     },
     {
       name: "Description",
       key: "description",
       type: dataType.text,
+      card: true,
+      mapKey: "description",
     },
   ];
   const formProps = {

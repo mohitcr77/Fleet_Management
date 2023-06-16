@@ -149,8 +149,4 @@ const DashBoard = () => {
 export default DashBoard;
 
 const styles = StyleSheet.create({
-  chartHeading: {
-    alignItems: "center",
-    margin: 10,
-  },
 });

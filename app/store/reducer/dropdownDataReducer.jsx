@@ -17,10 +17,16 @@ export const dropdownDataSlice = createSlice({
     addMachineTypeList: (state, action) => {
       state.machineTypeList = action.payload;
     },
+    addDriverList: (state, action) => {
+      state.driverList = action.payload;
+    },
+    addSupervisorList: (state, action) => {
+      state.supervisorList =  action.payload;
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addClientList, addMachineTypeList } = dropdownDataSlice.actions;
+export const { addClientList, addMachineTypeList, addDriverList, addSupervisorList } = dropdownDataSlice.actions;
 
 export default dropdownDataSlice.reducer;
