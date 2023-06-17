@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
 
 import screenNames from "../../constants/screenNames";
 import AppFooterButton from "../../components/AppFooterButton";
@@ -12,7 +11,6 @@ import ParentContainer from "../../components/ParentContainer";
 import useApi from "../../hooks/useApi";
 
 const MechanicFormScreen = () => {
-  const { machineTypeList } = useSelector((state) => state.dropDownData);
   const { request: postMechanicData } = useApi();
 
   const mechanicForm = [
@@ -20,7 +18,7 @@ const MechanicFormScreen = () => {
       name: "Rego",
       key: "rego",
       type: dataType.dropdown,
-      data: machineTypeList,
+      data: "machineTypeList",
     },
     {
       name: "Date",
@@ -57,7 +55,6 @@ const MechanicFormScreen = () => {
       endpoint: endpoint,
       body: form.current,
     };
-    console.log(form.current);
   };
   return (
     <ParentContainer

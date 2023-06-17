@@ -1,20 +1,36 @@
 import { View, StyleSheet, Text } from "react-native";
 import React, { useState } from "react";
-import dataType from "../constants/dataType";
+import { useSelector } from "react-redux";
 import { Input } from "@ui-kitten/components";
+
 import { DatePicker } from "./DatePicker";
 import { Dropdown } from "react-native-element-dropdown";
-import customStyles from "../constants/styles";
-import colors from "../constants/colors";
 import { TimePicker } from "./TimePicker";
+import AddImage from "./AddImage";
+import AppCheckBox from "./AppCheckBox";
+import colors from "../constants/colors";
+import customStyles from "../constants/styles";
+import dataType from "../constants/dataType";
+import dimensions from "../constants/dimensions";
 import FromAdd from "./FromAdd";
 import PickSignature from "./PickSignature";
-import AddImage from "./AddImage";
-import dimensions from "../constants/dimensions";
-import AppCheckBox from "./AppCheckBox";
+
+const dummyList = [
+  { label: "0", value: "1" },
+  { label: "0.5", value: "2" },
+  { label: "1", value: "3" },
+  { label: "1.5", value: "4" },
+  { label: "2", value: "5" },
+  { label: "2.5", value: "6" },
+  { label: "5", value: "7" },
+];
 
 export default function FormInput(props) {
-  const { name, type, list, data } = props;
+  const { name, type, data } = props;
+  let list = useSelector((state) => state.dropDownData);
+
+  list = { ...list, data: dummyList };
+
   switch (type) {
     case dataType.date:
       return (
@@ -33,7 +49,7 @@ export default function FormInput(props) {
             ]}
             placeholder={""}
             placeholderStyle={{ color: colors.gray2, fontSize: 15 }}
-            data={data}
+            data={list[data]}
             search
             searchPlaceholder="Search..."
             onChange={props.onDropdownItemSelect}

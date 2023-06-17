@@ -1,21 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  FlatList,
-  Text,
-} from "react-native";
-import ParentContainer from "../../components/ParentContainer";
-import screenNames from "../../constants/screenNames";
-import ListCard from "../../components/ListCard";
-import { height } from "../../helpers/scales";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useState } from "react";
+
+import AdminListRendered from "../../components/AdminListRendered";
 import dataType from "../../constants/dataType";
 import endpoint from "../../service/endpoint";
+import getNestedData from "../../helpers/getNestedData";
+import ParentContainer from "../../components/ParentContainer";
+import screenNames from "../../constants/screenNames";
+import useGet from "./../../hooks/useGet";
 
-const MechanicDataScreen = ({ navigation }) => {
-  const { machineTypeList } = useSelector((state) => state.dropDownData);
+const MechanicDataScreen = () => {
   const form = [
     {
       name: "Id#",
@@ -23,69 +17,75 @@ const MechanicDataScreen = ({ navigation }) => {
       type: dataType.number,
       value: null,
       card: true,
+      mapKey: ["id"],
     },
     {
       name: "Rego",
       key: "rego",
       type: dataType.dropdown,
-      data: machineTypeList,
+      data: "machineTypeList",
+      mapKey: ["rego"],
+      value: null,
+      card: true,
     },
     {
       name: "Date",
       key: "date",
       type: dataType.date,
+      mapKey: ["date"],
+      value: null,
+      card: true,
     },
     {
       name: "Total Amount",
       key: "total_amount",
       type: dataType.number,
+      mapKey: ["total_amount"],
+      value: null,
+      card: true,
     },
     {
       name: "Mileage",
       key: "mileage",
       type: dataType.number,
+      mapKey: ["mileage"],
+      value: null,
+      card: true,
     },
     {
       name: "Comment",
       key: "comment",
       type: dataType.text,
+      mapKey: ["comment"],
+      value: null,
+      card: true,
     },
     {
       name: "Attachment",
       key: "attachment",
       type: dataType.image,
+      mapKey: ["attachment"],
+      value: null,
+      card: true,
     },
   ];
+  const [listData, setListData] = useState([]);
 
-  const CardComponent = ({ obj }) => {
-    const data = {
-      cardData: [
-        { key: "Rego", value: "obj.rego.name", type: "text" },
-        {
-          key: "Date",
-          value:
-            'formatDate(obj.date).monthNameFormat + "  " + AMPMFormat(obj.start)',
-          type: "date",
-        },
-        { key: "Total amount", value: "obj.total_amount", type: "number" },
-        { key: "Mileage", value: "obj.mileage", type: "number" },
-        {
-          key: "Comment",
-          value: "obj.comment",
-          type: "text",
-        },
-      ],
-    };
+  const { refresh, loading } = useGet(endpoint.rego, handleGetRegoSuccess);
 
-    return (
-      <ListCard
-        data={data}
-        obj={obj}
-        editScreen={screenNames.MECHANIC_FORM_SCREEN}
-        listScreen={screenNames.MECHANIC_DATA_SCREEN}
-      />
-    );
-  };
+  function handleGetRegoSuccess(d) {
+    let arr = [];
+    d.data.data.forEach((item) => {
+      let a = [];
+      form.forEach((i) => {
+        const value = getNestedData(item, i.mapKey);
+        a.push({ ...i, value });
+      });
+      arr.push(a);
+    });
+    setListData(arr);
+  }
+
   const formProps = {
     backScreen: screenNames.MECHANIC_DATA_SCREEN,
     endpoint: endpoint.rego,
@@ -95,31 +95,20 @@ const MechanicDataScreen = ({ navigation }) => {
   return (
     <ParentContainer
       useScroll={false}
-      // containerStyle={{ alignItems: "center" }}
-      addScreen={{name:screenNames.FORM_SCREEN, params: formProps}}
-      title={"Data"}
+      title="Mechanic Data"
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
-      <View style={styles.container}>
-        {false ? (
-          <Text style={{ marginTop: 100, alignSelf: "center", height }}>
-            No Data
-          </Text>
-        ) : (
-          <FlatList
-            data={[1, 2, 3]}
-            keyExtractor={(item, index) => "key" + index}
-            renderItem={({ item }) => {
-              return <CardComponent obj={item} />;
-            }}
-          />
-        )}
-      </View>
+      <AdminListRendered
+        data={listData}
+        onRefresh={refresh}
+        loading={loading}
+        backScreen={screenNames.MECHANIC_DATA_SCREEN}
+        listTitle={"Rego Details"}
+        editTitle={"Edit Rego"}
+        endpoint={endpoint.rego}
+      />
     </ParentContainer>
   );
 };
 
 export default MechanicDataScreen;
-
-const styles = StyleSheet.create({
-  container: { height: height - 40 },
-});

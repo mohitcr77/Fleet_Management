@@ -44,7 +44,7 @@ const MechanicTimeSheetData = () => {
       name: "Break",
       key: "break",
       type: dataType.dropdown,
-      data,
+      data: "data",
     },
     {
       name: "Driver Total",

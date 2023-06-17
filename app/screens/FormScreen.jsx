@@ -12,13 +12,10 @@ import useApi from "../hooks/useApi";
 
 export default function Form({ route, navigation }) {
   const { title, backScreen, endpoint, form } = route.params;
-  //const { form } = useSelector((state) => state.inputForm);
   const initialState = generateKeyValueFromFormData(form);
-  console.log(initialState);
 
-  // return <View />;
   const [update, setUpdate] = useState(false);
-  const formData = useRef(initialState);
+  const formData = useRef({});
 
   const { request } = useApi(handlePostSuccess);
 
@@ -51,6 +48,7 @@ export default function Form({ route, navigation }) {
               key={i.key}
               name={i.name}
               type={i.type}
+              data={i.data || []}
               defaultValue={formData.current[i.key]}
               onChangeText={(e) => (formData.current[i.key] = e)}
               onDateSelect={(e) =>
