@@ -7,6 +7,7 @@ import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 import getNestedData from "../../helpers/getNestedData";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const JobEntry = () => {
   
@@ -55,7 +56,8 @@ const JobEntry = () => {
     {
       name: "Client_id",
       key: "client_id",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.CLIENTS,
       value: null,
       card: true,
       mapKey: ["client_id"],
@@ -121,28 +123,32 @@ const JobEntry = () => {
     {
       name: "Driver ID",
       key: "driver_id",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.DRIVERS,
       value: null,
       mapKey: ["driver_id"],
     },
     {
       name: "Rego ID",
       key: "rego_id",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.REGOS,
       value: null,
       mapKey: ["rego_id"],
     },
     {
       name: "Rego planned ID",
       key: "rego_planned_id",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.REGOS,
       value: null,
       mapKey: ["rego_planned_id"],
     },
     {
       name: "Color ID",
       key: "color_id",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.COLORS,
       value: null,
       mapKey: ["color_id"],
     },
@@ -193,7 +199,7 @@ const JobEntry = () => {
     backScreen: screenNames.JOB_ENTRY,
     endpoint: endpoint.job,
     form,
-    title: "Add Regos",
+    title: "Add Job",
   };
 
   return (

@@ -28,7 +28,8 @@ export default function Form({ route, navigation }) {
       body: formData.current,
     };
 
-    await request(requestConfig);
+    const d = await request(requestConfig);
+    console.log(d, "aaaaaaa");
   }
 
   function handlePostSuccess() {

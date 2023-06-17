@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import dataType from "../../constants/dataType";
-import TokenContext from "../../service/context";
 import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
@@ -118,7 +117,7 @@ const Drivers = () => {
     <ParentContainer
       useScroll={false}
       title="Driver"
-      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      addScreen={{name:screenNames.FORM_SCREEN, params: formProps}}
     >
       <AdminListRendered
         data={listData}

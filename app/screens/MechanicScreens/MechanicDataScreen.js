@@ -101,7 +101,7 @@ const MechanicDataScreen = () => {
       <AdminListRendered
         data={listData}
         onRefresh={refresh}
-        loading={loading}
+        loading={!listData.length}
         backScreen={screenNames.MECHANIC_DATA_SCREEN}
         listTitle={"Rego Details"}
         editTitle={"Edit Rego"}

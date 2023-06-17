@@ -2,6 +2,7 @@ import * as SecureStore from "expo-secure-store";
 
 export const driverDetails = "driver_details";
 export const firstTimeLogin = "firstTimeLogin";
+export const loginDetail = "login_detail"
 
 const saveData = async (key, details) => {
   try {

@@ -7,6 +7,7 @@ import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 import getNestedData from "../../helpers/getNestedData";
+import { DROPDOWN_LIST } from "../../constants/entity";
 const MechanicTimesheet = () => {
   const [listData, setListData] = useState([]);
 
@@ -36,7 +37,8 @@ const MechanicTimesheet = () => {
     {
       name: "Mechanic Id",
       key: "mechanic_id",
-      type: dataType.number,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.MECHANICS,
       value: null,
       card: true,
       mapKey: ["mechanic_id"],
@@ -93,14 +95,14 @@ const MechanicTimesheet = () => {
     backScreen: screenNames.MECHANIC_TIME_SHEET,
     endpoint: endpoint.mechanic_timeSheet,
     form,
-    title: "Add Mechanic Time Sheet",
+    title: "Time Sheet",
   };
 
   return (
     <ParentContainer
       useScroll={false}
       title="Time Sheet"
-      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      addScreen={{ name:screenNames.FORM_SCREEN, params :formProps}}
     >
       <AdminListRendered
         data={listData}

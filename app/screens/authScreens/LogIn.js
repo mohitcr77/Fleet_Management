@@ -14,7 +14,7 @@ import AppButton from "../../components/AppButton";
 import dimensions from "../../constants/dimensions";
 import LoadingScreen from "../AdminScreens/LoadingScreen";
 import service from "../../service";
-import TokenContext from "../../service/context";
+import TokenContext from "../../auth/context";
 import customStyles from "../../constants/styles";
 import colors from "../../constants/colors";
 import screenNames from "../../constants/screenNames";

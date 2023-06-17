@@ -75,17 +75,8 @@ export default function DrawerContent({ navigation }) {
       },
       {
         name: "TimeSheet",
-        screen: null,
-        children: [
-          {
-            name: "TimeSheet Form",
-            screen: screenNames.MECHANIC_TIME_SHEET_FORM,
-          },
-          {
-            name: "TimeSheet Data",
-            screen: screenNames.MECHANIC_TIME_SHEET_DATA,
-          },
-        ],
+        screen: screenNames.MECHANIC_TIME_SHEET_DATA,
+        children: null,
       },
       {
         name: "Inspection",
@@ -100,11 +91,8 @@ export default function DrawerContent({ navigation }) {
       },
       {
         name: "Documents",
-        screen: null,
-        children: [
-          { name: "Add Document", screen: screenNames.ADD_DOCUMENT_SCREEN },
-          { name: "View Documents", screen: screenNames.VIEW_DOCUMENTS },
-        ],
+        screen: screenNames.DOCUMENTS_SCREEN,
+        children: null,
       },
     ],
     [Role.ADMIN]: [
@@ -178,7 +166,6 @@ export default function DrawerContent({ navigation }) {
         screen: null,
         children: [
           { name: "Tax", screen: screenNames.TAX },
-          { name: "Company Info", screen: screenNames.COMPANY_INFO },
           { name: "Job Color", screen: screenNames.JOB_COLOR },
           { name: "Currency", screen: screenNames.CURRENCY },
         ],

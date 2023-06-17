@@ -49,14 +49,14 @@ const JobColor = () => {
       key: "code",
       type: dataType.text,
       card: true,
-      mapKey: "code",
+      mapKey: ["code"],
     },
     {
       name: "Description",
       key: "description",
       type: dataType.text,
       card: true,
-      mapKey: "description",
+      mapKey: ["description"],
     },
   ];
   const formProps = {
@@ -70,7 +70,7 @@ const JobColor = () => {
     <ParentContainer
       useScroll={false}
       title="Job Color"
-      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      addScreen={{name:screenNames.FORM_SCREEN, params:formProps}}
     >
       <AdminListRendered
         data={listData}

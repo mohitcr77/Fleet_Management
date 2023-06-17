@@ -9,29 +9,6 @@ import useGet from "./../../hooks/useGet";
 import getNestedData from "../../helpers/getNestedData";
 
 const ReportIssue = () => {
-  const [listData, setListData] = useState([]);
-
-  const { refresh, loading } = useGet(endpoint.report_issue, handleGetIssueSuccess);
-
-  function handleGetIssueSuccess(d) {
-    let arr = [];
-    d.data.data.forEach((item) => {
-      let a = [];
-      form.forEach((i) => {
-        const value = getNestedData(item, i.mapKey);
-        a.push({ ...i, value });
-      });
-      arr.push(a);
-    });
-    setListData(arr);
-  }
-
-  const formProps = {
-    backScreen: screenNames.REPORT_ISSUE,
-    endpoint: endpoint.report_issue,
-    form,
-    title: "Add Issue",
-  };
 
   const form = [
     {
@@ -53,7 +30,7 @@ const ReportIssue = () => {
     {
       name: "Shift",
       key: "shift",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       card: true,
       mapKey: ["shift"],
@@ -82,11 +59,37 @@ const ReportIssue = () => {
     },
   ];
   
+  const [listData, setListData] = useState([]);
+
+  const { refresh, loading } = useGet(endpoint.report_issue, handleGetIssueSuccess);
+
+  function handleGetIssueSuccess(d) {
+    let arr = [];
+    d.data.data.forEach((item) => {
+      let a = [];
+      form.forEach((i) => {
+        const value = getNestedData(item, i.mapKey);
+        a.push({ ...i, value });
+      });
+      arr.push(a);
+    });
+    setListData(arr);
+  }
+
+  const formProps = {
+    backScreen: screenNames.REPORT_ISSUE,
+    endpoint: endpoint.report_issue,
+    form,
+    title: "Add Issue",
+  };
+
+  
+  
   return (
     <ParentContainer
       useScroll={false}
       title="Issue"
-      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
+      addScreen={{name:screenNames.FORM_SCREEN, params: formProps}}
     >
       <AdminListRendered
         data={listData}

@@ -10,11 +10,11 @@ const screenNames = {
   PROFILE_SCREEN: "Profile Screen",
   FORM_SCREEN: "Form Screen",
   DETAILS_VIEW_SCREEN: "Details View Screen",
+  DOCUMENTS_SCREEN: "Documents Screen",
 
   // Driver Screens
   CHAT_ROOM_SCREEN: "Chat Room Screen",
   DOCUMENT_ADD_SCREEN: "Document Add Screen",
-  DRIVER_DOCUMENTS_SCREEN: "Driver Documents Screen",
   DRIVER_JOBS_SCREEN: "Driver Jobs Screen",
   DRIVER_JOBS_LIST_SCREEN: "Driver Jobs List Screen",
   DRIVER_TIME_SHEET_SCREEN: "Driver Time Sheet Screen",

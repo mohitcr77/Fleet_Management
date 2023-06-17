@@ -2,13 +2,13 @@ import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import dataType from "../../constants/dataType";
-import TokenContext from "../../service/context";
 import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 import getNestedData from "../../helpers/getNestedData";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const VehicleMaintenance = () => {
   const form = [
@@ -21,9 +21,17 @@ const VehicleMaintenance = () => {
       mapKey: ["id"]
     },
     {
-      name: "Mechanic Id",
+      name: "Rego",
+      key: "rego_id",
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.REGOS,
+      mapKey: ["rego_id"]
+    },
+    {
+      name: "Mechanic",
       key: "mechanic_id",
-      type: dataType.number,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.MECHANICS,
       value: null,
       card: true,
       mapKey: ["mechanic_id"]
@@ -74,12 +82,6 @@ const VehicleMaintenance = () => {
       mapKey: ["type"]
     },
     {
-      name: "Rego ID",
-      key: "rego_id",
-      type: dataType.text,
-      mapKey: ["rego_id"]
-    },
-    {
       name: "Odometer Start",
       key: "odo_start",
       type: dataType.number,
@@ -102,19 +104,20 @@ const VehicleMaintenance = () => {
     },
     {
       name: "Mileage",
-      key: "milage", 
+      key: "milage",
       type: dataType.number,
       value: null,
       mapKey: ["milage"],
     },
   ];
+
   const [listData, setListData] = useState([]);
- 
-  const { refresh, loading } = useGet( 
-    endpoint.vehicle_Maintenance,
+
+  const { refresh, loading } = useGet(
+    endpoint.vehicle_maintenance,
     handleGetVehicleMaintenanceSuccess
   );
-   
+
   function handleGetVehicleMaintenanceSuccess(d) {
     let arr = [];
     d.data.data.forEach((item) => {
@@ -129,7 +132,7 @@ const VehicleMaintenance = () => {
   }
   const formProps = {
     backScreen: screenNames.VEHICLE_MAINTENANCE,
-    endpoint: endpoint.vehicle_Maintenance,
+    endpoint: endpoint.vehicle_maintenance,
     form,
     title: "Add Vehicle",
   };
@@ -147,7 +150,7 @@ const VehicleMaintenance = () => {
         backScreen={screenNames.VEHICLE_MAINTENANCE}
         listTitle={"Vehicle Details"}
         editTitle={"Edit Vehicle"}
-        endpoint={endpoint.vehicle_Maintenance}
+        endpoint={endpoint.vehicle_maintenance}
       />
     </ParentContainer>
   );

@@ -2,7 +2,7 @@ import axios from "axios";
 import { URL, getHeader } from ".";
 
 const clients = "/clients";
-const currency = "/currencies";
+const currency = "/currency";
 const driver = "/driver";
 const estimate = "/estimate";
 const fuel_efficiency = "/fuel_efficiency";
@@ -12,14 +12,15 @@ const job_color = "/color";
 const mechanic = "/mechanic";
 const mechanic_timeSheet = "/mechanic_timesheet";
 const rego = "/regos";
+const login = "/login";
 const sign_up = "/signup";
 const staff = "/staff";
 const tax = "/taxes";
-const vehicle_Maintenance = "/vehicle_maintenance";
+const vehicle_maintenance = "/vehicle_maintenance";
 const timezones = "/timezones";
-const job ="/jobs"
-const report_issue = "/issues"
-
+const job ="/jobs";
+const report_issue = "/issues";
+const creditnote = "/creditnote"
 const fetchData = async (endpoint, token) => {
   let res;
   try {
@@ -39,6 +40,7 @@ export default {
   fetchData,
   fuel_efficiency,
   fuel_log,
+  login,
   getId,
   job_color,
   mechanic_timeSheet,
@@ -47,8 +49,9 @@ export default {
   sign_up,
   staff,
   tax,
-  vehicle_Maintenance,
-  timezones,
   job,
-  report_issue
+  report_issue,
+  vehicle_maintenance,
+  timezones,
+  creditnote
 };
