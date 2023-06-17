@@ -12,13 +12,14 @@ import useApi from "../hooks/useApi";
 
 export default function Form({ route, navigation }) {
   const { title, backScreen, endpoint, form } = route.params;
+  console.log(form, "pppppppppppppppppp");
   const initialState = generateKeyValueFromFormData(form);
 
   const [update, setUpdate] = useState(false);
   const formData = useRef(initialState);
 
   const { request } = useApi(handlePostSuccess);
-
+  console.log(form, formData.current, "ppp");
   async function handlePostData() {
     const id = formData.current.id;
 
@@ -27,9 +28,10 @@ export default function Form({ route, navigation }) {
       endpoint: id ? endpoint + "/" + id : endpoint,
       body: formData.current,
     };
-
+    // console.log(requestConfig);
+    // return;
     const d = await request(requestConfig);
-    console.log(d, "aaaaaaa");
+    // console.log(d, "aaaaaaa");
   }
 
   function handlePostSuccess() {

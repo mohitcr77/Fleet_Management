@@ -10,108 +10,108 @@ import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 
 const FuelLog = () => {
+  const form = [
+    {
+      name: "Id#",
+      key: "id",
+      type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
+      name: "Date",
+      key: "date",
+      type: dataType.date,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
+      name: "Time",
+      key: "time",
+      type: dataType.time,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
+      name: "Dkt_no.",
+      key: "dkt_no",
+      type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
+      name: "Dip Start",
+      key: "dip_Start",
+      type: dataType.text,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
+      name: "Dip finish",
+      key: "dip_finish",
+      type: dataType.text,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
+      name: "EST Delivered",
+      key: "est_delivered",
+      type: dataType.text,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
+      name: "Actual Delivered",
+      key: "actual_delivered",
+      type: dataType.text,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
+      name: "Fuel Rate",
+      key: "fuel_rate",
+      type: dataType.text,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
+      name: "Invoice",
+      key: "invoice_total",
+      type: dataType.text,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+  ];
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useGet(endpoint.fuel_log, handleCurrencySuccess);
 
   function handleCurrencySuccess(d) {
     let arr = [];
-    d.forEach((item) => {
-      const a = [
-        {
-          name: "Date",
-          value: item?.date,
-          card: true
-        },
-        {
-          name: "Time",
-          value: item?.time,
-          card: true
-        },
-        {
-          name: "Dkt_no.",
-          value: item?.dkt_no,
-          card: true
-        },
-        {
-          name: "Dip Start",
-          value: JSON.stringify(item?.dip_start),
-          card: true
-        },
-        {
-          name: "Dip finish",
-          value: JSON.stringify(item?.dip_finish),
-          card: true
-        },
-        {
-          name: "EST Delivered",
-          value: JSON.stringify(item?.est_delivered),
-          card: true
-        },
-        {
-          name: "Actual Delivered",
-          value: JSON.stringify(item?.actual_delivered),
-        },
-        {
-          name: "Fuel Rate",
-          value: JSON.stringify(item?.fuel_rate),
-        },
-        {
-          name: "Invoice",
-          value: item?.invoice_total,
-        },
-      ];
+    d.data.data.forEach((item) => {
+      let a = [];
+      form.forEach((i) => {
+        console.log(item, "ppp");
+        // const value = getNestedData(item, i.mapKey);
+
+        a.push({ ...i, value: item[i.key] });
+      });
       arr.push(a);
     });
+    console.log(arr, "lll");
     setListData(arr);
   }
-  const form = [
-    {
-      name: "Date",
-      key: "date",
-      type: dataType.date,
-    },
-    {
-      name: "Time",
-      key: "time",
-      type: dataType.time,
-    },
-    {
-      name: "Dkt_no.",
-      key: "dkt_no",
-      type: dataType.number,
-    },
-    {
-      name: "Dip Start",
-      key: "dip_Start",
-      type: dataType.text,
-    },
-    {
-      name: "Dip finish",
-      key: "dip_finish",
-      type: dataType.text,
-    },
-    {
-      name: "EST Delivered",
-      key: "est_delivered",
-      type: dataType.text,
-    },
-    {
-      name: "Actual Delivered",
-      key: "actual_delivered",
-      type: dataType.text,
-    },
-    {
-      name: "Fuel Rate",
-      key: "fuel_rate",
-      type: dataType.text,
-    },
-    {
-      name: "Invoice",
-      key: "invoice_total",
-      type: dataType.text,
-    },
-  ];
+
   const formProps = {
     backScreen: screenNames.FUEL_LOG,
     endpoint: endpoint.fuel_log,
@@ -129,6 +129,10 @@ const FuelLog = () => {
         data={listData}
         onRefresh={refresh}
         loading={loading}
+        backScreen={screenNames.FUEL_LOG}
+        listTitle={"Fuel Log"}
+        editTitle={"Edit"}
+        endpoint={endpoint.fuel_log}
       />
     </ParentContainer>
   );

@@ -47,8 +47,8 @@ export default function FormInput(props) {
               customStyles.inputBox,
               { paddingHorizontal: 14, height: 40 },
             ]}
-            placeholder={""}
-            placeholderStyle={{ color: colors.gray2, fontSize: 15 }}
+            placeholder={getDropdownPlaceholder()}
+            placeholderStyle={{ color: "black", fontSize: 15 }}
             data={list[data]}
             search
             searchPlaceholder="Search..."
@@ -124,6 +124,11 @@ export default function FormInput(props) {
         {children}
       </View>
     );
+  }
+
+  function getDropdownPlaceholder() {
+    const d = list[data].filter((e) => e.id == props.defaultValue)[0].label;
+    return d;
   }
 }
 

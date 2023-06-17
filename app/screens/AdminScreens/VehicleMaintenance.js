@@ -31,7 +31,7 @@ const VehicleMaintenance = () => {
       type: dataType.dropdown,
       data: DROPDOWN_LIST.MECHANICS,
       value: null,
-      card: true,
+      card: false,
     },
     {
       name: "Repair Date",
@@ -45,7 +45,7 @@ const VehicleMaintenance = () => {
       key: "repair_time",
       type: dataType.time,
       value: null,
-      card: true,
+      card: false,
     },
     {
       name: "Day",
@@ -65,6 +65,7 @@ const VehicleMaintenance = () => {
       key: "total_amount",
       type: dataType.number,
       value: null,
+      card: true,
     },
     {
       name: "Type",
@@ -102,14 +103,15 @@ const VehicleMaintenance = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useGet(
-    endpoint.vehicle_Maintenance,
+    endpoint.vehicle_maintenance,
     handleGetVehicleMaintenanceSuccess
   );
 
   function handleGetVehicleMaintenanceSuccess(d) {
     let arr = [];
-    d.forEach((item) => {
+    d.data.data.forEach((item) => {
       let a = [];
+      console.log(item, ";;;");
       form.forEach((i) => a.push({ ...i, value: item[i.key] }));
       arr.push(a);
     });
@@ -135,7 +137,7 @@ const VehicleMaintenance = () => {
         backScreen={screenNames.VEHICLE_MAINTENANCE}
         listTitle={"Vehicle Details"}
         editTitle={"Edit Vehicle"}
-        endpoint={endpoint.vehicle_Maintenance}
+        endpoint={endpoint.vehicle_maintenance}
       />
     </ParentContainer>
   );

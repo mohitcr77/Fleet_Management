@@ -21,17 +21,17 @@ const Currencies = () => {
         {
           name: "Name",
           value: item.name,
-          card: true
+          card: true,
         },
         {
           name: "Code",
           value: item.code,
-          card: true
+          card: true,
         },
         {
           name: "Symbol",
           value: item.symbol,
-          card: true
+          card: true,
         },
       ];
       arr.push(a);
@@ -40,16 +40,22 @@ const Currencies = () => {
   }
   const form = [
     {
+      name: "Id#",
+      key: "id",
+      type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
       name: "Name",
       key: "name",
       type: dataType.text,
-      
     },
     {
       name: "code",
       key: "code",
       type: dataType.text,
-      
     },
     {
       name: "Symbol",

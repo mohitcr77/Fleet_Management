@@ -9,7 +9,6 @@ import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 
 const FuelEfficiency = () => {
-
   const form = [
     {
       name: "Id#",
@@ -23,28 +22,28 @@ const FuelEfficiency = () => {
       key: "driver_id",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Current miles",
       key: "current_miles",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Total fuel (ltrs)",
       key: "total_fuel_ltrs",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Milage",
       key: "milage",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Fuel Cost",
@@ -86,12 +85,16 @@ const FuelEfficiency = () => {
 
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.fuel_efficiency, handleFuelEfficiencySuccess);
+  const { refresh, loading } = useGet(
+    endpoint.fuel_efficiency,
+    handleFuelEfficiencySuccess
+  );
 
   function handleFuelEfficiencySuccess(d) {
     let arr = [];
-    d.forEach((item) => {
+    d.data.data.forEach((item) => {
       let a = [];
+
       form.forEach((i) => a.push({ ...i, value: item[i.key] }));
       arr.push(a);
     });
@@ -102,7 +105,7 @@ const FuelEfficiency = () => {
     endpoint: endpoint.fuel_efficiency,
     form,
     title: "Add Fuel Efficiency",
-  }
+  };
 
   return (
     <ParentContainer
@@ -116,7 +119,7 @@ const FuelEfficiency = () => {
         loading={loading}
       />
     </ParentContainer>
-  )
+  );
 };
 
 export default FuelEfficiency;

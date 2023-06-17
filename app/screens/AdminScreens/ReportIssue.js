@@ -7,6 +7,7 @@ import dataType from "../../constants/dataType";
 import index from "../../service/index";
 import TokenContext from "../../service/context";
 import LoadingScreen from "./LoadingScreen";
+import ParentContainer from "../../components/ParentContainer";
 
 const ReportIssue = () => {
   const token = useContext(TokenContext);

@@ -23,7 +23,7 @@ const Mechanic = () => {
       key: "name",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Email",
@@ -46,14 +46,14 @@ const Mechanic = () => {
       key: "current_address_1",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Address 2",
       key: "current_address_2",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "State",
@@ -78,7 +78,7 @@ const Mechanic = () => {
       key: "availibility_status",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
     },
   ];
   const [listData, setListData] = useState([]);
@@ -87,7 +87,7 @@ const Mechanic = () => {
 
   function handleCurrencySuccess(d) {
     let arr = [];
-    d.forEach((item) => {
+    d.data.data.forEach((item) => {
       let a = [];
       form.forEach((i) => a.push({ ...i, value: item[i.key] }));
       arr.push(a);
