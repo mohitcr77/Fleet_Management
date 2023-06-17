@@ -5,6 +5,7 @@ const initialState = {
   machineTypeList: [],
   driverList: [],
   supervisorList: [],
+  mechanicList: [],
 };
 
 export const dropdownDataSlice = createSlice({
@@ -20,7 +21,7 @@ export const dropdownDataSlice = createSlice({
     addDriverList: (state, action) => {
       state.driverList = action.payload;
     },
-    addSupervisorList: (state, action) => {
+    addSupervisorList: (state, action) => {r
       state.supervisorList =  action.payload;
     }
   },

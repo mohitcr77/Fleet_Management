@@ -16,7 +16,9 @@ const sign_up = "/signup";
 const staff = "/staff";
 const tax = "/taxes";
 const vehicle_Maintenance = "/vehicle_maintenance";
-const timezones = "/timezones"
+const timezones = "/timezones";
+const job ="/jobs"
+const report_issue = "/issues"
 
 const fetchData = async (endpoint, token) => {
   let res;
@@ -46,5 +48,7 @@ export default {
   staff,
   tax,
   vehicle_Maintenance,
-  timezones
+  timezones,
+  job,
+  report_issue
 };

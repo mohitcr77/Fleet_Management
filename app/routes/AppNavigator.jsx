@@ -17,14 +17,14 @@ import ScanDktList from "../screens/DriverScreens/ScanDktListScreen";
 import TimeSheet from "../screens/DriverScreens/TimeSheetScreen";
 
 //mechanic screen
-import MechanicFormScreen from "../screens/MechnicScreens/MechanicFormScreen";
-import MechanicDataScreen from "../screens/MechnicScreens/MechanicDataScreen";
-import MechanicTimeSheetForm from "../screens/MechnicScreens/MechanicTimeSheetForm";
-import MechanicTimeSheetData from "../screens/MechnicScreens/MechanicTimeSheetData";
-import FleetInspection from "../screens/MechnicScreens/FleetInspection";
-import InspectionHistory from "../screens/MechnicScreens/InspectionHistory";
-import DocumentForm from "../screens/MechnicScreens/DocumentForm";
-import DocumentList from "../screens/MechnicScreens/DocumentList";
+import MechanicFormScreen from "../screens/MechanicScreens/MechanicFormScreen";
+import MechanicDataScreen from "../screens/MechanicScreens/MechanicDataScreen";
+import MechanicTimeSheetForm from "../screens/MechanicScreens/MechanicTimeSheetForm";
+import MechanicTimeSheetData from "../screens/MechanicScreens/MechanicTimeSheetData";
+import FleetInspection from "../screens/MechanicScreens/FleetInspection";
+import InspectionHistory from "../screens/MechanicScreens/InspectionHistory";
+import DocumentForm from "../screens/MechanicScreens/DocumentForm";
+import DocumentList from "../screens/MechanicScreens/DocumentList";
 
 //common screen
 import AboutApp from "../screens/AboutAppScreen";

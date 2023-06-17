@@ -15,9 +15,9 @@ export default function Form({ route, navigation }) {
   const initialState = generateKeyValueFromFormData(form);
 
   const [update, setUpdate] = useState(false);
-  const formData = useRef({});
+  const formData = useRef(initialState);
 
-  const { request } = useApi(handlePostSuccess);
+  const { request } = useApi(handlePostSuccess);0.0
 
   async function handlePostData() {
     const id = formData.current.id;

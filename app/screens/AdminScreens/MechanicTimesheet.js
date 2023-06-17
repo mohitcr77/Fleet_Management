@@ -1,14 +1,12 @@
-import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import dataType from "../../constants/dataType";
-import TokenContext from "../../service/context";
 import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
-
+import getNestedData from "../../helpers/getNestedData";
 const MechanicTimesheet = () => {
   const [listData, setListData] = useState([]);
 
@@ -16,76 +14,79 @@ const MechanicTimesheet = () => {
 
   function handleMechanic_TimeSheetSuccess(d) {
     let arr = [];
-    d.forEach((item) => {
-      const a = [
-        {
-          name: "Mechanic Id",
-          value: item?.mechanic_id,
-          card: true,
-        },
-        {
-          name: "Date",
-          value: item?.date,
-          card: true,
-        },
-        {
-          name: "Day",
-          value: item?.day,
-          card: true
-        },
-        {
-          name: "Start time",
-          value: JSON.stringify(item?.start_time),
-          card: true
-        },
-        {
-          name: "End_time",
-          value: item?.end_time,
-        },
-        {
-          name: "notes",
-          value: item?.notes,
-        },
-      ];
+    d.data.data.forEach((item) => {
+      let a = [];
+      form.forEach((i) => {
+        const value = getNestedData(item, i.mapKey);
+        a.push({ ...i, value });
+      });
       arr.push(a);
     });
     setListData(arr);
   }
   const form = [
     {
+      name: "Id#",
+      key: "id",
+      type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
       name: "Mechanic Id",
       key: "mechanic_id",
       type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: ["mechanic_id"],
     },
     {
       name: "Date",
       key: "date",
       type: dataType.date,
+      value: null,
+      card: true,
+      mapKey: ["date"],
+
     },
     {
       name: "Day",
       key: "day",
       type: dataType.text,
+      value: null,
+      card: true,
+      mapKey: ["day"],
     },
     {
       name: "Start time",
       key: "start_time",
       type: dataType.time,
+      value: null,
+      card: true,
+      mapKey: ["start_time"],
     },
     {
       name: "End_time",
       key: "end_time",
       type: dataType.time,
+      value: null,
+      card: true,
+      mapKey: ["end_time"],
     },
     {
       name: "notes",
       key: "notes",
       type: dataType.text,
+      value: null,
+      mapKey: ["notes"],
     },
     {
       name: "Total time",
       key: "total_time",
       type: dataType.number,
+      value: null,
+      mapKey: ["total_time"],
     },
   ];
   const formProps = {

@@ -8,6 +8,7 @@ import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import getNestedData from "../../helpers/getNestedData";
 
 const VehicleMaintenance = () => {
   const form = [
@@ -17,81 +18,94 @@ const VehicleMaintenance = () => {
       type: dataType.number,
       value: null,
       card: true,
+      mapKey: ["id"]
     },
     {
       name: "Mechanic Id",
       key: "mechanic_id",
       type: dataType.number,
       value: null,
-      card: true
+      card: true,
+      mapKey: ["mechanic_id"]
     },
     {
       name: "Repair Date",
       key: "repair_date",
       type: dataType.date,
       value: null,
-      card: true
+      card: true,
+      mapKey: ["repair_date"]
     },
     {
       name: "Repair Time",
       key: "repair_time",
       type: dataType.time,
       value: null,
-      card: true
+      card: true,
+      mapKey : ["repair_time"]
     },
     {
       name: "Day",
       key: "day",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
+      mapKey: ["repair_time"]
     },
     {
       name: "Comment",
       key: "comment",
       type: dataType.text,
       value: null,
+      mapKey: ["repair_time"]
     },
     {
       name: "Total amount",
       key: "total_amount",
       type: dataType.number,
       value: null,
+      mapKey: ["total_amount"]
     },
     {
       name: "Type",
       key: "type",
       type: dataType.text,
       value: null,
+      mapKey: ["type"]
     },
     {
       name: "Rego ID",
       key: "rego_id",
       type: dataType.text,
+      mapKey: ["rego_id"]
     },
     {
       name: "Odometer Start",
       key: "odo_start",
       type: dataType.number,
       value: null,
+      mapKey: ["odo_start"]
     },
     {
       name: "Odometer Finish",
       key: "odo_finish",
       type: dataType.number,
       value: null,
+      mapKey: ["odo_finish"]
     },
     {
       name: "Distance",
       key: "distance",
       type: dataType.number,
       value: null,
+      mapKey: ["distance"]
     },
     {
       name: "Mileage",
       key: "milage", 
       type: dataType.number,
       value: null,
+      mapKey: ["milage"],
     },
   ];
   const [listData, setListData] = useState([]);
@@ -103,9 +117,12 @@ const VehicleMaintenance = () => {
    
   function handleGetVehicleMaintenanceSuccess(d) {
     let arr = [];
-    d.forEach((item) => {
+    d.data.data.forEach((item) => {
       let a = [];
-      form.forEach((i) => a.push({ ...i, value: item[i.key] }));
+      form.forEach((i) => {
+        const value = getNestedData(item, i.mapKey);
+        a.push({ ...i, value });
+      });
       arr.push(a);
     });
     setListData(arr);

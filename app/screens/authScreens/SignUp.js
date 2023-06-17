@@ -23,20 +23,6 @@ import isEmptyArray from "../../helpers/isEmptyArray";
 import LoadingScreen from "./../AdminScreens/LoadingScreen";
 import SignUpDropDown from "../../components/SignUpDropDown";
 
-const placements = [
-  "top",
-  "top start",
-  "top end",
-  "bottom",
-  "bottom start",
-  "bottom end",
-  "left",
-  "left start",
-  "left end",
-  "right",
-  "right start",
-  "right end",
-];
 const SignUp = ({ navigation }) => {
   const { data: currencyList } = useGet(endpoint.currency);
   const { data: timezoneList } = useGet(endpoint.timezones);
