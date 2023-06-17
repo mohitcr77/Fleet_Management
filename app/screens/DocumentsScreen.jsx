@@ -1,21 +1,40 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
-import ParentContainer from "../../components/ParentContainer";
-import { width } from "../../helpers/scales";
-import colors from "../../constants/colors";
-import TouchableText from "../../components/TouchableText";
-import Icons from "../../components/Icons";
-import screenNames from "../../constants/screenNames";
+
+import screenNames from "../constants/screenNames";
+import { width } from "../helpers/scales";
+import colors from "../constants/colors";
+import dataType from "../constants/dataType";
+import endpoint from "../service/endpoint";
+import ParentContainer from "../components/ParentContainer";
+import TouchableText from "../components/TouchableText";
 
 export default function Documents({ navigation }) {
+  const form = [
+    { name: "Name", key: "name", type: dataType.text },
+    {
+      name: "Comment",
+      key: "comment",
+      type: dataType.text,
+    },
+    {
+      title: "Attach Image",
+      key: "img",
+      type: dataType.image,
+    },
+  ];
+
+  const formProps = {
+    backScreen: screenNames.DOCUMENTS_SCREEN,
+    endpoint: endpoint.rego,
+    form,
+    title: "Add",
+  };
+
   return (
     <ParentContainer
-      onAddDocumentScreen={screenNames.DOCUMENT_ADD_SCREEN}
-      // headerBtn={() => (
-      //   <Icons.AddDocument
-      //     onPress={() => navigation.navigate(screenNames.DOCUMENT_ADD_SCREEN)}
-      //   />
-      // )}
+      title="Documents"
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
         <CardComponent key={i} item={i} />
@@ -46,7 +65,7 @@ function CardComponent({ item }) {
   );
 
   function getIcon(doc) {
-    return require(`../../assets/images/pdf.jpg`);
+    return require(`../assets/images/pdf.jpg`);
 
     // const ext = doc.split(".")[1] || "image";
     // if (ext === "jpg" || ext === "jpeg" || ext === "png") {

@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import dataType from "../../constants/dataType";
-import FormInput from "../../components/FormInput";
-import ParentContainer from "../../components/ParentContainer";
-import AppButton from "../../components/AppButton";
-import AppFooterButton from "../../components/AppFooterButton";
-import screenNames from "../../constants/screenNames";
+import dataType from "../constants/dataType";
+import FormInput from "../components/FormInput";
+import ParentContainer from "../components/ParentContainer";
+import AppButton from "../components/AppButton";
+import AppFooterButton from "../components/AppFooterButton";
+import screenNames from "../constants/screenNames";
 
 export default function DocumentAdd({ navigation }) {
   const form = [
