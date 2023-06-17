@@ -18,6 +18,7 @@ import TokenContext from "../../service/context";
 import customStyles from "../../constants/styles";
 import colors from "../../constants/colors";
 import screenNames from "../../constants/screenNames";
+import store, { firstTimeLogin } from "../../auth/store"; 
 
 const LogIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -35,6 +36,7 @@ const LogIn = ({ navigation }) => {
     try {
       const res = await service.getApiData(data);
       if (res.data) {
+        const firstLogin = await store.getData(firstTimeLogin)
         token.setAuth(res.data);
         service.saveData(JSON.stringify(res.data));
       } else {

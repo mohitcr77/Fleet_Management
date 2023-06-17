@@ -122,7 +122,6 @@ const SignUp = ({ navigation }) => {
       endpoint: endpoint.sign_up,
       body: state,
     };
-    console.log(state);
     await signUpUser(requestConfig);
   };
 
