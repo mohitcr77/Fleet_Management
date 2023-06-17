@@ -9,7 +9,6 @@ export const inputForm = createSlice({
   initialState,
   reducers: {
     addInputForm: (state, action) => {
-      console.log(action.payload.length, "0000000000000");
       state.form = [...action.payload];
     },
   },

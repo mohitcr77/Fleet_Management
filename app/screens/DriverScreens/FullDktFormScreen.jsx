@@ -23,33 +23,30 @@ export const dummyDropdownData = [
 ];
 
 export default function FullDktForm() {
-  const { clientList, machineTypeList } = useSelector(
-    (state) => state.dropDownData
-  );
   const fullDktForm = [
     {
       name: "Client Name",
       key: "client_name",
       type: dataType.dropdown,
-      data: clientList,
+      data: "clientList",
     },
     {
       name: "Machine Type",
       key: "machine_type",
       type: dataType.dropdown,
-      data: machineTypeList,
+      data: "machineTypeList",
     },
     {
       name: "Travel Time",
       key: "travel_time",
       type: dataType.dropdown,
-      data: dummyDropdownData,
+      data: "dummyDropdownData",
     },
     {
       name: "Supervisor",
       key: "supervisor",
       type: dataType.dropdown,
-      data: dummyDropdownData,
+      data: "dummyDropdownData",
     },
     { name: "Date", key: "date", type: dataType.date },
     { name: "Start Time", key: "start", type: dataType.time },

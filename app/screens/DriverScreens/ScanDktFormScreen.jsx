@@ -7,9 +7,6 @@ import AppFooterButton from "../../components/AppFooterButton";
 import { useSelector } from "react-redux";
 
 export default function ScanDktForm() {
-  const { clientList, machineTypeList } = useSelector(
-    (state) => state.dropDownData
-  );
   const data = [
     { label: "Item 1", value: "1" },
     { label: "Item 2", value: "2" },
@@ -26,20 +23,20 @@ export default function ScanDktForm() {
       name: "Client Name",
       key: "client",
       type: dataType.dropdown,
-      data: clientList,
+      data: "clientList",
     },
     {
       name: "Machine Type",
       key: "machine_type",
       type: dataType.dropdown,
-      data: machineTypeList,
+      data: "machineTypeList",
     },
     { name: "Date", key: "date", type: dataType.date },
     {
       name: "Operator",
       key: "driver_name",
       type: dataType.dropdown,
-      data,
+      data: "data",
     },
     { name: "Docket No.", key: "docket_no", type: dataType.text },
     { name: "Job No.", key: "job_no", type: dataType.text },

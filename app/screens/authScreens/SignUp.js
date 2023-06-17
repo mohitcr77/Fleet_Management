@@ -9,10 +9,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { useState, useEffect, useRef } from "react";
-import {
-  Text,
-  Input,
-} from "@ui-kitten/components/ui";
+import { Text, Input } from "@ui-kitten/components/ui";
 
 import dimensions from "../../constants/dimensions";
 import Icons from "../../components/Icons";
@@ -129,7 +126,7 @@ const SignUp = ({ navigation }) => {
     navigation.navigate(screenNames.OTP_SCREEN, { email: state?.email });
   }
 
-  //setting value for dropdown 
+  //setting value for dropdown
   const setDropDownState = (key, item) => {
     setState({ ...state, [key]: item });
   };
