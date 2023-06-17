@@ -8,6 +8,7 @@ import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const VehicleMaintenance = () => {
   const form = [
@@ -19,32 +20,39 @@ const VehicleMaintenance = () => {
       card: true,
     },
     {
-      name: "Mechanic Id",
+      name: "Rego",
+      key: "rego_id",
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.REGOS,
+    },
+    {
+      name: "Mechanic",
       key: "mechanic_id",
-      type: dataType.number,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.MECHANICS,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Repair Date",
       key: "repair_date",
       type: dataType.date,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Repair Time",
       key: "repair_time",
       type: dataType.time,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Day",
       key: "day",
       type: dataType.text,
       value: null,
-      card: true
+      card: true,
     },
     {
       name: "Comment",
@@ -64,11 +72,7 @@ const VehicleMaintenance = () => {
       type: dataType.text,
       value: null,
     },
-    {
-      name: "Rego ID",
-      key: "rego_id",
-      type: dataType.text,
-    },
+
     {
       name: "Odometer Start",
       key: "odo_start",
@@ -89,18 +93,19 @@ const VehicleMaintenance = () => {
     },
     {
       name: "Mileage",
-      key: "milage", 
+      key: "milage",
       type: dataType.number,
       value: null,
     },
   ];
+
   const [listData, setListData] = useState([]);
- 
-  const { refresh, loading } = useGet( 
+
+  const { refresh, loading } = useGet(
     endpoint.vehicle_Maintenance,
     handleGetVehicleMaintenanceSuccess
   );
-   
+
   function handleGetVehicleMaintenanceSuccess(d) {
     let arr = [];
     d.forEach((item) => {
@@ -112,7 +117,7 @@ const VehicleMaintenance = () => {
   }
   const formProps = {
     backScreen: screenNames.VEHICLE_MAINTENANCE,
-    endpoint: endpoint.vehicle_Maintenance,
+    endpoint: endpoint.vehicle_maintenance,
     form,
     title: "Add Vehicle",
   };

@@ -15,7 +15,7 @@ export default function Form({ route, navigation }) {
   const initialState = generateKeyValueFromFormData(form);
 
   const [update, setUpdate] = useState(false);
-  const formData = useRef({});
+  const formData = useRef(initialState);
 
   const { request } = useApi(handlePostSuccess);
 
@@ -28,7 +28,8 @@ export default function Form({ route, navigation }) {
       body: formData.current,
     };
 
-    await request(requestConfig);
+    const d = await request(requestConfig);
+    console.log(d, "aaaaaaa");
   }
 
   function handlePostSuccess() {

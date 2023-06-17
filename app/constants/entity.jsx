@@ -20,3 +20,12 @@ export const HTTPS_METHODS = {
   DELETE: "delete",
   PUT: "put",
 };
+
+export const DROPDOWN_LIST = {
+  CLIENTS: "clientList",
+  REGOS: "machineTypeList",
+  DRIVERS: "driverList",
+  SUPERVISOR: "supervisorList",
+  MECHANICS: "mechanicList",
+  COLORS: "colors",
+};
