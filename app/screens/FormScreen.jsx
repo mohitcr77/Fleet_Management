@@ -22,7 +22,7 @@ export default function Form({ route, navigation }) {
 
   async function handlePostData() {
     const id = formData.current.id;
-
+     // console.log(formData.current);
     const requestConfig = {
       method: id ? HTTPS_METHODS.PUT : HTTPS_METHODS.POST,
       endpoint: id ? endpoint + "/" + id : endpoint,
