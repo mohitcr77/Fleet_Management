@@ -134,7 +134,7 @@ export default function DrawerContent({ navigation }) {
         screen: null,
         children: [
           { name: "SMS", screen: screenNames.SMS },
-          { name: "Chat", screen: screenNames.CHAT },
+          { name: "Chat", screen: screenNames.CHAT_ROOM_SCREEN },
         ],
       },
       {

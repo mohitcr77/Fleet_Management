@@ -17,7 +17,7 @@ const Mechanic = () => {
       type: dataType.number,
       value: null,
       card: true,
-      mapKey: ["id"]
+      mapKey: ["id"],
     },
     {
       name: "Name",
@@ -25,61 +25,61 @@ const Mechanic = () => {
       type: dataType.text,
       value: null,
       card: true,
-      mapKey: ["user", "name"]
+      mapKey: ["user", "name"],
     },
     {
       name: "Email",
       key: "email",
       type: dataType.text,
       card: true,
-      mapKey: ["user", "email"]
+      mapKey: ["user", "email"],
     },
     {
       name: "Password",
       key: "password",
       type: dataType.password,
-      mapKey: [""]
+      mapKey: [""],
     },
     {
       name: "Re-enter Password",
       key: "repassword",
       type: dataType.password,
-      mapKey: [""]
+      mapKey: [""],
     },
     {
       name: "Address 1",
       key: "current_address_1",
       type: dataType.text,
       value: null,
-      mapKey: [""]
+      mapKey: [""],
     },
     {
       name: "Address 2",
       key: "current_address_2",
       type: dataType.text,
       value: null,
-      mapKey: [""]
+      mapKey: [""],
     },
     {
       name: "State",
       key: "state_id",
       type: dataType.text,
       value: null,
-      mapKey: [""]
+      mapKey: [""],
     },
     {
       name: "City",
       key: "city_id",
       type: dataType.text,
       value: null,
-      mapKey: [""]
+      mapKey: [""],
     },
     {
       name: "Country",
       key: "conutry_id",
       type: dataType.text,
       value: null,
-      mapKey: [""]
+      mapKey: [""],
     },
     {
       name: "Availabilty Status",
@@ -87,7 +87,7 @@ const Mechanic = () => {
       type: dataType.text,
       value: null,
       card: true,
-      mapKey: ["availibility_status"]
+      mapKey: ["availibility_status"],
     },
   ];
   const [listData, setListData] = useState([]);
@@ -117,7 +117,7 @@ const Mechanic = () => {
     <ParentContainer
       useScroll={false}
       title="Mechanic"
-      addScreen={{ name:screenNames.FORM_SCREEN,params: formProps}}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}

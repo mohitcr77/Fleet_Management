@@ -16,7 +16,7 @@ const Drivers = () => {
       type: dataType.number,
       value: null,
       card: true,
-      mapKey: "id",
+      mapKey: ["id"],
     },
     {
       name: "Name",

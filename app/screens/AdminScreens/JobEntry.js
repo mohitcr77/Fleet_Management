@@ -10,7 +10,6 @@ import getNestedData from "../../helpers/getNestedData";
 import { DROPDOWN_LIST } from "../../constants/entity";
 
 const JobEntry = () => {
-  
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useGet(endpoint.job, handleGetJobSuccess);
@@ -48,13 +47,14 @@ const JobEntry = () => {
     {
       name: "Day",
       key: "day",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.DAYS,
       value: null,
       card: true,
       mapKey: ["day"],
     },
     {
-      name: "Client_id",
+      name: "Client",
       key: "client_id",
       type: dataType.dropdown,
       data: DROPDOWN_LIST.CLIENTS,
@@ -109,7 +109,7 @@ const JobEntry = () => {
     {
       name: "Docket hours",
       key: "docket_hours",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       mapKey: ["docket_hours"],
     },
@@ -121,7 +121,7 @@ const JobEntry = () => {
       mapKey: ["invoice_no"],
     },
     {
-      name: "Driver ID",
+      name: "Driver",
       key: "driver_id",
       type: dataType.dropdown,
       data: DROPDOWN_LIST.DRIVERS,
@@ -129,7 +129,7 @@ const JobEntry = () => {
       mapKey: ["driver_id"],
     },
     {
-      name: "Rego ID",
+      name: "Rego",
       key: "rego_id",
       type: dataType.dropdown,
       data: DROPDOWN_LIST.REGOS,
@@ -137,7 +137,7 @@ const JobEntry = () => {
       mapKey: ["rego_id"],
     },
     {
-      name: "Rego planned ID",
+      name: "Rego planned",
       key: "rego_planned_id",
       type: dataType.dropdown,
       data: DROPDOWN_LIST.REGOS,
@@ -145,7 +145,7 @@ const JobEntry = () => {
       mapKey: ["rego_planned_id"],
     },
     {
-      name: "Color ID",
+      name: "Color",
       key: "color_id",
       type: dataType.dropdown,
       data: DROPDOWN_LIST.COLORS,
@@ -155,14 +155,14 @@ const JobEntry = () => {
     {
       name: "Travel time",
       key: "travel_time",
-      type: dataType.time,
+      type: dataType.number,
       value: null,
       mapKey: ["travel_time"],
     },
     {
       name: "Admin dstart",
       key: "admin_dstart",
-      type: dataType.text,
+      type: dataType.time,
       value: null,
       mapKey: ["admin_dstart"],
     },
@@ -181,7 +181,7 @@ const JobEntry = () => {
       mapKey: ["short_url"],
     },
     {
-      name: "Link_id",
+      name: "Link",
       key: "link_id",
       type: dataType.text,
       value: null,

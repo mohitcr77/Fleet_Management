@@ -10,6 +10,7 @@ import FormInput from "../../components/FormInput";
 import ParentContainer from "../../components/ParentContainer";
 import screenNames from "../../constants/screenNames";
 import { useSelector } from "react-redux";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 export const dummyDropdownData = [
   { label: "Item 1", value: "1" },
@@ -28,25 +29,25 @@ export default function FullDktForm() {
       name: "Client Name",
       key: "client_name",
       type: dataType.dropdown,
-      data: "clientList",
+      data: DROPDOWN_LIST.CLIENTS,
     },
     {
       name: "Machine Type",
       key: "machine_type",
       type: dataType.dropdown,
-      data: "machineTypeList",
+      data: DROPDOWN_LIST.REGOS,
     },
     {
       name: "Travel Time",
       key: "travel_time",
       type: dataType.dropdown,
-      data: "dummyDropdownData",
+      data: DROPDOWN_LIST.BREAK,
     },
     {
       name: "Supervisor",
       key: "supervisor",
       type: dataType.dropdown,
-      data: "dummyDropdownData",
+      data: DROPDOWN_LIST.SUPERVISOR,
     },
     { name: "Date", key: "date", type: dataType.date },
     { name: "Start Time", key: "start", type: dataType.time },

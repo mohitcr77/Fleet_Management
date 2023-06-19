@@ -99,7 +99,6 @@ export default function AppNavigator() {
 
       { name: screenNames.DRIVER_TIME_SHEET_SCREEN, component: TimeSheet },
 
-      { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
       // { name: screenNames.DOCUMENT_ADD_SCREEN, component: DocumentAdd },
       {
         name: screenNames.PRE_INSPECTION_HISTORY_SCREEN,
@@ -200,6 +199,7 @@ export default function AppNavigator() {
     { name: screenNames.FORM_SCREEN, component: Form },
     { name: screenNames.DETAILS_VIEW_SCREEN, component: DetailsView },
     { name: screenNames.DOCUMENTS_SCREEN, component: Documents },
+    { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
   ];
 
   const navigationScreens = [...drawerScreens[role], ...commonScreens];

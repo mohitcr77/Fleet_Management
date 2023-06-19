@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import ParentContainer from "../../components/ParentContainer";
 
 const SMS = () => {
   return (
-    <View>
+    <ParentContainer title={"SMS"}>
       <Text>SMS</Text>
-    </View>
-  )
-}
+    </ParentContainer>
+  );
+};
 
-export default SMS
+export default SMS;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -9,7 +9,6 @@ import useGet from "./../../hooks/useGet";
 import getNestedData from "../../helpers/getNestedData";
 
 const ReportIssue = () => {
-
   const form = [
     {
       name: "Id#",
@@ -27,14 +26,7 @@ const ReportIssue = () => {
       card: true,
       mapKey: ["date"],
     },
-    {
-      name: "Shift",
-      key: "shift",
-      type: dataType.number,
-      value: null,
-      card: true,
-      mapKey: ["shift"],
-    },
+
     {
       name: "Report time",
       key: "report_time",
@@ -58,10 +50,13 @@ const ReportIssue = () => {
       mapKey: ["report"],
     },
   ];
-  
+
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.report_issue, handleGetIssueSuccess);
+  const { refresh, loading } = useGet(
+    endpoint.report_issue,
+    handleGetIssueSuccess
+  );
 
   function handleGetIssueSuccess(d) {
     let arr = [];
@@ -83,13 +78,11 @@ const ReportIssue = () => {
     title: "Add Issue",
   };
 
-  
-  
   return (
     <ParentContainer
       useScroll={false}
       title="Issue"
-      addScreen={{name:screenNames.FORM_SCREEN, params: formProps}}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}
@@ -101,6 +94,7 @@ const ReportIssue = () => {
         endpoint={endpoint.report_issue}
       />
     </ParentContainer>
-)};
+  );
+};
 
 export default ReportIssue;

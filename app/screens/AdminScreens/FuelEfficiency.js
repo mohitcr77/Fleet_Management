@@ -9,7 +9,7 @@ import getNestedData from "../../helpers/getNestedData";
 import { DROPDOWN_LIST } from "../../constants/entity";
 
 const FuelEfficiency = () => {
-//what is user id? and how is rego_id entered in API
+  //what is user id? and how is rego_id entered in API
   const form = [
     {
       name: "Id#",
@@ -17,7 +17,7 @@ const FuelEfficiency = () => {
       type: dataType.number,
       value: null,
       card: true,
-      mapKey: ["id"]
+      mapKey: ["id"],
     },
     {
       name: "Rego",
@@ -26,7 +26,7 @@ const FuelEfficiency = () => {
       data: DROPDOWN_LIST.REGOS,
       value: null,
       card: true,
-      mapKey: ["user_id"]
+      mapKey: ["user_id"],
     },
     {
       name: "Driver",
@@ -43,7 +43,7 @@ const FuelEfficiency = () => {
       type: dataType.text,
       value: null,
       card: true,
-      mapKey: ["current_miles"]
+      mapKey: ["current_miles"],
     },
     {
       name: "Total fuel (ltrs)",
@@ -51,7 +51,7 @@ const FuelEfficiency = () => {
       type: dataType.text,
       value: null,
       card: true,
-      mapKey: ["total_fuel_ltrs"]
+      mapKey: ["total_fuel_ltrs"],
     },
     {
       name: "Milage",
@@ -59,64 +59,65 @@ const FuelEfficiency = () => {
       type: dataType.text,
       value: null,
       card: true,
-      mapKey: ["milage"]
+      mapKey: ["milage"],
     },
     {
       name: "Fuel Cost",
       key: "fuel_cost",
       type: dataType.text,
       value: null,
-      mapKey: ["fuel_cost"]
+      mapKey: ["fuel_cost"],
     },
     {
       name: "Fuel card no",
       key: "fuel_card_no",
       type: dataType.text,
       value: null,
-      mapKey: ["fuel_card_no"]
+      mapKey: ["fuel_card_no"],
     },
     {
       name: "Fuel rate",
       key: "fuel_rate",
       type: dataType.text,
       value: null,
-      mapKey: ["fuel_rate"]
+      mapKey: ["fuel_rate"],
     },
     {
       name: "Fuel per km",
       key: "fuel_per_km",
       type: dataType.text,
       value: null,
-      mapKey: ["fuel_per_km"]
+      mapKey: ["fuel_per_km"],
     },
     {
       name: "Date",
       key: "date",
       type: dataType.date,
       value: null,
-      mapKey: ["date"]
+      mapKey: ["date"],
     },
     {
       name: "Comments",
       key: "comments",
       type: dataType.text,
       value: null,
-      mapKey: ["comments"]
+      mapKey: ["comments"],
     },
   ];
 
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.fuel_efficiency, handleFuelEfficiencySuccess);
+  const { refresh, loading } = useGet(
+    endpoint.fuel_efficiency,
+    handleFuelEfficiencySuccess
+  );
 
   function handleFuelEfficiencySuccess(d) {
     let arr = [];
     d.data.data.forEach((item) => {
       let a = [];
-      form.forEach((i) => {
-        const value = getNestedData(item, i.mapKey);
-        a.push({ ...i, value });
-      });
+
+      form.forEach((i) => a.push({ ...i, value: item[i.key] }));
       arr.push(a);
     });
     setListData(arr);
@@ -126,13 +127,13 @@ const FuelEfficiency = () => {
     endpoint: endpoint.fuel_efficiency,
     form,
     title: "Add Efficiency",
-  }
+  };
 
   return (
     <ParentContainer
       useScroll={false}
       title="Fuel Efficiency"
-      addScreen={{ name :screenNames.FORM_SCREEN, params: formProps}}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}
@@ -143,7 +144,7 @@ const FuelEfficiency = () => {
         endpoint={endpoint.fuel_efficiency}
       />
     </ParentContainer>
-  )
+  );
 };
 
 export default FuelEfficiency;

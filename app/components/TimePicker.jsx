@@ -6,14 +6,15 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import colors from "../constants/colors";
 import formatDate from "../helpers/formatDate";
 
-export const TimePicker = ({ name }) => {
+export const TimePicker = ({ onTimeSelect }) => {
   const [show, setShow] = useState(false);
   const [time, setTime] = useState(null);
 
-  const onChange = (e) => {
+  const onChange = (e, t) => {
     setShow(false);
-    const d = new Date(e);
     setTime(formatDate(e).hourMinFormat);
+    // console.log(formatDate(e).hourMinFormat);
+    onTimeSelect(formatDate(e).hourMinFormat + ":00");
   };
 
   return (

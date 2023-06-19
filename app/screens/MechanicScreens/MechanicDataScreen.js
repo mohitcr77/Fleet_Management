@@ -8,6 +8,7 @@ import getNestedData from "../../helpers/getNestedData";
 import ParentContainer from "../../components/ParentContainer";
 import screenNames from "../../constants/screenNames";
 import useGet from "./../../hooks/useGet";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const MechanicDataScreen = () => {
   const form = [
@@ -23,7 +24,7 @@ const MechanicDataScreen = () => {
       name: "Rego",
       key: "rego",
       type: dataType.dropdown,
-      data: "machineTypeList",
+      data: DROPDOWN_LIST.REGOS,
       mapKey: ["rego"],
       value: null,
       card: true,

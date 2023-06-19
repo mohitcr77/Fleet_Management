@@ -18,14 +18,12 @@ const VehicleMaintenance = () => {
       type: dataType.number,
       value: null,
       card: true,
-      mapKey: "id"
     },
     {
       name: "Rego",
       key: "rego_id",
       type: dataType.dropdown,
       data: DROPDOWN_LIST.REGOS,
-      mapKey: ["rego_id"]
     },
     {
       name: "Mechanic",
@@ -34,7 +32,6 @@ const VehicleMaintenance = () => {
       data: DROPDOWN_LIST.MECHANICS,
       value: null,
       card: true,
-      mapKey: ["mechanic_id"]
     },
     {
       name: "Repair Date",
@@ -42,7 +39,6 @@ const VehicleMaintenance = () => {
       type: dataType.date,
       value: null,
       card: true,
-      mapKey: ["repair_date"]
     },
     {
       name: "Repair Time",
@@ -50,12 +46,12 @@ const VehicleMaintenance = () => {
       type: dataType.time,
       value: null,
       card: true,
-      mapKey : ["repair_time"]
     },
     {
       name: "Day",
       key: "day",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.DAYS,
       value: null,
       card: true,
     },
@@ -114,9 +110,7 @@ const VehicleMaintenance = () => {
     let arr = [];
     d.data.data.forEach((item) => {
       let a = [];
-      form.forEach((i) => {
-        a.push({ ...i, value: item[i.key] });
-      });
+      form.forEach((i) => a.push({ ...i, value: item[i.key] }));
       arr.push(a);
     });
     setListData(arr);

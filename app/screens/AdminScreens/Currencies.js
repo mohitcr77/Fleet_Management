@@ -43,7 +43,7 @@ const Currencies = () => {
       mapKey: ["symbol"],
     },
   ];
-  
+
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useGet(endpoint.currency, handleCurrencySuccess);
@@ -60,7 +60,7 @@ const Currencies = () => {
     });
     setListData(arr);
   }
-  
+
   const formProps = {
     backScreen: screenNames.CURRENCY,
     endpoint: endpoint.currency,
@@ -71,7 +71,7 @@ const Currencies = () => {
     <ParentContainer
       useScroll={false}
       title="Currency"
-      addScreen={{ name:screenNames.FORM_SCREEN, params: formProps}}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}
