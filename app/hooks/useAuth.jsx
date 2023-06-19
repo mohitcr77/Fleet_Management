@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import TokenContext from "../service/context";
+import TokenContext from "../auth/context";
 import dataType from "../constants/dataType";
 
 export default useAuth = () => {

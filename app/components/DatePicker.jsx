@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Datepicker, Layout, Text } from "@ui-kitten/components";
 import dimensions from "../constants/dimensions";
 import customStyles from "../constants/styles";
+import formatDate from "../helpers/formatDate";
 
 export const DatePicker = (props) => {
   // const d = props.value !== "" ? new Date(props.value) : new Date();
@@ -15,7 +16,7 @@ export const DatePicker = (props) => {
           date={date}
           onSelect={(nextDate) => {
             setDate(nextDate);
-            props.onDateSelect(nextDate);
+            props.onDateSelect(formatDate(nextDate).y_m_d);
           }}
           controlStyle={{ backgroundColor: "white" }}
         />

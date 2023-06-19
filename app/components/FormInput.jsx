@@ -40,6 +40,9 @@ export default function FormInput(props) {
       );
 
     case dataType.dropdown:
+      // list[data].forEach((e) => {
+      //   console.log(e.label, e.value, "ooo");
+      // });
       return (
         <CompWrapper>
           <Dropdown
@@ -127,7 +130,11 @@ export default function FormInput(props) {
   }
 
   function getDropdownPlaceholder() {
-    const d = list[data].filter((e) => e.id == props.defaultValue)[0].label;
+    const d =
+      // props.defaultValue
+      // ? list[data].filter((e) => e.id == props.defaultValue)[0].label
+      // :
+      "";
     return d;
   }
 }

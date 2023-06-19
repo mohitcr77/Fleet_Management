@@ -2,12 +2,12 @@ import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import dataType from "../../constants/dataType";
-import TokenContext from "../../service/context";
 import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import getNestedData from "../../helpers/getNestedData";
 
 const Mechanic = () => {
   const form = [
@@ -17,6 +17,7 @@ const Mechanic = () => {
       type: dataType.number,
       value: null,
       card: true,
+      mapKey: ["id"],
     },
     {
       name: "Name",
@@ -24,54 +25,61 @@ const Mechanic = () => {
       type: dataType.text,
       value: null,
       card: true,
+      mapKey: ["user", "name"],
     },
     {
       name: "Email",
       key: "email",
       type: dataType.text,
       card: true,
+      mapKey: ["user", "email"],
     },
     {
       name: "Password",
       key: "password",
       type: dataType.password,
+      mapKey: [""],
     },
     {
       name: "Re-enter Password",
       key: "repassword",
       type: dataType.password,
+      mapKey: [""],
     },
     {
       name: "Address 1",
       key: "current_address_1",
       type: dataType.text,
       value: null,
-      card: true,
+      mapKey: [""],
     },
     {
       name: "Address 2",
       key: "current_address_2",
       type: dataType.text,
       value: null,
-      card: true,
+      mapKey: [""],
     },
     {
       name: "State",
       key: "state_id",
       type: dataType.text,
       value: null,
+      mapKey: [""],
     },
     {
       name: "City",
       key: "city_id",
       type: dataType.text,
       value: null,
+      mapKey: [""],
     },
     {
       name: "Country",
       key: "conutry_id",
       type: dataType.text,
       value: null,
+      mapKey: [""],
     },
     {
       name: "Availabilty Status",
@@ -79,6 +87,7 @@ const Mechanic = () => {
       type: dataType.text,
       value: null,
       card: true,
+      mapKey: ["availibility_status"],
     },
   ];
   const [listData, setListData] = useState([]);
@@ -89,7 +98,10 @@ const Mechanic = () => {
     let arr = [];
     d.data.data.forEach((item) => {
       let a = [];
-      form.forEach((i) => a.push({ ...i, value: item[i.key] }));
+      form.forEach((i) => {
+        const value = getNestedData(item, i.mapKey);
+        a.push({ ...i, value });
+      });
       arr.push(a);
     });
     setListData(arr);
@@ -105,7 +117,7 @@ const Mechanic = () => {
     <ParentContainer
       useScroll={false}
       title="Mechanic"
-      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}

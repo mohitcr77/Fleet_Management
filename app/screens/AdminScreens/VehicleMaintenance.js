@@ -2,12 +2,12 @@ import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import dataType from "../../constants/dataType";
-import TokenContext from "../../service/context";
 import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import getNestedData from "../../helpers/getNestedData";
 import { DROPDOWN_LIST } from "../../constants/entity";
 
 const VehicleMaintenance = () => {
@@ -31,7 +31,7 @@ const VehicleMaintenance = () => {
       type: dataType.dropdown,
       data: DROPDOWN_LIST.MECHANICS,
       value: null,
-      card: false,
+      card: true,
     },
     {
       name: "Repair Date",
@@ -45,14 +45,15 @@ const VehicleMaintenance = () => {
       key: "repair_time",
       type: dataType.time,
       value: null,
-      card: false,
+      card: true,
     },
     {
       name: "Day",
       key: "day",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.DAYS,
       value: null,
-      card: true,
+      // card: true,
     },
     {
       name: "Comment",
@@ -65,7 +66,6 @@ const VehicleMaintenance = () => {
       key: "total_amount",
       type: dataType.number,
       value: null,
-      card: true,
     },
     {
       name: "Type",
@@ -73,7 +73,6 @@ const VehicleMaintenance = () => {
       type: dataType.text,
       value: null,
     },
-
     {
       name: "Odometer Start",
       key: "odo_start",
@@ -111,7 +110,6 @@ const VehicleMaintenance = () => {
     let arr = [];
     d.data.data.forEach((item) => {
       let a = [];
-      console.log(item, ";;;");
       form.forEach((i) => a.push({ ...i, value: item[i.key] }));
       arr.push(a);
     });

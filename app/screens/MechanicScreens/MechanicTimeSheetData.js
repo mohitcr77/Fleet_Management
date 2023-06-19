@@ -13,17 +13,9 @@ import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
 import dataType from "../../constants/dataType";
 import endpoint from "../../service/endpoint";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const MechanicTimeSheetData = () => {
-  const data = [
-    { label: "0", value: "1" },
-    { label: "0.5", value: "2" },
-    { label: "1", value: "3" },
-    { label: "1.5", value: "4" },
-    { label: "2", value: "5" },
-    { label: "2.5", value: "6" },
-    { label: "5", value: "7" },
-  ];
   const form = [
     {
       name: "Date",
@@ -44,7 +36,7 @@ const MechanicTimeSheetData = () => {
       name: "Break",
       key: "break",
       type: dataType.dropdown,
-      data: "data",
+      data: DROPDOWN_LIST.BREAK,
     },
     {
       name: "Driver Total",

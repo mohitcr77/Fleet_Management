@@ -23,20 +23,6 @@ import isEmptyArray from "../../helpers/isEmptyArray";
 import LoadingScreen from "./../AdminScreens/LoadingScreen";
 import SignUpDropDown from "../../components/SignUpDropDown";
 
-const placements = [
-  "top",
-  "top start",
-  "top end",
-  "bottom",
-  "bottom start",
-  "bottom end",
-  "left",
-  "left start",
-  "left end",
-  "right",
-  "right start",
-  "right end",
-];
 const SignUp = ({ navigation }) => {
   const { data: currencyList } = useGet(endpoint.currency);
   const { data: timezoneList } = useGet(endpoint.timezones);
@@ -72,20 +58,20 @@ const SignUp = ({ navigation }) => {
       key: "email",
       type: dataType.text,
     },
-    {
-      placeholder: "Currency",
-      hidden: false,
-      key: "currency_id",
-      type: dataType.dropdown,
-      data: currencyList,
-    },
-    {
-      placeholder: "Timezone",
-      hidden: false,
-      key: "timezone_id",
-      type: dataType.dropdown,
-      data: timezoneList,
-    },
+    // {
+    //   placeholder: "Currency",
+    //   hidden: false,
+    //   key: "currency_id",
+    //   type: dataType.dropdown,
+    //   data: currencyList,
+    // },
+    // {
+    //   placeholder: "Timezone",
+    //   hidden: false,
+    //   key: "timezone_id",
+    //   type: dataType.dropdown,
+    //   data: timezoneList,
+    // },
     {
       placeholder: "Role",
       hidden: false,

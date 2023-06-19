@@ -2,12 +2,12 @@ import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import dataType from "../../constants/dataType";
-import TokenContext from "../../service/context";
 import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import getNestedData from "../../helpers/getNestedData";
 
 const FuelLog = () => {
   const form = [
@@ -23,73 +23,58 @@ const FuelLog = () => {
       name: "Date",
       key: "date",
       type: dataType.date,
-      value: null,
       card: true,
-      mapKey: ["id"],
+      mapKey: ["date"],
     },
     {
       name: "Time",
       key: "time",
       type: dataType.time,
-      value: null,
       card: true,
-      mapKey: ["id"],
+      mapKey: ["time"],
     },
     {
       name: "Dkt_no.",
       key: "dkt_no",
       type: dataType.number,
-      value: null,
       card: true,
-      mapKey: ["id"],
+      mapKey: ["dtk_no"],
     },
     {
       name: "Dip Start",
       key: "dip_Start",
-      type: dataType.text,
-      value: null,
-      card: true,
-      mapKey: ["id"],
+      type: dataType.time,
+      mapKey: ["dip_start"],
     },
     {
       name: "Dip finish",
       key: "dip_finish",
-      type: dataType.text,
-      value: null,
-      card: true,
-      mapKey: ["id"],
+      type: dataType.time,
+      mapKey: ["dip_finish"],
     },
     {
       name: "EST Delivered",
       key: "est_delivered",
       type: dataType.text,
-      value: null,
-      card: true,
-      mapKey: ["id"],
+      mapKey: ["dip_finish"],
     },
     {
       name: "Actual Delivered",
       key: "actual_delivered",
       type: dataType.text,
-      value: null,
-      card: true,
-      mapKey: ["id"],
+      mapKey: ["actual_delivered"],
     },
     {
       name: "Fuel Rate",
       key: "fuel_rate",
-      type: dataType.text,
-      value: null,
-      card: true,
-      mapKey: ["id"],
+      type: dataType.number,
+      mapKey: ["fuel_rate"],
     },
     {
       name: "Invoice",
       key: "invoice_total",
       type: dataType.text,
-      value: null,
-      card: true,
-      mapKey: ["id"],
+      mapKey: ["invoice_total"],
     },
   ];
   const [listData, setListData] = useState([]);
@@ -101,14 +86,12 @@ const FuelLog = () => {
     d.data.data.forEach((item) => {
       let a = [];
       form.forEach((i) => {
-        console.log(item, "ppp");
         // const value = getNestedData(item, i.mapKey);
 
         a.push({ ...i, value: item[i.key] });
       });
       arr.push(a);
     });
-    console.log(arr, "lll");
     setListData(arr);
   }
 
@@ -123,7 +106,7 @@ const FuelLog = () => {
     <ParentContainer
       useScroll={false}
       title="Fuel Log"
-      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}

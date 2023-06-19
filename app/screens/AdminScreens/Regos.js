@@ -1,7 +1,5 @@
-import { StyleSheet } from "react-native";
 import React from "react";
 import { useState } from "react";
-
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";

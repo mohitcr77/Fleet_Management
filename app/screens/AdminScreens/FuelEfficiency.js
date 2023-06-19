@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
-import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import getNestedData from "../../helpers/getNestedData";
 
 const FuelEfficiency = () => {
+  //what is user id? and how is rego_id entered in API
   const form = [
     {
       name: "Id#",
@@ -16,6 +16,7 @@ const FuelEfficiency = () => {
       type: dataType.number,
       value: null,
       card: true,
+      mapKey: ["id"],
     },
     {
       name: "User id",
@@ -23,6 +24,7 @@ const FuelEfficiency = () => {
       type: dataType.text,
       value: null,
       card: true,
+      mapKey: ["user_id"],
     },
     {
       name: "Current miles",
@@ -30,6 +32,7 @@ const FuelEfficiency = () => {
       type: dataType.text,
       value: null,
       card: true,
+      mapKey: ["current_miles"],
     },
     {
       name: "Total fuel (ltrs)",
@@ -37,6 +40,7 @@ const FuelEfficiency = () => {
       type: dataType.text,
       value: null,
       card: true,
+      mapKey: ["total_fuel_ltrs"],
     },
     {
       name: "Milage",
@@ -44,42 +48,49 @@ const FuelEfficiency = () => {
       type: dataType.text,
       value: null,
       card: true,
+      mapKey: ["milage"],
     },
     {
       name: "Fuel Cost",
       key: "fuel_cost",
       type: dataType.text,
       value: null,
+      mapKey: ["fuel_cost"],
     },
     {
       name: "Fuel card no",
       key: "fuel_card_no",
       type: dataType.text,
       value: null,
+      mapKey: ["fuel_card_no"],
     },
     {
       name: "Fuel rate",
       key: "fuel_rate",
       type: dataType.text,
       value: null,
+      mapKey: ["fuel_rate"],
     },
     {
       name: "Fuel per km",
       key: "fuel_per_km",
       type: dataType.text,
       value: null,
+      mapKey: ["fuel_per_km"],
     },
     {
       name: "Date",
       key: "date",
       type: dataType.date,
       value: null,
+      mapKey: ["date"],
     },
     {
       name: "Comments",
       key: "comments",
       type: dataType.text,
       value: null,
+      mapKey: ["comments"],
     },
   ];
 
@@ -104,43 +115,25 @@ const FuelEfficiency = () => {
     backScreen: screenNames.FUEL_EFFICIENCY,
     endpoint: endpoint.fuel_efficiency,
     form,
-    title: "Add Fuel Efficiency",
+    title: "Add Efficiency",
   };
 
   return (
     <ParentContainer
       useScroll={false}
       title="Fuel Efficiency"
-      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}
         onRefresh={refresh}
         loading={loading}
+        backScreen={screenNames.FUEL_EFFICIENCY}
+        editTitle={"Edit FUEL"}
+        endpoint={endpoint.fuel_efficiency}
       />
     </ParentContainer>
   );
 };
 
 export default FuelEfficiency;
-const styles = StyleSheet.create({
-  topContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-    margin: 10,
-    backgroundColor: "#ffffff",
-    borderRadius: 10,
-  },
-  btnStyle: {
-    backgroundColor: "#13bfa6",
-    borderRadius: 6,
-    padding: 8,
-  },
-  listStyle: {
-    flex: 9,
-  },
-});

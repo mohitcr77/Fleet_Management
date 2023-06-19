@@ -12,7 +12,7 @@ import AppNavigator from "./app/routes/AppNavigator";
 import AuthNavigator from "./app/routes/AuthNavigator";
 import index from "./app/service/index";
 import StartupScreen from "./app/screens/AdminScreens/StartupScreen";
-import TokenContext from "./app/service/context";
+import TokenContext from "./app/auth/context";
 
 export default function App() {
   const [userToken, setAuth] = useState(null);

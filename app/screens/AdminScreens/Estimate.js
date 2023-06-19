@@ -6,6 +6,7 @@ import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
+import getNestedData from "../../helpers/getNestedData";
 
 const Estimate = () => {
   const [listData, setListData] = useState([]);
@@ -14,103 +15,97 @@ const Estimate = () => {
 
   function handleEstimateSuccess(d) {
     let arr = [];
-    d.forEach((item) => {
-      const a = [
-        {
-          name: "Client ID",
-          value: item?.client_id,
-        },
-        {
-          name: "Estimate number",
-          value: item?.estimate_no,
-        },
-        {
-          name: "Reference Number",
-          value: JSON.stringify(item?.reference_no),
-        },
-        {
-          name: "Estimate Date",
-          value: item?.estimate_date,
-        },
-        {
-          name: "Expire Date",
-          value: item?.expire_date,
-        },
-        {
-          name: "Subject",
-          value: item?.subject,
-        },
-        {
-          name: "Customer Notes",
-          value: JSON.stringify(item?.customer_notes),
-        },
-        {
-          name: "Subtotal",
-          value: item?.subtotal,
-        },
-        {
-          name: "Total",
-          value: item?.total,
-        },
-        {
-          name: "paid",
-          value: item?.paid,
-        },
-      ];
+    d.data.data.forEach((item) => {
+      let a = [];
+      form.forEach((i) => {
+        const value = getNestedData(item, i.mapKey);
+        a.push({ ...i, value });
+      });
       arr.push(a);
     });
     setListData(arr);
   }
   const form = [
     {
+      name: "Id#",
+      key: "id",
+      type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
+    {
       name: "Client ID",
       key: "client_id",
       type: dataType.text,
+      value: null,
+      card: true,
+      mapKey: ["client_id"],
     },
     {
       name: "Estimate number",
       key: "estimate_no",
       type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: ["estimate_no"],
     },
     {
       name: "Reference Number",
       key: "reference_no",
       type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: ["reference_no"],
     },
     {
       name: "Estimate Date",
       key: "estimate_date",
       type: dataType.date,
+      value: null,
+      mapKey: ["estimate_date"],
     },
     {
       name: "Expire Date",
       key: "expire_date",
       type: dataType.date,
+      value: null,
+      mapKey: ["repair_Date"],
     },
     {
       name: "Subject",
       key: "subject",
       type: dataType.text,
+      value: null,
+      mapKey: ["subject"],
     },
     {
       name: "Customer Notes",
       key: "customer_notes",
       type: dataType.text,
+      value: null,
+      mapKey: ["customer_notes"],
     },
     {
       name: "Subtotal",
       key: "subtotal",
       type: dataType.number,
+      value: null,
+      mapKey: ["subtotal"],
     },
     {
       name: "Total",
       key: "total",
       type: dataType.number,
+      value: null,
+      mapKey: ["total"],
     },
     {
       name: "paid",
       key: "paid",
       type: dataType.number,
+      value: null,
+      mapKey: ["paid"],
     },
   ];
   const formProps = {
@@ -124,12 +119,16 @@ const Estimate = () => {
     <ParentContainer
       useScroll={false}
       title="Estimate"
-      addScreen={[screenNames.FORM_SCREEN, formProps]}
+      addScreen={{ name:screenNames.FORM_SCREEN,params: formProps}}
     >
       <AdminListRendered
         data={listData}
         onRefresh={refresh}
         loading={loading}
+        backScreen={screenNames.REGOS}
+        listTitle={"Rego Details"}
+        editTitle={"Edit Rego"}
+        endpoint={endpoint.rego}
       />
     </ParentContainer>
   );

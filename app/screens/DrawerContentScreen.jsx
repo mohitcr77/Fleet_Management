@@ -116,6 +116,7 @@ export default function DrawerContent({ navigation }) {
         name: "Staffs",
         screen: null,
         children: [
+          { name: "Staff", screen: screenNames.STAFF },
           { name: "Driver", screen: screenNames.DRIVER },
           { name: "Mechanic", screen: screenNames.MECHANIC },
         ],
@@ -165,7 +166,6 @@ export default function DrawerContent({ navigation }) {
         screen: null,
         children: [
           { name: "Tax", screen: screenNames.TAX },
-          { name: "Company Info", screen: screenNames.COMPANY_INFO },
           { name: "Job Color", screen: screenNames.JOB_COLOR },
           { name: "Currency", screen: screenNames.CURRENCY },
         ],

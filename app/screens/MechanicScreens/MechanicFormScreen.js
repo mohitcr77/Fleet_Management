@@ -9,6 +9,7 @@ import FormInput from "../../components/FormInput";
 import generateKeyValueFromFormData from "../../helpers/generateKeyValueFromForm";
 import ParentContainer from "../../components/ParentContainer";
 import useApi from "../../hooks/useApi";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const MechanicFormScreen = () => {
   const { request: postMechanicData } = useApi();
@@ -18,7 +19,7 @@ const MechanicFormScreen = () => {
       name: "Rego",
       key: "rego",
       type: dataType.dropdown,
-      data: "machineTypeList",
+      data: DROPDOWN_LIST.REGOS,
     },
     {
       name: "Date",

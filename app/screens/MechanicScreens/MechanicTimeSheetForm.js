@@ -5,6 +5,7 @@ import FormInput from "../../components/FormInput";
 import dataType from "../../constants/dataType";
 import customStyles from "../../constants/styles";
 import AppButton from "../../components/AppButton";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const MechanicTimeSheetForm = () => {
   const data = [
@@ -36,7 +37,7 @@ const MechanicTimeSheetForm = () => {
       name: "Break",
       key: "break",
       type: dataType.dropdown,
-      data: "data",
+      data: DROPDOWN_LIST.BREAK,
     },
     {
       name: "Driver Total",

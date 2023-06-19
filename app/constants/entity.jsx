@@ -22,10 +22,12 @@ export const HTTPS_METHODS = {
 };
 
 export const DROPDOWN_LIST = {
+  BREAK: "break",
   CLIENTS: "clientList",
-  REGOS: "machineTypeList",
-  DRIVERS: "driverList",
-  SUPERVISOR: "supervisorList",
-  MECHANICS: "mechanicList",
   COLORS: "colors",
+  DAYS: "days",
+  DRIVERS: "driverList",
+  MECHANICS: "mechanicList",
+  REGOS: "machineTypeList",
+  SUPERVISOR: "supervisorList",
 };

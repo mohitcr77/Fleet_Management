@@ -12,14 +12,14 @@ import useApi from "../hooks/useApi";
 
 export default function Form({ route, navigation }) {
   const { title, backScreen, endpoint, form } = route.params;
-  console.log(form, "pppppppppppppppppp");
   const initialState = generateKeyValueFromFormData(form);
 
   const [update, setUpdate] = useState(false);
   const formData = useRef(initialState);
 
   const { request } = useApi(handlePostSuccess);
-  console.log(form, formData.current, "ppp");
+  0.0;
+
   async function handlePostData() {
     const id = formData.current.id;
 
@@ -31,7 +31,7 @@ export default function Form({ route, navigation }) {
     // console.log(requestConfig);
     // return;
     const d = await request(requestConfig);
-    // console.log(d, "aaaaaaa");
+    console.log(d, "ppp");
   }
 
   function handlePostSuccess() {
@@ -44,24 +44,26 @@ export default function Form({ route, navigation }) {
       containerStyle={{ backgroundColor: "white" }}
       onBackButtonPressScreen={backScreen}
     >
-      {form.map(
-        (i) =>
-          i.name !== "Id#" && (
+      {form.map((i) => {
+        const { value, ...respProps } = i;
+        if (i.name !== "Id#") {
+          const onSelect = (e) => (formData.current[i.key] = e);
+
+          return (
             <FormInput
-              key={i.key}
-              name={i.name}
-              type={i.type}
-              data={i.data || []}
+              {...respProps}
               defaultValue={formData.current[i.key]}
-              onChangeText={(e) => (formData.current[i.key] = e)}
-              onDateSelect={(e) =>
-                (formData.current[i.key] = formatDate(e).y_m_d)
+              onChangeText={onSelect}
+              onDateSelect={onSelect}
+              onImageSelect={onSelect}
+              onTimeSelect={onSelect}
+              onDropdownItemSelect={(e) =>
+                (formData.current[i.key] = e.id || e.label)
               }
-              onImageSelect={(e) => (formData.current[i.key] = e)}
-              onDropdownItemSelect={(e) => (formData.current[i.key] = e.id)}
             />
-          )
-      )}
+          );
+        }
+      })}
       <AppFooterButton onPressRight={handlePostData} />
     </ParentContainer>
   );

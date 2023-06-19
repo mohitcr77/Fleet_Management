@@ -5,38 +5,29 @@ import FormInput from "../../components/FormInput";
 import dataType from "../../constants/dataType";
 import AppFooterButton from "../../components/AppFooterButton";
 import { useSelector } from "react-redux";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 export default function ScanDktForm() {
-  const data = [
-    { label: "Item 1", value: "1" },
-    { label: "Item 2", value: "2" },
-    { label: "Item 3", value: "3" },
-    { label: "Item 4", value: "4" },
-    { label: "Item 5", value: "5" },
-    { label: "Item 6", value: "6" },
-    { label: "Item 7", value: "7" },
-    { label: "Item 8", value: "8" },
-  ];
   const fullDktForm = [
     { name: "Add Document", key: "document1", type: dataType.image },
     {
       name: "Client Name",
       key: "client",
       type: dataType.dropdown,
-      data: "clientList",
+      data: DROPDOWN_LIST.CLIENTS,
     },
     {
       name: "Machine Type",
       key: "machine_type",
       type: dataType.dropdown,
-      data: "machineTypeList",
+      data: DROPDOWN_LIST.REGOS,
     },
     { name: "Date", key: "date", type: dataType.date },
     {
       name: "Operator",
       key: "driver_name",
       type: dataType.dropdown,
-      data: "data",
+      data: DROPDOWN_LIST.DRIVERS,
     },
     { name: "Docket No.", key: "docket_no", type: dataType.text },
     { name: "Job No.", key: "job_no", type: dataType.text },
