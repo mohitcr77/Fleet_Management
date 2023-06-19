@@ -18,35 +18,37 @@ import TokenContext from "../../auth/context";
 import customStyles from "../../constants/styles";
 import colors from "../../constants/colors";
 import screenNames from "../../constants/screenNames";
-import store, { firstTimeLogin } from "../../auth/store"; 
+import store, { firstTimeLogin } from "../../auth/store";
+import endpoint from "../../service/endpoint";
+import useAuth from "../../hooks/useAuth";
+import { loginDetail } from "../../auth/store";
+import useApi from "../../hooks/useApi";
 
 const LogIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const token = useContext(TokenContext);
+  const { userToken: auth, setAuth: setAuth } = useContext(TokenContext);
   const [passwordVisible, setPasswordVisible] = useState(true);
+  const { request: loginUser } = useApi(handleLoginSuccess);
 
-  const addNewId = async () => {
+  const addUserDetail = async () => {
     const data = {
       email: email,
       password: password,
     };
-    setIsLoading(true);
-    try {
-      const res = await service.getApiData(data);
-      if (res.data) {
-        const firstLogin = await store.getData(firstTimeLogin)
-        token.setAuth(res.data);
-        service.saveData(JSON.stringify(res.data));
-      } else {
-        alert("Invalid userId or password");
-      }
-    } catch (error) {
-      console.warn(error);
-    }
-    setIsLoading(false);
+    const requestConfig = {
+      endpoint: endpoint.login,
+      body: data,
+    };
+    await loginUser(requestConfig);
   };
+
+  function handleLoginSuccess(res) {
+    //console.log(res, "hello");
+    store.saveData(loginDetail,res);
+    setAuth(res);
+  }
 
   //for password toggle visibilty
 
@@ -77,7 +79,7 @@ const LogIn = ({ navigation }) => {
 
       <AppButton
         title="Login"
-        onPress={() => addNewId()}
+        onPress={() => addUserDetail()}
         // loading={isLoading}
       />
       <SignUpOption />

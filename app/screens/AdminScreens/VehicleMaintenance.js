@@ -53,7 +53,7 @@ const VehicleMaintenance = () => {
       type: dataType.dropdown,
       data: DROPDOWN_LIST.DAYS,
       value: null,
-      // card: true,
+      card: true,
     },
     {
       name: "Comment",

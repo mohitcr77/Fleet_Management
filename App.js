@@ -22,8 +22,7 @@ export default function App() {
     setIsLoading(true);
     let result = await index.getData();
     if (result) {
-      const resultjson = JSON.parse(result);
-      setAuth(resultjson);
+      setAuth(result);
     }
     setIsLoading(false);
   };
