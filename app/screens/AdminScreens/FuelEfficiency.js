@@ -6,6 +6,7 @@ import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 import getNestedData from "../../helpers/getNestedData";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const FuelEfficiency = () => {
 //what is user id? and how is rego_id entered in API
@@ -19,12 +20,22 @@ const FuelEfficiency = () => {
       mapKey: ["id"]
     },
     {
-      name: "User id",
-      key: "driver_id",
-      type: dataType.text,
+      name: "Rego",
+      key: "rego_id",
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.REGOS,
       value: null,
       card: true,
       mapKey: ["user_id"]
+    },
+    {
+      name: "Driver",
+      key: "driver_id",
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.DRIVERS,
+      value: null,
+      card: true,
+      mapKey: ["Driver_id"]
     },
     {
       name: "Current miles",

@@ -73,12 +73,6 @@ const SignUp = ({ navigation }) => {
       data: timezoneList,
     },
     {
-      placeholder: "Role",
-      hidden: false,
-      key: "role",
-      type: dataType.text,
-    },
-    {
       placeholder: "Password",
       hidden: true,
       key: "password",
@@ -94,8 +88,6 @@ const SignUp = ({ navigation }) => {
 
   const initialState = generateKeyValueFromFormData(signupForm);
   const [state, setState] = useState(initialState);
-  const [placementIndex, setPlacementIndex] = useState();
-  const placement = null;
 
   const { request: signUpUser } = useApi(handleSignUpSuccess);
   const [passwordVisible, setPasswordVisible] = useState(true);

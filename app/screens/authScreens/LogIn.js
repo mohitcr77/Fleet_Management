@@ -18,7 +18,7 @@ import TokenContext from "../../auth/context";
 import customStyles from "../../constants/styles";
 import colors from "../../constants/colors";
 import screenNames from "../../constants/screenNames";
-import store, { firstTimeLogin } from "../../auth/store"; 
+import store, { firstTimeLogin } from "../../auth/store";
 import endpoint from "../../service/endpoint";
 import useAuth from "../../hooks/useAuth";
 import { loginDetail } from "../../auth/store";
@@ -41,13 +41,13 @@ const LogIn = ({ navigation }) => {
       endpoint: endpoint.login,
       body: data,
     };
-    const res = await loginUser(requestConfig);
-    handleLoginSuccess(res.data)
+    await loginUser(requestConfig);
   };
 
   function handleLoginSuccess(res) {
-    store.saveData(loginDetail, JSON.stringify(res))
-    setAuth(res)
+    //console.log(res, "hello");
+    store.saveData(loginDetail,res);
+    setAuth(res);
   }
 
   //for password toggle visibilty

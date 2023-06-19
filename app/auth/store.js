@@ -6,7 +6,7 @@ export const loginDetail = "login_detail"
 
 const saveData = async (key, details) => {
   try {
-    await SecureStore.setItemAsync(key, details);
+    await SecureStore.setItemAsync(key, JSON.stringify(details));
   } catch (error) {
     console.warn("Error in storing details.", error);
   }
@@ -15,7 +15,7 @@ const saveData = async (key, details) => {
 const getData = async (key) => {
   try {
     let result = await SecureStore.getItemAsync(key);
-    return result;
+    return JSON.parse(result);
   } catch (error) {
     console.warn("Error in fetching details.", error);
   }

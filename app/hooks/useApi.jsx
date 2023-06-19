@@ -17,7 +17,7 @@ export default useApi = (onSuccess = () => {}, onFail = () => {}) => {
       Toast.hide();
       if (data.ok) {
         Toast.show(ToastType.SUCCESS);
-        onSuccess();
+        onSuccess(data.data);
       } else {
         Toast.show(ToastType.ERROR);
         onFail();

@@ -18,7 +18,7 @@ const VehicleMaintenance = () => {
       type: dataType.number,
       value: null,
       card: true,
-      mapKey: ["id"]
+      mapKey: "id"
     },
     {
       name: "Rego",
@@ -58,56 +58,48 @@ const VehicleMaintenance = () => {
       type: dataType.text,
       value: null,
       card: true,
-      mapKey: ["repair_time"]
     },
     {
       name: "Comment",
       key: "comment",
       type: dataType.text,
       value: null,
-      mapKey: ["repair_time"]
     },
     {
       name: "Total amount",
       key: "total_amount",
       type: dataType.number,
       value: null,
-      mapKey: ["total_amount"]
     },
     {
       name: "Type",
       key: "type",
       type: dataType.text,
       value: null,
-      mapKey: ["type"]
     },
     {
       name: "Odometer Start",
       key: "odo_start",
       type: dataType.number,
       value: null,
-      mapKey: ["odo_start"]
     },
     {
       name: "Odometer Finish",
       key: "odo_finish",
       type: dataType.number,
       value: null,
-      mapKey: ["odo_finish"]
     },
     {
       name: "Distance",
       key: "distance",
       type: dataType.number,
       value: null,
-      mapKey: ["distance"]
     },
     {
       name: "Mileage",
       key: "milage",
       type: dataType.number,
       value: null,
-      mapKey: ["milage"],
     },
   ];
 
@@ -123,8 +115,7 @@ const VehicleMaintenance = () => {
     d.data.data.forEach((item) => {
       let a = [];
       form.forEach((i) => {
-        const value = getNestedData(item, i.mapKey);
-        a.push({ ...i, value });
+        a.push({ ...i, value: item[i.key] });
       });
       arr.push(a);
     });
