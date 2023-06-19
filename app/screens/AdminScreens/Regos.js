@@ -104,7 +104,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: false,
-      mapKey: ["engine_number"],
+      mapKey: ["engine_no"],
     },
     {
       name: "Model No",
