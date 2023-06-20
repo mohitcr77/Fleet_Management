@@ -13,6 +13,7 @@ import AuthNavigator from "./app/routes/AuthNavigator";
 import index from "./app/service/index";
 import StartupScreen from "./app/screens/AdminScreens/StartupScreen";
 import TokenContext from "./app/auth/context";
+import permanentStorage, { loginDetail } from "./app/auth/permanentStorage";
 
 export default function App() {
   const [userToken, setAuth] = useState(null);
@@ -20,7 +21,7 @@ export default function App() {
 
   const get = async () => {
     setIsLoading(true);
-    let result = await index.getData();
+    let result = await permanentStorage.getData(loginDetail);
     if (result) {
       setAuth(result);
     }

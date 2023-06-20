@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import TokenContext from "../auth/context";
 import dataType from "../constants/dataType";
+import { Role } from "../constants/entity";
 
 export default useAuth = () => {
   const { userToken: auth, setAuth: setAuth } = useContext(TokenContext);

@@ -20,7 +20,7 @@ const CreditNote = () => {
       mapKey: ["id"],
     },
     {
-      name: "client",
+      name: "Client",
       key: "client_id",
       type: dataType.dropdown,
       value: null,
@@ -124,6 +124,14 @@ const CreditNote = () => {
       value: null,
       card: true,
       mapKey: ["paid"],
+    },
+    {
+      name: "Add Item",
+      key: "add_item",
+      type: dataType.creditNoteForm,
+      value: null,
+      card: true,
+      mapKey: ["add_item", "job_no"],
     },
   ];
   const [listData, setListData] = useState([]);

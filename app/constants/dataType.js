@@ -14,6 +14,8 @@ const state = "state";
 const text = "text";
 const time = "time";
 const string = "string";
+const location = "location",
+creditNoteForm = "credit_note_form"
 
 export default {
   string,
@@ -32,4 +34,6 @@ export default {
   state,
   text,
   time,
+  location,
+  creditNoteForm
 };

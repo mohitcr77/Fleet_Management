@@ -17,6 +17,8 @@ export default useFetchList = (update) => {
   useGet(endpoint.mechanic, handleGetMechanicDetails);
   useGet(endpoint.job_color, handleGetColorDetails);
   useGet(endpoint.driver, handleGetDriverDetails);
+  useGet(endpoint.staff, handleGetStaffDetails);
+  useGet(endpoint.tax, handleGetTaxDetails);
 
   const dispatch = useDispatch();
   const { clientList, machineTypeList } = useSelector(
@@ -75,6 +77,28 @@ export default useFetchList = (update) => {
         e.value = e.user.name;
       });
       dispatch(addListItem({ data: d, name: DROPDOWN_LIST.DRIVERS }));
+    }
+  }
+
+  async function handleGetStaffDetails(arr) {
+    if (isNotNullOrUndefined(arr)) {
+      const d = arr.data.data;
+      d.forEach((e) => {
+        e.label = e.user.name;
+        e.value = e.user.name;
+      });
+      dispatch(addListItem({ data: d, name: DROPDOWN_LIST.STAFF }));
+    }
+  }
+
+  async function handleGetTaxDetails(arr) {
+    if (isNotNullOrUndefined(arr)) {
+      const d = arr.data.data;
+      d.forEach((e) => {
+        e.label = e.tax_name;
+        e.value = e.tax_name;
+      });
+      dispatch(addListItem({ data: d, name: DROPDOWN_LIST.TAX }));
     }
   }
 

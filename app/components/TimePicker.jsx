@@ -13,7 +13,6 @@ export const TimePicker = ({ onTimeSelect }) => {
   const onChange = (e, t) => {
     setShow(false);
     setTime(formatDate(e).hourMinFormat);
-    // console.log(formatDate(e).hourMinFormat);
     onTimeSelect(formatDate(e).hourMinFormat + ":00");
   };
 

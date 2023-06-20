@@ -18,10 +18,9 @@ import TokenContext from "../../auth/context";
 import customStyles from "../../constants/styles";
 import colors from "../../constants/colors";
 import screenNames from "../../constants/screenNames";
-import store, { firstTimeLogin } from "../../auth/store";
 import endpoint from "../../service/endpoint";
 import useAuth from "../../hooks/useAuth";
-import { loginDetail } from "../../auth/store";
+import permanentStorage, { loginDetail } from "../../auth/permanentStorage";
 import useApi from "../../hooks/useApi";
 
 const LogIn = ({ navigation }) => {
@@ -45,8 +44,7 @@ const LogIn = ({ navigation }) => {
   };
 
   function handleLoginSuccess(res) {
-    //console.log(res, "hello");
-    store.saveData(loginDetail,res);
+    permanentStorage.saveData(loginDetail, res);
     setAuth(res);
   }
 
