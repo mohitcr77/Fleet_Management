@@ -75,7 +75,7 @@ const Client = () => {
     {
       name: "Client Rate",
       key: "weightage",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       mapKey: ["weightage"],
     },

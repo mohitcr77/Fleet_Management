@@ -104,7 +104,7 @@ const Regos = () => {
       type: dataType.number,
       value: null,
       card: false,
-      mapKey: ["engine_number"],
+      mapKey: ["engine_no"],
     },
     {
       name: "Model No",
@@ -211,10 +211,7 @@ const Regos = () => {
     let arr = [];
     d.data.data.forEach((item) => {
       let a = [];
-      form.forEach((i) => {
-        const value = getNestedData(item, i.mapKey);
-        a.push({ ...i, value });
-      });
+      form.forEach((i) => a.push({ ...i, value: item[i.key] }));
       arr.push(a);
     });
     setListData(arr);

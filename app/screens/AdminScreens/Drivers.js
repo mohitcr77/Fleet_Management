@@ -34,7 +34,6 @@ const Drivers = () => {
       card: true,
       mapKey: ["user", "email"],
     },
-
     {
       name: "Mobile",
       key: "mobile",
@@ -42,6 +41,20 @@ const Drivers = () => {
       value: null,
       card: true,
       mapKey: ["mobile"],
+    },
+    {
+      name: "Password",
+      key: "password",
+      type: dataType.password,
+      value: null,
+      mapKey: [""]
+    },
+    {
+      name: "Re-enter Password",
+      key: "repassword",
+      type: dataType.password,
+      value: null,
+      mapKey: [""]
     },
     {
       name: "Address 1",
@@ -57,7 +70,7 @@ const Drivers = () => {
       type: dataType.text,
       value: null,
       card: true,
-      mapKey: ["address2"],
+      mapKey: ["user", "user_details","address2"],
     },
     {
       name: "State",

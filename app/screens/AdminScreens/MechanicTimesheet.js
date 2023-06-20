@@ -17,10 +17,7 @@ const MechanicTimesheet = () => {
     let arr = [];
     d.data.data.forEach((item) => {
       let a = [];
-      form.forEach((i) => {
-        const value = getNestedData(item, i.mapKey);
-        a.push({ ...i, value });
-      });
+      form.forEach((i) => a.push({ ...i, value: item[i.key] }));
       arr.push(a);
     });
     setListData(arr);
@@ -108,6 +105,10 @@ const MechanicTimesheet = () => {
         data={listData}
         onRefresh={refresh}
         loading={loading}
+        backScreen={screenNames.MECHANIC_TIME_SHEET}
+        listTitle={"TimeSheet Details"}
+        editTitle={"Edit Time Sheet"}
+        endpoint={endpoint.mechanic_timeSheet}
       />
     </ParentContainer>
   );

@@ -17,64 +17,63 @@ const FuelLog = () => {
       type: dataType.number,
       value: null,
       card: true,
-      mapKey: ["id"],
     },
     {
       name: "Date",
       key: "date",
       type: dataType.date,
       card: true,
-      mapKey: ["date"],
+      value: null
     },
     {
       name: "Time",
       key: "time",
       type: dataType.time,
       card: true,
-      mapKey: ["time"],
+      value: null
     },
     {
       name: "Dkt_no.",
       key: "dkt_no",
       type: dataType.number,
       card: true,
-      mapKey: ["dtk_no"],
+      value: null
     },
     {
       name: "Dip Start",
-      key: "dip_Start",
-      type: dataType.time,
-      mapKey: ["dip_start"],
+      key: "dip_start",
+      type: dataType.number,
+      value: null
     },
     {
       name: "Dip finish",
       key: "dip_finish",
-      type: dataType.time,
-      mapKey: ["dip_finish"],
+      type: dataType.number,
+      value: null
     },
     {
       name: "EST Delivered",
       key: "est_delivered",
-      type: dataType.text,
-      mapKey: ["dip_finish"],
+      type: dataType.number,
+      value: null
     },
     {
       name: "Actual Delivered",
       key: "actual_delivered",
-      type: dataType.text,
-      mapKey: ["actual_delivered"],
+      type: dataType.number,
+      value: null
     },
     {
       name: "Fuel Rate",
       key: "fuel_rate",
       type: dataType.number,
-      mapKey: ["fuel_rate"],
+      value: null
     },
     {
       name: "Invoice",
       key: "invoice_total",
       type: dataType.text,
-      mapKey: ["invoice_total"],
+      value: null
     },
   ];
   const [listData, setListData] = useState([]);
@@ -86,8 +85,6 @@ const FuelLog = () => {
     d.data.data.forEach((item) => {
       let a = [];
       form.forEach((i) => {
-        // const value = getNestedData(item, i.mapKey);
-
         a.push({ ...i, value: item[i.key] });
       });
       arr.push(a);
