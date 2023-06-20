@@ -14,6 +14,8 @@ import dataType from "../constants/dataType";
 import dimensions from "../constants/dimensions";
 import FromAdd from "./FromAdd";
 import PickSignature from "./PickSignature";
+import LocationInput from "./LocationInput";
+import CompWrapper from "./CompWrapper";
 
 const dummyList = [
   { label: "0", value: "1" },
@@ -34,17 +36,14 @@ export default function FormInput(props) {
   switch (type) {
     case dataType.date:
       return (
-        <CompWrapper>
+        <CompWrapper name={name}>
           <DatePicker {...props} />
         </CompWrapper>
       );
 
     case dataType.dropdown:
-      // list[data].forEach((e) => {
-      //   console.log(e.label, e.value, "ooo");
-      // });
       return (
-        <CompWrapper>
+        <CompWrapper name={name}>
           <Dropdown
             style={[
               customStyles.inputBox,
@@ -64,42 +63,51 @@ export default function FormInput(props) {
 
     case dataType.time:
       return (
-        <CompWrapper>
+        <CompWrapper name={name}>
           <TimePicker {...props} />
         </CompWrapper>
       );
 
     case dataType.signature:
       return (
-        <CompWrapper>
+        <CompWrapper name={name}>
           <PickSignature {...props} />
         </CompWrapper>
       );
 
     case dataType.form:
       return (
-        <CompWrapper>
+        <CompWrapper name={name}>
           <FromAdd {...props} />
         </CompWrapper>
       );
 
     case dataType.image:
       return (
-        <CompWrapper>
+        <CompWrapper name={name}>
           <AddImage {...props} />
         </CompWrapper>
       );
 
     case dataType.checkBox:
       return (
-        <CompWrapper>
+        <CompWrapper name={name}>
           <AppCheckBox {...props} />
         </CompWrapper>
       );
 
+    case dataType.country:
+      return <LocationInput {...props} />;
+
+    case dataType.state:
+      return null;
+
+    case dataType.city:
+      return null;
+
     default:
       return (
-        <CompWrapper>
+        <CompWrapper name={name}>
           <Input
             style={{
               backgroundColor: "white",
@@ -118,17 +126,6 @@ export default function FormInput(props) {
       );
   }
 
-  function CompWrapper({ children }) {
-    return (
-      <View style={styles.compWrapperStyle}>
-        <Text style={{ marginBottom: 5, marginTop: 8, fontWeight: "bold" }}>
-          {name}
-        </Text>
-        {children}
-      </View>
-    );
-  }
-
   function getDropdownPlaceholder() {
     const d =
       // props.defaultValue
@@ -138,10 +135,3 @@ export default function FormInput(props) {
     return d;
   }
 }
-
-const styles = StyleSheet.create({
-  compWrapperStyle: {
-    marginVertical: 5,
-    width: dimensions.componentWidth,
-  },
-});

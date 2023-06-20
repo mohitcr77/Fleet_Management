@@ -18,11 +18,9 @@ export default function Form({ route, navigation }) {
   const formData = useRef(initialState);
 
   const { request } = useApi(handlePostSuccess);
-  0.0;
 
   async function handlePostData() {
     const id = formData.current.id;
-     // console.log(formData.current);
     const requestConfig = {
       method: id ? HTTPS_METHODS.PUT : HTTPS_METHODS.POST,
       endpoint: id ? endpoint + "/" + id : endpoint,
@@ -31,13 +29,14 @@ export default function Form({ route, navigation }) {
     // console.log(requestConfig);
     // return;
     const d = await request(requestConfig);
-    console.log(d, "ppp");
+    // console.log(d, "ppp");
   }
 
   function handlePostSuccess() {
     formData.current = initialState;
     setUpdate(!update);
   }
+
   return (
     <ParentContainer
       title={title}
@@ -59,6 +58,9 @@ export default function Form({ route, navigation }) {
               onTimeSelect={onSelect}
               onDropdownItemSelect={(e) =>
                 (formData.current[i.key] = e.id || e.label)
+              }
+              onLocationSelect={(e) =>
+                (formData.current = { ...formData.current, ...e })
               }
             />
           );

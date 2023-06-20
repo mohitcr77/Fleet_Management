@@ -44,7 +44,6 @@ const LogIn = ({ navigation }) => {
   };
 
   function handleLoginSuccess(res) {
-    //console.log(res, "hello");
     permanentStorage.saveData(loginDetail, res);
     setAuth(res);
   }
