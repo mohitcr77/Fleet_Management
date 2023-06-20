@@ -7,6 +7,7 @@ import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 import getNestedData from "../../helpers/getNestedData";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const CreditNote = () => {
   const form = [
@@ -19,17 +20,18 @@ const CreditNote = () => {
       mapKey: ["id"],
     },
     {
-      name: "client_id",
+      name: "client",
       key: "client_id",
-      type: dataType.text,
+      type: dataType.dropdown,
       value: null,
       card: true,
+      data: DROPDOWN_LIST.CLIENTS,
       mapKey: ["client_id"],
     },
     {
       name: "Credit Note no",
       key: "credit_note_no",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       card: true,
       mapKey: ["credit_note_no"],
@@ -37,15 +39,16 @@ const CreditNote = () => {
     {
       name: "Reference no",
       key: "reference_no",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       card: true,
       mapKey: ["reference_no"],
     },
     {
-      name: "Staff id",
+      name: "Staff",
       key: "staff_id",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.STAFF,
       value: null,
       card: true,
       mapKey: ["staff_id"],

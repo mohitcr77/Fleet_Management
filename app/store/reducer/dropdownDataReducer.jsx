@@ -7,6 +7,7 @@ const initialState = {
   [DROPDOWN_LIST.DRIVERS]: [{ label: "", value: "" }],
   [DROPDOWN_LIST.SUPERVISOR]: [{ label: "", value: "" }],
   [DROPDOWN_LIST.MECHANICS]: [{ label: "", value: "" }],
+  [DROPDOWN_LIST.STAFF]: [{ label: "", value: "" }],
   [DROPDOWN_LIST.COLORS]: [{ label: "", value: "" }],
   [DROPDOWN_LIST.BREAK]: [
     { label: "0", value: "1" },

@@ -30,4 +30,5 @@ export const DROPDOWN_LIST = {
   MECHANICS: "mechanicList",
   REGOS: "machineTypeList",
   SUPERVISOR: "supervisorList",
+  STAFF: "staffList"
 };
