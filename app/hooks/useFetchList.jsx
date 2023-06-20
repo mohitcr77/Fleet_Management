@@ -12,11 +12,11 @@ import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
 import { DROPDOWN_LIST } from "../constants/entity";
 
 export default useFetchList = (update) => {
-  useGet(endpoint.clients, handleGetClientDetails);
-  useGet(endpoint.rego, handleGetRegoDetails);
-  useGet(endpoint.mechanic, handleGetMechanicDetails);
-  useGet(endpoint.job_color, handleGetColorDetails);
-  useGet(endpoint.driver, handleGetDriverDetails);
+  // useGet(endpoint.clients, handleGetClientDetails);
+  // useGet(endpoint.rego, handleGetRegoDetails);
+  // useGet(endpoint.mechanic, handleGetMechanicDetails);
+  // useGet(endpoint.job_color, handleGetColorDetails);
+  // useGet(endpoint.driver, handleGetDriverDetails);
 
   const dispatch = useDispatch();
   const { clientList, machineTypeList } = useSelector(
