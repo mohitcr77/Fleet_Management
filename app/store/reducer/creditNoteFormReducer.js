@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   form: {
-    add_item: [{rego_id: "",job_no:"", qty:"", rate:"", tax_id:"", amount: ""}],
+    add_item: [],
     client_id: "",
     credit_note_no: "",
     reference_no: "",
@@ -29,18 +29,14 @@ export const creditNoteFormData = createSlice({
       state.form[key] = value;
     },
     addItemInCreditNote: (state, action) => {
-      state.form.add_item.push({rego_id: "",job_no:"", qty:"", rate:"", tax_id:"", amount: ""});
+      state.form.add_item.push({job:"",rego_id: "",job_no:"", qty:"", rate:"", tax_id:"", amount: ""});
     },
     addDataInItemUsingKey: (state, action) => {
       const { e, i, k } = action.payload;
       state.form.add_item[i][k] = e;
     },
     removeCreditNoteItem: (state, action) => {
-      if (state.form.add_item.length === 1) {
-        state.form.add_item = initialState.details;
-      } else {
         state.form.add_item.splice(action.payload, 1);
-      }
     },
   },
 });

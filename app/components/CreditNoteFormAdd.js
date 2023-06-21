@@ -24,9 +24,10 @@ const CreditNoteFormAdd = () => {
   const { form } = useSelector((state) => state.creditNoteFormData);
   const dispatch = useDispatch();
 
-  const handleTaxInput = () => {
-    
-  }
+  const getJobsByClientDummyList = [
+    { label: "Job 1", value: "1" },
+    { label: "Job 2", value: "2" },
+  ];
 
   return (
     <View style={{ alignItems: "center" }}>
@@ -46,6 +47,27 @@ const CreditNoteFormAdd = () => {
                 dispatch(addDataInItemUsingKey({ e, i, k: "rego_id" }));
               }}
             /> */}
+            <Dropdown
+              style={[
+                {
+                  width: width - 40,
+                  backgroundColor: "white",
+                  marginBottom: 5,
+                  borderWidth: 1,
+                  borderColor: "#dfdfdf",
+                  borderRadius: 3,
+                  paddingLeft: 18,
+                },
+              ]}
+              placeholder={"Select Job"}
+              placeholderStyle={{ color: "#9b9a9a", fontSize: 15 }}
+              data={getJobsByClientDummyList}
+              search
+              searchPlaceholder="Search..."
+              onChange={() => {}}
+              labelField="label"
+              valueField="value"
+            />
             <Dropdown
               style={[
                 {
@@ -199,5 +221,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 30,
     backgroundColor: colors.red,
+    width: "90%"
   },
 });

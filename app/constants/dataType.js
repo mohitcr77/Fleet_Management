@@ -14,8 +14,10 @@ const state = "state";
 const text = "text";
 const time = "time";
 const string = "string";
-const location = "location",
-creditNoteForm = "credit_note_form"
+const location = "location";
+const creditNoteForm = "credit_note_form";
+const currentDate = "current date";
+const expireDate= "expire date"
 
 export default {
   string,
@@ -35,5 +37,7 @@ export default {
   text,
   time,
   location,
-  creditNoteForm
+  creditNoteForm,
+  currentDate,
+  expireDate,
 };

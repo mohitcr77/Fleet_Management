@@ -7,6 +7,7 @@ import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useGet from "./../../hooks/useGet";
 import getNestedData from "../../helpers/getNestedData";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const Estimate = () => {
   const [listData, setListData] = useState([]);
@@ -37,7 +38,8 @@ const Estimate = () => {
     {
       name: "Client ID",
       key: "client_id",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.CLIENTS,
       value: null,
       card: true,
       mapKey: ["client_id"],
@@ -61,14 +63,14 @@ const Estimate = () => {
     {
       name: "Estimate Date",
       key: "estimate_date",
-      type: dataType.date,
+      type: dataType.currentDate,
       value: null,
       mapKey: ["estimate_date"],
     },
     {
       name: "Expire Date",
       key: "expire_date",
-      type: dataType.date,
+      type: dataType.expireDate,
       value: null,
       mapKey: ["repair_Date"],
     },
@@ -87,6 +89,20 @@ const Estimate = () => {
       mapKey: ["customer_notes"],
     },
     {
+      name: "paid",
+      key: "paid",
+      type: dataType.number,
+      value: null,
+      mapKey: ["paid"],
+    },
+    {
+      name: "Add Item",
+      key: "add_item",
+      type: dataType.creditNoteForm,
+      value: null,
+      mapKey: ["add_item"],
+    },
+    {
       name: "Subtotal",
       key: "subtotal",
       type: dataType.number,
@@ -94,18 +110,18 @@ const Estimate = () => {
       mapKey: ["subtotal"],
     },
     {
+      name: "Total tax",
+      key: "total_tax",
+      type: dataType.number,
+      value: null,
+      mapKey: ["total_tax"],
+    },
+    {
       name: "Total",
       key: "total",
       type: dataType.number,
       value: null,
       mapKey: ["total"],
-    },
-    {
-      name: "paid",
-      key: "paid",
-      type: dataType.number,
-      value: null,
-      mapKey: ["paid"],
     },
   ];
   const formProps = {

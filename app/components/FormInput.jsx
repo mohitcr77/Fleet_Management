@@ -17,6 +17,8 @@ import PickSignature from "./PickSignature";
 import LocationInput from "./LocationInput";
 import CompWrapper from "./CompWrapper";
 import CreditNoteFormAdd from "./CreditNoteFormAdd";
+import CurrentDate from "./CurrentDate";
+import ExpireDate from "./ExpireDate";
 
 const dummyList = [
   { label: "0", value: "1" },
@@ -80,6 +82,20 @@ export default function FormInput(props) {
       return (
         <CompWrapper name={name}>
           <FromAdd {...props} />
+        </CompWrapper>
+      );
+
+      case dataType.currentDate:
+      return (
+        <CompWrapper name={name}>
+          <CurrentDate {...props} />
+        </CompWrapper>
+      );
+
+      case dataType.expireDate:
+      return (
+        <CompWrapper name={name}>
+          <ExpireDate {...props} />
         </CompWrapper>
       );
 
