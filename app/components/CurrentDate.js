@@ -14,7 +14,7 @@ const CurrentDate = () => {
   var date = new Date();
   date.setDate(date.getDate() + 7);
 
-  console.log(date.toLocaleDateString());
+  //console.log(date.toLocaleDateString());
 
   function reformatDate(dateStr) {
     var dArr = dateStr.split("/");

@@ -11,6 +11,7 @@ const screenNames = {
   FORM_SCREEN: "Form Screen",
   DETAILS_VIEW_SCREEN: "Details View Screen",
   DOCUMENTS_SCREEN: "Documents Screen",
+  ESTIMATE_CREDIT_NOTE_FORM: "Estimate Credit Note Form",
 
   // Driver Screens
   CHAT_ROOM_SCREEN: "Chat Room Screen",

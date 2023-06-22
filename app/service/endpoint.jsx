@@ -23,7 +23,7 @@ const job = "/jobs";
 const report_issue = "/issues";
 const states = "/states/";
 const cities = "/cities/";
-
+const jobs_by_client = "/jobs_by_client/";
 const creditnote = "/creditnote";
 
 const fetchData = async (endpoint, token) => {
@@ -62,4 +62,5 @@ export default {
   creditnote,
   states,
   cities,
+  jobs_by_client
 };

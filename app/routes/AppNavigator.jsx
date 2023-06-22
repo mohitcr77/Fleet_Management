@@ -60,6 +60,7 @@ import Timezones from "../screens/AdminScreens/Timezones";
 import CreditNote from "../screens/AdminScreens/CreditNote";
 import Form from "../screens/FormScreen";
 import DetailsView from "../screens/DetailsViewScreen";
+import EstimateCreditNoteForm from "../screens/AdminScreens/EstimateCreditNoteForm";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -200,6 +201,7 @@ export default function AppNavigator() {
     { name: screenNames.DETAILS_VIEW_SCREEN, component: DetailsView },
     { name: screenNames.DOCUMENTS_SCREEN, component: Documents },
     { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
+    { name: screenNames.ESTIMATE_CREDIT_NOTE_FORM, component: EstimateCreditNoteForm },
   ];
 
   const navigationScreens = [...drawerScreens[role], ...commonScreens];

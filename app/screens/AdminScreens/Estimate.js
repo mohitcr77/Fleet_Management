@@ -135,16 +135,16 @@ const Estimate = () => {
     <ParentContainer
       useScroll={false}
       title="Estimate"
-      addScreen={{ name:screenNames.FORM_SCREEN,params: formProps}}
+      addScreen={{ name:screenNames.ESTIMATE_CREDIT_NOTE_FORM,params: formProps}}
     >
       <AdminListRendered
         data={listData}
         onRefresh={refresh}
         loading={loading}
-        backScreen={screenNames.REGOS}
-        listTitle={"Rego Details"}
-        editTitle={"Edit Rego"}
-        endpoint={endpoint.rego}
+        backScreen={screenNames.ESTIMATE}
+        listTitle={"Estimate Details"}
+        editTitle={"Edit Estimate"}
+        endpoint={endpoint.estimate}
       />
     </ParentContainer>
   );
