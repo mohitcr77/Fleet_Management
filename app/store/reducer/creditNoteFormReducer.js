@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   form: {
     add_item: [],
+    id: "",
     client_id: "",
     credit_note_no: "",
     reference_no: "",
@@ -25,8 +26,10 @@ export const creditNoteFormData = createSlice({
   initialState,
   reducers: {
     addCreditNoteKeyValue: (state, action) => {
-      const { key, value } = action.payload;
-      state.form[key] = value;
+      //state.form.add_item = { ...state.form.add_item,  ...action.payload };
+      const { value, i } = action.payload
+      state.form.add_item[i] = { ...state.form.add_item[i], ...value }
+      //console.log(state.form.add_item, "store value");
     },
     addItemInCreditNote: (state, action) => {
       state.form.add_item.push({job:"",rego_id: "",job_no:"", qty:"", rate:"", tax_id:"", amount: ""});

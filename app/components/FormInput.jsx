@@ -152,10 +152,7 @@ export default function FormInput(props) {
 
   function getDropdownPlaceholder() {
     const d =
-      // props.defaultValue
-      // ? list[data].filter((e) => e.id == props.defaultValue)[0].label
-      // :
-      "";
+        list[data].filter((e) => e.id == props.defaultValue)[0]?.label || ""
     return d;
   }
 }
