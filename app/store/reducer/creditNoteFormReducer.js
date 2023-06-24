@@ -6,7 +6,10 @@ const initialState = {
     id: "",
     client_id: "",
     credit_note_no: "",
+    estimate_no: "",
     reference_no: "",
+    estimate_date: "",
+    expire_date: "",
     staff_id: "",
     subject: "",
     customer_notes: "",
@@ -20,6 +23,8 @@ const initialState = {
   },
   list: [],
 };
+
+
 
 export const creditNoteFormData = createSlice({
   name: "creditNoteFormData",
@@ -35,14 +40,16 @@ export const creditNoteFormData = createSlice({
       state.form.add_item.push({job:"",rego_id: "",job_no:"", qty:"", rate:"", tax_id:"", amount: ""});
     },
     addDataInItemUsingKey: (state, action) => {
-      const { e, i, k } = action.payload;
-      state.form.add_item[i][k] = e;
+      const {value, i, k } = action.payload;
+      state.form.add_item[i][k] =value;
+      //console.log( "Store State" ,state.form.add_item);
     },
     removeCreditNoteItem: (state, action) => {
         state.form.add_item.splice(action.payload, 1);
     },
   },
 });
+
 
 // Action creators are generated for each case reducer function
 export const {

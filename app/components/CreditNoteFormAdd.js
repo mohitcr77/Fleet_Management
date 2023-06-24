@@ -46,16 +46,20 @@ const CreditNoteFormAdd = () => {
       rego_id: e.regos.id,
       qty: e.docket_hours,
       rate: e.regos.rego_rate,
-      job_no: e.job_no
+      job_no: e.job_no,
+      job: e.id,
     };
     //console.log(value);
     dispatch(addCreditNoteKeyValue({ value, i }));
   };
 
-  const onTaxSelect = (e, qty, rate) => {
-    let taxPercent = ((qty*rate*e.tax_percentage)/100 + qty)
-    console.log(taxPercent);
-  }
+  const onTaxSelect = (e, qty, rate, i) => {
+    const taxPercent = (qty * rate * e.tax_percentage) / 100 + parseInt(qty);
+    const taxID= e.id
+    //console.log(taxID);
+    dispatch(addDataInItemUsingKey({ value: taxPercent, i, k: "amount" }));
+    dispatch(addDataInItemUsingKey({ value: taxID , i, k: "tax_id" }));
+  };
 
   return (
     <View style={{ alignItems: "center" }}>
@@ -77,9 +81,15 @@ const CreditNoteFormAdd = () => {
             <Input style={styles.inputContainer} placeholder="Rego">
               {getDropdownPlaceholder(item.rego_id)}
             </Input>
-            <Input style={styles.inputContainer} placeholder="Job no">{item.job_no}</Input>
-            <Input style={styles.inputContainer} placeholder="Qty(hrs)">{item.qty}</Input>
-            <Input style={styles.inputContainer} placeholder="rate">{item.rate}</Input>
+            <Input style={styles.inputContainer} placeholder="Job no">
+              {item.job_no}
+            </Input>
+            <Input style={styles.inputContainer} placeholder="Qty(hrs)">
+              {item.qty}
+            </Input>
+            <Input style={styles.inputContainer} placeholder="rate">
+              {item.rate}
+            </Input>
             <Dropdown
               style={styles.dropdown}
               placeholder={"Tax"}
@@ -87,7 +97,7 @@ const CreditNoteFormAdd = () => {
               data={list[taxData]}
               search
               searchPlaceholder="Search..."
-              onChange={(e) => onTaxSelect(e, item.qty, item.rate)}
+              onChange={(e) => onTaxSelect(e, item.qty, item.rate, i)}
               labelField="label"
               valueField="value"
             />
@@ -102,7 +112,9 @@ const CreditNoteFormAdd = () => {
               onChangeText={(e) => {
                 dispatch(addDataInItemUsingKey({ e, i, k: "amount" }));
               }}
-            />
+            >
+              {item.amount}
+            </Input>
             <AppButton
               title={"Remove"}
               style={styles.btn}
@@ -121,11 +133,9 @@ const CreditNoteFormAdd = () => {
         }}
       />
     </View>
-
   );
   function getDropdownPlaceholder(rego_id) {
-    const d =
-        list[regoData].filter((e) => e.id == rego_id)[0]?.label || ""
+    const d = list[regoData].filter((e) => e.id == rego_id)[0]?.label || "";
     return d;
   }
 };

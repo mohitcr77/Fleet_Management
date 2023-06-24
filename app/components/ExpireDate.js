@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useRef, useState } from "react";
 import { setDate } from "date-fns";
 
-const ExpireDate = () => {
+const ExpireDate = (props) => {
   const [expireDate, setExpireDate] = useState("");
 
   function reformatDate() {
@@ -21,6 +21,11 @@ const ExpireDate = () => {
     reformatDate();
   });
 
+  const setDate = () => {
+    props.onGetDate(expireDate)
+    return expireDate
+  }
+
   return (
     <View
       style={[
@@ -28,7 +33,7 @@ const ExpireDate = () => {
         { overflow: "hidden", height: 40, justifyContent: "center" },
       ]}
     >
-      <Text style={{ color: "#7a7a7a", paddingLeft: 18 }}>{expireDate}</Text>
+      <Text style={{ color: "#7a7a7a", paddingLeft: 18 }}>{setDate()}</Text>
     </View>
   );
 };

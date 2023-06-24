@@ -66,7 +66,7 @@ const CreditNote = () => {
       key: "customer_notes",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["customer_notes"],
     },
     {
@@ -74,7 +74,7 @@ const CreditNote = () => {
       key: "total",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["total"],
     },
     {
@@ -82,7 +82,7 @@ const CreditNote = () => {
       key: "terms",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["terms"],
     },
     {
@@ -90,7 +90,7 @@ const CreditNote = () => {
       key: "shipping",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["shipping"],
     },
     {
@@ -98,7 +98,7 @@ const CreditNote = () => {
       key: "adjustment",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["adjustment"],
     },
     {
@@ -106,7 +106,7 @@ const CreditNote = () => {
       key: "invoice",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["invoice"],
     },
     {
@@ -114,7 +114,7 @@ const CreditNote = () => {
       key: "discount",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["discount"],
     },
     {
@@ -122,7 +122,7 @@ const CreditNote = () => {
       key: "paid",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["paid"],
     },
     {
@@ -130,8 +130,8 @@ const CreditNote = () => {
       key: "add_item",
       type: dataType.creditNoteForm,
       value: null,
-      card: true,
-      mapKey: ["add_item", "job_no"],
+      
+      mapKey: ["add_item"],
     },
   ];
   const [listData, setListData] = useState([]);
@@ -161,7 +161,7 @@ const CreditNote = () => {
     <ParentContainer
       useScroll={false}
       title="Credit Note"
-      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
+      addScreen={{ name: screenNames.ESTIMATE_CREDIT_NOTE_FORM, params: formProps }}
     >
       <AdminListRendered
         data={listData}

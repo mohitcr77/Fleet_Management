@@ -8,9 +8,8 @@ import { useEffect } from "react";
 import { useRef, useState } from "react";
 import { setDate } from "date-fns";
 
-const CurrentDate = () => {
+const CurrentDate = (props) => {
   const [currentDate, setCurrentDate] = useState("");
-
   var date = new Date();
   date.setDate(date.getDate() + 7);
 
@@ -22,7 +21,12 @@ const CurrentDate = () => {
   }
   useEffect(() => {
     reformatDate(new Date().toLocaleDateString());
-  }, [1]);
+  });
+
+  const setDate = () => {
+    props.onGetDate(currentDate)
+    return currentDate
+  }
 
   return (
     <View
@@ -31,7 +35,7 @@ const CurrentDate = () => {
         { overflow: "hidden", height: 40, justifyContent: "center" },
       ]}
     >
-      <Text style={{ color: "#7a7a7a", paddingLeft: 18 }}>{currentDate}</Text>
+      <Text style={{ color: "#7a7a7a", paddingLeft: 18 }}>{setDate()}</Text>
     </View>
   );
 };
