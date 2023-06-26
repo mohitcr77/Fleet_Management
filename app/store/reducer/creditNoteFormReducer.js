@@ -47,6 +47,10 @@ export const creditNoteFormData = createSlice({
     removeCreditNoteItem: (state, action) => {
         state.form.add_item.splice(action.payload, 1);
     },
+    setItemToInitialState: (state, action) => {
+      state.form = initialState.form
+      console.log("ijj",initialState.form);
+  },
   },
 });
 
@@ -57,6 +61,7 @@ export const {
   addItemInCreditNote,
   addDataInItemUsingKey,
   removeCreditNoteItem,
+  setItemToInitialState,
 } = creditNoteFormData.actions;
 
 export default creditNoteFormData.reducer;

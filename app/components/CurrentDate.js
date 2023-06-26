@@ -17,7 +17,7 @@ const CurrentDate = (props) => {
 
   function reformatDate(dateStr) {
     var dArr = dateStr.split("/");
-    setCurrentDate(dArr[1] + "/" + dArr[0] + "/" + dArr[2]);
+    setCurrentDate(dArr[2] + "/" + dArr[0] + "/" + dArr[1]);
   }
   useEffect(() => {
     reformatDate(new Date().toLocaleDateString());

@@ -72,7 +72,7 @@ const CreditNote = () => {
     {
       name: "Total",
       key: "total",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       
       mapKey: ["total"],
@@ -88,7 +88,7 @@ const CreditNote = () => {
     {
       name: "Shipping",
       key: "shipping",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       
       mapKey: ["shipping"],
@@ -96,7 +96,7 @@ const CreditNote = () => {
     {
       name: "Adjustment",
       key: "adjustment",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       
       mapKey: ["adjustment"],
@@ -104,7 +104,7 @@ const CreditNote = () => {
     {
       name: "Invoice",
       key: "invoice",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       
       mapKey: ["invoice"],
@@ -112,7 +112,7 @@ const CreditNote = () => {
     {
       name: "Discount",
       key: "discount",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       
       mapKey: ["discount"],
@@ -120,7 +120,7 @@ const CreditNote = () => {
     {
       name: "Paid",
       key: "paid",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       
       mapKey: ["paid"],

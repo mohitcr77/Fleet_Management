@@ -15,7 +15,7 @@ const ExpireDate = (props) => {
     var date = new Date();
     date.setDate(date.getDate() + 7);
     var dArr = date.toLocaleDateString().split("/");
-    setExpireDate(dArr[1] + "/" + dArr[0] + "/" + dArr[2]);
+    setExpireDate(dArr[2] + "/" + dArr[0] + "/" + dArr[1]);
   }
   useEffect(() => {
     reformatDate();

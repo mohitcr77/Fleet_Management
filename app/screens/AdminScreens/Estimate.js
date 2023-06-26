@@ -72,7 +72,7 @@ const Estimate = () => {
       key: "expire_date",
       type: dataType.expireDate,
       value: null,
-      mapKey: ["repair_Date"],
+      mapKey: ["expire_date"],
     },
     {
       name: "Subject",
