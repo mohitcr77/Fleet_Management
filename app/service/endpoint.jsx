@@ -1,5 +1,51 @@
-import axios from "axios";
-import { URL, getHeader } from ".";
+const authEndpoints = {
+  login: "/login",
+  resend_top: "/resend",
+  sign_up: "/signup",
+};
+
+const endpoints = {
+  cities: "/cities/",
+  clients: "/clients",
+  countries: "/countries",
+  currency: "/currency",
+  notification: "/notifications",
+  save_token: "/update-fcm-token",
+};
+
+const adminEndpoints = {
+  driver: "/driver",
+  estimate: "/estimate",
+  fuel_efficiency: "/fuel_efficiency",
+  fuel_log: "/fuellog",
+  getId: (id) => `/id${id}`,
+  job_color: "/color",
+  job: "/jobs",
+  mechanic_timeSheet: "/mechanic_timesheet",
+  mechanic: "/mechanic",
+  rego: "/regos",
+  report_issue: "/issues",
+  staff: "/staff",
+  states: "/states/",
+  tax: "/taxes",
+  timezones: "/timezones",
+  vehicle_maintenance: "/vehicle_maintenance",
+};
+
+const driverEndpoints = {
+  pending_jobs: "/pending-jobs",
+  accepted_jobs: "/accepted-jobs",
+};
+
+const mechanicEndpoints = {};
+
+export {
+  driverEndpoints,
+  adminEndpoints,
+  endpoints,
+  authEndpoints,
+  mechanicEndpoints,
+};
 
 const clients = "/clients";
 const currency = "/currency";
@@ -23,19 +69,7 @@ const job = "/jobs";
 const report_issue = "/issues";
 const states = "/states/";
 const cities = "/cities/";
-
 const creditnote = "/creditnote";
-
-const fetchData = async (endpoint, token) => {
-  let res;
-  try {
-    res = await axios.get(URL + endpoint, getHeader(token));
-    return res;
-  } catch (error) {
-    res = error;
-  }
-  return res;
-};
 
 export default {
   countries,
@@ -43,7 +77,6 @@ export default {
   currency,
   driver,
   estimate,
-  fetchData,
   fuel_efficiency,
   fuel_log,
   login,

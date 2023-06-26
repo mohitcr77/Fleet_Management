@@ -5,7 +5,7 @@ import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
-import useGet from "./../../hooks/useGet";
+import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
 
 const Regos = () => {
@@ -205,7 +205,7 @@ const Regos = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.rego, handleGetRegoSuccess);
+  const { refresh, loading } = useFetch(endpoint.rego, handleGetRegoSuccess);
 
   function handleGetRegoSuccess(d) {
     let arr = [];

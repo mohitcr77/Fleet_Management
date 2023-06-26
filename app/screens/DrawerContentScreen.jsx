@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { Role } from "../constants/entity";
 import { width } from "../helpers/scales";
@@ -37,12 +37,12 @@ export default function DrawerContent({ navigation }) {
         screen: null,
         children: [
           {
-            name: "Today Jobs",
-            screen: screenNames.DRIVER_JOBS_SCREEN,
+            name: "Pending Jobs",
+            screen: screenNames.DRIVER_PENDING_JOBS_SCREEN,
           },
           {
-            name: "Older Jobs",
-            screen: screenNames.DRIVER_JOBS_LIST_SCREEN,
+            name: "Accepted Jobs",
+            screen: screenNames.DRIVER_ACCEPTED_JOBS_SCREEN,
           },
         ],
       },
@@ -171,13 +171,20 @@ export default function DrawerContent({ navigation }) {
         ],
       },
     ],
+    commonScreens: [
+      {
+        name: "Notifications",
+        screen: screenNames.NOTIFICATIONS_SCREEN,
+        children: null,
+      },
+    ],
   };
 
   return (
     <View style={styles.container}>
       <Profile auth={auth} />
       <FlatList
-        data={drawerBtn[role]}
+        data={[...drawerBtn[role], ...drawerBtn.commonScreens]}
         refreshing={true}
         renderItem={({ item, index }) => (
           <DrawerButtonAccordion

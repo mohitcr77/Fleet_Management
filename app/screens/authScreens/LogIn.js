@@ -1,7 +1,6 @@
 import {
   View,
   StyleSheet,
-  Image,
   TouchableOpacity,
   ImageBackground,
   TouchableWithoutFeedback,
@@ -9,17 +8,13 @@ import {
 import { useState, useContext } from "react";
 import { Card, Text, Input } from "@ui-kitten/components";
 
-import { Entypo } from "@expo/vector-icons";
 import AppButton from "../../components/AppButton";
 import dimensions from "../../constants/dimensions";
 import LoadingScreen from "../AdminScreens/LoadingScreen";
-import service from "../../service";
 import TokenContext from "../../auth/context";
 import customStyles from "../../constants/styles";
-import colors from "../../constants/colors";
 import screenNames from "../../constants/screenNames";
 import endpoint from "../../service/endpoint";
-import useAuth from "../../hooks/useAuth";
 import permanentStorage, { loginDetail } from "../../auth/permanentStorage";
 import useApi from "../../hooks/useApi";
 
@@ -54,12 +49,7 @@ const LogIn = ({ navigation }) => {
     <TouchableWithoutFeedback
       onPress={() => setPasswordVisible(!passwordVisible)}
     >
-      {/* <CustomIcons.toggleEye show={passwordVisible}  /> */}
-      <Entypo
-        name={passwordVisible ? "eye" : "eye-with-line"}
-        size={24}
-        color="black"
-      />
+      <Text>Icons</Text>
     </TouchableWithoutFeedback>
   );
 

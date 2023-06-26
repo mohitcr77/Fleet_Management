@@ -7,7 +7,7 @@ import endpoint from "../../service/endpoint";
 import getNestedData from "../../helpers/getNestedData";
 import ParentContainer from "../../components/ParentContainer";
 import screenNames from "../../constants/screenNames";
-import useGet from "./../../hooks/useGet";
+import useFetch from "../../hooks/useFetch";
 import { DROPDOWN_LIST } from "../../constants/entity";
 
 const MechanicDataScreen = () => {
@@ -72,7 +72,7 @@ const MechanicDataScreen = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.rego, handleGetRegoSuccess);
+  const { refresh, loading } = useFetch(endpoint.rego, handleGetRegoSuccess);
 
   function handleGetRegoSuccess(d) {
     let arr = [];

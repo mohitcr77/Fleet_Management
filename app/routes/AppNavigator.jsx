@@ -1,41 +1,37 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import useAuth from "../hooks/useAuth";
+import { Role } from "../constants/entity";
 
 import DrawerContent from "../screens/DrawerContentScreen";
 import screenNames from "../constants/screenNames";
 import useFetchList from "../hooks/useFetchList";
 
-//screens
+//common screen
+import AboutApp from "../screens/AboutAppScreen";
+import PreInspectionForm from "../screens/DriverScreens/PreInspectionFormScreen";
+import Profile from "../screens/ProfileScreen";
+import PreInspectionHistory from "../screens/DriverScreens/PreInspectionHistoryScreen";
+import PreInspectionNote from "../screens/DriverScreens/PreInspectionNoteScreen";
+
+// driver screens
 import ChatRoom from "../screens/DriverScreens/ChatRoomScreen";
 import Documents from "../screens/DocumentsScreen";
-import DriverJobs from "../screens/DriverScreens/DriverJobsScreen";
 import FullDktForm from "../screens/DriverScreens/FullDktFormScreen";
 import FullDktList from "../screens/DriverScreens/FullDktListScreen";
 import PreInspectionList from "../screens/DriverScreens/PreInspectionListScreen";
 import ScanDktForm from "../screens/DriverScreens/ScanDktFormScreen";
 import ScanDktList from "../screens/DriverScreens/ScanDktListScreen";
 import TimeSheet from "../screens/DriverScreens/TimeSheetScreen";
+import DriverJobs from "../screens/DriverScreens/DriverJobsListScreen";
 
 //mechanic screen
-import MechanicFormScreen from "../screens/MechanicScreens/MechanicFormScreen";
 import MechanicDataScreen from "../screens/MechanicScreens/MechanicDataScreen";
-import MechanicTimeSheetForm from "../screens/MechanicScreens/MechanicTimeSheetForm";
 import MechanicTimeSheetData from "../screens/MechanicScreens/MechanicTimeSheetData";
 import FleetInspection from "../screens/MechanicScreens/FleetInspection";
 import InspectionHistory from "../screens/MechanicScreens/InspectionHistory";
 import DocumentForm from "../screens/MechanicScreens/DocumentForm";
 import DocumentList from "../screens/MechanicScreens/DocumentList";
-
-//common screen
-import AboutApp from "../screens/AboutAppScreen";
-import PreInspectionForm from "../screens/DriverScreens/PreInspectionFormScreen";
-import Profile from "../screens/ProfileScreen";
-import DocumentAdd from "../screens/DocumentAddScreen";
-import PreInspectionHistory from "../screens/DriverScreens/PreInspectionHistoryScreen";
-import PreInspectionNote from "../screens/DriverScreens/PreInspectionNoteScreen";
-import DriverJobsList from "../screens/DriverScreens/DriverJobsListScreen";
-import useAuth from "../hooks/useAuth";
-import { Role } from "../constants/entity";
 
 //Admin Screen
 import DashBoard from "../screens/AdminScreens/DashBoard";
@@ -60,6 +56,8 @@ import Timezones from "../screens/AdminScreens/Timezones";
 import CreditNote from "../screens/AdminScreens/CreditNote";
 import Form from "../screens/FormScreen";
 import DetailsView from "../screens/DetailsViewScreen";
+import Notifications from "../screens/NotificationsScreen";
+import useNotification from "../hooks/useNotification";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -67,6 +65,7 @@ const Drawer = createDrawerNavigator();
 export default function AppNavigator() {
   const { role } = useAuth();
   useFetchList();
+  useNotification();
 
   const drawerScreens = {
     [Role.MECHANIC]: [
@@ -94,8 +93,14 @@ export default function AppNavigator() {
         name: screenNames.PRE_INSPECTION_LIST_SCREEN,
         component: PreInspectionList,
       },
-      { name: screenNames.DRIVER_JOBS_SCREEN, component: DriverJobs },
-      { name: screenNames.DRIVER_JOBS_LIST_SCREEN, component: DriverJobsList },
+      {
+        name: screenNames.DRIVER_ACCEPTED_JOBS_SCREEN,
+        component: DriverJobs,
+      },
+      {
+        name: screenNames.DRIVER_PENDING_JOBS_SCREEN,
+        component: DriverJobs,
+      },
 
       { name: screenNames.DRIVER_TIME_SHEET_SCREEN, component: TimeSheet },
 
@@ -188,8 +193,8 @@ export default function AppNavigator() {
       },
       {
         name: screenNames.CREDIT_NOTE,
-        component: CreditNote
-      }
+        component: CreditNote,
+      },
     ],
   };
 
@@ -200,6 +205,7 @@ export default function AppNavigator() {
     { name: screenNames.DETAILS_VIEW_SCREEN, component: DetailsView },
     { name: screenNames.DOCUMENTS_SCREEN, component: Documents },
     { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
+    { name: screenNames.NOTIFICATIONS_SCREEN, component: Notifications },
   ];
 
   const navigationScreens = [...drawerScreens[role], ...commonScreens];

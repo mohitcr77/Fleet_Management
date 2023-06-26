@@ -5,13 +5,16 @@ import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
-import useGet from "./../../hooks/useGet";
+import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
 import { DROPDOWN_LIST } from "../../constants/entity";
 const MechanicTimesheet = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.mechanic_timeSheet, handleMechanic_TimeSheetSuccess);
+  const { refresh, loading } = useFetch(
+    endpoint.mechanic_timeSheet,
+    handleMechanic_TimeSheetSuccess
+  );
 
   function handleMechanic_TimeSheetSuccess(d) {
     let arr = [];
@@ -47,7 +50,6 @@ const MechanicTimesheet = () => {
       value: null,
       card: true,
       mapKey: ["date"],
-
     },
     {
       name: "Day",
@@ -99,7 +101,7 @@ const MechanicTimesheet = () => {
     <ParentContainer
       useScroll={false}
       title="Time Sheet"
-      addScreen={{ name:screenNames.FORM_SCREEN, params :formProps}}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}

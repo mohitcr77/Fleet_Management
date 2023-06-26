@@ -1,22 +1,23 @@
 const screenNames = {
-  // Auth Screens
-  LOGIN_SCREEN: "Login Screen",
-  SELECT_USER_TYPE_SCREEN: "Select User Type Screen",
-  SIGN_UP_SCREEN: "Sign Up Screen",
-  OTP_SCREEN: "Otp Screen",
-
   //Common Screens
   ABOUT_APP_SCREEN: "About App Screen",
   PROFILE_SCREEN: "Profile Screen",
   FORM_SCREEN: "Form Screen",
   DETAILS_VIEW_SCREEN: "Details View Screen",
   DOCUMENTS_SCREEN: "Documents Screen",
+  NOTIFICATIONS_SCREEN: "Notification Screen",
+
+  // Auth Screens
+  LOGIN_SCREEN: "Login Screen",
+  SELECT_USER_TYPE_SCREEN: "Select User Type Screen",
+  SIGN_UP_SCREEN: "Sign Up Screen",
+  OTP_SCREEN: "Otp Screen",
 
   // Driver Screens
   CHAT_ROOM_SCREEN: "Chat Room Screen",
   DOCUMENT_ADD_SCREEN: "Document Add Screen",
-  DRIVER_JOBS_SCREEN: "Driver Jobs Screen",
-  DRIVER_JOBS_LIST_SCREEN: "Driver Jobs List Screen",
+  DRIVER_ACCEPTED_JOBS_SCREEN: "Driver Accepted Jobs Screen",
+  DRIVER_PENDING_JOBS_SCREEN: "Driver Pending Jobs Screen",
   DRIVER_TIME_SHEET_SCREEN: "Driver Time Sheet Screen",
   FULL_DKT_FORM_SCREEN: "Full Dkt Form Screen",
   FULL_DKT_LIST_SCREEN: "Full Dkt List Screen",

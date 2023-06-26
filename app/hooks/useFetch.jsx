@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-
-import { URL, getHeader } from "../service";
 import useAuth from "./useAuth";
+import api, { getHeader } from "../service/api";
 
-import axios from "axios";
-import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { ToastType } from "../constants/entity";
-import api from "../service/api";
-
-export default useGet = (endpoint, onSuccess = () => {}, onFail = () => {}) => {
+export default useFetch = (
+  endpoint,
+  onSuccess = () => {},
+  onFail = () => {}
+) => {
   const [data, setData] = useState(null);
   const [update, setUpdate] = useState(true);
   const [loading, setLoading] = useState(true);

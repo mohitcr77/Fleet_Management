@@ -6,7 +6,7 @@ import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
-import useGet from "./../../hooks/useGet";
+import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
 
 const Staff = () => {
@@ -151,7 +151,7 @@ const Staff = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.staff, handleGetStaffSuccess);
+  const { refresh, loading } = useFetch(endpoint.staff, handleGetStaffSuccess);
 
   function handleGetStaffSuccess(d) {
     let arr = [];

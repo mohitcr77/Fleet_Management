@@ -5,13 +5,13 @@ import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
-import useGet from "./../../hooks/useGet";
+import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
 
 const Tax = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.tax, handleTaxSuccess);
+  const { refresh, loading } = useFetch(endpoint.tax, handleTaxSuccess);
 
   function handleTaxSuccess(d) {
     let arr = [];
@@ -59,7 +59,7 @@ const Tax = () => {
     <ParentContainer
       useScroll={false}
       title="Tax"
-      addScreen={{ name:screenNames.FORM_SCREEN, params: formProps}}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}

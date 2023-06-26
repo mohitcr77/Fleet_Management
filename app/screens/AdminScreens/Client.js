@@ -5,13 +5,13 @@ import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
-import useGet from "./../../hooks/useGet";
+import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
 
 const Client = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.clients, handleClientSuccess);
+  const { refresh, loading } = useFetch(endpoint.clients, handleClientSuccess);
 
   function handleClientSuccess(d) {
     let arr = [];
@@ -40,7 +40,7 @@ const Client = () => {
       type: dataType.text,
       value: null,
       card: true,
-      mapKey: ["user","name"],
+      mapKey: ["user", "name"],
     },
     {
       name: "Email",
@@ -111,7 +111,7 @@ const Client = () => {
     <ParentContainer
       useScroll={false}
       title="Client"
-      addScreen={{ name:screenNames.FORM_SCREEN, params: formProps}}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}

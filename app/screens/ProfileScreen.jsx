@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 
-import ParentContainer from "../components/ParentContainer";
 import { width } from "../helpers/scales";
 import colors from "../constants/colors";
 import useAuth from "../hooks/useAuth";
 import Icons from "../components/Icons";
 import { DrawerActions } from "@react-navigation/native";
-import { deleteData } from "../store/dataSlice";
-import service from "../service";
+
 import permanentStorage, { loginDetail } from "../auth/permanentStorage";
 
 export default function Profile({ navigation }) {

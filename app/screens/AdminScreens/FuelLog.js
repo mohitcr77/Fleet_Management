@@ -6,7 +6,7 @@ import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
-import useGet from "./../../hooks/useGet";
+import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
 
 const FuelLog = () => {
@@ -23,62 +23,65 @@ const FuelLog = () => {
       key: "date",
       type: dataType.date,
       card: true,
-      value: null
+      value: null,
     },
     {
       name: "Time",
       key: "time",
       type: dataType.time,
       card: true,
-      value: null
+      value: null,
     },
     {
       name: "Dkt_no.",
       key: "dkt_no",
       type: dataType.number,
       card: true,
-      value: null
+      value: null,
     },
     {
       name: "Dip Start",
       key: "dip_start",
       type: dataType.number,
-      value: null
+      value: null,
     },
     {
       name: "Dip finish",
       key: "dip_finish",
       type: dataType.number,
-      value: null
+      value: null,
     },
     {
       name: "EST Delivered",
       key: "est_delivered",
       type: dataType.number,
-      value: null
+      value: null,
     },
     {
       name: "Actual Delivered",
       key: "actual_delivered",
       type: dataType.number,
-      value: null
+      value: null,
     },
     {
       name: "Fuel Rate",
       key: "fuel_rate",
       type: dataType.number,
-      value: null
+      value: null,
     },
     {
       name: "Invoice",
       key: "invoice_total",
       type: dataType.text,
-      value: null
+      value: null,
     },
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.fuel_log, handleCurrencySuccess);
+  const { refresh, loading } = useFetch(
+    endpoint.fuel_log,
+    handleCurrencySuccess
+  );
 
   function handleCurrencySuccess(d) {
     let arr = [];

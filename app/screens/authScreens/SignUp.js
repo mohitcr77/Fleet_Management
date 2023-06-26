@@ -17,15 +17,15 @@ import screenNames from "../../constants/screenNames";
 import useApi from "../../hooks/useApi";
 import endpoint from "../../service/endpoint";
 import generateKeyValueFromFormData from "../../helpers/generateKeyValueFromForm";
-import useGet from "./../../hooks/useGet";
+import useFetch from "./../../hooks/useFetch";
 import dataType from "../../constants/dataType";
 import isEmptyArray from "../../helpers/isEmptyArray";
 import LoadingScreen from "./../AdminScreens/LoadingScreen";
 import SignUpDropDown from "../../components/SignUpDropDown";
 
 const SignUp = ({ navigation }) => {
-  const { data: currencyList } = useGet(endpoint.currency);
-  const { data: timezoneList } = useGet(endpoint.timezones);
+  const { data: currencyList } = useFetch(endpoint.currency);
+  const { data: timezoneList } = useFetch(endpoint.timezones);
 
   const signupForm = [
     {

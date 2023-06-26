@@ -6,6 +6,8 @@ import { useRef, useState, useEffect } from "react";
 import service from "../../service";
 import screenNames from "../../constants/screenNames";
 import LoadingScreen from "../AdminScreens/LoadingScreen";
+import useApi from "../../hooks/useApi";
+import { authEndpoints } from "../../service/endpoint";
 
 export default function FillOtp({ route, navigation }) {
   const { email } = route.params;
@@ -13,6 +15,8 @@ export default function FillOtp({ route, navigation }) {
   const [timerCount, setTimer] = useState(30);
   const [count, setCount] = useState(0);
   const [otp, setOtp] = useState(0);
+
+  const { request: sendOtp } = useApi(authEndpoints.resend_top);
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -38,7 +42,11 @@ export default function FillOtp({ route, navigation }) {
       email: email,
     };
     setIsLoading(true);
-    const res = await service.resendOTP(data);
+    const requestConfig = {
+      endpoint: authEndpoints.resend_top,
+      body: data,
+    };
+    const res = await sendOtp(requestConfig);
     if (res.data.success) {
       alert("re-sending OTP successful");
     } else {

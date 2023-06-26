@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 
 import { Dropdown } from "react-native-element-dropdown";
 import customStyles from "../constants/styles";
-import useGet from "../hooks/useGet";
+import useFetch from "../hooks/useFetch";
 import endpoint from "../service/endpoint";
 import CompWrapper from "./CompWrapper";
 import LoadingScreen from "../screens/AdminScreens/LoadingScreen";
@@ -23,15 +23,15 @@ export default function LocationInput(props) {
     city_id: "1",
   });
 
-  const { loading: countryLoading, refresh: refreshCountry } = useGet(
+  const { loading: countryLoading, refresh: refreshCountry } = useFetch(
     endpoint.countries,
     (d) => onGetData(d, 0)
   );
-  const { loading: stateLoading, refresh: refreshState } = useGet(
+  const { loading: stateLoading, refresh: refreshState } = useFetch(
     endpoint.states + locationRef.current.country_id,
     (d) => onGetData(d, 1)
   );
-  const { loading: cityLoading } = useGet(
+  const { loading: cityLoading } = useFetch(
     endpoint.cities + locationRef.current.state_id,
     (d) => onGetData(d, 2)
   );

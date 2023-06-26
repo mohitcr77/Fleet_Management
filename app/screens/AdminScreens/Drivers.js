@@ -6,7 +6,7 @@ import ParentContainer from "../../components/ParentContainer";
 import endpoint from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
-import useGet from "./../../hooks/useGet";
+import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
 const Drivers = () => {
   const form = [
@@ -47,14 +47,14 @@ const Drivers = () => {
       key: "password",
       type: dataType.password,
       value: null,
-      mapKey: [""]
+      mapKey: [""],
     },
     {
       name: "Re-enter Password",
       key: "repassword",
       type: dataType.password,
       value: null,
-      mapKey: [""]
+      mapKey: [""],
     },
     {
       name: "Address 1",
@@ -70,7 +70,7 @@ const Drivers = () => {
       type: dataType.text,
       value: null,
       card: true,
-      mapKey: ["user", "user_details","address2"],
+      mapKey: ["user", "user_details", "address2"],
     },
     {
       name: "State",
@@ -104,7 +104,10 @@ const Drivers = () => {
 
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useGet(endpoint.driver, handleGetDriverSuccess);
+  const { refresh, loading } = useFetch(
+    endpoint.driver,
+    handleGetDriverSuccess
+  );
 
   function handleGetDriverSuccess(d) {
     let arr = [];
@@ -130,7 +133,7 @@ const Drivers = () => {
     <ParentContainer
       useScroll={false}
       title="Driver"
-      addScreen={{name:screenNames.FORM_SCREEN, params: formProps}}
+      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
     >
       <AdminListRendered
         data={listData}

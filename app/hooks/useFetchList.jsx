@@ -6,17 +6,17 @@ import {
   addListItem,
   addMachineTypeList,
 } from "../store/reducer/dropdownDataReducer";
-import useGet from "./useGet";
+import useFetch from "./useFetch";
 import endpoint from "../service/endpoint";
 import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
 import { DROPDOWN_LIST } from "../constants/entity";
 
 export default useFetchList = (update) => {
-  // useGet(endpoint.clients, handleGetClientDetails);
-  // useGet(endpoint.rego, handleGetRegoDetails);
-  // useGet(endpoint.mechanic, handleGetMechanicDetails);
-  // useGet(endpoint.job_color, handleGetColorDetails);
-  // useGet(endpoint.driver, handleGetDriverDetails);
+  // useFetch(endpoint.clients, handleGetClientDetails);
+  // useFetch(endpoint.rego, handleGetRegoDetails);
+  // useFetch(endpoint.mechanic, handleGetMechanicDetails);
+  // useFetch(endpoint.job_color, handleGetColorDetails);
+  // useFetch(endpoint.driver, handleGetDriverDetails);
 
   const dispatch = useDispatch();
   const { clientList, machineTypeList } = useSelector(
