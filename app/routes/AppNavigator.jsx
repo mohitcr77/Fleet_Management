@@ -58,6 +58,7 @@ import Form from "../screens/FormScreen";
 import DetailsView from "../screens/DetailsViewScreen";
 import Notifications from "../screens/NotificationsScreen";
 import useNotification from "../hooks/useNotification";
+import EstimateCreditNoteForm from "../screens/AdminScreens/EstimateCreditNoteForm";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -206,6 +207,10 @@ export default function AppNavigator() {
     { name: screenNames.DOCUMENTS_SCREEN, component: Documents },
     { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
     { name: screenNames.NOTIFICATIONS_SCREEN, component: Notifications },
+    {
+      name: screenNames.ESTIMATE_CREDIT_NOTE_FORM,
+      component: EstimateCreditNoteForm,
+    },
   ];
 
   const navigationScreens = [...drawerScreens[role], ...commonScreens];

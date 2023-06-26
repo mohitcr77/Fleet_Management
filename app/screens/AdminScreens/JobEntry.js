@@ -65,7 +65,7 @@ const JobEntry = () => {
     {
       name: "Job number",
       key: "job_no",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       card: true,
       mapKey: ["job_no"],
@@ -102,7 +102,7 @@ const JobEntry = () => {
     {
       name: "Docket number",
       key: "docket_no",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       mapKey: ["docket_no"],
     },
@@ -116,7 +116,7 @@ const JobEntry = () => {
     {
       name: "Invoice no.",
       key: "invoice_no",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       mapKey: ["invoice_no"],
     },

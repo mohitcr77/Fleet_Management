@@ -10,19 +10,14 @@ export default useApi = (onSuccess = () => {}, onFail = () => {}) => {
   const { token } = useAuth();
 
   const request = async (requestConfig) => {
-    const {
-      endpoint,
-      body = {},
-      method = HTTPS_METHODS.POST,
-      showLoader = true,
-    } = requestConfig;
+    const { endpoint, body = {}, method = HTTPS_METHODS.POST } = requestConfig;
     try {
-      if (showLoader) Toast.show(ToastType.LOADING);
+      Toast.show(ToastType.LOADING);
 
       const data = await api[method](endpoint, body, getHeader(token));
       Toast.hide();
       if (data.ok) {
-        if (showLoader) Toast.show(ToastType.SUCCESS);
+        Toast.show(ToastType.SUCCESS);
         onSuccess(data.data);
       } else {
         Toast.show(ToastType.ERROR);

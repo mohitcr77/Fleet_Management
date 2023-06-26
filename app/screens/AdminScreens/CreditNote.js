@@ -7,6 +7,7 @@ import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const CreditNote = () => {
   const form = [
@@ -19,17 +20,18 @@ const CreditNote = () => {
       mapKey: ["id"],
     },
     {
-      name: "client_id",
+      name: "Client",
       key: "client_id",
-      type: dataType.text,
+      type: dataType.dropdown,
       value: null,
       card: true,
+      data: DROPDOWN_LIST.CLIENTS,
       mapKey: ["client_id"],
     },
     {
       name: "Credit Note no",
       key: "credit_note_no",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       card: true,
       mapKey: ["credit_note_no"],
@@ -37,15 +39,16 @@ const CreditNote = () => {
     {
       name: "Reference no",
       key: "reference_no",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       card: true,
       mapKey: ["reference_no"],
     },
     {
-      name: "Staff id",
+      name: "Staff",
       key: "staff_id",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.STAFF,
       value: null,
       card: true,
       mapKey: ["staff_id"],
@@ -63,15 +66,15 @@ const CreditNote = () => {
       key: "customer_notes",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["customer_notes"],
     },
     {
       name: "Total",
       key: "total",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
-      card: true,
+      
       mapKey: ["total"],
     },
     {
@@ -79,48 +82,56 @@ const CreditNote = () => {
       key: "terms",
       type: dataType.text,
       value: null,
-      card: true,
+      
       mapKey: ["terms"],
     },
     {
       name: "Shipping",
       key: "shipping",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
-      card: true,
+      
       mapKey: ["shipping"],
     },
     {
       name: "Adjustment",
       key: "adjustment",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
-      card: true,
+      
       mapKey: ["adjustment"],
     },
     {
       name: "Invoice",
       key: "invoice",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
-      card: true,
+      
       mapKey: ["invoice"],
     },
     {
       name: "Discount",
       key: "discount",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
-      card: true,
+      
       mapKey: ["discount"],
     },
     {
       name: "Paid",
       key: "paid",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
-      card: true,
+      
       mapKey: ["paid"],
+    },
+    {
+      name: "Add Item",
+      key: "add_item",
+      type: dataType.creditNoteForm,
+      value: null,
+      
+      mapKey: ["add_item"],
     },
   ];
   const [listData, setListData] = useState([]);
@@ -153,7 +164,7 @@ const CreditNote = () => {
     <ParentContainer
       useScroll={false}
       title="Credit Note"
-      addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
+      addScreen={{ name: screenNames.ESTIMATE_CREDIT_NOTE_FORM, params: formProps }}
     >
       <AdminListRendered
         data={listData}

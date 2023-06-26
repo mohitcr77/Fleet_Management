@@ -71,7 +71,7 @@ const Staff = () => {
     {
       name: "Country",
       key: "country_id",
-      type: dataType.country,
+      type: dataType.lo,
       value: null,
       mapKey: ["country_id", "state_id", "city_id"],
     },
