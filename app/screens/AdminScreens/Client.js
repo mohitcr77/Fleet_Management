@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { endpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -103,7 +103,7 @@ const Client = () => {
   ];
   const formProps = {
     backScreen: screenNames.CLIENT,
-    endpoint: endpoint.clients,
+    endpoint: endpoints.clients,
     form,
     title: "Add Client",
   };
@@ -120,7 +120,7 @@ const Client = () => {
         backScreen={screenNames.CLIENT}
         listTitle={"Client Details"}
         editTitle={"Edit Client"}
-        endpoint={endpoint.clients}
+        endpoint={endpoints.clients}
       />
     </ParentContainer>
   );

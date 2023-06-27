@@ -10,15 +10,16 @@ import useFetch from "./useFetch";
 import endpoint from "../service/endpoint";
 import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
 import { DROPDOWN_LIST } from "../constants/entity";
+import { adminEndpoints } from "../service/endpoint";
 
 export default useFetchList = (update) => {
-  useGet(endpoint.clients, handleGetClientDetails);
-  useGet(endpoint.rego, handleGetRegoDetails);
-  useGet(endpoint.mechanic, handleGetMechanicDetails);
-  useGet(endpoint.job_color, handleGetColorDetails);
-  useGet(endpoint.driver, handleGetDriverDetails);
-  useGet(endpoint.staff, handleGetStaffDetails);
-  useGet(endpoint.tax, handleGetTaxDetails);
+  useFetch(endpoint.clients, handleGetClientDetails);
+  useFetch(endpoint.rego, handleGetRegoDetails);
+  useFetch(endpoint.mechanic, handleGetMechanicDetails);
+  useFetch(endpoint.job_color, handleGetColorDetails);
+  useFetch(adminEndpoints.driver, handleGetDriverDetails);
+  useFetch(endpoint.staff, handleGetStaffDetails);
+  useFetch(endpoint.tax, handleGetTaxDetails);
 
   const dispatch = useDispatch();
   const { clientList, machineTypeList } = useSelector(

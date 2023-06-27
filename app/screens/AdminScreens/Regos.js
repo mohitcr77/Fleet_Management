@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -205,7 +205,7 @@ const Regos = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(endpoint.rego, handleGetRegoSuccess);
+  const { refresh, loading } = useFetch(adminEndpoints.rego, handleGetRegoSuccess);
 
   function handleGetRegoSuccess(d) {
     let arr = [];
@@ -219,7 +219,7 @@ const Regos = () => {
 
   const formProps = {
     backScreen: screenNames.REGOS,
-    endpoint: endpoint.rego,
+    endpoint: adminEndpoints.rego,
     form,
     title: "Add Regos",
   };
@@ -236,7 +236,7 @@ const Regos = () => {
         backScreen={screenNames.REGOS}
         listTitle={"Rego Details"}
         editTitle={"Edit Rego"}
-        endpoint={endpoint.rego}
+        endpoint={adminEndpoints.rego}
       />
     </ParentContainer>
   );

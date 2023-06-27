@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -13,7 +13,7 @@ const Estimate = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.estimate,
+    adminEndpoints.estimate,
     handleEstimateSuccess
   );
 
@@ -129,7 +129,7 @@ const Estimate = () => {
   ];
   const formProps = {
     backScreen: screenNames.ESTIMATE,
-    endpoint: endpoint.estimate,
+    endpoint: adminEndpoints.estimate,
     form,
     title: "Add Estimate",
   };
@@ -150,7 +150,7 @@ const Estimate = () => {
         backScreen={screenNames.ESTIMATE}
         listTitle={"Estimate Details"}
         editTitle={"Edit Estimate"}
-        endpoint={endpoint.estimate}
+        endpoint={adminEndpoints.estimate}
       />
     </ParentContainer>
   );

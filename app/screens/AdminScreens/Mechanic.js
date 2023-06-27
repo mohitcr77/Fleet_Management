@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -93,7 +93,7 @@ const Mechanic = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.mechanic,
+    adminEndpoints.mechanic,
     handleCurrencySuccess
   );
 
@@ -111,7 +111,7 @@ const Mechanic = () => {
   }
   const formProps = {
     backScreen: screenNames.MECHANIC,
-    endpoint: endpoint.mechanic,
+    endpoint: adminEndpoints.mechanic,
     form,
     title: "Add Mechanic",
   };
@@ -129,7 +129,7 @@ const Mechanic = () => {
         backScreen={screenNames.MECHANIC}
         listTitle={"Mechanic Details"}
         editTitle={"Edit Mechanic"}
-        endpoint={endpoint.mechanic}
+        endpoint={adminEndpoints.mechanic}
       />
     </ParentContainer>
   );
