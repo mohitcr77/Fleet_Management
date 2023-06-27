@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import AdminListRendered from "../../components/AdminListRendered";
 import dataType from "../../constants/dataType";
-import endpoint from "../../service/endpoint";
+import endpoint, { adminEndpoints } from "../../service/endpoint";
 import getNestedData from "../../helpers/getNestedData";
 import ParentContainer from "../../components/ParentContainer";
 import screenNames from "../../constants/screenNames";
@@ -72,7 +72,7 @@ const MechanicDataScreen = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(endpoint.rego, handleGetRegoSuccess);
+  const { refresh, loading } = useFetch(adminEndpoints.rego, handleGetRegoSuccess);
 
   function handleGetRegoSuccess(d) {
     let arr = [];
@@ -89,7 +89,7 @@ const MechanicDataScreen = () => {
 
   const formProps = {
     backScreen: screenNames.MECHANIC_DATA_SCREEN,
-    endpoint: endpoint.rego,
+    endpoint: adminEndpoints.rego,
     form,
     title: "Mechanic Form",
   };
@@ -106,7 +106,7 @@ const MechanicDataScreen = () => {
         backScreen={screenNames.MECHANIC_DATA_SCREEN}
         listTitle={"Rego Details"}
         editTitle={"Edit Rego"}
-        endpoint={endpoint.rego}
+        endpoint={adminEndpoints.rego}
       />
     </ParentContainer>
   );

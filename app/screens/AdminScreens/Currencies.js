@@ -47,7 +47,7 @@ const Currencies = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.currency,
+    endpoints.currency,
     handleCurrencySuccess
   );
 

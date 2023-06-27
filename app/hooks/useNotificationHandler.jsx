@@ -13,7 +13,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export default useNotification = () => {
+export default useNotificationHandler = () => {
   const { token: headerToken } = useAuth();
   useEffect(() => {
     requestPermissions();
@@ -42,7 +42,7 @@ export default useNotification = () => {
         getHeader(headerToken)
       );
 
-      console.log(data);
+      // console.log(data);
     } catch (error) {}
   }
 };

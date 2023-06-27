@@ -10,7 +10,6 @@ import { store } from "./app/store/store";
 import { toastConfig } from "./app/config/toastConfig";
 import AppNavigator from "./app/routes/AppNavigator";
 import AuthNavigator from "./app/routes/AuthNavigator";
-import index from "./app/service/index";
 import StartupScreen from "./app/screens/AdminScreens/StartupScreen";
 import TokenContext from "./app/auth/context";
 import permanentStorage, { loginDetail } from "./app/auth/permanentStorage";

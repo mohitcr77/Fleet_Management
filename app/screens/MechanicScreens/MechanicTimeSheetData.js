@@ -12,7 +12,7 @@ import screenNames from "../../constants/screenNames";
 import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
 import dataType from "../../constants/dataType";
-import endpoint from "../../service/endpoint";
+import endpoint, { adminEndpoints } from "../../service/endpoint";
 import { DROPDOWN_LIST } from "../../constants/entity";
 
 const MechanicTimeSheetData = () => {
@@ -83,7 +83,7 @@ const MechanicTimeSheetData = () => {
 
   const formProps = {
     backScreen: screenNames.MECHANIC_TIME_SHEET_DATA,
-    endpoint: endpoint.rego,
+    endpoint: adminEndpoints.rego,
     form,
     title: "Time Sheet",
   };

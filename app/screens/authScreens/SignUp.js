@@ -15,7 +15,7 @@ import dimensions from "../../constants/dimensions";
 import Icons from "../../components/Icons";
 import screenNames from "../../constants/screenNames";
 import useApi from "../../hooks/useApi";
-import endpoint from "../../service/endpoint";
+import { authEndpoints, endpoints } from "../../service/endpoint";
 import generateKeyValueFromFormData from "../../helpers/generateKeyValueFromForm";
 import useFetch from "./../../hooks/useFetch";
 import dataType from "../../constants/dataType";
@@ -24,8 +24,8 @@ import LoadingScreen from "./../AdminScreens/LoadingScreen";
 import SignUpDropDown from "../../components/SignUpDropDown";
 
 const SignUp = ({ navigation }) => {
-  const { data: currencyList } = useFetch(endpoint.currency);
-  const { data: timezoneList } = useFetch(endpoint.timezones);
+  const { data: currencyList } = useFetch(endpoints.currencies);
+  const { data: timezoneList } = useFetch(endpoints.timezones);
 
   const signupForm = [
     {
@@ -58,20 +58,20 @@ const SignUp = ({ navigation }) => {
       key: "email",
       type: dataType.text,
     },
-    // {
-    //   placeholder: "Currency",
-    //   hidden: false,
-    //   key: "currency_id",
-    //   type: dataType.dropdown,
-    //   data: currencyList,
-    // },
-    // {
-    //   placeholder: "Timezone",
-    //   hidden: false,
-    //   key: "timezone_id",
-    //   type: dataType.dropdown,
-    //   data: timezoneList,
-    // },
+    {
+      placeholder: "Currency",
+      hidden: false,
+      key: "currency_id",
+      type: dataType.dropdown,
+      data: currencyList,
+    },
+    {
+      placeholder: "Timezone",
+      hidden: false,
+      key: "timezone_id",
+      type: dataType.dropdown,
+      data: timezoneList,
+    },
     {
       placeholder: "Password",
       hidden: true,
@@ -94,7 +94,7 @@ const SignUp = ({ navigation }) => {
 
   const signUp = async () => {
     const requestConfig = {
-      endpoint: endpoint.sign_up,
+      endpoint: authEndpoints.sign_up,
       body: state,
     };
     await signUpUser(requestConfig);

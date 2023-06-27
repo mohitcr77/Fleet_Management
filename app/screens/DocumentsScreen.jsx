@@ -5,7 +5,7 @@ import screenNames from "../constants/screenNames";
 import { width } from "../helpers/scales";
 import colors from "../constants/colors";
 import dataType from "../constants/dataType";
-import endpoint from "../service/endpoint";
+import endpoint, { adminEndpoints } from "../service/endpoint";
 import ParentContainer from "../components/ParentContainer";
 import TouchableText from "../components/TouchableText";
 
@@ -26,7 +26,7 @@ export default function Documents({ navigation }) {
 
   const formProps = {
     backScreen: screenNames.DOCUMENTS_SCREEN,
-    endpoint: endpoint.rego,
+    endpoint: adminEndpoints.rego,
     form,
     title: "Add",
   };

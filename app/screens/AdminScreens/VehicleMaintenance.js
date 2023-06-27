@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -102,7 +102,7 @@ const VehicleMaintenance = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.vehicle_maintenance,
+    adminEndpoints.vehicle_maintenance,
     handleGetVehicleMaintenanceSuccess
   );
 
@@ -117,7 +117,7 @@ const VehicleMaintenance = () => {
   }
   const formProps = {
     backScreen: screenNames.VEHICLE_MAINTENANCE,
-    endpoint: endpoint.vehicle_maintenance,
+    endpoint: adminEndpoints.vehicle_maintenance,
     form,
     title: "Add Vehicle",
   };
@@ -135,7 +135,7 @@ const VehicleMaintenance = () => {
         backScreen={screenNames.VEHICLE_MAINTENANCE}
         listTitle={"Vehicle Details"}
         editTitle={"Edit Vehicle"}
-        endpoint={endpoint.vehicle_maintenance}
+        endpoint={adminEndpoints.vehicle_maintenance}
       />
     </ParentContainer>
   );

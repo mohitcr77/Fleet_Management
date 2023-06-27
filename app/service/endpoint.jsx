@@ -2,6 +2,7 @@ const authEndpoints = {
   login: "/login",
   resend_top: "/resend",
   sign_up: "/signup",
+  very_otp: "/verify-otp",
 };
 
 const endpoints = {
@@ -11,6 +12,10 @@ const endpoints = {
   currency: "/currency",
   notification: "/notifications",
   save_token: "/update-fcm-token",
+  currencies: "/currencies",
+  timezones: "/timezones",
+  states: "/states/",
+  cities: "/cities/",
 };
 
 const adminEndpoints = {
@@ -30,9 +35,9 @@ const adminEndpoints = {
   tax: "/taxes",
   timezones: "/timezones",
   vehicle_maintenance: "/vehicle_maintenance",
-  creditnote : "/creditnote",
+  creditnote: "/creditnote",
   jobs_by_client: "/jobs_by_client/",
-  job_color : "/color",
+  job_color: "/color",
 };
 
 const driverEndpoints = {
@@ -49,30 +54,6 @@ export {
   authEndpoints,
   mechanicEndpoints,
 };
-// change endpoints, color picker, remove files from service, components
+// removed - InputFormScreen, DrawerContentScreen, HomeScreen, Header,
+// component removed -  appItem, appInput, dataList and custom, modal +1 from store
 
-const currency = "/currency";
-const countries = "/countries";
-const getId = (id) => `/id${id}`;
-const login = "/login";
-const sign_up = "/signup";
-const staff = "/staff";
-const tax = "/taxes";
-const vehicle_maintenance = "/vehicle_maintenance";
-const timezones = "/timezones";
-const states = "/states/";
-const cities = "/cities/";
-
-export default {
-  countries,
-  currency,
-  login,
-  getId,
-  sign_up,
-  staff,
-  tax,
-  vehicle_maintenance,
-  timezones,
-  states,
-  cities,
-};

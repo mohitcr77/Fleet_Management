@@ -44,7 +44,7 @@ const JobColor = () => {
     {
       name: "code",
       key: "code",
-      type: dataType.text,
+      type: dataType.color,
       card: true,
       mapKey: ["code"],
     },

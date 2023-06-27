@@ -3,7 +3,6 @@ import React from "react";
 import OTPTextView from "react-native-otp-textinput";
 import { Button, Text } from "@ui-kitten/components";
 import { useRef, useState, useEffect } from "react";
-import service from "../../service";
 import screenNames from "../../constants/screenNames";
 import LoadingScreen from "../AdminScreens/LoadingScreen";
 import useApi from "../../hooks/useApi";
@@ -16,7 +15,8 @@ export default function FillOtp({ route, navigation }) {
   const [count, setCount] = useState(0);
   const [otp, setOtp] = useState(0);
 
-  const { request: sendOtp } = useApi(authEndpoints.resend_top);
+  const { request: sendOtp } = useApi();
+  const { request: verifyOtp } = useApi();
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -61,7 +61,11 @@ export default function FillOtp({ route, navigation }) {
       otp: otp,
     };
     setIsLoading(true);
-    const res = await service.verifyOTP(data);
+    const requestConfig = {
+      endpoint: authEndpoints.very_otp,
+      body: data,
+    };
+    const res = await verifyOtp(requestConfig);
     if (res.data.success) {
       navigation.navigate(screenNames.LOGIN_SCREEN);
       alert("OTP verified");

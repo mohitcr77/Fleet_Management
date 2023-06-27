@@ -11,7 +11,7 @@ import getNestedData from "../../helpers/getNestedData";
 const Client = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(endpoint.clients, handleClientSuccess);
+  const { refresh, loading } = useFetch(endpoints.clients, handleClientSuccess);
 
   function handleClientSuccess(d) {
     let arr = [];

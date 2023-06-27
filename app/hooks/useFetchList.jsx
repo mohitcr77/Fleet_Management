@@ -7,106 +7,51 @@ import {
   addMachineTypeList,
 } from "../store/reducer/dropdownDataReducer";
 import useFetch from "./useFetch";
-import endpoint from "../service/endpoint";
+import endpoint, { adminEndpoints, endpoints } from "../service/endpoint";
 import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
 import { DROPDOWN_LIST } from "../constants/entity";
-import { adminEndpoints } from "../service/endpoint";
+import getNestedData from "../helpers/getNestedData";
 
 export default useFetchList = (update) => {
-  useFetch(endpoint.clients, handleGetClientDetails);
-  useFetch(endpoint.rego, handleGetRegoDetails);
-  useFetch(endpoint.mechanic, handleGetMechanicDetails);
-  useFetch(endpoint.job_color, handleGetColorDetails);
-  useFetch(adminEndpoints.driver, handleGetDriverDetails);
-  useFetch(endpoint.staff, handleGetStaffDetails);
-  useFetch(endpoint.tax, handleGetTaxDetails);
-
-  const dispatch = useDispatch();
-  const { clientList, machineTypeList } = useSelector(
-    (state) => state.dropDownData
+  useFetch(endpoints.clients, (arr) =>
+    handleReceiveData(arr, DROPDOWN_LIST.CLIENTS, ["user", "name"])
   );
 
-  async function handleGetClientDetails(arr) {
+  useFetch(adminEndpoints.rego, (arr) =>
+    handleReceiveData(arr, DROPDOWN_LIST.REGOS, ["name"])
+  );
+
+  useFetch(adminEndpoints.mechanic, (arr) =>
+    handleReceiveData(arr, DROPDOWN_LIST.MECHANICS, ["user", "name"])
+  );
+
+  useFetch(adminEndpoints.job_color, (arr) =>
+    handleReceiveData(arr, DROPDOWN_LIST.COLORS, ["name"])
+  );
+
+  useFetch(adminEndpoints.driver, (arr) =>
+    handleReceiveData(arr, DROPDOWN_LIST.DRIVERS, ["user", "name"])
+  );
+
+  useFetch(adminEndpoints.staff, (arr) =>
+    handleReceiveData(arr, DROPDOWN_LIST.STAFF, ["user", "name"])
+  );
+
+  useFetch(adminEndpoints.tax, (arr) =>
+    handleReceiveData(arr, DROPDOWN_LIST.TAX, ["tax_name"])
+  );
+
+  const dispatch = useDispatch();
+
+  async function handleReceiveData(arr, list, map) {
     if (isNotNullOrUndefined(arr)) {
       const d = arr.data.data;
       d.forEach((e) => {
-        e.label = e.user.name;
-        e.value = e.user.name;
+        const val = getNestedData(e, map);
+        e.label = val;
+        e.value = val;
       });
-      dispatch(addClientList(d));
+      dispatch(addListItem({ data: d, name: list }));
     }
   }
-
-  async function handleGetRegoDetails(arr) {
-    if (isNotNullOrUndefined(arr)) {
-      const d = arr.data.data;
-      d.forEach((e) => {
-        e.label = e.name;
-        e.value = e.name;
-      });
-      dispatch(addMachineTypeList(d));
-    }
-  }
-
-  async function handleGetMechanicDetails(arr) {
-    if (isNotNullOrUndefined(arr)) {
-      const d = arr.data.data;
-      d.forEach((e) => {
-        e.label = e.user.name;
-        e.value = e.user.name;
-      });
-      dispatch(addListItem({ data: d, name: DROPDOWN_LIST.MECHANICS }));
-    }
-  }
-
-  async function handleGetColorDetails(arr) {
-    if (isNotNullOrUndefined(arr)) {
-      const d = arr.data.data;
-      d.forEach((e) => {
-        e.label = e.name;
-        e.value = e.name;
-      });
-      dispatch(addListItem({ data: d, name: DROPDOWN_LIST.COLORS }));
-    }
-  }
-
-  async function handleGetDriverDetails(arr) {
-    if (isNotNullOrUndefined(arr)) {
-      const d = arr.data.data;
-      d.forEach((e) => {
-        e.label = e.user.name;
-        e.value = e.user.name;
-      });
-      dispatch(addListItem({ data: d, name: DROPDOWN_LIST.DRIVERS }));
-    }
-  }
-
-  async function handleGetStaffDetails(arr) {
-    if (isNotNullOrUndefined(arr)) {
-      const d = arr.data.data;
-      d.forEach((e) => {
-        e.label = e.user.name;
-        e.value = e.user.name;
-      });
-      dispatch(addListItem({ data: d, name: DROPDOWN_LIST.STAFF }));
-    }
-  }
-
-  async function handleGetTaxDetails(arr) {
-    if (isNotNullOrUndefined(arr)) {
-      const d = arr.data.data;
-      d.forEach((e) => {
-        e.label = e.tax_name;
-        e.value = e.tax_name;
-      });
-      dispatch(addListItem({ data: d, name: DROPDOWN_LIST.TAX }));
-    }
-  }
-
-  const response = {
-    clientList,
-    machineTypeList,
-  };
-
-  return response;
 };
