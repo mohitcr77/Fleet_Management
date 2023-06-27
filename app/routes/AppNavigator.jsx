@@ -3,12 +3,12 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import useAuth from "../hooks/useAuth";
 import { Role } from "../constants/entity";
 
-import DrawerContent from "../screens/DrawerContentScreen";
 import screenNames from "../constants/screenNames";
 import useFetchList from "../hooks/useFetchList";
 
 //common screen
 import AboutApp from "../screens/AboutAppScreen";
+import DrawerContent from "../screens/DrawerContentScreen";
 import PreInspectionForm from "../screens/DriverScreens/PreInspectionFormScreen";
 import Profile from "../screens/ProfileScreen";
 import PreInspectionHistory from "../screens/DriverScreens/PreInspectionHistoryScreen";
@@ -17,48 +17,48 @@ import PreInspectionNote from "../screens/DriverScreens/PreInspectionNoteScreen"
 // driver screens
 import ChatRoom from "../screens/DriverScreens/ChatRoomScreen";
 import Documents from "../screens/DocumentsScreen";
+import DriverJobs from "../screens/DriverScreens/DriverJobsListScreen";
 import FullDktForm from "../screens/DriverScreens/FullDktFormScreen";
 import FullDktList from "../screens/DriverScreens/FullDktListScreen";
 import PreInspectionList from "../screens/DriverScreens/PreInspectionListScreen";
 import ScanDktForm from "../screens/DriverScreens/ScanDktFormScreen";
 import ScanDktList from "../screens/DriverScreens/ScanDktListScreen";
 import TimeSheet from "../screens/DriverScreens/TimeSheetScreen";
-import DriverJobs from "../screens/DriverScreens/DriverJobsListScreen";
 
 //mechanic screen
-import MechanicDataScreen from "../screens/MechanicScreens/MechanicDataScreen";
-import MechanicTimeSheetData from "../screens/MechanicScreens/MechanicTimeSheetData";
-import FleetInspection from "../screens/MechanicScreens/FleetInspection";
-import InspectionHistory from "../screens/MechanicScreens/InspectionHistory";
 import DocumentForm from "../screens/MechanicScreens/DocumentForm";
 import DocumentList from "../screens/MechanicScreens/DocumentList";
+import FleetInspection from "../screens/MechanicScreens/FleetInspection";
+import InspectionHistory from "../screens/MechanicScreens/InspectionHistory";
+import MechanicDataScreen from "../screens/MechanicScreens/MechanicDataScreen";
+import MechanicTimeSheetData from "../screens/MechanicScreens/MechanicTimeSheetData";
 
 //Admin Screen
-import DashBoard from "../screens/AdminScreens/DashBoard";
-import Regos from "../screens/AdminScreens/Regos";
-import Drivers from "../screens/AdminScreens/Drivers";
-import Mechanic from "../screens/AdminScreens/Mechanic";
-import VehicleMaintenance from "../screens/AdminScreens/VehicleMaintenance";
-import Staff from "../screens/AdminScreens/Staff";
-import FuelLog from "../screens/AdminScreens/FuelLog";
 import Chat from "../screens/AdminScreens/Chat";
-import SMS from "../screens/AdminScreens/SMS";
-import FuelEfficiency from "../screens/AdminScreens/FuelEfficiency";
-import JobEntry from "../screens/AdminScreens/JobEntry";
 import Client from "../screens/AdminScreens/Client";
-import ReportIssue from "../screens/AdminScreens/ReportIssue";
-import MechanicTimesheet from "../screens/AdminScreens/MechanicTimesheet";
-import Estimate from "../screens/AdminScreens/Estimate";
-import Tax from "../screens/AdminScreens/Tax";
-import JobColor from "../screens/AdminScreens/JobColor";
-import Currencies from "../screens/AdminScreens/Currencies";
-import Timezones from "../screens/AdminScreens/Timezones";
 import CreditNote from "../screens/AdminScreens/CreditNote";
-import Form from "../screens/FormScreen";
+import Currencies from "../screens/AdminScreens/Currencies";
+import DashBoard from "../screens/AdminScreens/DashBoard";
 import DetailsView from "../screens/DetailsViewScreen";
-import Notifications from "../screens/NotificationsScreen";
-import useNotification from "../hooks/useNotification";
+import Drivers from "../screens/AdminScreens/Drivers";
+import Estimate from "../screens/AdminScreens/Estimate";
 import EstimateCreditNoteForm from "../screens/AdminScreens/EstimateCreditNoteForm";
+import Form from "../screens/FormScreen";
+import FuelEfficiency from "../screens/AdminScreens/FuelEfficiency";
+import FuelLog from "../screens/AdminScreens/FuelLog";
+import JobColor from "../screens/AdminScreens/JobColor";
+import JobEntry from "../screens/AdminScreens/JobEntry";
+import Mechanic from "../screens/AdminScreens/Mechanic";
+import MechanicTimesheet from "../screens/AdminScreens/MechanicTimesheet";
+import Notifications from "../screens/NotificationsScreen";
+import Regos from "../screens/AdminScreens/Regos";
+import ReportIssue from "../screens/AdminScreens/ReportIssue";
+import SMS from "../screens/AdminScreens/SMS";
+import Staff from "../screens/AdminScreens/Staff";
+import Tax from "../screens/AdminScreens/Tax";
+import Timezones from "../screens/AdminScreens/Timezones";
+import useNotificationHandler from "../hooks/useNotificationHandler";
+import VehicleMaintenance from "../screens/AdminScreens/VehicleMaintenance";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -66,7 +66,7 @@ const Drawer = createDrawerNavigator();
 export default function AppNavigator() {
   const { role } = useAuth();
   useFetchList();
-  useNotification();
+  useNotificationHandler();
 
   const drawerScreens = {
     [Role.MECHANIC]: [

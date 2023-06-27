@@ -2,6 +2,7 @@ const authEndpoints = {
   login: "/login",
   resend_top: "/resend",
   sign_up: "/signup",
+  very_otp: "/verify-otp",
 };
 
 const endpoints = {

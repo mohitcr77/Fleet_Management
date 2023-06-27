@@ -6,7 +6,6 @@ import customStyles from "../constants/styles";
 import formatDate from "../helpers/formatDate";
 import { useEffect } from "react";
 import { useRef, useState } from "react";
-import { setDate } from "date-fns";
 
 const ExpireDate = (props) => {
   const [expireDate, setExpireDate] = useState("");
@@ -22,9 +21,9 @@ const ExpireDate = (props) => {
   });
 
   const setDate = () => {
-    props.onGetDate(expireDate)
-    return expireDate
-  }
+    props.onGetDate(expireDate);
+    return expireDate;
+  };
 
   return (
     <View

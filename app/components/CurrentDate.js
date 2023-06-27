@@ -6,7 +6,6 @@ import customStyles from "../constants/styles";
 import formatDate from "../helpers/formatDate";
 import { useEffect } from "react";
 import { useRef, useState } from "react";
-import { setDate } from "date-fns";
 
 const CurrentDate = (props) => {
   const [currentDate, setCurrentDate] = useState("");
@@ -24,9 +23,9 @@ const CurrentDate = (props) => {
   });
 
   const setDate = () => {
-    props.onGetDate(currentDate)
-    return currentDate
-  }
+    props.onGetDate(currentDate);
+    return currentDate;
+  };
 
   return (
     <View
