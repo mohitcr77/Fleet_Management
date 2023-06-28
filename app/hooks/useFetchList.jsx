@@ -1,16 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import {
-  addClientList,
-  addListItem,
-  addMachineTypeList,
-} from "../store/reducer/dropdownDataReducer";
-import useFetch from "./useFetch";
-import endpoint from "../service/endpoint";
-import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
+import { addListItem } from "../store/reducer/dropdownDataReducer";
 import { DROPDOWN_LIST } from "../constants/entity";
+import endpoint from "../service/endpoint";
 import getNestedData from "../helpers/getNestedData";
+import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
+import useFetch from "./useFetch";
 
 export default useFetchList = (update) => {
   useFetch(endpoint.clients, (arr) =>

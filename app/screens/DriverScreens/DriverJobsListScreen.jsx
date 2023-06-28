@@ -7,42 +7,42 @@ import ParentContainer from "../../components/ParentContainer";
 import screenNames from "../../constants/screenNames";
 import useFetch from "../../hooks/useFetch";
 
-const screenParams = {
-  [screenNames.DRIVER_ACCEPTED_JOBS_SCREEN]: {
-    title: "Accepted Jobs",
-    endpoint: driverEndpoints.accepted_jobs,
-    data: [1, 2, 3, 4],
-  },
-  [screenNames.DRIVER_PENDING_JOBS_SCREEN]: {
-    title: "Pending Jobs",
-    endpoint: driverEndpoints.pending_jobs,
-    data: [1, 2],
-  },
-};
+export default function DriverJobs({ route }) {
+  const { title, endpoint, showBtn } = route.params;
+  const [list, setList] = useState([]);
 
-export default function DriverJobs() {
-  const { history: routeHistory } = useNavigationState((state) => state);
-  const [params, setParams] = useState(
-    screenParams[screenNames.DRIVER_ACCEPTED_JOBS_SCREEN]
-  );
+  const { refresh } = useFetch(endpoint, handleFetchSuccess);
 
-  const screen = routeHistory
-    .filter((i) => i.type === "route")
-    .slice(-1)
-    .pop().key;
+  // useEffect(() => {
+  //   console.log(route.params, "oooo");
+  // }, [route.params]);
 
-  const currentScreen = screen.substring(0, screen.indexOf("-"));
+  function handleFetchSuccess(e) {
+    console.log("first");
+    let arr = [];
+    e.data.data.forEach((ele) => {
+      const a = [
+        {
+          name: "Date",
+          key: "date",
+          value: ele.date,
+        },
+        { name: "Day", key: "day", value: ele.day },
+        { name: "Client", key: "clients.name", value: ele.clients.user.name },
 
-  useEffect(() => {
-    setParams(screenParams[currentScreen]);
-  }, [currentScreen]);
-
-  const { data: jobs } = useFetch(params.endpoint);
-
+        { name: "Color", key: "color", value: ele.color.name },
+        { name: "Job No.", key: "job_no", value: ele.job_no },
+        { name: "Start", key: "drv_start", value: ele.day_start },
+        // { name: "Rego", key: "regos[name]", value: "data.regos.name" },
+      ];
+      arr.push(a);
+    });
+    setList(arr);
+  }
   return (
-    <ParentContainer title={params.title}>
-      {params.data.map((i) => (
-        <DriverJobsCard key={i} />
+    <ParentContainer title={title}>
+      {list.map((i) => (
+        <DriverJobsCard key={i} data={i} showBtn={showBtn} />
       ))}
     </ParentContainer>
   );
