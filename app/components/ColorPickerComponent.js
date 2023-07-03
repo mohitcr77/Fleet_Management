@@ -16,11 +16,6 @@ const ColorPickerComponent = (props) => {
     setPickerVisible(false);
   }
 
-  // const [color, setColor] = useState(toHsv('green'));
-  // function onColorChange(color) {
-  //   setColor({ color });
-  // }
-
   return (
     <View>
       <Pressable
@@ -35,14 +30,6 @@ const ColorPickerComponent = (props) => {
           onColorSelected={(color) => closeColorPicker(color)}
           style={{ height: 500, outerWidth: 500 }}
         /> 
-        {/* <ColorPicker
-        oldColor="purple"
-        color={color}
-        onColorChange={onColorChange}
-        onColorSelected={(color) => alert(`Color selected: ${color}`)}
-        onOldColorSelected={(color) => alert(`Old color selected: ${color}`)}
-        style={{ flex: 1 }}
-      /> */}
         <View style={{ alignItems: "center", margin: 40 }}>
           <Text style={{ fontSize: 15 }}>
             (Click the middle circle to confirm)

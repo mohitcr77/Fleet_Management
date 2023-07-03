@@ -7,6 +7,7 @@ import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
+import { View } from "react-native";
 
 const Client = () => {
   const [listData, setListData] = useState([]);
