@@ -4,22 +4,6 @@ import colors from "../constants/colors";
 import { scale, width, largeScreen } from "../helpers/scales";
 
 export default function DriverJobsCard({ data, showBtn = true }) {
-  const driverJobData = [
-    {
-      name: "Date",
-      key: "date",
-      value: "data.date",
-    },
-    { name: "Day", key: "day", value: "data.date" },
-    { name: "Client", key: "clients.name", value: "data.clients.name" },
-    { name: "Supervisor", key: "supervisor", value: "data?.supervisor?.name" },
-    { name: "Color", key: "color", value: "data?.color?.name" },
-    { name: "Job No.", key: "job_no", value: "data.job_no" },
-    { name: "Start", key: "drv_start", value: "data.day_start" },
-    { name: "Rego", key: "regos[name]", value: "data.regos.name" },
-    { name: "Comment", key: "comment", value: "data.comment" },
-    { name: "Link", key: "link", value: "data.short_url" },
-  ];
   const jobAccept = "yes";
   const jobReject = "no";
 
@@ -57,7 +41,7 @@ export default function DriverJobsCard({ data, showBtn = true }) {
           padding: 5,
         }}
       >
-        {driverJobData.map((item, index) => (
+        {data.map((item, index) => (
           <Text style={styles.text} key={index}>
             <Text style={{ fontWeight: "bold" }}>{item.name}: </Text>
             {item.value}

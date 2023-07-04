@@ -59,6 +59,7 @@ import Tax from "../screens/AdminScreens/Tax";
 import Timezones from "../screens/AdminScreens/Timezones";
 import useNotificationHandler from "../hooks/useNotificationHandler";
 import VehicleMaintenance from "../screens/AdminScreens/VehicleMaintenance";
+import { driverEndpoints } from "../service/endpoint";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -97,15 +98,24 @@ export default function AppNavigator() {
       {
         name: screenNames.DRIVER_ACCEPTED_JOBS_SCREEN,
         component: DriverJobs,
+        initialParams: {
+          title: "Accepted Jobs",
+          endpoint: driverEndpoints.accepted_jobs,
+          showBtn: false,
+        },
       },
       {
         name: screenNames.DRIVER_PENDING_JOBS_SCREEN,
         component: DriverJobs,
+        initialParams: {
+          title: "Pending Jobs",
+          endpoint: driverEndpoints.pending_jobs,
+          showBtn: true,
+        },
       },
 
       { name: screenNames.DRIVER_TIME_SHEET_SCREEN, component: TimeSheet },
 
-      // { name: screenNames.DOCUMENT_ADD_SCREEN, component: DocumentAdd },
       {
         name: screenNames.PRE_INSPECTION_HISTORY_SCREEN,
         component: PreInspectionHistory,
@@ -226,12 +236,8 @@ export default function AppNavigator() {
       drawerContent={(props) => <DrawerContent {...props} />}
       useLegacyImplementation={true}
     >
-      {navigationScreens.map((screen) => (
-        <Drawer.Screen
-          key={screen.name}
-          name={screen.name}
-          component={screen.component}
-        />
+      {navigationScreens.map((screen, index) => (
+        <Drawer.Screen key={index} {...screen} />
       ))}
     </Drawer.Navigator>
   );

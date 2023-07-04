@@ -14,6 +14,7 @@ export default useFetch = (
 
   useEffect(() => {
     request();
+    return () => {};
   }, [update]);
 
   const refresh = () => setUpdate(!update);
