@@ -116,7 +116,6 @@ export default function AppNavigator() {
 
       { name: screenNames.DRIVER_TIME_SHEET_SCREEN, component: TimeSheet },
 
-      // { name: screenNames.DOCUMENT_ADD_SCREEN, component: DocumentAdd },
       {
         name: screenNames.PRE_INSPECTION_HISTORY_SCREEN,
         component: PreInspectionHistory,
