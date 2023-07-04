@@ -1881,9 +1881,9 @@
     "@sinonjs/commons" "^2.0.0"
 
 "@stripe/stripe-react-native@0.23.3":
-  version "0.23.3"
-  resolved "https://registry.yarnpkg.com/@stripe/stripe-react-native/-/stripe-react-native-0.23.3.tgz#aa997afb2012ce2f34848015a24798da562de1e8"
-  integrity sha512-jfvmNDYxjkIdc/Hths3wdKAAXThAf+IieV+KQhd5b7f1eWrTXBzA9IzUZkXb73r/LiSw/GB5K4bBOJTDjgvd+A==
+  "integrity" "sha512-jfvmNDYxjkIdc/Hths3wdKAAXThAf+IieV+KQhd5b7f1eWrTXBzA9IzUZkXb73r/LiSw/GB5K4bBOJTDjgvd+A=="
+  "resolved" "https://registry.npmjs.org/@stripe/stripe-react-native/-/stripe-react-native-0.23.3.tgz"
+  "version" "0.23.3"
 
 "@types/hammerjs@^2.0.36":
   "integrity" "sha512-ewXv/ceBaJprikMcxCmWU1FKyMAQ2X7a9Gtmzw8fcg2kIePI1crERDM818W+XYrxqdBBOdlf2rm137bU+BltCA=="
@@ -3465,7 +3465,7 @@
   "resolved" "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-12.1.1.tgz"
   "version" "12.1.1"
 
-"expo@*", "expo@~48.0.6":
+"expo@*", "expo@>=46.0.9", "expo@~48.0.6":
   "integrity" "sha512-4sPW+HWm03z72FKIG9IddwEhF9+RlAUsTh8pnsoZjZbXALVikmV3QjD4zp/Dkt9YuiCAnJN1VBaT2AlhbYk2Rg=="
   "resolved" "https://registry.npmjs.org/expo/-/expo-48.0.7.tgz"
   "version" "48.0.7"

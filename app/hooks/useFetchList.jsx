@@ -1,17 +1,6 @@
 import { useDispatch } from "react-redux";
 
-<<<<<<< HEAD
-import {
-  addClientList,
-  addListItem,
-  addMachineTypeList,
-} from "../store/reducer/dropdownDataReducer";
-import useFetch from "./useFetch";
-import endpoint, { adminEndpoints, endpoints } from "../service/endpoint";
-import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
-=======
 import { addListItem } from "../store/reducer/dropdownDataReducer";
->>>>>>> f9a8d6432a6e1395fbfff1ceb19459e9f8c56f41
 import { DROPDOWN_LIST } from "../constants/entity";
 import endpoint from "../service/endpoint";
 import getNestedData from "../helpers/getNestedData";
