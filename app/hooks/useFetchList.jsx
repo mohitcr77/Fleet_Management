@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
 
+import useFetch from "./useFetch";
+import endpoint, { adminEndpoints, endpoints } from "../service/endpoint";
+import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
 import { addListItem } from "../store/reducer/dropdownDataReducer";
 import { DROPDOWN_LIST } from "../constants/entity";
-import endpoint from "../service/endpoint";
 import getNestedData from "../helpers/getNestedData";
-import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
-import useFetch from "./useFetch";
 
 export default useFetchList = (update) => {
   useFetch(endpoints.clients, (arr) =>
