@@ -6,6 +6,7 @@ import dropdownDataReducer from "./reducer/dropdownDataReducer.jsx";
 import fullDktFormDataReducer from "./reducer/fullDktFormDataReducer.jsx";
 import inputFormReducer from "./reducer/inputFormReducer.jsx";
 import creditNoteFormReducer from "./reducer/creditNoteFormReducer.js";
+import authReducer from "./reducer/authReducer.jsx";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     dropDownData: dropdownDataReducer,
     fullDktFromData: fullDktFormDataReducer,
     inputForm: inputFormReducer,
-    creditNoteFormData: creditNoteFormReducer
+    creditNoteFormData: creditNoteFormReducer,
+    auth: authReducer,
   },
 });

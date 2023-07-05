@@ -7,10 +7,10 @@ import AppInput from "./AppInput";
 import dataType from "../constants/dataType";
 import { open, close, selectVisible } from "../store/modalSlice";
 import index from "../service/index";
-import TokenContext from "../service/context";
+import useAuth from "../hooks/useAuth";
 
 const InputFormScreen = (props) => {
-  const token = useContext(TokenContext);
+  const { token } = useAuth();
   const [state, setState] = useState(props.initialState);
   const dispatch = useDispatch();
   const [cityData, setcityData] = useState({});
@@ -26,11 +26,11 @@ const InputFormScreen = (props) => {
   }, []);
 
   const getcity = async () => {
-    const data = await index.getcity(token.userToken.token);
+    const data = await index.getcity(token);
     setcityData(data?.data?.data);
-    const state = await index.getstate(token.userToken.token);
+    const state = await index.getstate(token);
     setstateData(state?.data?.data);
-    // const country = await index.getcountry(token.userToken.token);
+    // const country = await index.getcountry( token);
     // setcountry(country?.data?.data);
   };
 
@@ -101,7 +101,7 @@ const InputFormScreen = (props) => {
           </View>
         </Pressable>
       </View>
-      </View>
+    </View>
   );
 };
 

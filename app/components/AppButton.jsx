@@ -11,10 +11,10 @@ import customStyles from "../constants/styles";
 import colors from "../constants/colors";
 
 export default function AppButton({
-  onPress,
-  title,
   loading = false,
+  onPress,
   style,
+  title,
   titleStyle,
   type = "large",
 }) {

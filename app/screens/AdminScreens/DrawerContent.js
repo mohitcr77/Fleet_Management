@@ -10,7 +10,6 @@
 // import React from "react";
 // import { useContext, useState } from "react";
 // import index from "../../service/index";
-// import TokenContext from "../../service/context";
 
 // const Item = ({ title, icon, onPress, backgroundColor, textColor }) => (
 //   <TouchableOpacity
@@ -59,7 +58,6 @@
 
 // const DrawerContent = ({ navigation }) => {
 //   const [selectedId, setSelectedId] = useState(null);
-//   const token = useContext(TokenContext);
 
 //   const logoutHandler = () => {
 //     index.deleteData();

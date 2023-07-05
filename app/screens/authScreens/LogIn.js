@@ -11,18 +11,18 @@ import { Card, Text, Input } from "@ui-kitten/components";
 import AppButton from "../../components/AppButton";
 import dimensions from "../../constants/dimensions";
 import LoadingScreen from "../AdminScreens/LoadingScreen";
-import TokenContext from "../../auth/context";
 import customStyles from "../../constants/styles";
 import screenNames from "../../constants/screenNames";
 import endpoint from "../../service/endpoint";
 import permanentStorage, { loginDetail } from "../../auth/permanentStorage";
 import useApi from "../../hooks/useApi";
+import useAuth from "../../hooks/useAuth";
 
 const LogIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { userToken: auth, setAuth: setAuth } = useContext(TokenContext);
+  const { setAuth } = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(true);
   const { request: loginUser } = useApi(handleLoginSuccess);
 
@@ -40,7 +40,7 @@ const LogIn = ({ navigation }) => {
 
   function handleLoginSuccess(res) {
     permanentStorage.saveData(loginDetail, res);
-    setAuth(res);
+    setAuth({ key: "auth", data: res });
   }
 
   //for password toggle visibilty

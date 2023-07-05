@@ -9,7 +9,7 @@ import FillOtp from "../screens/AuthScreens/FillOtp";
 
 const Stack = createNativeStackNavigator();
 
-const authNavigator = () => {
+const AuthNavigator = () => {
   const screens = [
     // { name: screenNames.SELECT_USER_TYPE_SCREEN, component: SelectUserType },
     { name: screenNames.LOGIN_SCREEN, component: LogIn },
@@ -31,4 +31,4 @@ const authNavigator = () => {
   );
 };
 
-export default authNavigator;
+export default AuthNavigator;

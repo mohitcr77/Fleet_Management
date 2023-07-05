@@ -49,16 +49,14 @@ const CreditNoteFormAdd = () => {
       job_no: e.job_no,
       job: e.id,
     };
-    //console.log(value);
     dispatch(addCreditNoteKeyValue({ value, i }));
   };
 
   const onTaxSelect = (e, qty, rate, i) => {
     const taxPercent = (qty * rate * e.tax_percentage) / 100 + parseInt(qty);
-    const taxID= e.id
-    //console.log(taxID);
+    const taxID = e.id;
     dispatch(addDataInItemUsingKey({ value: taxPercent, i, k: "amount" }));
-    dispatch(addDataInItemUsingKey({ value: taxID , i, k: "tax_id" }));
+    dispatch(addDataInItemUsingKey({ value: taxID, i, k: "tax_id" }));
   };
 
   return (

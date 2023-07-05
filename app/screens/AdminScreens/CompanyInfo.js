@@ -5,12 +5,11 @@ import InputModal from "../../components/InputFormSCreen";
 import AppItem from "../../components/AppItem";
 import dataType from "../../constants/dataType";
 import index from "../../service/index";
-import TokenContext from "../../service/context";
 import LoadingScreen from "./LoadingScreen";
 import ParentContainer from "../../components/ParentContainer";
 
 const CompanyInfo = () => {
-  const token = useContext(TokenContext);
+  const { token } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [isvisible, setisvisible] = useState(false);
   const [updateData, setupdateData] = useState("");
@@ -38,8 +37,8 @@ const CompanyInfo = () => {
   }, []);
 
   async function addItemHandler(enteredItemText) {
-    index.postApi(token.userToken.token, enteredItemText, "company");
-    const res = await index.getApi(token.userToken.token, "company");
+    index.postApi(token, enteredItemText, "company");
+    const res = await index.getApi(token, "company");
     setlistdata(res.data.data);
     setisvisible(false);
     addNewid();
@@ -115,7 +114,7 @@ const CompanyInfo = () => {
   ];
   const addNewid = async () => {
     setIsLoading(true);
-    const res = await index.getApi(token.userToken.token, "company");
+    const res = await index.getApi(token, "company");
     setlistdata(res.data.data);
     setIsLoading(false);
   };
@@ -123,20 +122,20 @@ const CompanyInfo = () => {
     const newobj = Object.fromEntries(
       Object.entries(enteredItemText).filter(([_, val]) => val !== "")
     );
-    index.UpdateApi(token.userToken.token, newobj, dataID, "company");
+    index.UpdateApi(token, newobj, dataID, "company");
     setisvisible(false);
     setviewData("");
     addNewid();
   }
 
   function deleteDataHandler(id) {
-    index.deleteApi(token.userToken.token, id, "company");
+    index.deleteApi(token, id, "company");
     addNewid();
   }
 
   async function updateHandler(id) {
     setdataID(id);
-    const res = await index.getaApi(token.userToken.token, id, "company");
+    const res = await index.getaApi(token, id, "company");
     setviewData(res?.data);
     setcrud("update");
     setisvisible(true);
@@ -152,141 +151,141 @@ const CompanyInfo = () => {
   }
   return (
     <ParentContainer>
-    <View style={{ flex: 10 }}>
-      <View style={styles.topContainer}>
-        <Text style={{ fontSize: 20 }}>Company List</Text>
-        <Pressable
-          onPress={addHandler}
-          style={styles.btnStyle}
-          android_ripple={{ color: "#00580c" }}
-        >
-          <View>
-            <Text style={{ color: "#ffffff" }}>Add Company</Text>
-          </View>
-        </Pressable>
-      </View>
-      <InputModal
-        crudop={crud}
-        form={form}
-        updateValue={updateData}
-        initialState={initialState}
-        onAddItem={addItemHandler}
-        onUpdateItem={updateItemHandler}
-        visible={isvisible}
-        onCancel={onCancelHandler}
-      />
-      <View style={styles.listStyle}>
-        <LoadingScreen loading={isLoading} />
-        <FlatList
-          data={listdata}
-          renderItem={(itemData) => {
-            const cardviewform = [
-              {
-                name: "Name",
-                value: itemData?.item?.name,
-              },
-              {
-                name: "Company Mobile",
-                value: JSON.stringify(itemData?.item?.company_mobile),
-              },
-              {
-                name: "Office Email",
-                value: itemData?.item?.office_email,
-              },
-              {
-                name: "Company address 1",
-                value: itemData?.item?.company_address1,
-              },
-              {
-                name: "Company Address 2",
-                value: itemData?.item?.company_address2,
-              },
-              {
-                name: "City",
-                value: itemData?.item?.city_id,
-              },
-            ];
-            const viewform = [
-              {
-                name: "Name",
-                key: "name",
-                type: dataType.text,
-                value: itemData?.item.name,
-              },
-              {
-                name: "Company Mobile",
-                key: "company_mobile",
-                type: dataType.text,
-                value: itemData?.item.company_mobile,
-              },
-              {
-                name: "Office Email",
-                key: "office_email",
-                type: dataType.text,
-                value: itemData?.item.office_email,
-              },
-              {
-                name: "Company address 1",
-                key: "company_address1",
-                type: dataType.text,
-                value: itemData?.item.company_address1,
-              },
-              {
-                name: "Company Address 2",
-                key: "company_address2",
-                type: dataType.text,
-                value: itemData?.item.company_address2,
-              },
-              {
-                name: "City",
-                key: "city_id",
-                type: dataType.city,
-                value: itemData?.item.city_id,
-              },
-              {
-                name: "State",
-                key: "state_id",
-                type: dataType.text,
-                value: itemData?.item.state_id,
-              },
-              {
-                name: "Country",
-                key: "country_id",
-                type: dataType.text,
-                value: itemData?.item.country_id,
-              },
-              {
-                name: "Company Gstin",
-                key: "company_gstin",
-                type: dataType.text,
-                value: itemData?.item.company_gstin,
-              },
-              {
-                name: "Company office",
-                key: "company_office",
-                type: dataType.text,
-                value: itemData?.item.company_office,
-              },
-              {
-                name: "Note",
-                key: "payment_note",
-                type: dataType.text,
-                value: itemData?.item.payment_note,
-              },
-            ];
-            return (
-              <AppItem
-                onDeleteItem={deleteDataHandler}
-                onupdateData={updateHandler}
-                id={itemData.item.id}
-                cardviewform={cardviewform}
-                viewform={viewform}
-              />
-            );
-          }}
+      <View style={{ flex: 10 }}>
+        <View style={styles.topContainer}>
+          <Text style={{ fontSize: 20 }}>Company List</Text>
+          <Pressable
+            onPress={addHandler}
+            style={styles.btnStyle}
+            android_ripple={{ color: "#00580c" }}
+          >
+            <View>
+              <Text style={{ color: "#ffffff" }}>Add Company</Text>
+            </View>
+          </Pressable>
+        </View>
+        <InputModal
+          crudop={crud}
+          form={form}
+          updateValue={updateData}
+          initialState={initialState}
+          onAddItem={addItemHandler}
+          onUpdateItem={updateItemHandler}
+          visible={isvisible}
+          onCancel={onCancelHandler}
         />
+        <View style={styles.listStyle}>
+          <LoadingScreen loading={isLoading} />
+          <FlatList
+            data={listdata}
+            renderItem={(itemData) => {
+              const cardviewform = [
+                {
+                  name: "Name",
+                  value: itemData?.item?.name,
+                },
+                {
+                  name: "Company Mobile",
+                  value: JSON.stringify(itemData?.item?.company_mobile),
+                },
+                {
+                  name: "Office Email",
+                  value: itemData?.item?.office_email,
+                },
+                {
+                  name: "Company address 1",
+                  value: itemData?.item?.company_address1,
+                },
+                {
+                  name: "Company Address 2",
+                  value: itemData?.item?.company_address2,
+                },
+                {
+                  name: "City",
+                  value: itemData?.item?.city_id,
+                },
+              ];
+              const viewform = [
+                {
+                  name: "Name",
+                  key: "name",
+                  type: dataType.text,
+                  value: itemData?.item.name,
+                },
+                {
+                  name: "Company Mobile",
+                  key: "company_mobile",
+                  type: dataType.text,
+                  value: itemData?.item.company_mobile,
+                },
+                {
+                  name: "Office Email",
+                  key: "office_email",
+                  type: dataType.text,
+                  value: itemData?.item.office_email,
+                },
+                {
+                  name: "Company address 1",
+                  key: "company_address1",
+                  type: dataType.text,
+                  value: itemData?.item.company_address1,
+                },
+                {
+                  name: "Company Address 2",
+                  key: "company_address2",
+                  type: dataType.text,
+                  value: itemData?.item.company_address2,
+                },
+                {
+                  name: "City",
+                  key: "city_id",
+                  type: dataType.city,
+                  value: itemData?.item.city_id,
+                },
+                {
+                  name: "State",
+                  key: "state_id",
+                  type: dataType.text,
+                  value: itemData?.item.state_id,
+                },
+                {
+                  name: "Country",
+                  key: "country_id",
+                  type: dataType.text,
+                  value: itemData?.item.country_id,
+                },
+                {
+                  name: "Company Gstin",
+                  key: "company_gstin",
+                  type: dataType.text,
+                  value: itemData?.item.company_gstin,
+                },
+                {
+                  name: "Company office",
+                  key: "company_office",
+                  type: dataType.text,
+                  value: itemData?.item.company_office,
+                },
+                {
+                  name: "Note",
+                  key: "payment_note",
+                  type: dataType.text,
+                  value: itemData?.item.payment_note,
+                },
+              ];
+              return (
+                <AppItem
+                  onDeleteItem={deleteDataHandler}
+                  onupdateData={updateHandler}
+                  id={itemData.item.id}
+                  cardviewform={cardviewform}
+                  viewform={viewform}
+                />
+              );
+            }}
+          />
+        </View>
       </View>
-    </View>
     </ParentContainer>
   );
 };

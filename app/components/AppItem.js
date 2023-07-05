@@ -4,11 +4,12 @@ import DataList from "./DataList";
 import dimensions from "../constants/dimensions";
 import AppInput from "./AppInput";
 import { ScrollView } from "react-native-gesture-handler";
-import TokenContext from "../service/context";
 import index from "../service/index";
+import useAuth from "../hooks/useAuth";
+
 const AppItem = (props) => {
+  const { token } = useAuth();
   const [visible, setvisible] = useState(false);
-  const token = useContext(TokenContext);
   const [cityData, setcityData] = useState({});
   const [stateData, setstateData] = useState({});
   const [country, setcountry] = useState({});
@@ -18,11 +19,11 @@ const AppItem = (props) => {
   }, []);
 
   const getcity = async () => {
-    const data = await index.getcity(token.userToken.token);
+    const data = await index.getcity(token);
     setcityData(data?.data?.data);
-    const state = await index.getstate(token.userToken.token);
+    const state = await index.getstate(token);
     setstateData(state?.data?.data);
-    // const country = await index.getcountry(token.userToken.token);
+    // const country = await index.getcountry(token);
     // setcountry(country?.data?.data);
   };
   return (

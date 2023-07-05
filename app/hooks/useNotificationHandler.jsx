@@ -41,8 +41,6 @@ export default useNotificationHandler = () => {
         { fcm_token },
         getHeader(headerToken)
       );
-
-      // console.log(data);
     } catch (error) {}
   }
 };
