@@ -9,7 +9,7 @@ import dimensions from "../constants/dimensions";
 import useAuth from "../hooks/useAuth";
 import SignOutBtn from "./SignOutBtn";
 
-const cardHeight = { height: 300 };
+const cardHeight = { height: 250 };
 
 export default function Payment() {
   const { confirmPayment } = useStripe();
@@ -27,7 +27,13 @@ export default function Payment() {
           Make payment to continue
         </Text>
         <View style={styles.form}>
-          <CardForm style={cardHeight} />
+          <CardForm
+            style={cardHeight}
+            defaultValues={{
+              countryCode: "NL",
+            }}
+            onFormComplete={(e) => (e.complete ? console.log(e, "oooo") : null)}
+          />
         </View>
         <AppButton
           title={"Buy"}

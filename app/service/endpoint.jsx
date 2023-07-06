@@ -43,9 +43,14 @@ const adminEndpoints = {
 const driverEndpoints = {
   pending_jobs: "/pending-jobs",
   accepted_jobs: "/accepted-jobs",
+  preStartInspection: (id) => `/regos/${id}/prestart`,
+  preStartNote: (id) => `/regos/${id}/notes`,
 };
 
-const mechanicEndpoints = {};
+const mechanicEndpoints = {
+  mechanic_timeSheet: "/mechanic_timesheet",
+  mechanic_entries: "/mechanic-entries"
+};
 
 export {
   driverEndpoints,

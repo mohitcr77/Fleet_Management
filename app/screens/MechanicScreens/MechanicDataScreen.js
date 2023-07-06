@@ -3,7 +3,10 @@ import { useState } from "react";
 
 import AdminListRendered from "../../components/AdminListRendered";
 import dataType from "../../constants/dataType";
-import endpoint, { adminEndpoints } from "../../service/endpoint";
+import endpoint, {
+  adminEndpoints,
+  mechanicEndpoints,
+} from "../../service/endpoint";
 import getNestedData from "../../helpers/getNestedData";
 import ParentContainer from "../../components/ParentContainer";
 import screenNames from "../../constants/screenNames";
@@ -34,6 +37,14 @@ const MechanicDataScreen = () => {
       key: "date",
       type: dataType.date,
       mapKey: ["date"],
+      value: null,
+      card: true,
+    },
+    {
+      name: "Day",
+      key: "day",
+      type: dataType.text,
+      mapKey: ["day"],
       value: null,
       card: true,
     },
@@ -72,9 +83,12 @@ const MechanicDataScreen = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(adminEndpoints.rego, handleGetRegoSuccess);
+  const { refresh, loading } = useFetch(
+    mechanicEndpoints.mechanic_entries,
+    handleGetMechanicSuccess
+  );
 
-  function handleGetRegoSuccess(d) {
+  function handleGetMechanicSuccess(d) {
     let arr = [];
     d.data.data.forEach((item) => {
       let a = [];
@@ -89,7 +103,7 @@ const MechanicDataScreen = () => {
 
   const formProps = {
     backScreen: screenNames.MECHANIC_DATA_SCREEN,
-    endpoint: adminEndpoints.rego,
+    endpoint: mechanicEndpoints.mechanic_entries,
     form,
     title: "Mechanic Form",
   };
@@ -104,9 +118,9 @@ const MechanicDataScreen = () => {
         onRefresh={refresh}
         loading={!listData.length}
         backScreen={screenNames.MECHANIC_DATA_SCREEN}
-        listTitle={"Rego Details"}
-        editTitle={"Edit Rego"}
-        endpoint={adminEndpoints.rego}
+        listTitle={"Mechanic Details"}
+        editTitle={"Edit Mechanic"}
+        endpoint={mechanicEndpoints.mechanic_entries}
       />
     </ParentContainer>
   );

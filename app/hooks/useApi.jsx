@@ -20,7 +20,13 @@ export default useApi = (onSuccess = () => {}, onFail = () => {}) => {
         Toast.show(ToastType.SUCCESS);
         onSuccess(data.data);
       } else {
-        Toast.show(ToastType.ERROR);
+        console.warn(
+          data?.data?.message || "Something went wrong please try again"
+        );
+        Toast.show({
+          ...ToastType.ERROR,
+          text2: data?.data?.message || "Something went wrong please try again",
+        });
         onFail();
       }
 

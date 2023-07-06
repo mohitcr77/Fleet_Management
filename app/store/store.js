@@ -7,10 +7,10 @@ import authReducer from "./reducer/authReducer.jsx";
 
 export const store = configureStore({
   reducer: {
+    auth: authReducer,
+    creditNoteFormData: creditNoteFormReducer,
     dropDownData: dropdownDataReducer,
     fullDktFromData: fullDktFormDataReducer,
     inputForm: inputFormReducer,
-    creditNoteFormData: creditNoteFormReducer,
-    auth: authReducer,
   },
 });

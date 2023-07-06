@@ -22,6 +22,7 @@ export default useFetch = (
   const request = async () => {
     try {
       const data = await api.get(endpoint, {}, getHeader(token));
+      // console.log(data.data, "pppppp");
       if (data.ok) {
         setData(data?.data);
         onSuccess(data?.data);
