@@ -23,7 +23,7 @@ import FullDktList from "../screens/DriverScreens/FullDktListScreen";
 import PreInspectionList from "../screens/DriverScreens/PreInspectionListScreen";
 import ScanDktForm from "../screens/DriverScreens/ScanDktFormScreen";
 import ScanDktList from "../screens/DriverScreens/ScanDktListScreen";
-import TimeSheet from "../screens/DriverScreens/TimeSheetScreen";
+import TimeSheet from "../screens/TimeSheetScreen";
 
 //mechanic screen
 import DocumentForm from "../screens/MechanicScreens/DocumentForm";
@@ -61,6 +61,7 @@ import useNotificationHandler from "../hooks/useNotificationHandler";
 import VehicleMaintenance from "../screens/AdminScreens/VehicleMaintenance";
 import { driverEndpoints } from "../service/endpoint";
 import Payment from "../components/Payment";
+import TimeSheetForm from "../screens/TimeSheetFormScreen";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -115,7 +116,13 @@ export default function AppNavigator() {
         },
       },
 
-      { name: screenNames.DRIVER_TIME_SHEET_SCREEN, component: TimeSheet },
+      {
+        name: screenNames.TIME_SHEET_LIST_SCREEN,
+        component: TimeSheet,
+        initialParams: {
+          endpoint: driverEndpoints.time_sheet,
+        },
+      },
 
       {
         name: screenNames.PRE_INSPECTION_HISTORY_SCREEN,
@@ -218,6 +225,7 @@ export default function AppNavigator() {
     { name: screenNames.DOCUMENTS_SCREEN, component: Documents },
     { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
     { name: screenNames.NOTIFICATIONS_SCREEN, component: Notifications },
+    { name: screenNames.TIME_SHEET_FORM_SCREEN, component: TimeSheetForm },
     {
       name: screenNames.ESTIMATE_CREDIT_NOTE_FORM,
       component: EstimateCreditNoteForm,

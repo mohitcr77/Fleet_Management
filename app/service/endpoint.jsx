@@ -45,11 +45,12 @@ const driverEndpoints = {
   accepted_jobs: "/accepted-jobs",
   preStartInspection: (id) => `/regos/${id}/prestart`,
   preStartNote: (id) => `/regos/${id}/notes`,
+  time_sheet: `/driver_timesheet`,
 };
 
 const mechanicEndpoints = {
-  mechanic_timeSheet: "/mechanic_timesheet",
-  mechanic_entries: "/mechanic-entries"
+  mechanic_entries: "/mechanic-entries",
+  time_sheet: `/mechanic_timesheet`,
 };
 
 export {

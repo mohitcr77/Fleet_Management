@@ -6,6 +6,8 @@ const screenNames = {
   DETAILS_VIEW_SCREEN: "Details View Screen",
   DOCUMENTS_SCREEN: "Documents Screen",
   NOTIFICATIONS_SCREEN: "Notification Screen",
+  TIME_SHEET_FORM_SCREEN: "Time Sheet Form",
+  TIME_SHEET_LIST_SCREEN: "Time Sheet List",
 
   // Auth Screens
   LOGIN_SCREEN: "Login Screen",

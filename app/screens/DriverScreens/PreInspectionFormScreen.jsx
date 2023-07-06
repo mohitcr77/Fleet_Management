@@ -8,6 +8,7 @@ import AddImage from "../../components/AddImage";
 import screenNames from "../../constants/screenNames";
 import useApi from "../../hooks/useApi";
 import { driverEndpoints } from "../../service/endpoint";
+import useAuth from "../../hooks/useAuth";
 
 export const preStartCheckList = [
   {
@@ -144,6 +145,16 @@ export const preStartCheckList = [
     type: dataType.checkBox,
   },
   {
+    name: "Service Date",
+    key: "service_date",
+    type: dataType.date,
+  },
+  {
+    name: "Service Title",
+    key: "service_title",
+    type: dataType.text,
+  },
+  {
     name: "Enter Kms",
     key: "total_kms",
     type: dataType.number,
@@ -169,28 +180,22 @@ export const preStartCheckList = [
 
 export default function PreInspectionForm({ route }) {
   const { regoId } = route.params;
+  const { auth } = useAuth();
 
   const formRef = useRef();
-  const { request: submitPreInspectionForm } = useApi(handleFormSubmitSuccess);
-
-  const onChange = (e, i) =>
-    (formRef.current = { ...formRef.current, [i.key]: e });
+  const { request: submitPreInspectionForm } = useApi();
 
   async function handleSubmitData() {
     const requestConfig = {
       endpoint: driverEndpoints.preStartInspection(regoId),
-      body: formRef.current,
+      body: { ...formRef.current, rego_id: regoId, mechanic_id: auth.user.id },
     };
-    // console.log(requestConfig);
-    // return;
-    const d = await submitPreInspectionForm(requestConfig);
-    delete d.config.data;
-    console.log(d, "ppp");
+
+    await submitPreInspectionForm(requestConfig);
   }
 
-  function handleFormSubmitSuccess(d) {
-    console.log(d);
-  }
+  const onChange = (e, i) =>
+    (formRef.current = { ...formRef.current, [i.key]: e });
 
   return (
     <ParentContainer
@@ -208,6 +213,7 @@ export default function PreInspectionForm({ route }) {
           onCheckboxPress={(e) => onChange(e, i)}
           onChangeText={(e) => onChange(e, i)}
           onImageSelect={(e) => onChange(e, i)}
+          onDateSelect={(e) => onChange(e, i)}
         />
       ))}
 

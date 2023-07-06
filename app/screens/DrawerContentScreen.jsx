@@ -58,7 +58,7 @@ export default function DrawerContent({ navigation }) {
       },
       {
         name: "Time Sheet",
-        screen: screenNames.DRIVER_TIME_SHEET_SCREEN,
+        screen: screenNames.TIME_SHEET_LIST_SCREEN,
         children: null,
       },
       {
