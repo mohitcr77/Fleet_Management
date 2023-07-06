@@ -2,15 +2,12 @@ import { StyleSheet, View } from "react-native";
 import React, { useRef } from "react";
 import { Card, List, Text } from "@ui-kitten/components";
 
-import dataType from "../../constants/dataType";
-import FormInput from "../../components/FormInput";
-import ParentContainer from "../../components/ParentContainer";
-import AppFooterButton from "../../components/AppFooterButton";
-import screenNames from "../../constants/screenNames";
-import useApi from "../../hooks/useApi";
 import { driverEndpoints } from "../../service/endpoint";
-import useFetch from "../../hooks/useFetch";
 import { width } from "../../helpers/scales";
+import dataType from "../../constants/dataType";
+import ParentContainer from "../../components/ParentContainer";
+import screenNames from "../../constants/screenNames";
+import useFetch from "../../hooks/useFetch";
 
 const form = [
   { name: "Date", key: "date", type: dataType.date },
@@ -21,43 +18,11 @@ const form = [
     type: dataType.text,
   },
 ];
+
 export default function PreInspectionNote({ route, navigation }) {
   const { regoId } = route.params;
-  // const [regoId, setregoId] = useState(route.params.regoId ?)
 
-  const formData = useRef({});
-  const { request: submitPreStartNote } = useApi();
   const { data } = useFetch(driverEndpoints.preStartNote(regoId));
-
-  async function handleSubmitData() {
-    const requestConfig = {
-      endpoint: driverEndpoints.preStartNote(regoId),
-      body: formData.current,
-    };
-
-    await submitPreStartNote(requestConfig);
-  }
-
-  const renderItemHeader = (headerProps, info) => (
-    <View {...headerProps}>
-      <Text category="h6">{`#${info.item.id} ${info.item.title}`}</Text>
-    </View>
-  );
-
-  const renderItemFooter = (footerProps, info) => {
-    console.log(footerProps, info, "ppppppp");
-    return <Text {...footerProps}>{info.item.date}</Text>;
-  };
-  const renderItem = (info) => (
-    <Card
-      style={styles.item}
-      status="basic"
-      header={(headerProps) => renderItemHeader(headerProps, info)}
-      footer={(e) => renderItemFooter(e, info)}
-    >
-      <Text>{info.item.description}</Text>
-    </Card>
-  );
 
   const formProps = {
     backScreen: screenNames.PRE_INSPECTION_LIST_SCREEN,
@@ -81,6 +46,31 @@ export default function PreInspectionNote({ route, navigation }) {
       />
     </ParentContainer>
   );
+
+  function renderItemHeader(headerProps, info) {
+    return (
+      <View {...headerProps}>
+        <Text category="h6">{`#${info.item.id} ${info.item.title}`}</Text>
+      </View>
+    );
+  }
+
+  function renderItemFooter(footerProps, info) {
+    return <Text {...footerProps}>{info.item.date}</Text>;
+  }
+
+  function renderItem(info) {
+    return (
+      <Card
+        style={styles.item}
+        status="basic"
+        header={(headerProps) => renderItemHeader(headerProps, info)}
+        footer={(e) => renderItemFooter(e, info)}
+      >
+        <Text>{info.item.description}</Text>
+      </Card>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

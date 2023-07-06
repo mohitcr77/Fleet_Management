@@ -38,9 +38,12 @@ const driverEndpoints = {
   accepted_jobs: "/accepted-jobs",
   preStartInspection: (id) => `/regos/${id}/prestart`,
   preStartNote: (id) => `/regos/${id}/notes`,
+  time_sheet: `/driver_timesheet`,
 };
 
-const mechanicEndpoints = {};
+const mechanicEndpoints = {
+  time_sheet: `/mechanic_timesheet`,
+};
 
 export {
   driverEndpoints,
