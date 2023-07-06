@@ -8,6 +8,7 @@ import Icons from "../components/Icons";
 import { DrawerActions } from "@react-navigation/native";
 
 import permanentStorage, { loginDetail } from "../auth/permanentStorage";
+import SignOutBtn from "../components/SignOutBtn";
 
 export default function Profile({ navigation }) {
   const { auth, setAuth } = useAuth();
@@ -43,15 +44,7 @@ export default function Profile({ navigation }) {
       <View style={styles.textContainer}>
         <Text> {auth.phone}</Text>
       </View>
-      <TouchableOpacity
-        onPress={async () => {
-          setAuth(null);
-          permanentStorage.deleteData(loginDetail);
-        }}
-        style={styles.signOutButton}
-      >
-        <Text style={styles.signOut}>Sign Out</Text>
-      </TouchableOpacity>
+      <SignOutBtn style={styles.signOutButton} />
     </View>
   );
 }
@@ -106,13 +99,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   signOutButton: {
-    backgroundColor: colors.red,
     marginTop: 100,
     width: width - 50,
-    height: 50,
-    borderRadius: 8,
+
     alignSelf: "center",
-    justifyContent: "center",
+
     ...shadowStyle,
   },
 });

@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
-import TokenContext from "../auth/context";
 import dataType from "../constants/dataType";
-import { Role } from "../constants/entity";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser, updateAuth } from "../store/reducer/authReducer";
 
 export default useAuth = () => {
-  const { userToken: auth, setAuth: setAuth } = useContext(TokenContext);
+  const { auth, subscribed } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const setAuth = (body) => dispatch(updateAuth(body));
+  const logout = () => dispatch(logoutUser());
+
   let role = null;
   let token = null;
   if (auth) {
@@ -14,8 +17,10 @@ export default useAuth = () => {
   }
   return {
     auth,
-    setAuth,
+    logout,
     role,
+    setAuth,
+    subscribed,
     token,
   };
 };

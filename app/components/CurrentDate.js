@@ -12,8 +12,6 @@ const CurrentDate = (props) => {
   var date = new Date();
   date.setDate(date.getDate() + 7);
 
-  //console.log(date.toLocaleDateString());
-
   function reformatDate(dateStr) {
     var dArr = dateStr.split("/");
     setCurrentDate(dArr[2] + "/" + dArr[0] + "/" + dArr[1]);

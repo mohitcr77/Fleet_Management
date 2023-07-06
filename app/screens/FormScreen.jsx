@@ -20,16 +20,14 @@ export default function Form({ route, navigation }) {
 
   async function handlePostData() {
     const id = formData.current.id;
-    // console.log(formData.current);
+
     const requestConfig = {
       method: id ? HTTPS_METHODS.PUT : HTTPS_METHODS.POST,
       endpoint: id ? endpoint + "/" + id : endpoint,
       body: formData.current,
     };
-    // console.log(requestConfig);
-    // return;
+
     const d = await request(requestConfig);
-    // console.log(d, "ppp");
   }
 
   function handlePostSuccess() {

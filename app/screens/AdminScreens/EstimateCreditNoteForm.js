@@ -31,21 +31,19 @@ const EstimateCreditNoteForm = ({ route, navigation }) => {
       );
     }
     let dataWithoutNullObject = removeEmpty(formData);
-    //console.log("new" ,dataWithoutNullObject);
     const requestConfig = {
       method: HTTPS_METHODS.POST,
       endpoint: endpoint,
       body: dataWithoutNullObject,
     };
-    console.log(dataWithoutNullObject);
+
     const d = await postData(requestConfig);
   }
   function handlePostSuccess(e) {
     dispatch(setItemToInitialState());
     setUpdate(!update);
-    
   }
- 
+
   const onClientSelect = async (e) => {
     const requestConfig = {
       method: HTTPS_METHODS.GET,
@@ -55,7 +53,6 @@ const EstimateCreditNoteForm = ({ route, navigation }) => {
   };
 
   async function handleGetJobsSuccess(arr) {
-    //console.log(arr.data[0].job_no);
     if (isNotNullOrUndefined(arr)) {
       const d = arr.data;
       d.forEach((e) => {

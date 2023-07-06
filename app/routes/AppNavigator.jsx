@@ -60,6 +60,7 @@ import Timezones from "../screens/AdminScreens/Timezones";
 import useNotificationHandler from "../hooks/useNotificationHandler";
 import VehicleMaintenance from "../screens/AdminScreens/VehicleMaintenance";
 import { driverEndpoints } from "../service/endpoint";
+import Payment from "../components/Payment";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -226,19 +227,22 @@ export default function AppNavigator() {
   const navigationScreens = [...drawerScreens[role], ...commonScreens];
 
   return (
-    <Drawer.Navigator
-      screenOptions={{
-        headerShown: false,
-        drawerStyle: {
-          width: "85%",
-        },
-      }}
-      drawerContent={(props) => <DrawerContent {...props} />}
-      useLegacyImplementation={true}
-    >
-      {navigationScreens.map((screen, index) => (
-        <Drawer.Screen key={index} {...screen} />
-      ))}
-    </Drawer.Navigator>
+    <>
+      <Payment />
+      <Drawer.Navigator
+        screenOptions={{
+          headerShown: false,
+          drawerStyle: {
+            width: "85%",
+          },
+        }}
+        drawerContent={(props) => <DrawerContent {...props} />}
+        useLegacyImplementation={true}
+      >
+        {navigationScreens.map((screen, index) => (
+          <Drawer.Screen key={index} {...screen} />
+        ))}
+      </Drawer.Navigator>
+    </>
   );
 }

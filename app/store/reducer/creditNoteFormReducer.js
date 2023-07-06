@@ -24,36 +24,38 @@ const initialState = {
   list: [],
 };
 
-
-
 export const creditNoteFormData = createSlice({
   name: "creditNoteFormData",
   initialState,
   reducers: {
     addCreditNoteKeyValue: (state, action) => {
       //state.form.add_item = { ...state.form.add_item,  ...action.payload };
-      const { value, i } = action.payload
-      state.form.add_item[i] = { ...state.form.add_item[i], ...value }
-      //console.log(state.form.add_item, "store value");
+      const { value, i } = action.payload;
+      state.form.add_item[i] = { ...state.form.add_item[i], ...value };
     },
     addItemInCreditNote: (state, action) => {
-      state.form.add_item.push({job:"",rego_id: "",job_no:"", qty:"", rate:"", tax_id:"", amount: ""});
+      state.form.add_item.push({
+        job: "",
+        rego_id: "",
+        job_no: "",
+        qty: "",
+        rate: "",
+        tax_id: "",
+        amount: "",
+      });
     },
     addDataInItemUsingKey: (state, action) => {
-      const {value, i, k } = action.payload;
-      state.form.add_item[i][k] =value;
-      //console.log( "Store State" ,state.form.add_item);
+      const { value, i, k } = action.payload;
+      state.form.add_item[i][k] = value;
     },
     removeCreditNoteItem: (state, action) => {
-        state.form.add_item.splice(action.payload, 1);
+      state.form.add_item.splice(action.payload, 1);
     },
     setItemToInitialState: (state, action) => {
-      state.form = initialState.form
-      console.log("ijj",initialState.form);
-  },
+      state.form = initialState.form;
+    },
   },
 });
-
 
 // Action creators are generated for each case reducer function
 export const {
