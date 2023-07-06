@@ -5,37 +5,37 @@ import AppButton from "../../components/AppButton";
 import customStyles from "../../constants/styles";
 import dimensions from "../../constants/dimensions";
 import screenNames from "../../constants/screenNames";
+import { useSelector } from "react-redux";
 
 export default function PreInspectionList({ navigation }) {
+  const { machineTypeList } = useSelector((state) => state.dropDownData);
   return (
     <ParentContainer>
-      {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-        <InspectionCard key={i} />
+      {machineTypeList.map((i) => (
+        <InspectionCard key={i.id} regoDetails={i} />
       ))}
     </ParentContainer>
   );
-  function InspectionCard() {
+
+  function InspectionCard({ regoDetails }) {
     const btn = [
       {
         name: "Pre Inspection",
-        onPress: () =>
-          navigation.navigate(screenNames.PRE_INSPECTION_FORM_SCREEN),
+        screen: screenNames.PRE_INSPECTION_FORM_SCREEN,
       },
       {
         name: "History",
-        onPress: () =>
-          navigation.navigate(screenNames.PRE_INSPECTION_HISTORY_SCREEN),
+        screen: screenNames.PRE_INSPECTION_HISTORY_SCREEN,
       },
       {
         name: "Notes",
-        onPress: () =>
-          navigation.navigate(screenNames.PRE_INSPECTION_NOTES_SCREEN),
+        screen: screenNames.PRE_INSPECTION_NOTES_SCREEN,
       },
     ];
 
     const detail = [
-      { name: "Id :", value: "object.id" },
-      { name: "Fleet Number :", value: "object.fleet_number" },
+      { name: "Id :", value: regoDetails.id },
+      { name: "Fleet Number :", value: regoDetails.label },
     ];
 
     return (
@@ -53,7 +53,9 @@ export default function PreInspectionList({ navigation }) {
         <View style={customStyles.flex_row_between}>
           {btn.map((i) => (
             <AppButton
-              onPress={i.onPress}
+              onPress={() =>
+                navigation.navigate(i.screen, { regoId: regoDetails.id })
+              }
               title={i.name}
               key={i.name}
               style={styles.cardBtn}

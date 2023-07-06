@@ -1,10 +1,8 @@
-import { StyleSheet, View } from "react-native";
-import { useSelector } from "react-redux";
+import { StyleSheet } from "react-native";
 import React, { useRef, useState } from "react";
 
 import { HTTPS_METHODS } from "../constants/entity";
 import AppFooterButton from "./../components/AppFooterButton";
-import formatDate from "../helpers/formatDate";
 import FormInput from "../components/FormInput";
 import generateKeyValueFromFormData from "../helpers/generateKeyValueFromForm";
 import ParentContainer from "../components/ParentContainer";

@@ -36,6 +36,8 @@ const adminEndpoints = {
 const driverEndpoints = {
   pending_jobs: "/pending-jobs",
   accepted_jobs: "/accepted-jobs",
+  preStartInspection: (id) => `/regos/${id}/prestart`,
+  preStartNote: (id) => `/regos/${id}/notes`,
 };
 
 const mechanicEndpoints = {};

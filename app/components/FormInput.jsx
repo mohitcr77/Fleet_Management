@@ -1,5 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Input } from "@ui-kitten/components";
 
@@ -8,10 +7,8 @@ import { Dropdown } from "react-native-element-dropdown";
 import { TimePicker } from "./TimePicker";
 import AddImage from "./AddImage";
 import AppCheckBox from "./AppCheckBox";
-import colors from "../constants/colors";
 import customStyles from "../constants/styles";
 import dataType from "../constants/dataType";
-import dimensions from "../constants/dimensions";
 import FromAdd from "./FromAdd";
 import PickSignature from "./PickSignature";
 import LocationInput from "./LocationInput";
@@ -31,6 +28,20 @@ const dummyList = [
 ];
 
 export default function FormInput(props) {
+  // FormInput Props
+  // name
+  // type
+  // data (name of the list)
+  // defaultValue
+
+  // onChangeText
+  // onCheckboxPress
+  // onDateSelect
+  // onDropdownItemSelect
+  // onImageSelect
+  // onLocationSelect
+  // onTimeSelect
+
   const { name, type, data } = props;
   let list = useSelector((state) => state.dropDownData);
 
@@ -85,21 +96,21 @@ export default function FormInput(props) {
         </CompWrapper>
       );
 
-      case dataType.currentDate:
+    case dataType.currentDate:
       return (
         <CompWrapper name={name}>
           <CurrentDate {...props} />
         </CompWrapper>
       );
 
-      case dataType.expireDate:
+    case dataType.expireDate:
       return (
         <CompWrapper name={name}>
           <ExpireDate {...props} />
         </CompWrapper>
       );
 
-      case dataType.creditNoteForm:
+    case dataType.creditNoteForm:
       return (
         <CompWrapper name={name}>
           <CreditNoteFormAdd {...props} />
@@ -152,7 +163,7 @@ export default function FormInput(props) {
 
   function getDropdownPlaceholder() {
     const d =
-        list[data].filter((e) => e.id == props.defaultValue)[0]?.label || ""
+      list[data].filter((e) => e.id == props.defaultValue)[0]?.label || "";
     return d;
   }
 }
