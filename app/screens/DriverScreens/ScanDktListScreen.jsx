@@ -1,13 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  FlatList,
-  Text,
-} from "react-native";
+import React from "react";
+import { StyleSheet, View, FlatList } from "react-native";
 import ParentContainer from "../../components/ParentContainer";
-import ListHeader from "../../components/ListHeader";
 import screenNames from "../../constants/screenNames";
 import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
@@ -62,28 +55,17 @@ export default function ScanDktList({ navigation }) {
   };
   return (
     <ParentContainer useScroll={false}>
-      <ListHeader
-        listName={"Scan Dkt List"}
-        btnName={"Create"}
-        onPress={() => navigation.navigate(screenNames.SCAN_DKT_FORM_SCREEN)}
-      />
       <View style={styles.container}>
-        {false ? (
-          <Text style={{ marginTop: 100, alignSelf: "center", height }}>
-            No Data
-          </Text>
-        ) : (
-          <FlatList
-            data={[1, 2, 3]}
-            keyExtractor={(item, index) => "key" + index}
-            scrollEventThrottle={16}
-            decelerationRate={"fast"}
-            onEndReachedThreshold={0.05}
-            renderItem={({ item }) => {
-              return <CardComponent obj={item} />;
-            }}
-          />
-        )}
+        <FlatList
+          data={[1, 2, 3]}
+          keyExtractor={(item, index) => "key" + index}
+          scrollEventThrottle={16}
+          decelerationRate={"fast"}
+          onEndReachedThreshold={0.05}
+          renderItem={({ item }) => {
+            return <CardComponent obj={item} />;
+          }}
+        />
       </View>
     </ParentContainer>
   );

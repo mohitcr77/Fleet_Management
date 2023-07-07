@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useAuth from "./useAuth";
 import api, { getHeader } from "../service/api";
 
@@ -22,12 +22,10 @@ export default useFetch = (
   const request = async () => {
     try {
       const data = await api.get(endpoint, {}, getHeader(token));
-      // console.log(data.data, "pppppp");
       if (data.ok) {
         setData(data?.data);
         onSuccess(data?.data);
       }
-      // else Toast.show(ToastType.ERROR);
     } catch (error) {
       onFail();
     }

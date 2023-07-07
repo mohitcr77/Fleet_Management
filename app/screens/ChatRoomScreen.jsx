@@ -1,14 +1,23 @@
 import { View, Text, StyleSheet, TextInput, Pressable } from "react-native";
 import React, { useState } from "react";
-import ParentContainer from "../../components/ParentContainer";
-import colors from "../../constants/colors";
-import { height, width } from "../../helpers/scales";
-import Icons from "../../components/Icons";
-import dimensions from "../../constants/dimensions";
+import ParentContainer from "../components/ParentContainer";
+import colors from "../constants/colors";
+import { height, width } from "../helpers/scales";
+import Icons from "../components/Icons";
+
+import dimensions from "../constants/dimensions";
+import useAuth from "../hooks/useAuth";
+import { Role } from "../constants/entity";
+import screenNames from "../constants/screenNames";
 
 export default function ChatRoom() {
+  const { role } = useAuth();
   return (
-    <ParentContainer>
+    <ParentContainer
+      onBackButtonPressScreen={
+        role === Role.ADMIN ? screenNames.CHAT_LIST_SCREEN : null
+      }
+    >
       <View
         style={{
           width: dimensions.componentWidth,

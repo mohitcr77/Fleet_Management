@@ -9,6 +9,7 @@ const endpoints = {
   cities: "/cities/",
   clients: "/clients",
   countries: "/countries",
+  documents: "/staff/documents",
   currency: "/currency",
   notification: "/notifications",
   save_token: "/update-fcm-token",
@@ -34,8 +35,9 @@ const adminEndpoints = {
 };
 
 const driverEndpoints = {
-  pending_jobs: "/pending-jobs",
+  accept_job: (jobId) => `/accept-job/${jobId}`,
   accepted_jobs: "/accepted-jobs",
+  pending_jobs: "/pending-jobs",
   preStartInspection: (id) => `/regos/${id}/prestart`,
   preStartNote: (id) => `/regos/${id}/notes`,
   time_sheet: `/driver_timesheet`,

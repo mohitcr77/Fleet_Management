@@ -154,7 +154,12 @@ const AddDocument = ({ onPress }) => (
   </TouchableOpacity>
 );
 
+const PersonLogo = ({ onPress }) => (
+  <Ionicons name="person-circle-outline" size={50} color={colors.gray2} />
+);
+
 export default {
+  PersonLogo,
   AddDocument,
   Chevron,
   Attachment,

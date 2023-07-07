@@ -4,10 +4,12 @@ const screenNames = {
   PROFILE_SCREEN: "Profile Screen",
   FORM_SCREEN: "Form Screen",
   DETAILS_VIEW_SCREEN: "Details View Screen",
-  DOCUMENTS_SCREEN: "Documents Screen",
   NOTIFICATIONS_SCREEN: "Notification Screen",
   TIME_SHEET_FORM_SCREEN: "Time Sheet Form",
   TIME_SHEET_LIST_SCREEN: "Time Sheet List",
+  DOCUMENT_LIST_SCREEN: "Document List Screen",
+  DOCUMENT_ADD_SCREEN: "Document Add Screen",
+  CHAT_ROOM_SCREEN: "Chat Room Screen",
 
   // Auth Screens
   LOGIN_SCREEN: "Login Screen",
@@ -17,8 +19,6 @@ const screenNames = {
   ESTIMATE_CREDIT_NOTE_FORM: "Estimate Credit Note Form",
 
   // Driver Screens
-  CHAT_ROOM_SCREEN: "Chat Room Screen",
-  DOCUMENT_ADD_SCREEN: "Document Add Screen",
   DRIVER_ACCEPTED_JOBS_SCREEN: "Driver Accepted Jobs Screen",
   DRIVER_PENDING_JOBS_SCREEN: "Driver Pending Jobs Screen",
   DRIVER_TIME_SHEET_SCREEN: "Driver Time Sheet Screen",
@@ -42,6 +42,7 @@ const screenNames = {
   ADD_DOCUMENT_SCREEN: "Add Document",
 
   //Admin Screens
+  CHAT_LIST_SCREEN: "Chat List Screen",
   DASHBOARD: "Dashboard",
   REGOS: "Regos",
   VEHICLE_MAINTENANCE: "Vehicle Maintenance",

@@ -1,9 +1,8 @@
-import { StyleSheet, Text, FlatList, View } from "react-native";
+import { Card, Layout } from "@ui-kitten/components";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Card, Layout, Button } from "@ui-kitten/components";
-import dimensions from "../constants/dimensions";
+
 import colors from "../constants/colors";
-import { height } from "../helpers/scales";
 import ParentContainer from "../components/ParentContainer";
 
 export default function DetailsView({ route }) {

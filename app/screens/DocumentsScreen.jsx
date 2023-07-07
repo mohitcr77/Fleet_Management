@@ -5,9 +5,10 @@ import screenNames from "../constants/screenNames";
 import { width } from "../helpers/scales";
 import colors from "../constants/colors";
 import dataType from "../constants/dataType";
-import endpoint from "../service/endpoint";
+
 import ParentContainer from "../components/ParentContainer";
 import TouchableText from "../components/TouchableText";
+import { endpoints } from "../service/endpoint";
 
 export default function Documents({ navigation }) {
   const form = [
@@ -25,8 +26,8 @@ export default function Documents({ navigation }) {
   ];
 
   const formProps = {
-    backScreen: screenNames.DOCUMENTS_SCREEN,
-    endpoint: endpoint.rego,
+    backScreen: screenNames.DOCUMENT_LIST_SCREEN,
+    endpoint: endpoints.documents,
     form,
     title: "Add",
   };

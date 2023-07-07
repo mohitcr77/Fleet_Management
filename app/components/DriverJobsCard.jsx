@@ -2,34 +2,22 @@ import React, { useContext } from "react";
 import { View, Alert, StyleSheet, TouchableOpacity, Text } from "react-native";
 import colors from "../constants/colors";
 import { scale, width, largeScreen } from "../helpers/scales";
+import { driverEndpoints } from "../service/endpoint";
+import useApi from "../hooks/useApi";
+import { JOBS_STATUS } from "../constants/entity";
 
 export default function DriverJobsCard({ data, showBtn = true }) {
-  const jobAccept = "yes";
-  const jobReject = "no";
+  const id = data.find((i) => i.name === "#Id").value;
 
-  const handleJobStatus = async (acceptance) => {
-    // try {
-    //   const resp = await services.driverJobAcceptance(
-    //     data.id,
-    //     { acceptance },
-    //     auth.token
-    //   );
-    //   setRefresh(!refresh);
-    //   if (resp.ok) {
-    //     Alert.alert("", "Status Updated Successfully", [
-    //       {
-    //         text: "Ok",
-    //         onPress: () =>
-    //           navigation.navigate(
-    //             screenNames.fullDktForm,
-    //             acceptance === jobAccept ? data : null
-    //           ),
-    //       },
-    //     ]);
-    //   } else alert("Something Went Wrong");
-    // } catch (error) {
-    //   console.warn(error);
-    // }
+  const { request: updateJobStatus } = useApi();
+
+  const handleJobStatus = async (reply) => {
+    const requestConfig = {
+      endpoint: driverEndpoints.accept_job(id),
+      body: { status: reply },
+    };
+    const resp = await updateJobStatus(requestConfig);
+    console.log(resp, "2222222222222222");
   };
 
   return (
@@ -53,7 +41,7 @@ export default function DriverJobsCard({ data, showBtn = true }) {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => handleJobStatus(jobAccept)}
+            onPress={() => handleJobStatus(JOBS_STATUS.ACCEPTED)}
           >
             <Text>Accept</Text>
           </TouchableOpacity>
@@ -64,9 +52,9 @@ export default function DriverJobsCard({ data, showBtn = true }) {
                 backgroundColor: colors.notDoneRed,
               },
             ]}
-            onPress={() => handleJobStatus(jobReject)}
+            onPress={() => handleJobStatus(JOBS_STATUS.DECLINE)}
           >
-            <Text style={{ color: "black" }}>Reject</Text>
+            <Text style={{ color: "black" }}>Decline</Text>
           </TouchableOpacity>
         </View>
       )}

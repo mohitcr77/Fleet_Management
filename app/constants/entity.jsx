@@ -34,3 +34,8 @@ export const DROPDOWN_LIST = {
   TAX: "tax_list",
   JOBS_BY_CLIENT: "jobs_by_client",
 };
+
+export const JOBS_STATUS = {
+  ACCEPTED: "accepted",
+  DECLINE: "declined",
+};

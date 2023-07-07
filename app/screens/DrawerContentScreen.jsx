@@ -51,11 +51,7 @@ export default function DrawerContent({ navigation }) {
         screen: screenNames.PRE_INSPECTION_LIST_SCREEN,
         children: null,
       },
-      {
-        name: "Documents",
-        screen: screenNames.DRIVER_DOCUMENTS_SCREEN,
-        children: null,
-      },
+
       {
         name: "Time Sheet",
         screen: screenNames.TIME_SHEET_LIST_SCREEN,
@@ -89,16 +85,16 @@ export default function DrawerContent({ navigation }) {
           },
         ],
       },
-      {
-        name: "Documents",
-        screen: screenNames.DOCUMENTS_SCREEN,
-        children: null,
-      },
     ],
     [Role.ADMIN]: [
       {
         name: "Dashboard",
         screen: screenNames.DASHBOARD,
+        children: null,
+      },
+      {
+        name: "Chat",
+        screen: screenNames.CHAT_LIST_SCREEN,
         children: null,
       },
       {
@@ -172,6 +168,11 @@ export default function DrawerContent({ navigation }) {
       },
     ],
     commonScreens: [
+      {
+        name: "Documents",
+        screen: screenNames.DOCUMENT_LIST_SCREEN,
+        children: null,
+      },
       {
         name: "Notifications",
         screen: screenNames.NOTIFICATIONS_SCREEN,

@@ -18,8 +18,7 @@ import Icons from "./Icons";
 import dimensions from "../constants/dimensions";
 import customStyles from "../constants/styles";
 import colors from "../constants/colors";
-import { useDispatch } from "react-redux";
-import { addInputForm } from "../store/reducer/inputFormReducer";
+import ListHeader from "./ListHeader";
 
 export default function ParentContainer({
   title = null,
@@ -28,13 +27,21 @@ export default function ParentContainer({
   useScroll = true,
   onBackButtonPressScreen,
   addScreen,
+  noData = false,
 }) {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const CompWrapper = () => {
     return (
-      <View style={[styles.compContainer, containerStyle]}>{children}</View>
+      <View style={[styles.compContainer, containerStyle]}>
+        {noData ? (
+          <View style={styles.noDataContainer}>
+            <Text style={styles.noDataText}>No Data</Text>
+          </View>
+        ) : (
+          children
+        )}
+      </View>
     );
   };
   return (
@@ -44,24 +51,11 @@ export default function ParentContainer({
         alignItems: "center",
       }}
     >
-      <View style={styles.header}>
-        <View style={customStyles.flex_row_between}>
-          <Icons.Menu
-            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          />
-          <Image
-            source={require("../assets/images/logo-truck.png")}
-            style={{ width: 60, height: 50, marginLeft: 5 }}
-            resizeMode="contain"
-          />
-        </View>
-        <View style={styles.headerTitle}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>{title}</Text>
-        </View>
-        <View style={styles.iconContainer}>
-          <HeaderIcon />
-        </View>
-      </View>
+      <Header
+        title={title}
+        onBackButtonPressScreen={onBackButtonPressScreen}
+        addScreen={addScreen}
+      />
       {useScroll ? (
         <ScrollView style={styles.container}>
           <CompWrapper />
@@ -73,6 +67,10 @@ export default function ParentContainer({
       )}
     </View>
   );
+}
+
+export function Header({ title, onBackButtonPressScreen, addScreen }) {
+  const navigation = useNavigation();
 
   function HeaderIcon() {
     if (onBackButtonPressScreen) {
@@ -95,21 +93,43 @@ export default function ParentContainer({
 
           //   navigation.navigate(...addScreen);
           // }}
-           onPress={() =>
-             navigation.dispatch(
-               CommonActions.reset({
-                 routes: [addScreen],
-               })
-             )
-           }
+          onPress={() =>
+            navigation.dispatch(
+              CommonActions.reset({
+                routes: [addScreen],
+              })
+            )
+          }
         />
       );
     }
 
     return <View />;
   }
+  return (
+    <View style={styles.header}>
+      <View style={customStyles.flex_row_between}>
+        <Icons.Menu
+          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+        />
+        <Image
+          source={require("../assets/images/logo-truck.png")}
+          style={{ width: 60, height: 50, marginLeft: 5 }}
+          resizeMode="contain"
+        />
+      </View>
+      <View style={styles.headerTitle}>
+        <Text style={{ fontSize: 18, fontWeight: "bold" }}>{title}</Text>
+      </View>
+      <View style={styles.iconContainer}>
+        <HeaderIcon />
+      </View>
+    </View>
+  );
 }
 const styles = StyleSheet.create({
+  noDataContainer: { marginTop: height / 4 },
+  noDataText: { fontSize: 18 },
   container: {
     flex: 1,
   },

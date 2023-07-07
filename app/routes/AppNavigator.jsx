@@ -15,7 +15,7 @@ import PreInspectionHistory from "../screens/DriverScreens/PreInspectionHistoryS
 import PreInspectionNote from "../screens/DriverScreens/PreInspectionNoteScreen";
 
 // driver screens
-import ChatRoom from "../screens/DriverScreens/ChatRoomScreen";
+import ChatRoom from "../screens/ChatRoomScreen";
 import Documents from "../screens/DocumentsScreen";
 import DriverJobs from "../screens/DriverScreens/DriverJobsListScreen";
 import FullDktForm from "../screens/DriverScreens/FullDktFormScreen";
@@ -62,6 +62,7 @@ import VehicleMaintenance from "../screens/AdminScreens/VehicleMaintenance";
 import { driverEndpoints } from "../service/endpoint";
 import Payment from "../components/Payment";
 import TimeSheetForm from "../screens/TimeSheetFormScreen";
+import ChatList from "../screens/AdminScreens/ChatListScreen";
 
 //todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
@@ -137,6 +138,10 @@ export default function AppNavigator() {
       {
         name: screenNames.DASHBOARD,
         component: DashBoard,
+      },
+      {
+        name: screenNames.CHAT_LIST_SCREEN,
+        component: ChatList,
       },
       {
         name: screenNames.REGOS,
@@ -222,7 +227,7 @@ export default function AppNavigator() {
     { name: screenNames.PROFILE_SCREEN, component: Profile },
     { name: screenNames.FORM_SCREEN, component: Form },
     { name: screenNames.DETAILS_VIEW_SCREEN, component: DetailsView },
-    { name: screenNames.DOCUMENTS_SCREEN, component: Documents },
+    { name: screenNames.DOCUMENT_LIST_SCREEN, component: Documents },
     { name: screenNames.CHAT_ROOM_SCREEN, component: ChatRoom },
     { name: screenNames.NOTIFICATIONS_SCREEN, component: Notifications },
     { name: screenNames.TIME_SHEET_FORM_SCREEN, component: TimeSheetForm },
