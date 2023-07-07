@@ -46,11 +46,11 @@ const LogIn = ({ navigation }) => {
   //for password toggle visibilty
 
   const renderIcon = () => (
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       onPress={() => setPasswordVisible(!passwordVisible)}
     >
        <Icons.ToggleEye show={passwordVisible} />
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 
   return (

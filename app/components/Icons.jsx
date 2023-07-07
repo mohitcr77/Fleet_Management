@@ -140,6 +140,7 @@ const Chevron = ({ closed }) => (
 );
 
 const ToggleEye = (props) => (
+  //console.log(props.show),
   <Entypo name={props.show ? "eye" : "eye-with-line"} size={24} color="black" />
 );
 

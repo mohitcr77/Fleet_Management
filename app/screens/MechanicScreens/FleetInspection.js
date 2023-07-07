@@ -50,6 +50,7 @@ const FleetInspection = () => {
   return (
     <ParentContainer
       useScroll={false}
+      title={"Fleet Inspection"}
       // containerStyle={{ alignItems: "center" }}
     >
       <View style={styles.container}>
