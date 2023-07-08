@@ -6,7 +6,6 @@ import { endpoints } from "../service/endpoint";
 
 export default function Notifications() {
   const { data: notifications } = useFetch(endpoints.notification);
-  console.log(notifications, "oooo");
   return (
     <ParentContainer title={"Notifications"} noData={true}>
       <View>

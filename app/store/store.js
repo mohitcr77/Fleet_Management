@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import dropdownDataReducer from "./reducer/dropdownDataReducer.jsx";
 import fullDktFormDataReducer from "./reducer/fullDktFormDataReducer.jsx";
 import inputFormReducer from "./reducer/inputFormReducer.jsx";

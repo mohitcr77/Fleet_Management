@@ -7,13 +7,13 @@ import {
 } from "react-native";
 import { useState, useContext } from "react";
 import { Card, Text, Input } from "@ui-kitten/components";
-
+import Icons from "../../components/Icons";
 import AppButton from "../../components/AppButton";
 import dimensions from "../../constants/dimensions";
 import LoadingScreen from "../AdminScreens/LoadingScreen";
 import customStyles from "../../constants/styles";
 import screenNames from "../../constants/screenNames";
-import endpoint from "../../service/endpoint";
+import endpoint, { authEndpoints } from "../../service/endpoint";
 import permanentStorage, { loginDetail } from "../../auth/permanentStorage";
 import useApi from "../../hooks/useApi";
 import useAuth from "../../hooks/useAuth";
@@ -32,7 +32,7 @@ const LogIn = ({ navigation }) => {
       password: password,
     };
     const requestConfig = {
-      endpoint: endpoint.login,
+      endpoint: authEndpoints.login,
       body: data,
     };
     await loginUser(requestConfig);
@@ -46,11 +46,11 @@ const LogIn = ({ navigation }) => {
   //for password toggle visibilty
 
   const renderIcon = () => (
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       onPress={() => setPasswordVisible(!passwordVisible)}
     >
-      <Text>Icons</Text>
-    </TouchableWithoutFeedback>
+       <Icons.ToggleEye show={passwordVisible} />
+    </TouchableOpacity>
   );
 
   return (

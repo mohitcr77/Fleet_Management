@@ -5,12 +5,12 @@ import ParentContainer from "../components/ParentContainer";
 import screenNames from "../constants/screenNames";
 import { driverEndpoints } from "../service/endpoint";
 import dataType from "../constants/dataType";
-import { DROPDOWN_LIST } from "../constants/entity";
+import { DROPDOWN_LIST, Role } from "../constants/entity";
 import useAuth from "../hooks/useAuth";
 
 export default function TimeSheet({ route }) {
   const { endpoint } = route.params;
-  const { auth } = useAuth();
+  const { auth, role } = useAuth();
 
   const { id, company_id } = auth.user;
 
@@ -66,10 +66,14 @@ export default function TimeSheet({ route }) {
     <ParentContainer
       useScroll={false}
       title="Time Sheet"
-      addScreen={{
-        name: screenNames.TIME_SHEET_FORM_SCREEN,
-        params: formProps,
-      }}
+      addScreen={
+        role !== Role.DRIVER
+          ? {
+              name: screenNames.TIME_SHEET_FORM_SCREEN,
+              params: formProps,
+            }
+          : null
+      }
     >
       <Text>TimeSheet</Text>
     </ParentContainer>

@@ -64,6 +64,9 @@ const screenNames = {
   CURRENCY: "Currency",
   TIMEZONE: "Timezone",
   CREDIT_NOTE: "Credit Note",
+  DRIVER_LIST: "Driver",
+  MECHANIC_LIST: "Mechanic",
+  STAFF_LIST: "Staff",
 
   //Admin Component
   CLIENT_FORM_SCREEN: "CLIENT Form Screen",

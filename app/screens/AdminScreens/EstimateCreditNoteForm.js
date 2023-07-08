@@ -5,7 +5,7 @@ import AppFooterButton from "../../components/AppFooterButton";
 import ParentContainer from "../../components/ParentContainer";
 import useApi from "../../hooks/useApi";
 import { useSelector } from "react-redux";
-import endpointB from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import { useDispatch } from "react-redux";
 import FormInput from "../../components/FormInput";
 import { DROPDOWN_LIST } from "../../constants/entity";
@@ -47,7 +47,7 @@ const EstimateCreditNoteForm = ({ route, navigation }) => {
   const onClientSelect = async (e) => {
     const requestConfig = {
       method: HTTPS_METHODS.GET,
-      endpoint: endpointB.jobs_by_client + e.id,
+      endpoint: adminEndpoints.jobs_by_client + e.id,
     };
     await getJobsByClient(requestConfig);
   };

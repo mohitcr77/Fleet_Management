@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -79,7 +79,7 @@ const FuelLog = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.fuel_log,
+    adminEndpoints.fuel_log,
     handleCurrencySuccess
   );
 
@@ -97,7 +97,7 @@ const FuelLog = () => {
 
   const formProps = {
     backScreen: screenNames.FUEL_LOG,
-    endpoint: endpoint.fuel_log,
+    endpoint: adminEndpoints.fuel_log,
     form,
     title: "Add Fuel Log",
   };
@@ -115,7 +115,7 @@ const FuelLog = () => {
         backScreen={screenNames.FUEL_LOG}
         listTitle={"Fuel Log"}
         editTitle={"Edit"}
-        endpoint={endpoint.fuel_log}
+        endpoint={adminEndpoints.fuel_log}
       />
     </ParentContainer>
   );

@@ -5,22 +5,26 @@ import screenNames from "../constants/screenNames";
 import { width } from "../helpers/scales";
 import colors from "../constants/colors";
 import dataType from "../constants/dataType";
-
 import ParentContainer from "../components/ParentContainer";
 import TouchableText from "../components/TouchableText";
 import { endpoints } from "../service/endpoint";
+import useFetch from "../hooks/useFetch";
+import formatDate from "../helpers/formatDate";
+import genImageUrl from "../helpers/genImageUrl";
 
 export default function Documents({ navigation }) {
+  const { data } = useFetch(endpoints.documents);
+
   const form = [
     { name: "Name", key: "name", type: dataType.text },
     {
       name: "Comment",
-      key: "comment",
+      key: "comments",
       type: dataType.text,
     },
     {
       title: "Attach Image",
-      key: "img",
+      key: "document",
       type: dataType.image,
     },
   ];
@@ -36,8 +40,9 @@ export default function Documents({ navigation }) {
     <ParentContainer
       title="Documents"
       addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
+      noData={!data?.data?.data.length}
     >
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+      {data?.data?.data.map((i) => (
         <CardComponent key={i} item={i} />
       ))}
     </ParentContainer>
@@ -47,18 +52,13 @@ function CardComponent({ item }) {
   return (
     <View style={styles.card} key={item}>
       <TouchableText title={"Open"} onPress={() => {}} />
-      <Image
-        source={getIcon("obj.path")}
-        style={styles.img}
-        resizeMode="stretch"
-      />
+      <Image source={getIcon(item)} style={styles.img} resizeMode="stretch" />
       <View style={styles.dataContainer}>
-        <Text style={{ fontWeight: "bold" }}>Name</Text>
+        <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
         <View style={styles.data}>
-          <Text style={{ color: colors.gray2 }}>New Doc</Text>
+          <Text style={{ color: colors.gray2 }}>{item.comments}</Text>
           <Text style={{ color: colors.gray2 }}>
-            23 / 4 / 98
-            {/* {"formatDate(obj.created_at).monthNameFormat"} */}
+            {formatDate(item.created_at).monthNameFormat}
           </Text>
         </View>
       </View>
@@ -66,16 +66,13 @@ function CardComponent({ item }) {
   );
 
   function getIcon(doc) {
-    return require(`../assets/images/pdf.jpg`);
+    switch (doc.mime_type) {
+      case "image":
+        return { uri: genImageUrl(doc.path) };
 
-    // const ext = doc.split(".")[1] || "image";
-    // if (ext === "jpg" || ext === "jpeg" || ext === "png") {
-    //   return require(`../../assets/images/jpegIcon.png`);
-    // } else {
-    //   if (ext === "pdf") {
-    //     return require(`../../assets/images/pdf.jpg`);
-    //   } else return require(`../../assets/images/doc.png`);
-    // }
+      default:
+        return require(`../assets/images/pdf.jpg`);
+    }
   }
 }
 const styles = StyleSheet.create({

@@ -24,10 +24,8 @@ export default function TimeSheetForm({ route, navigation }) {
       endpoint: id ? endpoint + "/" + id : endpoint,
       body: formData.current,
     };
-    console.log(requestConfig);
     // return;
     const d = await request(requestConfig);
-    console.log(d, "ppppppppppp");
   }
 
   function handlePostSuccess() {
@@ -37,7 +35,7 @@ export default function TimeSheetForm({ route, navigation }) {
 
   return (
     <ParentContainer
-      title={"Time Sheet!!"}
+      title={"Time Sheet"}
       containerStyle={{ backgroundColor: "white" }}
       onBackButtonPressScreen={backScreen}
     >

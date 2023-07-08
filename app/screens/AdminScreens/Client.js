@@ -2,16 +2,17 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { endpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
+import { View } from "react-native";
 
 const Client = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(endpoint.clients, handleClientSuccess);
+  const { refresh, loading } = useFetch(endpoints.clients, handleClientSuccess);
 
   function handleClientSuccess(d) {
     let arr = [];
@@ -103,7 +104,7 @@ const Client = () => {
   ];
   const formProps = {
     backScreen: screenNames.CLIENT,
-    endpoint: endpoint.clients,
+    endpoint: endpoints.clients,
     form,
     title: "Add Client",
   };
@@ -120,7 +121,7 @@ const Client = () => {
         backScreen={screenNames.CLIENT}
         listTitle={"Client Details"}
         editTitle={"Edit Client"}
-        endpoint={endpoint.clients}
+        endpoint={endpoints.clients}
       />
     </ParentContainer>
   );

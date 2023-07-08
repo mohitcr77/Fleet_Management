@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -105,7 +105,7 @@ const Drivers = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.driver,
+    adminEndpoints.driver,
     handleGetDriverSuccess
   );
 
@@ -124,7 +124,7 @@ const Drivers = () => {
 
   const formProps = {
     backScreen: screenNames.DRIVER,
-    endpoint: endpoint.driver,
+    endpoint: adminEndpoints.driver,
     form,
     title: "Add Driver",
   };
@@ -142,7 +142,7 @@ const Drivers = () => {
         backScreen={screenNames.DRIVER}
         listTitle={"Driver Details"}
         editTitle={"Edit Driver"}
-        endpoint={endpoint.driver}
+        endpoint={adminEndpoints.driver}
       />
     </ParentContainer>
   );

@@ -52,11 +52,11 @@ export default function DrawerContent({ navigation }) {
         children: null,
       },
 
-      {
-        name: "Time Sheet",
-        screen: screenNames.TIME_SHEET_LIST_SCREEN,
-        children: null,
-      },
+      // {
+      //   name: "Time Sheet",
+      //   screen: screenNames.TIME_SHEET_LIST_SCREEN,
+      //   children: null,
+      // },
       {
         name: "Chat",
         screen: screenNames.CHAT_ROOM_SCREEN,

@@ -16,6 +16,7 @@ import CompWrapper from "./CompWrapper";
 import CreditNoteFormAdd from "./CreditNoteFormAdd";
 import CurrentDate from "./CurrentDate";
 import ExpireDate from "./ExpireDate";
+import ColorPickerComponent from "./ColorPickerComponent";
 
 const dummyList = [
   { label: "0", value: "1" },
@@ -128,6 +129,13 @@ export default function FormInput(props) {
       return (
         <CompWrapper name={name}>
           <AppCheckBox {...props} />
+        </CompWrapper>
+      );
+
+      case dataType.color:
+      return (
+        <CompWrapper name={name}>
+          <ColorPickerComponent {...props} />
         </CompWrapper>
       );
 

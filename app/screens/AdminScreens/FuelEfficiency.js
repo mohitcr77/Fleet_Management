@@ -7,6 +7,7 @@ import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
 import { DROPDOWN_LIST } from "../../constants/entity";
+import { adminEndpoints } from "../../service/endpoint";
 
 const FuelEfficiency = () => {
   //what is user id? and how is rego_id entered in API
@@ -108,7 +109,7 @@ const FuelEfficiency = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.fuel_efficiency,
+    adminEndpoints.fuel_efficiency,
     handleFuelEfficiencySuccess
   );
 
@@ -124,7 +125,7 @@ const FuelEfficiency = () => {
   }
   const formProps = {
     backScreen: screenNames.FUEL_EFFICIENCY,
-    endpoint: endpoint.fuel_efficiency,
+    endpoint: adminEndpoints.fuel_efficiency,
     form,
     title: "Add Efficiency",
   };
@@ -141,7 +142,7 @@ const FuelEfficiency = () => {
         loading={loading}
         backScreen={screenNames.FUEL_EFFICIENCY}
         editTitle={"Edit FUEL"}
-        endpoint={endpoint.fuel_efficiency}
+        endpoint={adminEndpoints.fuel_efficiency}
       />
     </ParentContainer>
   );

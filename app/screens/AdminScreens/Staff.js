@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -151,7 +151,7 @@ const Staff = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(endpoint.staff, handleGetStaffSuccess);
+  const { refresh, loading } = useFetch(adminEndpoints.staff, handleGetStaffSuccess);
 
   function handleGetStaffSuccess(d) {
     let arr = [];
@@ -165,7 +165,7 @@ const Staff = () => {
 
   const formProps = {
     backScreen: screenNames.STAFF,
-    endpoint: endpoint.staff,
+    endpoint: adminEndpoints.staff,
     form,
     title: "Add Staff",
   };
@@ -183,7 +183,7 @@ const Staff = () => {
         backScreen={screenNames.STAFF}
         listTitle={"Staff Details"}
         editTitle={"Edit Staff"}
-        endpoint={endpoint.staff}
+        endpoint={adminEndpoints.staff}
       />
     </ParentContainer>
   );

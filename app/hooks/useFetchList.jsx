@@ -1,38 +1,38 @@
 import { useDispatch } from "react-redux";
 
+import useFetch from "./useFetch";
+import endpoint, { adminEndpoints, endpoints } from "../service/endpoint";
+import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
 import { addListItem } from "../store/reducer/dropdownDataReducer";
 import { DROPDOWN_LIST } from "../constants/entity";
-import endpoint from "../service/endpoint";
 import getNestedData from "../helpers/getNestedData";
-import isNotNullOrUndefined from "../helpers/isNotNullOrUndefined";
-import useFetch from "./useFetch";
 
 export default useFetchList = (update) => {
-  useFetch(endpoint.clients, (arr) =>
+  useFetch(endpoints.clients, (arr) =>
     handleReceiveData(arr, DROPDOWN_LIST.CLIENTS, ["user", "name"])
   );
 
-  useFetch(endpoint.rego, (arr) =>
+  useFetch(adminEndpoints.rego, (arr) =>
     handleReceiveData(arr, DROPDOWN_LIST.REGOS, ["name"])
   );
 
-  useFetch(endpoint.mechanic, (arr) =>
+  useFetch(adminEndpoints.mechanic, (arr) =>
     handleReceiveData(arr, DROPDOWN_LIST.MECHANICS, ["user", "name"])
   );
 
-  useFetch(endpoint.job_color, (arr) =>
+  useFetch(adminEndpoints.job_color, (arr) =>
     handleReceiveData(arr, DROPDOWN_LIST.COLORS, ["name"])
   );
 
-  useFetch(endpoint.driver, (arr) =>
+  useFetch(adminEndpoints.driver, (arr) =>
     handleReceiveData(arr, DROPDOWN_LIST.DRIVERS, ["user", "name"])
   );
 
-  useFetch(endpoint.staff, (arr) =>
+  useFetch(adminEndpoints.staff, (arr) =>
     handleReceiveData(arr, DROPDOWN_LIST.STAFF, ["user", "name"])
   );
 
-  useFetch(endpoint.tax, (arr) =>
+  useFetch(adminEndpoints.tax, (arr) =>
     handleReceiveData(arr, DROPDOWN_LIST.TAX, ["tax_name"])
   );
 

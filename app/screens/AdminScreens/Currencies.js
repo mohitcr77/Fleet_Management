@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { endpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -47,7 +47,7 @@ const Currencies = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.currency,
+    endpoints.currency,
     handleCurrencySuccess
   );
 
@@ -63,7 +63,7 @@ const Currencies = () => {
 
   const formProps = {
     backScreen: screenNames.CURRENCY,
-    endpoint: endpoint.currency,
+    endpoint: endpoints.currency,
     form,
     title: "Add Currency",
   };
@@ -80,7 +80,7 @@ const Currencies = () => {
         backScreen={screenNames.CURRENCY}
         listTitle={"Currency Details"}
         editTitle={"Edit Currency"}
-        endpoint={endpoint.currency}
+        endpoint={endpoints.currency}
       />
     </ParentContainer>
   );

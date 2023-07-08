@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -11,7 +11,7 @@ import getNestedData from "../../helpers/getNestedData";
 const Tax = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(endpoint.tax, handleTaxSuccess);
+  const { refresh, loading } = useFetch(adminEndpoints.tax, handleTaxSuccess);
 
   function handleTaxSuccess(d) {
     let arr = [];
@@ -50,7 +50,7 @@ const Tax = () => {
   ];
   const formProps = {
     backScreen: screenNames.TAX,
-    endpoint: endpoint.tax,
+    endpoint: adminEndpoints.tax,
     form,
     title: "Add Tax",
   };
@@ -68,7 +68,7 @@ const Tax = () => {
         backScreen={screenNames.TAX}
         listTitle={"Tax Details"}
         editTitle={"Edit Tax"}
-        endpoint={endpoint.tax}
+        endpoint={adminEndpoints.tax}
       />
     </ParentContainer>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -12,7 +12,7 @@ import { DROPDOWN_LIST } from "../../constants/entity";
 const JobEntry = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(endpoint.job, handleGetJobSuccess);
+  const { refresh, loading } = useFetch(adminEndpoints.job, handleGetJobSuccess);
 
   function handleGetJobSuccess(d) {
     let arr = [];
@@ -197,7 +197,7 @@ const JobEntry = () => {
   ];
   const formProps = {
     backScreen: screenNames.JOB_ENTRY,
-    endpoint: endpoint.job,
+    endpoint: adminEndpoints.job,
     form,
     title: "Add Job",
   };
@@ -215,7 +215,7 @@ const JobEntry = () => {
         backScreen={screenNames.JOB_ENTRY}
         listTitle={"Job Details"}
         editTitle={"Edit Job"}
-        endpoint={endpoint.job}
+        endpoint={adminEndpoints.job}
       />
     </ParentContainer>
   );

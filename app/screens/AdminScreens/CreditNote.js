@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -137,7 +137,7 @@ const CreditNote = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.creditnote,
+    adminEndpoints.creditnote,
     handleGetCreditNoteSuccess
   );
 
@@ -156,7 +156,7 @@ const CreditNote = () => {
 
   const formProps = {
     backScreen: screenNames.CREDIT_NOTE,
-    endpoint: endpoint.creditnote,
+    endpoint: adminEndpoints.creditnote,
     form,
     title: "Add Credit Note",
   };
@@ -173,7 +173,7 @@ const CreditNote = () => {
         backScreen={screenNames.CREDIT_NOTE}
         listTitle={"Credit Note Details"}
         editTitle={"Edit Credit Note"}
-        endpoint={endpoint.rego}
+        endpoint={adminEndpoints.creditnote}
       />
     </ParentContainer>
   );

@@ -1,13 +1,13 @@
 import { StyleSheet, Text } from "react-native";
-import React, { useRef, useState } from "react";
-import ParentContainer from "../../components/ParentContainer";
+import React, { useRef } from "react";
+
+import { driverEndpoints } from "../../service/endpoint";
+import AppButton from "../../components/AppButton";
 import dataType from "../../constants/dataType";
 import FormInput from "../../components/FormInput";
-import AppButton from "../../components/AppButton";
-import AddImage from "../../components/AddImage";
+import ParentContainer from "../../components/ParentContainer";
 import screenNames from "../../constants/screenNames";
 import useApi from "../../hooks/useApi";
-import { driverEndpoints } from "../../service/endpoint";
 import useAuth from "../../hooks/useAuth";
 
 export const preStartCheckList = [
@@ -188,10 +188,11 @@ export default function PreInspectionForm({ route }) {
   async function handleSubmitData() {
     const requestConfig = {
       endpoint: driverEndpoints.preStartInspection(regoId),
-      body: { ...formRef.current, rego_id: regoId, mechanic_id: auth.user.id },
+      body: { ...formRef.current, rego_id: regoId, user_id: auth.user.id },
     };
-
-    await submitPreInspectionForm(requestConfig);
+    console.log(requestConfig);
+    // const x = await submitPreInspectionForm(requestConfig);
+    // console.log(auth.user.id, "ooo");
   }
 
   const onChange = (e, i) =>
@@ -212,8 +213,11 @@ export default function PreInspectionForm({ route }) {
           key={index}
           onCheckboxPress={(e) => onChange(e, i)}
           onChangeText={(e) => onChange(e, i)}
-          onImageSelect={(e) => onChange(e, i)}
           onDateSelect={(e) => onChange(e, i)}
+          onImageSelect={(e) => {
+            const { file, mime_type } = e;
+            formRef.current = { ...formRef.current, [i.key]: file, mime_type };
+          }}
         />
       ))}
 

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -12,7 +12,7 @@ const JobColor = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.job_color,
+    adminEndpoints.job_color,
     handleJobColorSuccess
   );
 
@@ -44,7 +44,7 @@ const JobColor = () => {
     {
       name: "code",
       key: "code",
-      type: dataType.text,
+      type: dataType.color,
       card: true,
       mapKey: ["code"],
     },
@@ -58,7 +58,7 @@ const JobColor = () => {
   ];
   const formProps = {
     backScreen: screenNames.JOB_COLOR,
-    endpoint: endpoint.job_color,
+    endpoint: adminEndpoints.job_color,
     form,
     title: "Add Job Color",
   };
@@ -76,7 +76,7 @@ const JobColor = () => {
         backScreen={screenNames.JOB_COLOR}
         listTitle={"JobColor Details"}
         editTitle={"Edit JobColoe"}
-        endpoint={endpoint.job_color}
+        endpoint={adminEndpoints.job_color}
       />
     </ParentContainer>
   );

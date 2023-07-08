@@ -12,10 +12,12 @@ import screenNames from "../../constants/screenNames";
 import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
 import dataType from "../../constants/dataType";
-import endpoint from "../../service/endpoint";
+import endpoint, { adminEndpoints, mechanicEndpoints } from "../../service/endpoint";
 import { DROPDOWN_LIST } from "../../constants/entity";
 
 const MechanicTimeSheetData = () => {
+  const [listData, setListData] = useState([]);
+
   const form = [
     {
       name: "Date",
@@ -47,26 +49,7 @@ const MechanicTimeSheetData = () => {
 
   const CardComponent = ({ obj }) => {
     const data = {
-      cardData: [
-        {
-          key: "Date",
-          value:
-            'formatDate(obj.date).monthNameFormat + "  " + AMPMFormat(obj.start)',
-          type: "date",
-        },
-        { key: "Start Time", value: "obj.start_time", type: "time" },
-        { key: "End time", value: "obj.end_time", type: "time" },
-        {
-          key: "Break",
-          value: "obj.break",
-          type: "number",
-        },
-        {
-          key: "Driver Total",
-          value: "obj.driver_total",
-          type: "note",
-        },
-      ],
+      cardData: []
     };
 
     return (
@@ -83,7 +66,7 @@ const MechanicTimeSheetData = () => {
 
   const formProps = {
     backScreen: screenNames.MECHANIC_TIME_SHEET_DATA,
-    endpoint: endpoint.rego,
+    endpoint: mechanicEndpoints.mechanic_timeSheet,
     form,
     title: "Time Sheet",
   };
@@ -100,7 +83,7 @@ const MechanicTimeSheetData = () => {
           </Text>
         ) : (
           <FlatList
-            data={[1, 2, 3]}
+            data={listData}
             keyExtractor={(item, index) => "key" + index}
             renderItem={({ item }) => {
               return <CardComponent obj={item} />;

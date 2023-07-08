@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import endpoint, { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -12,7 +12,7 @@ const MechanicTimesheet = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.mechanic_timeSheet,
+    adminEndpoints.mechanic_timeSheet,
     handleMechanic_TimeSheetSuccess
   );
 
@@ -92,7 +92,7 @@ const MechanicTimesheet = () => {
   ];
   const formProps = {
     backScreen: screenNames.MECHANIC_TIME_SHEET,
-    endpoint: endpoint.mechanic_timeSheet,
+    endpoint: adminEndpoints.mechanic_timeSheet,
     form,
     title: "Time Sheet",
   };
@@ -110,7 +110,7 @@ const MechanicTimesheet = () => {
         backScreen={screenNames.MECHANIC_TIME_SHEET}
         listTitle={"TimeSheet Details"}
         editTitle={"Edit Time Sheet"}
-        endpoint={endpoint.mechanic_timeSheet}
+        endpoint={adminEndpoints.mechanic_timeSheet}
       />
     </ParentContainer>
   );

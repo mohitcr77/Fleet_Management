@@ -36,9 +36,9 @@ export default function DriverJobs({ route }) {
     setList(arr);
   }
   return (
-    <ParentContainer title={title + "!!"}>
-      {list.map((i) => (
-        <DriverJobsCard key={i} data={i} showBtn={showBtn} />
+    <ParentContainer title={title} noData={!list.length}>
+      {list.map((i, index) => (
+        <DriverJobsCard key={index} data={i} showBtn={showBtn} />
       ))}
     </ParentContainer>
   );

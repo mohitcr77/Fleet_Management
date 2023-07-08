@@ -6,6 +6,7 @@ import customStyles from "../../constants/styles";
 import dimensions from "../../constants/dimensions";
 import screenNames from "../../constants/screenNames";
 import { useSelector } from "react-redux";
+import { CommonActions } from "@react-navigation/routers";
 
 export default function PreInspectionList({ navigation }) {
   const { machineTypeList } = useSelector((state) => state.dropDownData);
@@ -53,8 +54,21 @@ export default function PreInspectionList({ navigation }) {
         <View style={customStyles.flex_row_between}>
           {btn.map((i) => (
             <AppButton
-              onPress={() =>
-                navigation.navigate(i.screen, { regoId: regoDetails.id })
+              onPress={
+                () =>
+                  navigation.dispatch(
+                    CommonActions.reset({
+                      routes: [
+                        {
+                          name: i.screen,
+                          params: {
+                            regoId: regoDetails.id,
+                          },
+                        },
+                      ],
+                    })
+                  )
+                // navigation.navigate(i.screen, { regoId: regoDetails.id })
               }
               title={i.name}
               key={i.name}

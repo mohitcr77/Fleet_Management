@@ -29,11 +29,18 @@ export default function AddImage({ title = "Add", onImageSelect }) {
       <AppImagePicker
         isVisible={visible}
         onDone={(e) => {
+          // console.log(e.assets[0].exif, e.assets[0].type, "###3");
+          // for (let x in e.assets[0]) {
+          //   console.log(x, "@@@@");
+          // }
           setVisible(false);
           if (!e) return;
 
           setImage(`data:image/jpeg;base64,${e.assets[0].base64}`);
-          onImageSelect(`data:image/jpeg;base64,${e.assets[0].base64}`);
+          onImageSelect({
+            mime_type: e.assets[0].type,
+            file: `data:image/jpeg;base64,${e.assets[0].base64}`,
+          });
         }}
       />
     </View>

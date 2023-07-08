@@ -25,9 +25,10 @@ export default function Form({ route, navigation }) {
       body: formData.current,
     };
 
+    // console.log(requestConfig);
     const d = await request(requestConfig);
-    delete d.config.data;
-    console.log(d);
+    // delete d.config.data;
+    // console.log(d);
   }
 
   function handlePostSuccess() {
@@ -52,7 +53,11 @@ export default function Form({ route, navigation }) {
               defaultValue={formData.current[i.key]}
               onChangeText={onSelect}
               onDateSelect={onSelect}
-              onImageSelect={onSelect}
+              onImageSelect={(e) => {
+                const { file, mime_type } = e;
+                formData.current.mime_type = mime_type;
+                onSelect(file);
+              }}
               onTimeSelect={onSelect}
               onDropdownItemSelect={(e) =>
                 (formData.current[i.key] = e.id || e.label)

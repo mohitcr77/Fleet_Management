@@ -1,4 +1,4 @@
-import { URL } from "../services/baseURL";
+import { URL } from "../service/api";
 
 function genImageUrl(name) {
   return `${URL}/storage/${name}`;

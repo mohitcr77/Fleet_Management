@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import dataType from "../../constants/dataType";
 import ParentContainer from "../../components/ParentContainer";
-import endpoint from "../../service/endpoint";
+import { adminEndpoints } from "../../service/endpoint";
 import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
@@ -54,7 +54,7 @@ const ReportIssue = () => {
   const [listData, setListData] = useState([]);
 
   const { refresh, loading } = useFetch(
-    endpoint.report_issue,
+    adminEndpoints.report_issue,
     handleGetIssueSuccess
   );
 
@@ -70,7 +70,7 @@ const ReportIssue = () => {
 
   const formProps = {
     backScreen: screenNames.REPORT_ISSUE,
-    endpoint: endpoint.report_issue,
+    endpoint: adminEndpoints.report_issue,
     form,
     title: "Add Issue",
   };
@@ -88,7 +88,7 @@ const ReportIssue = () => {
         backScreen={screenNames.REPORT_ISSUE}
         listTitle={"Issue Details"}
         editTitle={"Edit Issue"}
-        endpoint={endpoint.report_issue}
+        endpoint={adminEndpoints.report_issue}
       />
     </ParentContainer>
   );
