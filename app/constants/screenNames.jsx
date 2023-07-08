@@ -22,14 +22,14 @@ const screenNames = {
   DRIVER_ACCEPTED_JOBS_SCREEN: "Driver Accepted Jobs Screen",
   DRIVER_PENDING_JOBS_SCREEN: "Driver Pending Jobs Screen",
   DRIVER_TIME_SHEET_SCREEN: "Driver Time Sheet Screen",
-  FULL_DKT_FORM_SCREEN: "Full Dkt Form Screen",
-  FULL_DKT_LIST_SCREEN: "Full Dkt List Screen",
+  MACHINE_DKT_FORM_SCREEN: "Machine Dkt Form Screen",
+  MACHINE_DKT_LIST_SCREEN: "Machine Dkt List Screen",
   PRE_INSPECTION_FORM_SCREEN: "Pre-Inspection Form Screen",
   PRE_INSPECTION_LIST_SCREEN: "Pre-Inspection List Screen",
   PRE_INSPECTION_HISTORY_SCREEN: "Pre-Inspection History Screen",
   PRE_INSPECTION_NOTES_SCREEN: "Pre-Inspection Notes Screen",
-  SCAN_DKT_FORM_SCREEN: "Scan Dkt Form Screen",
-  SCAN_DKT_LIST_SCREEN: "Scan Dkt List Screen",
+  PAPER_DKT_FORM_SCREEN: "Paper Dkt Form Screen",
+  PAPER_DKT_LIST_SCREEN: "Paper Dkt List Screen",
 
   //Mechanic Screens
   MECHANIC_FORM_SCREEN: "Mechanic Form Screen",
