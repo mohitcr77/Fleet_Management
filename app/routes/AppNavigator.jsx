@@ -62,7 +62,7 @@ import VehicleMaintenance from "../screens/AdminScreens/VehicleMaintenance";
 import { driverEndpoints } from "../service/endpoint";
 import Payment from "../components/Payment";
 import TimeSheetForm from "../screens/TimeSheetFormScreen";
-import ChatList from "../screens/AdminScreens/ChatListScreen";
+import StaffNavigator from "./StaffNavigator";
 
 const Drawer = createDrawerNavigator();
 
@@ -139,8 +139,18 @@ export default function AppNavigator() {
         component: DashBoard,
       },
       {
-        name: screenNames.CHAT_LIST_SCREEN,
-        component: ChatList,
+        name: screenNames.STAFF_CHAT_SCREEN,
+        component: StaffNavigator,
+        initialParams: {
+          nextScreen: screenNames.CHAT_ROOM_SCREEN,
+        },
+      },
+      {
+        name: screenNames.STAFF_DOCUMENT_SCREEN,
+        component: StaffNavigator,
+        initialParams: {
+          nextScreen: screenNames.DOCUMENT_LIST_SCREEN,
+        },
       },
       {
         name: screenNames.REGOS,

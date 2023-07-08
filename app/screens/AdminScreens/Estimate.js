@@ -12,10 +12,10 @@ import { DROPDOWN_LIST } from "../../constants/entity";
 const Estimate = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.estimate,
-    handleEstimateSuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.estimate,
+    onSuccess: handleEstimateSuccess,
+  });
 
   function handleEstimateSuccess(d) {
     let arr = [];

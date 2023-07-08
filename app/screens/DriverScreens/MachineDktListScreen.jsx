@@ -55,6 +55,7 @@ export default function FullDktList({ navigation }) {
       />
     );
   };
+
   return (
     <ParentContainer
       useScroll={false}

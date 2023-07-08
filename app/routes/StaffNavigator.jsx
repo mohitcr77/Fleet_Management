@@ -3,27 +3,30 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import StaffsList from "../screens/AdminScreens/StaffListScreen";
 import screenNames from "../constants/screenNames";
 import { DROPDOWN_LIST } from "../constants/entity";
+import { Header } from "../components/ParentContainer";
 
 const TopTab = createMaterialTopTabNavigator();
 
-export default function StaffNavigator() {
+export default function StaffNavigator({ route }) {
+  const tabs = [
+    { name: screenNames.DRIVER_LIST, listName: DROPDOWN_LIST.DRIVERS },
+    { name: screenNames.MECHANIC_LIST, listName: DROPDOWN_LIST.MECHANICS },
+    { name: screenNames.STAFF_LIST, listName: DROPDOWN_LIST.STAFF },
+  ];
+
   return (
-    <TopTab.Navigator>
-      <TopTab.Screen
-        name={screenNames.DRIVER_LIST}
-        component={StaffsList}
-        initialParams={{ listName: DROPDOWN_LIST.DRIVERS }}
-      />
-      <TopTab.Screen
-        name={screenNames.MECHANIC_LIST}
-        component={StaffsList}
-        initialParams={{ listName: DROPDOWN_LIST.MECHANICS }}
-      />
-      <TopTab.Screen
-        name={screenNames.STAFF_LIST}
-        component={StaffsList}
-        initialParams={{ listName: DROPDOWN_LIST.STAFF }}
-      />
-    </TopTab.Navigator>
+    <>
+      <Header />
+      <TopTab.Navigator>
+        {tabs.map((i) => (
+          <TopTab.Screen
+            key={i.name}
+            name={i.name}
+            component={StaffsList}
+            initialParams={{ listName: i.listName, ...route.params }}
+          />
+        ))}
+      </TopTab.Navigator>
+    </>
   );
 }

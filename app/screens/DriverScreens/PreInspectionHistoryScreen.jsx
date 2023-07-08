@@ -6,7 +6,9 @@ import { driverEndpoints } from "../../service/endpoint";
 
 export default function PreInspectionHistory({ route }) {
   const { regoId } = route.params;
-  const { data } = useFetch(driverEndpoints.preStartInspection(regoId));
+  const { data } = useFetch({
+    endpoint: driverEndpoints.preStartInspection(regoId),
+  });
 
   return (
     <ParentContainer

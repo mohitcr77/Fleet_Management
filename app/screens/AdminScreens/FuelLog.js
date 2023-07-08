@@ -78,10 +78,10 @@ const FuelLog = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.fuel_log,
-    handleCurrencySuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.fuel_log,
+    onSuccess: handleCurrencySuccess,
+  });
 
   function handleCurrencySuccess(d) {
     let arr = [];

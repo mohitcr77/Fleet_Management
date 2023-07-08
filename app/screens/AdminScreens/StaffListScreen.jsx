@@ -1,22 +1,33 @@
 import { Divider, List, ListItem } from "@ui-kitten/components";
 import { StyleSheet, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { CommonActions, useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import React from "react";
 
 import colors from "../../constants/colors";
 import formatDate from "../../helpers/formatDate";
 import Icons from "../../components/Icons";
-import screenNames from "../../constants/screenNames";
 
 export default function StaffsList({ route }) {
   let list = useSelector((state) => state.dropDownData);
-  const { listName } = route.params;
+  const { listName, nextScreen } = route.params;
   const navigation = useNavigation();
 
+  //   navigation.navigate(nextScreen, { userData: item })
   const renderItem = ({ item, index }) => (
     <ListItem
-      onPress={() => navigation.navigate(screenNames.CHAT_ROOM_SCREEN)}
+      onPress={() =>
+        navigation.dispatch(
+          CommonActions.reset({
+            routes: [
+              {
+                name: nextScreen,
+                params: { userData: item },
+              },
+            ],
+          })
+        )
+      }
       style={{ height: 70 }}
       title={`${item.label} ${index + 1}`}
       description={`${item.user.email} ${index + 1}`}

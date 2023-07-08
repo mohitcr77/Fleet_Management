@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import useAuth from "./useAuth";
 import api, { getHeader } from "../service/api";
 
-export default useFetch = (
+export default useFetch = ({
   endpoint,
   onSuccess = () => {},
-  onFail = () => {}
-) => {
+  onFail = () => {},
+  params = {},
+}) => {
   const [data, setData] = useState(null);
   const [update, setUpdate] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ export default useFetch = (
 
   const request = async () => {
     try {
-      const data = await api.get(endpoint, {}, getHeader(token));
+      const data = await api.get(endpoint, params, getHeader(token));
       if (data.ok) {
         setData(data?.data);
         onSuccess(data?.data);

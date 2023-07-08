@@ -12,7 +12,10 @@ import { View } from "react-native";
 const Client = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(endpoints.clients, handleClientSuccess);
+  const { refresh, loading } = useFetch({
+    endpoint: endpoints.clients,
+    onSuccess: handleClientSuccess,
+  });
 
   function handleClientSuccess(d) {
     let arr = [];

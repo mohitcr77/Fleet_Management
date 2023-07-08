@@ -83,10 +83,10 @@ const MechanicDataScreen = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    mechanicEndpoints.mechanic_entries,
-    handleGetMechanicSuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: mechanicEndpoints.mechanic_entries,
+    onSuccess: handleGetMechanicSuccess,
+  });
 
   function handleGetMechanicSuccess(d) {
     let arr = [];

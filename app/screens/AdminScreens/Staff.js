@@ -151,7 +151,10 @@ const Staff = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(adminEndpoints.staff, handleGetStaffSuccess);
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.staff,
+    onSuccess: handleGetStaffSuccess,
+  });
 
   function handleGetStaffSuccess(d) {
     let arr = [];

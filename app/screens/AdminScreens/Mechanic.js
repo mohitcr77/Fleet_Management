@@ -92,10 +92,10 @@ const Mechanic = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.mechanic,
-    handleCurrencySuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.mechanic,
+    onSuccess: handleCurrencySuccess,
+  });
 
   function handleCurrencySuccess(d) {
     let arr = [];

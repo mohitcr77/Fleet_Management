@@ -23,18 +23,18 @@ export default function LocationInput(props) {
     city_id: "1",
   });
 
-  const { loading: countryLoading, refresh: refreshCountry } = useFetch(
-    endpoints.countries,
-    (d) => onGetData(d, 0)
-  );
-  const { loading: stateLoading, refresh: refreshState } = useFetch(
-    endpoints.states + locationRef.current.country_id,
-    (d) => onGetData(d, 1)
-  );
-  const { loading: cityLoading } = useFetch(
-    endpoints.cities + locationRef.current.state_id,
-    (d) => onGetData(d, 2)
-  );
+  const { loading: countryLoading, refresh: refreshCountry } = useFetch({
+    endpoint: endpoints.countries,
+    onSuccess: (d) => onGetData(d, 0),
+  });
+  const { loading: stateLoading, refresh: refreshState } = useFetch({
+    endpoint: endpoints.states + locationRef.current.country_id,
+    onSuccess: (d) => onGetData(d, 1),
+  });
+  const { loading: cityLoading } = useFetch({
+    endpoint: endpoints.cities + locationRef.current.state_id,
+    onSuccess: (d) => onGetData(d, 2),
+  });
 
   useEffect(() => {
     props.onLocationSelect(locationRef.current);

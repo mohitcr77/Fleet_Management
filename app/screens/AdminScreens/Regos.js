@@ -205,7 +205,10 @@ const Regos = () => {
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(adminEndpoints.rego, handleGetRegoSuccess);
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.rego,
+    onSuccess: handleGetRegoSuccess,
+  });
 
   function handleGetRegoSuccess(d) {
     let arr = [];

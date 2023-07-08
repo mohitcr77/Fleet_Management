@@ -8,7 +8,7 @@ export default function DriverJobs({ route }) {
   const { title, endpoint, showBtn } = route.params;
   const [list, setList] = useState([]);
 
-  const { refresh } = useFetch(endpoint, handleFetchSuccess);
+  const { refresh } = useFetch({ endpoint, onSuccess: handleFetchSuccess });
 
   function handleFetchSuccess(e) {
     let arr = [];

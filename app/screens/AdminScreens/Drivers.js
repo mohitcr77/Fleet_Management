@@ -104,10 +104,10 @@ const Drivers = () => {
 
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.driver,
-    handleGetDriverSuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.driver,
+    onSuccess: handleGetDriverSuccess,
+  });
 
   function handleGetDriverSuccess(d) {
     let arr = [];

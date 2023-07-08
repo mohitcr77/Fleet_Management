@@ -46,10 +46,10 @@ const Currencies = () => {
 
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    endpoints.currency,
-    handleCurrencySuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: endpoints.currency,
+    onSuccess: handleCurrencySuccess,
+  });
 
   function handleCurrencySuccess(d) {
     let arr = [];

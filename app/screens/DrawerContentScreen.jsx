@@ -62,6 +62,11 @@ export default function DrawerContent({ navigation }) {
         screen: screenNames.CHAT_ROOM_SCREEN,
         children: null,
       },
+      {
+        name: "Documents",
+        screen: screenNames.DOCUMENT_LIST_SCREEN,
+        children: null,
+      },
     ],
     [Role.MECHANIC]: [
       {
@@ -85,105 +90,68 @@ export default function DrawerContent({ navigation }) {
           },
         ],
       },
-    ],
-    [Role.ADMIN]: [
-      {
-        name: "Dashboard",
-        screen: screenNames.DASHBOARD,
-        children: null,
-      },
-      {
-        name: "Chat",
-        screen: screenNames.CHAT_LIST_SCREEN,
-        children: null,
-      },
-      {
-        name: "Vehicle",
-        screen: null,
-        children: [
-          { name: "Regos", screen: screenNames.REGOS },
-          {
-            name: "Vehicle Maintenance",
-            screen: screenNames.VEHICLE_MAINTENANCE,
-          },
-        ],
-      },
-      {
-        name: "Staffs",
-        screen: null,
-        children: [
-          { name: "Staff", screen: screenNames.STAFF },
-          { name: "Driver", screen: screenNames.DRIVER },
-          { name: "Mechanic", screen: screenNames.MECHANIC },
-        ],
-      },
-      {
-        name: "Fuel",
-        screen: null,
-        children: [
-          { name: "Fuel Log", screen: screenNames.FUEL_LOG },
-          { name: "Fuel Efficiency", screen: screenNames.FUEL_EFFICIENCY },
-        ],
-      },
-      {
-        name: "Communication",
-        screen: null,
-        children: [
-          { name: "SMS", screen: screenNames.SMS },
-          { name: "Chat", screen: screenNames.CHAT_ROOM_SCREEN },
-        ],
-      },
-      {
-        name: "Job Entry",
-        screen: screenNames.JOB_ENTRY,
-        children: null,
-      },
-      {
-        name: "Report Issue",
-        screen: screenNames.REPORT_ISSUE,
-        children: null,
-      },
-      {
-        name: "Mechanic Time Sheet",
-        screen: screenNames.MECHANIC_TIME_SHEET,
-        children: null,
-      },
-      {
-        name: "Sales",
-        screen: null,
-        children: [
-          { name: "Estimate", screen: screenNames.ESTIMATE },
-          { name: "Client", screen: screenNames.CLIENT },
-          { name: "Credit Note", screen: screenNames.CREDIT_NOTE },
-        ],
-      },
-      {
-        name: "Setting",
-        screen: null,
-        children: [
-          { name: "Tax", screen: screenNames.TAX },
-          { name: "Job Color", screen: screenNames.JOB_COLOR },
-          { name: "Currency", screen: screenNames.CURRENCY },
-        ],
-      },
-    ],
-    commonScreens: [
       {
         name: "Documents",
         screen: screenNames.DOCUMENT_LIST_SCREEN,
         children: null,
       },
-      {
-        name: "Notifications",
-        screen: screenNames.NOTIFICATIONS_SCREEN,
-        children: null,
-      },
+    ],
+
+    [Role.ADMIN]: [
+      generateDrawerItems("Dashboard", screenNames.DASHBOARD),
+      generateDrawerItems("Chat", screenNames.STAFF_CHAT_SCREEN),
+      generateDrawerItems("Documents", screenNames.STAFF_DOCUMENT_SCREEN),
+      generateDrawerItems("Vehicle", null, [
+        generateDrawerItems("Regos", screenNames.REGOS),
+        generateDrawerItems(
+          "Vehicle Maintenance",
+          screenNames.VEHICLE_MAINTENANCE
+        ),
+      ]),
+
+      generateDrawerItems("Staffs", null, [
+        generateDrawerItems("Regos", screenNames.STAFF),
+        generateDrawerItems("Driver", screenNames.DRIVER),
+        generateDrawerItems("Mechanic", screenNames.MECHANIC),
+      ]),
+      generateDrawerItems("Fuel", null, [
+        generateDrawerItems("Fuel Log", screenNames.FUEL_LOG),
+        generateDrawerItems("Fuel Efficiency", screenNames.FUEL_EFFICIENCY),
+      ]),
+
+      generateDrawerItems("Communication", null, [
+        generateDrawerItems("SMS", screenNames.SMS),
+        generateDrawerItems("Chat", screenNames.CHAT_ROOM_SCREEN),
+      ]),
+
+      generateDrawerItems("Job Entry", screenNames.JOB_ENTRY),
+      generateDrawerItems("Report Issue", screenNames.REPORT_ISSUE),
+      generateDrawerItems(
+        "Mechanic Time Sheet",
+        screenNames.MECHANIC_TIME_SHEET
+      ),
+
+      generateDrawerItems("Sales", null, [
+        generateDrawerItems("Estimate", screenNames.ESTIMATE),
+        generateDrawerItems("Client", screenNames.CLIENT),
+        generateDrawerItems("Credit Note", screenNames.CREDIT_NOTE),
+      ]),
+
+      generateDrawerItems("Setting", null, [
+        generateDrawerItems("Tax", screenNames.TAX),
+        generateDrawerItems("Job Color", screenNames.JOB_COLOR),
+        generateDrawerItems("Currency", screenNames.CURRENCY),
+      ]),
+    ],
+
+    commonScreens: [
+      generateDrawerItems("Notifications", screenNames.NOTIFICATIONS_SCREEN),
     ],
   };
 
   return (
     <View style={styles.container}>
-      <Profile auth={auth} />
+      <Profile auth={auth} navigation={navigation} />
       <FlatList
         data={[...drawerBtn[role], ...drawerBtn.commonScreens]}
         refreshing={true}
@@ -199,22 +167,26 @@ export default function DrawerContent({ navigation }) {
       />
     </View>
   );
-  function Profile({ auth }) {
-    return (
-      <TouchableOpacity
-        style={styles.profileContainer}
-        onPress={() => navigation.navigate(screenNames.PROFILE_SCREEN)}
-      >
-        <Icons.User
-        // image={auth.profile_pic}
-        />
-        <Text style={{ color: colors.white, marginTop: 20 }}>
-          {auth.user.name}
-        </Text>
-        <Text style={{ color: colors.white }}>{auth.user.email}</Text>
-      </TouchableOpacity>
-    );
+
+  function generateDrawerItems(name, screen, children = null) {
+    return { name, screen, children };
   }
+}
+function Profile({ auth, navigation }) {
+  return (
+    <TouchableOpacity
+      style={styles.profileContainer}
+      onPress={() => navigation.navigate(screenNames.PROFILE_SCREEN)}
+    >
+      <Icons.User
+      // image={auth.profile_pic}
+      />
+      <Text style={{ color: colors.white, marginTop: 20 }}>
+        {auth.user.name}
+      </Text>
+      <Text style={{ color: colors.white }}>{auth.user.email}</Text>
+    </TouchableOpacity>
+  );
 }
 const styles = StyleSheet.create({
   btn: {

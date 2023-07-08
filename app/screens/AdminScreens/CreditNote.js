@@ -66,7 +66,7 @@ const CreditNote = () => {
       key: "customer_notes",
       type: dataType.text,
       value: null,
-      
+
       mapKey: ["customer_notes"],
     },
     {
@@ -74,7 +74,7 @@ const CreditNote = () => {
       key: "total",
       type: dataType.number,
       value: null,
-      
+
       mapKey: ["total"],
     },
     {
@@ -82,7 +82,7 @@ const CreditNote = () => {
       key: "terms",
       type: dataType.text,
       value: null,
-      
+
       mapKey: ["terms"],
     },
     {
@@ -90,7 +90,7 @@ const CreditNote = () => {
       key: "shipping",
       type: dataType.number,
       value: null,
-      
+
       mapKey: ["shipping"],
     },
     {
@@ -98,7 +98,7 @@ const CreditNote = () => {
       key: "adjustment",
       type: dataType.number,
       value: null,
-      
+
       mapKey: ["adjustment"],
     },
     {
@@ -106,7 +106,7 @@ const CreditNote = () => {
       key: "invoice",
       type: dataType.number,
       value: null,
-      
+
       mapKey: ["invoice"],
     },
     {
@@ -114,7 +114,7 @@ const CreditNote = () => {
       key: "discount",
       type: dataType.number,
       value: null,
-      
+
       mapKey: ["discount"],
     },
     {
@@ -122,7 +122,7 @@ const CreditNote = () => {
       key: "paid",
       type: dataType.number,
       value: null,
-      
+
       mapKey: ["paid"],
     },
     {
@@ -130,16 +130,16 @@ const CreditNote = () => {
       key: "add_item",
       type: dataType.creditNoteForm,
       value: null,
-      
+
       mapKey: ["add_item"],
     },
   ];
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.creditnote,
-    handleGetCreditNoteSuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.creditnote,
+    onSuccess: handleGetCreditNoteSuccess,
+  });
 
   function handleGetCreditNoteSuccess(d) {
     let arr = [];
@@ -164,7 +164,10 @@ const CreditNote = () => {
     <ParentContainer
       useScroll={false}
       title="Credit Note"
-      addScreen={{ name: screenNames.ESTIMATE_CREDIT_NOTE_FORM, params: formProps }}
+      addScreen={{
+        name: screenNames.ESTIMATE_CREDIT_NOTE_FORM,
+        params: formProps,
+      }}
     >
       <AdminListRendered
         data={listData}

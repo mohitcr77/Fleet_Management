@@ -11,10 +11,10 @@ import getNestedData from "../../helpers/getNestedData";
 const JobColor = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.job_color,
-    handleJobColorSuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.job_color,
+    onSuccess: handleJobColorSuccess,
+  });
 
   function handleJobColorSuccess(d) {
     let arr = [];

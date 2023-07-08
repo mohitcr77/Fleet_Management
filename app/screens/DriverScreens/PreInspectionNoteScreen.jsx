@@ -22,7 +22,7 @@ const form = [
 export default function PreInspectionNote({ route, navigation }) {
   const { regoId } = route.params;
 
-  const { data } = useFetch(driverEndpoints.preStartNote(regoId));
+  const { data } = useFetch({ endpoint: driverEndpoints.preStartNote(regoId) });
 
   const formProps = {
     backScreen: screenNames.PRE_INSPECTION_LIST_SCREEN,

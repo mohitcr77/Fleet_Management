@@ -53,10 +53,10 @@ const ReportIssue = () => {
 
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.report_issue,
-    handleGetIssueSuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.report_issue,
+    onSuccess: handleGetIssueSuccess,
+  });
 
   function handleGetIssueSuccess(d) {
     let arr = [];

@@ -11,10 +11,10 @@ import { DROPDOWN_LIST } from "../../constants/entity";
 const MechanicTimesheet = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.mechanic_timeSheet,
-    handleMechanic_TimeSheetSuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.mechanic_timeSheet,
+    onSuccess: handleMechanic_TimeSheetSuccess,
+  });
 
   function handleMechanic_TimeSheetSuccess(d) {
     let arr = [];

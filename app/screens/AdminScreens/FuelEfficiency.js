@@ -108,10 +108,10 @@ const FuelEfficiency = () => {
 
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.fuel_efficiency,
-    handleFuelEfficiencySuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.fuel_efficiency,
+    onSuccess: handleFuelEfficiencySuccess,
+  });
 
   function handleFuelEfficiencySuccess(d) {
     let arr = [];

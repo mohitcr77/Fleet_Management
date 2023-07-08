@@ -12,7 +12,10 @@ import { DROPDOWN_LIST } from "../../constants/entity";
 const JobEntry = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(adminEndpoints.job, handleGetJobSuccess);
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.job,
+    onSuccess: handleGetJobSuccess,
+  });
 
   function handleGetJobSuccess(d) {
     let arr = [];

@@ -11,7 +11,10 @@ import getNestedData from "../../helpers/getNestedData";
 const Tax = () => {
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(adminEndpoints.tax, handleTaxSuccess);
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.tax,
+    onSuccess: handleTaxSuccess,
+  });
 
   function handleTaxSuccess(d) {
     let arr = [];

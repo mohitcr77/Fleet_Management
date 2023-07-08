@@ -42,7 +42,7 @@ const screenNames = {
   ADD_DOCUMENT_SCREEN: "Add Document",
 
   //Admin Screens
-  CHAT_LIST_SCREEN: "Chat List Screen",
+  STAFF_CHAT_SCREEN: "Staff Chat Screen",
   DASHBOARD: "Dashboard",
   REGOS: "Regos",
   VEHICLE_MAINTENANCE: "Vehicle Maintenance",
@@ -67,6 +67,7 @@ const screenNames = {
   DRIVER_LIST: "Driver",
   MECHANIC_LIST: "Mechanic",
   STAFF_LIST: "Staff",
+  STAFF_DOCUMENT_SCREEN: "Staff Document Screen",
 
   //Admin Component
   CLIENT_FORM_SCREEN: "CLIENT Form Screen",

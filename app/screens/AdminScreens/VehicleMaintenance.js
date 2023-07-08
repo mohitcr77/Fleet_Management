@@ -101,10 +101,10 @@ const VehicleMaintenance = () => {
 
   const [listData, setListData] = useState([]);
 
-  const { refresh, loading } = useFetch(
-    adminEndpoints.vehicle_maintenance,
-    handleGetVehicleMaintenanceSuccess
-  );
+  const { refresh, loading } = useFetch({
+    endpoint: adminEndpoints.vehicle_maintenance,
+    onSuccess: handleGetVehicleMaintenanceSuccess,
+  });
 
   function handleGetVehicleMaintenanceSuccess(d) {
     let arr = [];

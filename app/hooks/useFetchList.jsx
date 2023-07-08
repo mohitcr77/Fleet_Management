@@ -8,33 +8,44 @@ import { DROPDOWN_LIST } from "../constants/entity";
 import getNestedData from "../helpers/getNestedData";
 
 export default useFetchList = (update) => {
-  useFetch(endpoints.clients, (arr) =>
-    handleReceiveData(arr, DROPDOWN_LIST.CLIENTS, ["user", "name"])
-  );
+  useFetch({
+    endpoint: endpoints.clients,
+    onSuccess: (arr) =>
+      handleReceiveData(arr, DROPDOWN_LIST.CLIENTS, ["user", "name"]),
+  });
 
-  useFetch(adminEndpoints.rego, (arr) =>
-    handleReceiveData(arr, DROPDOWN_LIST.REGOS, ["name"])
-  );
+  useFetch({
+    endpoint: adminEndpoints.rego,
+    onSuccess: (arr) => handleReceiveData(arr, DROPDOWN_LIST.REGOS, ["name"]),
+  });
 
-  useFetch(adminEndpoints.mechanic, (arr) =>
-    handleReceiveData(arr, DROPDOWN_LIST.MECHANICS, ["user", "name"])
-  );
+  useFetch({
+    endpoint: adminEndpoints.mechanic,
+    onSuccess: (arr) =>
+      handleReceiveData(arr, DROPDOWN_LIST.MECHANICS, ["user", "name"]),
+  });
 
-  useFetch(adminEndpoints.job_color, (arr) =>
-    handleReceiveData(arr, DROPDOWN_LIST.COLORS, ["name"])
-  );
+  useFetch({
+    endpoint: adminEndpoints.job_color,
+    onSuccess: (arr) => handleReceiveData(arr, DROPDOWN_LIST.COLORS, ["name"]),
+  });
 
-  useFetch(adminEndpoints.driver, (arr) =>
-    handleReceiveData(arr, DROPDOWN_LIST.DRIVERS, ["user", "name"])
-  );
+  useFetch({
+    endpoint: adminEndpoints.driver,
+    onSuccess: (arr) =>
+      handleReceiveData(arr, DROPDOWN_LIST.DRIVERS, ["user", "name"]),
+  });
 
-  useFetch(adminEndpoints.staff, (arr) =>
-    handleReceiveData(arr, DROPDOWN_LIST.STAFF, ["user", "name"])
-  );
+  useFetch({
+    endpoint: adminEndpoints.staff,
+    onSuccess: (arr) =>
+      handleReceiveData(arr, DROPDOWN_LIST.STAFF, ["user", "name"]),
+  });
 
-  useFetch(adminEndpoints.tax, (arr) =>
-    handleReceiveData(arr, DROPDOWN_LIST.TAX, ["tax_name"])
-  );
+  useFetch({
+    endpoint: adminEndpoints.tax,
+    onSuccess: (arr) => handleReceiveData(arr, DROPDOWN_LIST.TAX, ["tax_name"]),
+  });
 
   const dispatch = useDispatch();
 

@@ -5,7 +5,9 @@ import useFetch from "../hooks/useFetch";
 import { endpoints } from "../service/endpoint";
 
 export default function Notifications() {
-  const { data: notifications } = useFetch(endpoints.notification);
+  const { data: notifications } = useFetch({
+    endpoint: endpoints.notification,
+  });
   return (
     <ParentContainer title={"Notifications"} noData={true}>
       <View>
