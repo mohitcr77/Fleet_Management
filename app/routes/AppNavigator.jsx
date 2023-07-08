@@ -18,11 +18,11 @@ import PreInspectionNote from "../screens/DriverScreens/PreInspectionNoteScreen"
 import ChatRoom from "../screens/DriverScreens/ChatRoomScreen";
 import Documents from "../screens/DocumentsScreen";
 import DriverJobs from "../screens/DriverScreens/DriverJobsListScreen";
-import FullDktForm from "../screens/DriverScreens/FullDktFormScreen";
-import FullDktList from "../screens/DriverScreens/FullDktListScreen";
+import MachineDktForm from "../screens/DriverScreens/MachineDktFormScreen";
+import MachineDktList from "../screens/DriverScreens/MachineDktListScreen";
 import PreInspectionList from "../screens/DriverScreens/PreInspectionListScreen";
-import ScanDktForm from "../screens/DriverScreens/ScanDktFormScreen";
-import ScanDktList from "../screens/DriverScreens/ScanDktListScreen";
+import PaperDktForm from "../screens/DriverScreens/PaperDktFormScreen";
+import PaperDktList from "../screens/DriverScreens/PaperDktListScreen";
 import TimeSheet from "../screens/TimeSheetScreen";
 
 //mechanic screen
@@ -63,7 +63,6 @@ import { driverEndpoints } from "../service/endpoint";
 import Payment from "../components/Payment";
 import TimeSheetForm from "../screens/TimeSheetFormScreen";
 
-//todo - scroll in side drawer
 const Drawer = createDrawerNavigator();
 
 export default function AppNavigator() {
@@ -85,10 +84,10 @@ export default function AppNavigator() {
       { name: screenNames.VIEW_DOCUMENTS, component: DocumentList },
     ],
     [Role.DRIVER]: [
-      { name: screenNames.FULL_DKT_LIST_SCREEN, component: FullDktList },
-      { name: screenNames.SCAN_DKT_LIST_SCREEN, component: ScanDktList },
-      { name: screenNames.FULL_DKT_FORM_SCREEN, component: FullDktForm },
-      { name: screenNames.SCAN_DKT_FORM_SCREEN, component: ScanDktForm },
+      { name: screenNames.MACHINE_DKT_LIST_SCREEN, component: MachineDktList },
+      { name: screenNames.PAPER_DKT_LIST_SCREEN, component: PaperDktList },
+      { name: screenNames.MACHINE_DKT_FORM_SCREEN, component: MachineDktForm },
+      { name: screenNames.PAPER_DKT_FORM_SCREEN, component: PaperDktForm },
       {
         name: screenNames.PRE_INSPECTION_FORM_SCREEN,
         component: PreInspectionForm,
