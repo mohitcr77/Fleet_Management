@@ -64,4 +64,3 @@ export {
 };
 // removed - InputFormScreen, DrawerContentScreen, HomeScreen, Header,
 // component removed -  appItem, appInput, dataList and custom, modal +1 from store
-

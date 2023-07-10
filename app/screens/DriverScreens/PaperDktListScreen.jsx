@@ -5,7 +5,7 @@ import screenNames from "../../constants/screenNames";
 import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
 
-export default function ScanDktList({ navigation }) {
+export default function PaperDktList({ navigation }) {
   const CardComponent = ({ obj }) => {
     const data = {
       cardData: [
@@ -54,7 +54,11 @@ export default function ScanDktList({ navigation }) {
     );
   };
   return (
-    <ParentContainer useScroll={false}>
+    <ParentContainer
+      useScroll={false}
+      title="Paper Dkt"
+      addScreen={{ name: screenNames.MACHINE_DKT_FORM_SCREEN }}
+    >
       <View style={styles.container}>
         <FlatList
           data={[1, 2, 3]}

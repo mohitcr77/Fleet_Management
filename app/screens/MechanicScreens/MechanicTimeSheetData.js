@@ -12,44 +12,98 @@ import screenNames from "../../constants/screenNames";
 import ListCard from "../../components/ListCard";
 import { height } from "../../helpers/scales";
 import dataType from "../../constants/dataType";
-import endpoint, { adminEndpoints, mechanicEndpoints } from "../../service/endpoint";
+import endpoint, {
+  adminEndpoints,
+  mechanicEndpoints,
+} from "../../service/endpoint";
 import { DROPDOWN_LIST } from "../../constants/entity";
+import useFetch from "../../hooks/useFetch";
+import getNestedData from "../../helpers/getNestedData";
+import AdminListRendered from "../../components/AdminListRendered";
 
 const MechanicTimeSheetData = () => {
-  const [listData, setListData] = useState([]);
-
   const form = [
+    {
+      name: "Id#",
+      key: "id",
+      type: dataType.number,
+      value: null,
+      card: true,
+      mapKey: ["id"],
+    },
     {
       name: "Date",
       key: "date",
       type: dataType.date,
+      mapKey: ["day"],
     },
     {
       name: "Start Time",
       key: "start_time",
       type: dataType.time,
+      mapKey: ["start_time"],
     },
     {
       name: "End Time",
       key: "end_time",
       type: dataType.time,
+      mapKey: ["end_time"],
+    },
+    {
+      name: "Day",
+      key: "day",
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.DAYS,
+      mapKey: ["day"],
+      value: null,
+      card: true,
     },
     {
       name: "Break",
       key: "break",
       type: dataType.dropdown,
       data: DROPDOWN_LIST.BREAK,
+      mapKey: ["break"],
     },
     {
-      name: "Driver Total",
-      key: "driver_total",
+      name: "Total",
+      key: "total_time",
+      type: dataType.number,
+      mapKey: ["total_time"],
+    },
+    {
+      name: "Note",
+      key: "notes",
       type: dataType.text,
+      mapKey: ["notes"],
     },
   ];
 
+  const [listData, setListData] = useState([]);
+
+  const { refresh, loading } = useFetch({
+    endpoint: mechanicEndpoints.time_sheet,
+    onSuccess: handleGetMechanicTimeSheet,
+  });
+
+  function handleGetMechanicTimeSheet(d) {
+    let arr = [];
+    console.log(d?.data?.data, "pppppppppp");
+    d?.data?.data.forEach((item) => {
+      let a = [];
+      form.forEach((i) => {
+        // const value = getNestedData(item, i.mapKey);
+        const value = "qq";
+        a.push({ ...i, value });
+      });
+      arr.push(a);
+    });
+    setListData(arr);
+  }
+
   const CardComponent = ({ obj }) => {
     const data = {
-      cardData: []
+      cardData: [],
     };
 
     return (
@@ -66,31 +120,27 @@ const MechanicTimeSheetData = () => {
 
   const formProps = {
     backScreen: screenNames.MECHANIC_TIME_SHEET_DATA,
-    endpoint: mechanicEndpoints.mechanic_timeSheet,
+    endpoint: mechanicEndpoints.time_sheet,
     form,
     title: "Time Sheet",
   };
+  console.log(listData, "zzzzzzzzzzzzz");
   return (
     <ParentContainer
       useScroll={false}
       addScreen={{ name: screenNames.FORM_SCREEN, params: formProps }}
-      title={"Data"}
+      title={"Time Sheet"}
+      noData={!listData.length}
     >
-      <View style={styles.container}>
-        {false ? (
-          <Text style={{ marginTop: 100, alignSelf: "center", height }}>
-            No Data
-          </Text>
-        ) : (
-          <FlatList
-            data={listData}
-            keyExtractor={(item, index) => "key" + index}
-            renderItem={({ item }) => {
-              return <CardComponent obj={item} />;
-            }}
-          />
-        )}
-      </View>
+      <AdminListRendered
+        data={listData}
+        onRefresh={refresh}
+        loading={!listData.length}
+        backScreen={screenNames.MECHANIC_TIME_SHEET}
+        listTitle={"Time Sheet"}
+        editTitle={"Edit Mechanic"}
+        endpoint={mechanicEndpoints.time_sheet}
+      />
     </ParentContainer>
   );
 };

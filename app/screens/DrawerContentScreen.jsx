@@ -23,12 +23,12 @@ export default function DrawerContent({ navigation }) {
     [Role.DRIVER]: [
       {
         name: "Full Dkt",
-        screen: screenNames.FULL_DKT_LIST_SCREEN,
+        screen: screenNames.MACHINE_DKT_LIST_SCREEN,
         children: null,
       },
       {
         name: "Scan Dkt",
-        screen: screenNames.SCAN_DKT_LIST_SCREEN,
+        screen: screenNames.PAPER_DKT_LIST_SCREEN,
         children: null,
       },
 

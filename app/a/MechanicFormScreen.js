@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
 
-import screenNames from "../../constants/screenNames";
-import AppFooterButton from "../../components/AppFooterButton";
-import dataType from "../../constants/dataType";
-import endpoint, { mechanicEndpoints } from "../../service/endpoint";
-import formatDate from "./../../helpers/formatDate";
-import FormInput from "../../components/FormInput";
-import generateKeyValueFromFormData from "../../helpers/generateKeyValueFromForm";
-import ParentContainer from "../../components/ParentContainer";
-import useApi from "../../hooks/useApi";
-import { DROPDOWN_LIST } from "../../constants/entity";
+import screenNames from "../constants/screenNames";
+import AppFooterButton from "../components/AppFooterButton";
+import dataType from "../constants/dataType";
+import endpoint, { mechanicEndpoints } from "../service/endpoint";
+import formatDate from "../helpers/formatDate";
+import FormInput from "../components/FormInput";
+import generateKeyValueFromFormData from "../helpers/generateKeyValueFromForm";
+import ParentContainer from "../components/ParentContainer";
+import useApi from "../hooks/useApi";
+import { DROPDOWN_LIST } from "../constants/entity";
 import { log } from "react-native-reanimated";
 
 const MechanicFormScreen = () => {
@@ -62,7 +62,8 @@ const MechanicFormScreen = () => {
       endpoint: mechanicEndpoints.mechanic_entries,
       body: form.current,
     };
-    await request(requestConfig);
+    const res = await request(requestConfig);
+    console.log(res, "o11111111111111111");
   };
 
   const formProps = {

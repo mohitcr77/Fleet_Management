@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { HTTPS_METHODS, ToastType } from "../constants/entity";
+import { HTTPS_METHODS, Role, ToastType } from "../constants/entity";
 import axios from "axios";
 
 import useAuth from "./useAuth";
 import api, { getHeader } from "../service/api";
+import Drivers from "./../screens/AdminScreens/Drivers";
 
 export default useApi = (onSuccess = () => {}, onFail = () => {}) => {
-  const { token } = useAuth();
+  const { token, auth, role } = useAuth();
 
   const request = async (requestConfig) => {
     const {
@@ -26,7 +27,7 @@ export default useApi = (onSuccess = () => {}, onFail = () => {}) => {
         params,
         headers,
         method,
-        data: body,
+        data: { ...body, ...getID() },
       });
 
       Toast.hide();
@@ -50,5 +51,17 @@ export default useApi = (onSuccess = () => {}, onFail = () => {}) => {
       onFail();
     }
   };
+  function getID() {
+    switch (role) {
+      case Role.MECHANIC:
+        return { mechanic_id: auth.user.id };
+
+      case Role.DRIVER:
+        return { driver_id: auth.user.id };
+
+      default:
+        return {};
+    }
+  }
   return { request };
 };
