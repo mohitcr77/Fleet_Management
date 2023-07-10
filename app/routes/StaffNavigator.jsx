@@ -9,14 +9,14 @@ const TopTab = createMaterialTopTabNavigator();
 
 export default function StaffNavigator({ route }) {
   const tabs = [
-    { name: screenNames.DRIVER_LIST, listName: DROPDOWN_LIST.DRIVERS },
-    { name: screenNames.MECHANIC_LIST, listName: DROPDOWN_LIST.MECHANICS },
-    { name: screenNames.STAFF_LIST, listName: DROPDOWN_LIST.STAFF },
+    generateTabList(screenNames.DRIVER_LIST, DROPDOWN_LIST.DRIVERS),
+    generateTabList(screenNames.MECHANIC_LIST, DROPDOWN_LIST.MECHANICS),
+    generateTabList(screenNames.STAFF_LIST, DROPDOWN_LIST.STAFF),
   ];
 
   return (
     <>
-      <Header />
+      <Header title={route.params.title} />
       <TopTab.Navigator>
         {tabs.map((i) => (
           <TopTab.Screen
@@ -29,4 +29,7 @@ export default function StaffNavigator({ route }) {
       </TopTab.Navigator>
     </>
   );
+  function generateTabList(name, listName) {
+    return { name, listName };
+  }
 }

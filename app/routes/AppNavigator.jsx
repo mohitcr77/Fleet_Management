@@ -143,6 +143,7 @@ export default function AppNavigator() {
         component: StaffNavigator,
         initialParams: {
           nextScreen: screenNames.CHAT_ROOM_SCREEN,
+          title: "Chat",
         },
       },
       {
@@ -150,6 +151,7 @@ export default function AppNavigator() {
         component: StaffNavigator,
         initialParams: {
           nextScreen: screenNames.DOCUMENT_LIST_SCREEN,
+          title: "Documents",
         },
       },
       {

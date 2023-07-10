@@ -10,6 +10,7 @@ export default function PreInspectionHistory({ route }) {
     endpoint: driverEndpoints.preStartInspection(regoId),
   });
 
+  console.log(data, "oooooooo");
   return (
     <ParentContainer
       onBackButtonPressScreen={screenNames.PRE_INSPECTION_LIST_SCREEN}
