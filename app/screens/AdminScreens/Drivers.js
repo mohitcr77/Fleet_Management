@@ -37,7 +37,7 @@ const Drivers = () => {
     {
       name: "Mobile",
       key: "mobile",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       card: true,
       mapKey: ["mobile"],

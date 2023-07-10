@@ -157,6 +157,7 @@ export default function FormInput(props) {
               borderRadius: 10,
               ...props.style,
             }}
+            secureTextEntry={ props.type === dataType.password ? true : false }
             placeholder={""}
             keyboardType={
               props.type === dataType.number ? "number-pad" : "default"

@@ -110,7 +110,7 @@ export default function DrawerContent({ navigation }) {
       ]),
 
       generateDrawerItems("Staffs", null, [
-        generateDrawerItems("Regos", screenNames.STAFF),
+        generateDrawerItems("Staff", screenNames.STAFF),
         generateDrawerItems("Driver", screenNames.DRIVER),
         generateDrawerItems("Mechanic", screenNames.MECHANIC),
       ]),

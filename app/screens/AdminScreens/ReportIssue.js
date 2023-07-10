@@ -36,6 +36,13 @@ const ReportIssue = () => {
       mapKey: ["report_time"],
     },
     {
+      name: "Shift",
+      key: "shift",
+      type: dataType.number,
+      value: null,
+      mapKey: ["shift"],
+    },
+    {
       name: "Reported by",
       key: "reported_by",
       type: dataType.text,

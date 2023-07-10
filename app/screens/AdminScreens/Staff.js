@@ -8,6 +8,7 @@ import screenNames from "../../constants/screenNames";
 import AdminListRendered from "../../components/AdminListRendered";
 import useFetch from "../../hooks/useFetch";
 import getNestedData from "../../helpers/getNestedData";
+import { DROPDOWN_LIST } from "../../constants/entity";
 
 const Staff = () => {
   const form = [
@@ -71,7 +72,7 @@ const Staff = () => {
     {
       name: "Country",
       key: "country_id",
-      type: dataType.lo,
+      type: dataType.location,
       value: null,
       mapKey: ["country_id", "state_id", "city_id"],
     },
@@ -108,7 +109,7 @@ const Staff = () => {
     {
       name: "Pincode",
       key: "pincode",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       card: true,
       mapKey: ["pincode"],
@@ -130,7 +131,7 @@ const Staff = () => {
     {
       name: "License Number",
       key: "licence_number",
-      type: dataType.text,
+      type: dataType.number,
       value: null,
       mapKey: ["licence_number"],
     },

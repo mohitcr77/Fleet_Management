@@ -59,7 +59,7 @@ import Tax from "../screens/AdminScreens/Tax";
 import Timezones from "../screens/AdminScreens/Timezones";
 import useNotificationHandler from "../hooks/useNotificationHandler";
 import VehicleMaintenance from "../screens/AdminScreens/VehicleMaintenance";
-import { driverEndpoints } from "../service/endpoint";
+import { driverEndpoints, endpoints } from "../service/endpoint";
 import Payment from "../components/Payment";
 import TimeSheetForm from "../screens/TimeSheetFormScreen";
 import StaffNavigator from "./StaffNavigator";
@@ -157,6 +157,9 @@ export default function AppNavigator() {
       {
         name: screenNames.REGOS,
         component: Regos,
+        // initialParams:{
+        //   pageParams:regoParams
+        // }
       },
       {
         name: screenNames.DRIVER,
@@ -270,3 +273,17 @@ export default function AppNavigator() {
     </>
   );
 }
+
+
+// const regoParams ={
+//   form:[],
+//   title:'rogo form',
+//   endpoint:endpoints.rego
+// }
+// export default {
+//   regoParams,
+// }
+
+
+
+// route.params.paageparams
