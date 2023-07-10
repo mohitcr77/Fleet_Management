@@ -23,7 +23,7 @@ export const dummyDropdownData = [
   { label: "Item 8", value: "8" },
 ];
 
-export default function FullDktForm() {
+export default function MachineDktForm() {
   const fullDktForm = [
     {
       name: "Client Name",

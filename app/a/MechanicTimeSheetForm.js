@@ -1,10 +1,10 @@
 import { View, ScrollView } from "react-native";
 import React from "react";
-import ParentContainer from "../../components/ParentContainer";
-import FormInput from "../../components/FormInput";
-import customStyles from "../../constants/styles";
-import AppButton from "../../components/AppButton";
-import { timeSheetForm } from "../TimeSheetFormScreen";
+import ParentContainer from "../components/ParentContainer";
+import FormInput from "../components/FormInput";
+import customStyles from "../constants/styles";
+import AppButton from "../components/AppButton";
+import { timeSheetForm } from "../screens/TimeSheetFormScreen";
 
 const MechanicTimeSheetForm = () => {
   return (

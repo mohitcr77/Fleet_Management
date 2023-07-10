@@ -7,7 +7,7 @@ import ListHeader from "../../components/ListHeader";
 import screenNames from "../../constants/screenNames";
 import ListCard from "../../components/ListCard";
 
-export default function FullDktList({ navigation }) {
+export default function MachineDktList({ navigation }) {
   const CardComponent = ({ obj }) => {
     const data = {
       cardData: [
@@ -59,8 +59,8 @@ export default function FullDktList({ navigation }) {
   return (
     <ParentContainer
       useScroll={false}
-      title="Full Dkt"
-      addScreen={{ name: screenNames.FULL_DKT_FORM_SCREEN }}
+      title="Machine Dkt"
+      addScreen={{ name: screenNames.MACHINE_DKT_FORM_SCREEN }}
     >
       <>
         {false ? (

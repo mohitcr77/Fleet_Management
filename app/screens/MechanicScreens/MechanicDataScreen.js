@@ -3,10 +3,7 @@ import { useState } from "react";
 
 import AdminListRendered from "../../components/AdminListRendered";
 import dataType from "../../constants/dataType";
-import endpoint, {
-  adminEndpoints,
-  mechanicEndpoints,
-} from "../../service/endpoint";
+import { mechanicEndpoints } from "../../service/endpoint";
 import getNestedData from "../../helpers/getNestedData";
 import ParentContainer from "../../components/ParentContainer";
 import screenNames from "../../constants/screenNames";
@@ -43,7 +40,8 @@ const MechanicDataScreen = () => {
     {
       name: "Day",
       key: "day",
-      type: dataType.text,
+      type: dataType.dropdown,
+      data: DROPDOWN_LIST.DAYS,
       mapKey: ["day"],
       value: null,
       card: true,
@@ -90,6 +88,7 @@ const MechanicDataScreen = () => {
 
   function handleGetMechanicSuccess(d) {
     let arr = [];
+    console.log(d.data, "oooooooooooooo");
     d.data.data.forEach((item) => {
       let a = [];
       form.forEach((i) => {

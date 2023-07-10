@@ -1,62 +1,26 @@
 import { View, Text, StyleSheet, Image } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 
-import screenNames from "../constants/screenNames";
+import { endpoints } from "../service/endpoint";
 import { width } from "../helpers/scales";
 import colors from "../constants/colors";
 import dataType from "../constants/dataType";
-import ParentContainer from "../components/ParentContainer";
-import TouchableText from "../components/TouchableText";
-import { endpoints } from "../service/endpoint";
-import useFetch from "../hooks/useFetch";
 import formatDate from "../helpers/formatDate";
 import genImageUrl from "../helpers/genImageUrl";
-import useApi from "../hooks/useApi";
-import { HTTPS_METHODS } from "../constants/entity";
+import ParentContainer from "../components/ParentContainer";
+import screenNames from "../constants/screenNames";
+import TouchableText from "../components/TouchableText";
+import useFetch from "../hooks/useFetch";
 
 export default function Documents({ route }) {
   const user_id = route.params?.userData?.user_id;
-  console.log(user_id, "iddddddddddddddddddddddddd");
+
   let requestConfig = {
     endpoint: endpoints.documents,
     params: user_id ? { user_id } : {},
   };
 
-  console.log(requestConfig);
   const { data } = useFetch(requestConfig);
-  console.log(data, "888888888");
-
-  // console.log(route.params);
-  let endpoint = endpoints.documents;
-
-  const { request: getDocuments } = useApi(handleSuccess, handleFail);
-
-  useEffect(() => {
-    // getData();
-  }, []);
-
-  async function getData() {
-    let requestConfig = {
-      method: HTTPS_METHODS.GET,
-      endpoint: endpoints.documents,
-    };
-    if (userData) {
-      // endpoint = endpoint + "?user_id=" + userData.user.id;
-      requestConfig.params = {
-        user_id: userData.user.id,
-      };
-    }
-    // console.log(requestConfig);
-    const r = await getDocuments(requestConfig);
-    console.log(r, "oooooooooooo");
-  }
-
-  function handleSuccess(e) {
-    // console.log(e, "rrrrrrrrrrrr");
-  }
-  function handleFail(e) {
-    // console.log(e, "eeeeeeee");
-  }
 
   const form = [
     { name: "Name", key: "name", type: dataType.text },
@@ -91,6 +55,7 @@ export default function Documents({ route }) {
     </ParentContainer>
   );
 }
+
 function CardComponent({ item }) {
   return (
     <View style={styles.card} key={item}>
@@ -107,17 +72,18 @@ function CardComponent({ item }) {
       </View>
     </View>
   );
+}
 
-  function getIcon(doc) {
-    switch (doc.mime_type) {
-      case "image":
-        return { uri: genImageUrl(doc.path) };
+function getIcon(doc) {
+  switch (doc.mime_type) {
+    case "image":
+      return { uri: genImageUrl(doc.path) };
 
-      default:
-        return require(`../assets/images/pdf.jpg`);
-    }
+    default:
+      return require(`../assets/images/pdf.jpg`);
   }
 }
+
 const styles = StyleSheet.create({
   card: {
     width: width - 30,

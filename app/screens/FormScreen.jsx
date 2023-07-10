@@ -10,6 +10,7 @@ import useApi from "../hooks/useApi";
 
 export default function Form({ route, navigation }) {
   const { title, backScreen, endpoint, form } = route.params;
+
   const initialState = generateKeyValueFromFormData(form);
 
   const [update, setUpdate] = useState(false);
@@ -27,8 +28,8 @@ export default function Form({ route, navigation }) {
 
     // console.log(requestConfig);
     const d = await request(requestConfig);
-    // delete d.config.data;
-    // console.log(d);
+    delete d.config.data;
+    console.log(d);
   }
 
   function handlePostSuccess() {

@@ -7,7 +7,7 @@ import AppFooterButton from "../../components/AppFooterButton";
 import { useSelector } from "react-redux";
 import { DROPDOWN_LIST } from "../../constants/entity";
 
-export default function ScanDktForm() {
+export default function PaperDktForm() {
   const fullDktForm = [
     { name: "Add Document", key: "document1", type: dataType.image },
     {
