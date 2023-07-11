@@ -5,7 +5,6 @@ import axios from "axios";
 
 import useAuth from "./useAuth";
 import api, { getHeader } from "../service/api";
-import Drivers from "./../screens/AdminScreens/Drivers";
 
 export default useApi = (onSuccess = () => {}, onFail = () => {}) => {
   const { token, auth, role } = useAuth();

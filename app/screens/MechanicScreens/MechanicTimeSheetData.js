@@ -38,16 +38,10 @@ const MechanicTimeSheetData = () => {
       mapKey: ["day"],
     },
     {
-      name: "Start Time",
-      key: "start_time",
-      type: dataType.time,
-      mapKey: ["start_time"],
-    },
-    {
-      name: "End Time",
-      key: "end_time",
-      type: dataType.time,
-      mapKey: ["end_time"],
+      name: "Total",
+      key: "total_time",
+      type: dataType.totalTime,
+      mapKey: ["total_time"],
     },
     {
       name: "Day",
@@ -64,12 +58,6 @@ const MechanicTimeSheetData = () => {
       type: dataType.dropdown,
       data: DROPDOWN_LIST.BREAK,
       mapKey: ["break"],
-    },
-    {
-      name: "Total",
-      key: "total_time",
-      type: dataType.number,
-      mapKey: ["total_time"],
     },
     {
       name: "Note",

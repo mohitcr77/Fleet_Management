@@ -11,6 +11,9 @@ import ParentContainer from "../components/ParentContainer";
 import screenNames from "../constants/screenNames";
 import TouchableText from "../components/TouchableText";
 import useFetch from "../hooks/useFetch";
+import Icons from "../components/Icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import dimensions from "../constants/dimensions";
 
 export default function Documents({ route }) {
   const user_id = route.params?.userData?.user_id;
@@ -59,16 +62,38 @@ export default function Documents({ route }) {
 function CardComponent({ item }) {
   return (
     <View style={styles.card} key={item}>
-      <TouchableText title={"Open"} onPress={() => {}} />
       <Image source={getIcon(item)} style={styles.img} resizeMode="stretch" />
-      <View style={styles.dataContainer}>
+      {/* <View style={styles.dataContainer}>
         <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
         <View style={styles.data}>
           <Text style={{ color: colors.gray2 }}>{item.comments}</Text>
           <Text style={{ color: colors.gray2 }}>
             {formatDate(item.created_at).monthNameFormat}
           </Text>
+          <TouchableOpacity onPress={() => {}}>
+            <Icons.EyeIcon />
+          </TouchableOpacity>
         </View>
+      </View> */}
+      <View style={{ marginLeft: 10 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 16 }}>{item.name}</Text>
+        <Text style={{ color: colors.gray2 }}>
+            {formatDate(item.created_at).monthNameFormat}
+          </Text>
+      </View>
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={() => {}}>
+          <Image
+            source={require("../assets/greenEye.png")}
+            style={{ height: 40, width: 40, marginHorizontal:20 }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {}}>
+          <Image
+            source={require("../assets/downloadIconBlue.png")}
+            style={{ height: 30, width: 30, marginHorizontal:20 }}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -98,6 +123,8 @@ const styles = StyleSheet.create({
   img: {
     height: 70,
     width: 50,
+    borderRadius: 8,
+    marginLeft: 5,
   },
   dataContainer: {
     paddingHorizontal: 5,
@@ -106,5 +133,11 @@ const styles = StyleSheet.create({
     width: width * 0.6,
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  footer: {
+    position:"absolute",
+    top: 60,
+    left: dimensions.componentWidth/2,
+    flexDirection:"row",
   },
 });

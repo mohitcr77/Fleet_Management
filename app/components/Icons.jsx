@@ -139,6 +139,10 @@ const Chevron = ({ closed }) => (
   />
 );
 
+const EyeIcon = () => (
+  <Entypo name="eye" size={24} color="black" />
+)
+
 const ToggleEye = (props) => (
   <Entypo name={props.show ? "eye" : "eye-with-line"} size={24} color="black" />
 );
@@ -178,6 +182,7 @@ export default {
   Send,
   User,
   ToggleEye,
+  EyeIcon
 };
 
 const styles = StyleSheet.create({

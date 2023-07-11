@@ -17,6 +17,7 @@ import CreditNoteFormAdd from "./CreditNoteFormAdd";
 import CurrentDate from "./CurrentDate";
 import ExpireDate from "./ExpireDate";
 import ColorPickerComponent from "./ColorPickerComponent";
+import TotalTimeComp from "./TotalTimeComp";
 
 const dummyList = [
   { label: "0", value: "1" },
@@ -137,6 +138,11 @@ export default function FormInput(props) {
         <CompWrapper name={name}>
           <ColorPickerComponent {...props} />
         </CompWrapper>
+      );
+
+      case dataType.totalTime:
+      return (
+          <TotalTimeComp {...props} />
       );
 
     case dataType.country:
