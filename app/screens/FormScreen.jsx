@@ -26,10 +26,8 @@ export default function Form({ route, navigation }) {
       body: formData.current,
     };
 
-    // console.log(requestConfig);
     const d = await request(requestConfig);
     delete d.config.data;
-    console.log(d);
   }
 
   function handlePostSuccess() {

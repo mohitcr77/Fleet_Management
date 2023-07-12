@@ -88,7 +88,6 @@ const MechanicDataScreen = () => {
 
   function handleGetMechanicSuccess(d) {
     let arr = [];
-    console.log(d.data, "oooooooooooooo");
     d.data.data.forEach((item) => {
       let a = [];
       form.forEach((i) => {

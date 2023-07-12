@@ -17,7 +17,6 @@ export default function DriverJobsCard({ data, showBtn = true }) {
       body: { status: reply },
     };
     const resp = await updateJobStatus(requestConfig);
-    console.log(resp, "ooooo");
   };
 
   return (

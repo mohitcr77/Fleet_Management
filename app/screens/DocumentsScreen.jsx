@@ -33,9 +33,9 @@ export default function Documents({ route }) {
       type: dataType.text,
     },
     {
-      title: "Attach Image",
+      title: "Attach Document",
       key: "document",
-      type: dataType.image,
+      type: dataType.document,
     },
   ];
 
@@ -78,20 +78,20 @@ function CardComponent({ item }) {
       <View style={{ marginLeft: 10 }}>
         <Text style={{ fontWeight: "bold", fontSize: 16 }}>{item.name}</Text>
         <Text style={{ color: colors.gray2 }}>
-            {formatDate(item.created_at).monthNameFormat}
-          </Text>
+          {formatDate(item.created_at).monthNameFormat}
+        </Text>
       </View>
       <View style={styles.footer}>
         <TouchableOpacity onPress={() => {}}>
           <Image
             source={require("../assets/greenEye.png")}
-            style={{ height: 40, width: 40, marginHorizontal:20 }}
+            style={{ height: 40, width: 40, marginHorizontal: 20 }}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {}}>
           <Image
             source={require("../assets/downloadIconBlue.png")}
-            style={{ height: 30, width: 30, marginHorizontal:20 }}
+            style={{ height: 30, width: 30, marginHorizontal: 20 }}
           />
         </TouchableOpacity>
       </View>
@@ -135,9 +135,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   footer: {
-    position:"absolute",
+    position: "absolute",
     top: 60,
-    left: dimensions.componentWidth/2,
-    flexDirection:"row",
+    left: dimensions.componentWidth / 2,
+    flexDirection: "row",
   },
 });

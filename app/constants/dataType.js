@@ -1,45 +1,24 @@
-const checkBox = "check box";
-const city = "city";
-const color = "color";
-const country = "country";
-const date = "date";
-const dropdown = "dropdown";
-const float = "float";
-const form = "form";
-const image = "image";
-const number = "number";
-const password = "password";
-const signature = "signature";
-const state = "state";
-const text = "text";
-const time = "time";
-const string = "string";
-const location = "location";
-const creditNoteForm = "credit_note_form";
-const currentDate = "current date";
-const expireDate= "expire date";
-const totalTime= "total time"
-
 export default {
-  string,
-  checkBox,
-  city,
-  color,
-  country,
-  date,
-  dropdown,
-  float,
-  form,
-  image,
-  number,
-  password,
-  signature,
-  state,
-  text,
-  time,
-  location,
-  creditNoteForm,
-  currentDate,
-  expireDate,
-  totalTime
+  checkBox: "check box",
+  city: "city",
+  color: "color",
+  country: "country",
+  creditNoteForm: "credit_note_form",
+  currentDate: "current date",
+  date: "date",
+  document: "document",
+  dropdown: "dropdown",
+  expireDate: "expire date",
+  float: "float",
+  form: "form",
+  image: "image",
+  location: "location",
+  number: "number",
+  password: "password",
+  signature: "signature",
+  state: "state",
+  string: "string",
+  text: "text",
+  time: "time",
+  totalTime: "total time",
 };

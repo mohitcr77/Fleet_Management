@@ -76,7 +76,6 @@ const MechanicTimeSheetData = () => {
 
   function handleGetMechanicTimeSheet(d) {
     let arr = [];
-    console.log(d?.data?.data, "pppppppppp");
     d?.data?.data.forEach((item) => {
       let a = [];
       form.forEach((i) => {
@@ -112,7 +111,6 @@ const MechanicTimeSheetData = () => {
     form,
     title: "Time Sheet",
   };
-  console.log(listData, "zzzzzzzzzzzzz");
   return (
     <ParentContainer
       useScroll={false}

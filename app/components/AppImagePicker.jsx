@@ -3,33 +3,41 @@ import { StyleSheet, Pressable } from "react-native";
 import { Card, Modal, Text } from "@ui-kitten/components";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
+import { StorageAccessFramework } from "expo-file-system";
+import * as DocumentPicker from "expo-document-picker";
 
-import { largeScreen, scale, width, height } from "../helpers/scales";
-import colors from "../constants/colors";
 import Icons from "./Icons";
+import dataType from "../constants/dataType";
 
-export default function AppImagePicker({ onDone, isVisible }) {
+export default function AppImagePicker({ onDone, isVisible, type, ...props }) {
+  console.log(type, "oooo");
   const gallery = async () => {
     const getPerm = await ImagePicker.getMediaLibraryPermissionsAsync();
     if (!getPerm.granted) {
       const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (!perm.granted) return;
     }
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: false,
-        quality: 0.1,
-        base64: true,
-      });
-      const base64 = await FileSystem.readAsStringAsync(result.assets[0].uri, {
-        encoding: "base64",
-      });
-      result.base64 = base64;
 
-      if (!result.canceled) {
-        onDone(result);
+    try {
+      let r = await DocumentPicker.getDocumentAsync({
+        type: type == dataType.image ? "image/*" : ["image/*", "application/*"],
+        copyToCacheDirectory: true,
+      });
+      const x = r.uri.replace("/", "");
+      console.log(x);
+      try {
+        const base64 = await FileSystem.readAsStringAsync(x, {
+          encoding: "base64",
+        });
+        console.log(base64, "llll");
+      } catch (error) {
+        console.warn(error);
       }
+      // result.base64 = base64;
+
+      // if (!result.canceled) {
+      //   onDone(result);
+      // }
     } catch (e) {
       console.error(e);
     }
