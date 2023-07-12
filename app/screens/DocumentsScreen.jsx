@@ -33,9 +33,9 @@ export default function Documents({ route }) {
       type: dataType.text,
     },
     {
-      title: "Attach Image",
+      title: "Attach Document",
       key: "document",
-      type: dataType.image,
+      type: dataType.document,
     },
   ];
 

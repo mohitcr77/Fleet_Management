@@ -63,7 +63,6 @@ const MechanicFormScreen = () => {
       body: form.current,
     };
     const res = await request(requestConfig);
-    console.log(res, "o11111111111111111");
   };
 
   const formProps = {

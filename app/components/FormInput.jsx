@@ -120,6 +120,7 @@ export default function FormInput(props) {
       );
 
     case dataType.image:
+    case dataType.document:
       return (
         <CompWrapper name={name}>
           <AddImage {...props} />
@@ -133,17 +134,15 @@ export default function FormInput(props) {
         </CompWrapper>
       );
 
-      case dataType.color:
+    case dataType.color:
       return (
         <CompWrapper name={name}>
           <ColorPickerComponent {...props} />
         </CompWrapper>
       );
 
-      case dataType.totalTime:
-      return (
-          <TotalTimeComp {...props} />
-      );
+    case dataType.totalTime:
+      return <TotalTimeComp {...props} />;
 
     case dataType.country:
       return <LocationInput {...props} />;
@@ -163,7 +162,7 @@ export default function FormInput(props) {
               borderRadius: 10,
               ...props.style,
             }}
-            secureTextEntry={ props.type === dataType.password ? true : false }
+            secureTextEntry={props.type === dataType.password ? true : false}
             placeholder={""}
             keyboardType={
               props.type === dataType.number ? "number-pad" : "default"

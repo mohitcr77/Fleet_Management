@@ -190,9 +190,8 @@ export default function PreInspectionForm({ route }) {
       endpoint: driverEndpoints.preStartInspection(regoId),
       body: { ...formRef.current, rego_id: regoId, user_id: auth.user.id },
     };
-    console.log(requestConfig);
+
     // const x = await submitPreInspectionForm(requestConfig);
-    // console.log(auth.user.id, "ooo");
   }
 
   const onChange = (e, i) =>
