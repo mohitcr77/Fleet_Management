@@ -139,7 +139,7 @@ const Chevron = ({ closed }) => (
   />
 );
 
-const PdfIcon = () => <MaterialCommunityIcons name="file-jpg-box" size={50} color="#999999" />;
+const PdfIcon = () => <MaterialCommunityIcons name="file-pdf-box" size={50} color="#999999" />;
 
 const JpgIcon = () => <MaterialCommunityIcons name="file-jpg-box" size={50} color="#999999" />;
 
