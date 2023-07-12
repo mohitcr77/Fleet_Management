@@ -62,37 +62,26 @@ export default function Documents({ route }) {
 function CardComponent({ item }) {
   return (
     <View style={styles.card} key={item}>
-      <Image source={getIcon(item)} style={styles.img} resizeMode="stretch" />
-      {/* <View style={styles.dataContainer}>
-        <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
-        <View style={styles.data}>
-          <Text style={{ color: colors.gray2 }}>{item.comments}</Text>
-          <Text style={{ color: colors.gray2 }}>
-            {formatDate(item.created_at).monthNameFormat}
-          </Text>
-          <TouchableOpacity onPress={() => {}}>
-            <Icons.EyeIcon />
-          </TouchableOpacity>
-        </View>
-      </View> */}
+      <View>{getIcon(item)}</View>
       <View style={{ marginLeft: 10 }}>
         <Text style={{ fontWeight: "bold", fontSize: 16 }}>{item.name}</Text>
         <Text style={{ color: colors.gray2 }}>
-            {formatDate(item.created_at).monthNameFormat}
-          </Text>
+          {formatDate(item.created_at).monthNameFormat}
+        </Text>
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity onPress={() => {}}>
-          <Image
-            source={require("../assets/greenEye.png")}
-            style={{ height: 40, width: 40, marginHorizontal:20 }}
-          />
+        <TouchableOpacity
+          style={styles.downloadIcon}
+          onPress={() => {}}
+        >
+          <Icons.DownloadIcon />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <Image
-            source={require("../assets/downloadIconBlue.png")}
-            style={{ height: 30, width: 30, marginHorizontal:20 }}
-          />
+        <TouchableOpacity style={styles.eyeIcon} onPress={() => {}}>
+          <Icons.EyeIcon />
+          {/* <Image
+            source={require("../assets/greenEye.png")}
+            style={{ height: 35, width: 35 }}
+          /> */}
         </TouchableOpacity>
       </View>
     </View>
@@ -100,12 +89,15 @@ function CardComponent({ item }) {
 }
 
 function getIcon(doc) {
-  switch (doc.mime_type) {
-    case "image":
-      return { uri: genImageUrl(doc.path) };
+  let uri = genImageUrl(doc.path);
+  let extension = uri.substring(uri.lastIndexOf(".") + 1);
+  //console.log(extension);
+  switch (extension) {
+    case "pdf":
+      return <Icons.PdfIcon />;
 
     default:
-      return require(`../assets/images/pdf.jpg`);
+      return <Icons.JpgIcon />;
   }
 }
 
@@ -116,8 +108,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 10,
     flexDirection: "row",
-    paddingHorizontal: 5,
-    paddingVertical: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 25,
     backgroundColor: "white",
   },
   img: {
@@ -135,9 +127,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   footer: {
-    position:"absolute",
-    top: 60,
-    left: dimensions.componentWidth/2,
-    flexDirection:"row",
+    flexDirection: "row",
+    position: "absolute",
+    left: dimensions.componentWidth / 2 + 20,
+    bottom: 10,
+    width: dimensions.componentWidth / 3 - 20,
+    justifyContent: "space-between",
   },
+  eyeIcon: { backgroundColor: "#2eff00", borderRadius: 10, padding: 5 },
+  downloadIcon: { backgroundColor: "#6D14D7", borderRadius: 10, padding: 5 }
 });

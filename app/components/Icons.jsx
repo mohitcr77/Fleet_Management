@@ -139,9 +139,13 @@ const Chevron = ({ closed }) => (
   />
 );
 
-const EyeIcon = () => (
-  <Entypo name="eye" size={24} color="black" />
-)
+const PdfIcon = () => <MaterialCommunityIcons name="file-jpg-box" size={50} color="#999999" />;
+
+const JpgIcon = () => <MaterialCommunityIcons name="file-jpg-box" size={50} color="#999999" />;
+
+const EyeIcon = () => <Ionicons name="eye-outline" size={27} color="white" />;
+
+const DownloadIcon = () => <AntDesign name="download" size={27} color="white" />
 
 const ToggleEye = (props) => (
   <Entypo name={props.show ? "eye" : "eye-with-line"} size={24} color="black" />
@@ -182,7 +186,10 @@ export default {
   Send,
   User,
   ToggleEye,
-  EyeIcon
+  EyeIcon,
+  PdfIcon,
+  JpgIcon,
+  DownloadIcon,
 };
 
 const styles = StyleSheet.create({
